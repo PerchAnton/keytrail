@@ -135,3 +135,11 @@ tests overlapped host sleep intervals of 61 and 67 seconds in the macOS power lo
 That run is excluded from the passing record; [the diagnostic summary](evidence/repeatability-host-sleep.json)
 is retained separately. The same source and timeouts were rerun with sleep inhibited
 for the command (`caffeinate -is` on macOS), without enabling retries.
+
+The first DEV08 hosted macOS run passed the guard subprocess cases but the integration
+harness stopped two long manual Home/End journeys at its 20-second test timeout.
+That outer limit was shorter than the library's default 30-second scenario budget.
+The harness now allows 45 seconds, matching the consumer examples and leaving setup
+and attachment time. Library budgets, expected observations and retries are unchanged.
+The recorded local worker/repeat runs above passed under the previous, stricter outer
+limit; hosted CI checks the updated harness.
