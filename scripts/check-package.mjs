@@ -7,10 +7,46 @@ import { createHash } from 'node:crypto';
 
 const root = process.cwd();
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
-for (const record of ['journeys', 'repeatability', 'tabs-repeatability', 'forms-repeatability', 'ci-guard']) {
+const reliabilityPolicy = JSON.parse(await readFile('docs/evidence/acceptance-policy.json', 'utf8'));
+assert.equal(reliabilityPolicy.version, pkg.version);
+assert(Number.isInteger(reliabilityPolicy.minimumCompletedRounds) && reliabilityPolicy.minimumCompletedRounds > 0);
+assert(reliabilityPolicy.minimumCompletedRounds <= reliabilityPolicy.referenceTargetRounds);
+for (const record of ['reliability', 'benchmark-dialog', 'benchmark-tabs', 'benchmark-formErrors', 'ci-guard']) {
   const evidence = JSON.parse(await readFile(`docs/evidence/${record}.json`, 'utf8'));
   assert.equal(evidence.version, pkg.version);
-  for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
+  if (record === 'reliability') {
+    assert(['passed', 'verified-partial'].includes(evidence.status));
+    assert.equal(evidence.identity, reliabilityPolicy.seriesIdentity);
+    assert.equal(evidence.targetRounds, reliabilityPolicy.referenceTargetRounds);
+    const completed = evidence.rounds.length;
+    assert(completed >= reliabilityPolicy.minimumCompletedRounds && completed <= evidence.targetRounds);
+    assert.equal(evidence.acceptance, completed === evidence.targetRounds);
+    assert.equal(evidence.status, evidence.acceptance ? 'passed' : 'verified-partial');
+    if (!evidence.acceptance) {
+      assert.equal(evidence.excluded.reason, 'maintainer-requested-stop');
+      assert.equal(evidence.excluded.exitCode, 130); assert.equal(evidence.excluded.round, completed + 1);
+      assert.equal(evidence.excluded.stats.unexpected + evidence.excluded.stats.flaky, 0);
+    }
+    assert.equal(evidence.workers, 1); assert.equal(evidence.parallel.workers, 4);
+    assert.equal(evidence.retries, 0); assert.equal(evidence.totalSequentialExecutions, evidence.caseCount * completed);
+    assert(evidence.caseCount > 0); assert.equal(evidence.cases.length, evidence.caseCount);
+    const signature = createHash('sha256').update(JSON.stringify(evidence.cases)).digest('hex');
+    assert.equal(signature, evidence.parallel.signature);
+    assert.equal(evidence.parallel.passed, evidence.caseCount);
+    assert(evidence.rounds.every((r, i) => r.round === i + 1 && r.tests === evidence.caseCount && r.passed === evidence.caseCount && r.signature === evidence.parallel.signature));
+  } else if (record.startsWith('benchmark-')) {
+    assert.equal(evidence.pilot, false); assert.equal(evidence.samplesPerArm, 30);
+    assert.equal(evidence.warmupsPerArm, 5); assert.equal(evidence.summary.targetMet, true);
+    assert.equal(evidence.pairs.length, 30);
+    assert(evidence.pairs.every(p => Number.isFinite(p.keytrailMs) && Number.isFinite(p.nativeMs) && p.keytrailMs > 0 && p.nativeMs > 0));
+    const median = values => { const sorted = [...values].sort((a, b) => a - b); return (sorted[14] + sorted[15]) / 2; };
+    const paired = median(evidence.pairs.map(p => (p.keytrailMs / p.nativeMs - 1) * 100));
+    const ratio = (median(evidence.pairs.map(p => p.keytrailMs)) / median(evidence.pairs.map(p => p.nativeMs)) - 1) * 100;
+    assert.equal(paired, evidence.summary.pairedMedianOverheadPercent);
+    assert.equal(ratio, evidence.summary.ratioOfMediansOverheadPercent);
+    assert(paired <= 20 && ratio <= 20);
+  }
+  for (const [file, expected] of Object.entries({ ...evidence.sourceHashes, ...evidence.recordingSourceHashes })) {
     assert(resolve(file).startsWith(root + '/'));
     const actual = createHash('sha256').update((await readFile(file, 'utf8')).replaceAll('\r\n', '\n')).digest('hex');
     assert.equal(actual, expected, `Refresh ${record} evidence after changing ${file}`);

@@ -5,9 +5,9 @@ expected focus order; KeyTrail presses keys, checks the result and attaches a re
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
+[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Roadmap](docs/roadmap.md)
 
-**Status: dialogs, tabs and form errors, `0.1.0-alpha.4` source/package candidate.** No npm
+**Status: dialogs, tabs and form errors, `0.1.0-alpha.5` source/package candidate.** No npm
 publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
 declared form-error recovery, plus a CI reporter that requires complete results for every discovered journey test and attempt.
 
@@ -45,12 +45,12 @@ On Linux, install Chromium's system dependencies with
 The package check packs the actual archive, installs it into a fresh offline consumer,
 checks ESM/CJS imports and types, then runs the working and broken dialog, tabs and form browser examples.
 It also runs the three corrected examples with the installed CI guard.
-It leaves `artifacts/keytrail-0.1.0-alpha.4.tgz` and a verification record.
+It leaves `artifacts/keytrail-0.1.0-alpha.5.tgz` and a verification record.
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.4.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.5.tgz @playwright/test@1.64.1
 ```
 
 ## Write a contract
@@ -151,7 +151,20 @@ pnpm exec playwright show-report
 Tests cover the specified correct/defective dialogs, detached and replaced nodes,
 unsupported contexts, bounded entry, scenario deadlines and safe own reports.
 The [verification record](docs/verification.md) separates completed checks from the
-full 0.1 acceptance criteria. Performance improvement and real-world adoption have
-not been established. The 20% overhead target is a future acceptance target, not a result.
+full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
+equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
+repeatability and attachment isolation. This checkpoint has 45 full sequential rounds
+(6,885 executions), accepted by the maintainer, plus a matching 153-test four-worker
+run. The original 100-round target was not completed. Real-world adoption has not
+been established.
+
+### Measured overhead
+
+![KeyTrail overhead against equivalent native Playwright checks](docs/assets/performance.svg)
+
+All three synthetic workloads meet the 20% target on the recorded runner. Each has
+30 measured pairs after five warmups, with the same actions and semantic checks.
+Manual tabs include required observation windows. See [method, limitations and raw
+samples](docs/performance.md); this is not a general speed or accessibility claim.
 
 Original code, rules and examples are licensed under [Apache-2.0](LICENSE).

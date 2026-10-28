@@ -1,6 +1,6 @@
 {
   "name": "keytrail",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "Keyboard journey checks for dialogs, tabs and form errors in Playwright",
   "type": "module",
   "license": "Apache-2.0",
@@ -73,6 +73,8 @@
     "check": "pnpm build && pnpm test:types && pnpm test:unit && pnpm test:guard && pnpm test:browser && pnpm test:package",
     "prepack": "pnpm build",
     "test:types": "tsc -p tsconfig.tests.json",
-    "test:guard": "node scripts/check-guard.mjs"
+    "test:guard": "node scripts/check-guard.mjs",
+    "verify:reliability": "node scripts/verify-reliability.mjs",
+    "benchmark": "playwright test --config benchmarks/playwright.config.ts"
   }
 }

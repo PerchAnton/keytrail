@@ -1,0 +1,678 @@
+{
+  "fixture": "tabs pass manual Enter",
+  "kind": "tabs",
+  "targets": [
+    {
+      "id": "tabs",
+      "selector": "#tabs"
+    },
+    {
+      "id": "tab-0",
+      "selector": "#tab-0"
+    },
+    {
+      "id": "panel-0",
+      "selector": "section#panel-0"
+    },
+    {
+      "id": "tab-1",
+      "selector": "#tab-1"
+    },
+    {
+      "id": "panel-1",
+      "selector": "section#panel-1"
+    },
+    {
+      "id": "tab-2",
+      "selector": "#tab-2"
+    },
+    {
+      "id": "panel-2",
+      "selector": "section#panel-2"
+    }
+  ],
+  "root": "tabs",
+  "scenario": {
+    "id": "account-tabs",
+    "kind": "tabs",
+    "contractVersion": "1"
+  },
+  "config": {
+    "maxTabs": 25,
+    "timeoutMs": 2000,
+    "scenarioTimeoutMs": 30000,
+    "observationWindowMs": 200
+  },
+  "checks": [
+    {
+      "checkId": "T01.entry",
+      "ruleId": "T01",
+      "stepId": "step-001",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-1"
+      }
+    },
+    {
+      "checkId": "T02.structure",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T02.role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tablist"
+      }
+    },
+    {
+      "checkId": "T02.name",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "hasAccessibleName": true
+      }
+    },
+    {
+      "checkId": "T02.orientation",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "checkId": "T02.item.001.tab-role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tab"
+      }
+    },
+    {
+      "checkId": "T02.item.001.panel-role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tabpanel"
+      }
+    },
+    {
+      "checkId": "T02.item.001.controls",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T02.item.001.labelledby",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T02.item.002.tab-role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tab"
+      }
+    },
+    {
+      "checkId": "T02.item.002.panel-role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tabpanel"
+      }
+    },
+    {
+      "checkId": "T02.item.002.controls",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T02.item.002.labelledby",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T02.item.003.tab-role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tab"
+      }
+    },
+    {
+      "checkId": "T02.item.003.panel-role",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "role": "tabpanel"
+      }
+    },
+    {
+      "checkId": "T02.item.003.controls",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T02.item.003.labelledby",
+      "ruleId": "T02",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "T06.initial",
+      "ruleId": "T06",
+      "stepId": "step-001",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-1",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T03.forward.001",
+      "ruleId": "T03",
+      "stepId": "step-002",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-2"
+      }
+    },
+    {
+      "checkId": "T06.forward.001.roving",
+      "ruleId": "T06",
+      "stepId": "step-002",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.forward.001.unchanged",
+      "ruleId": "T05",
+      "stepId": "step-002",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-2",
+        "selected": "tab-1",
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.forward.001.activated",
+      "ruleId": "T05",
+      "stepId": "step-003",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-2"
+      }
+    },
+    {
+      "checkId": "T06.forward.001.state",
+      "ruleId": "T06",
+      "stepId": "step-003",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-2",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T03.forward.002",
+      "ruleId": "T03",
+      "stepId": "step-004",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-0"
+      }
+    },
+    {
+      "checkId": "T06.forward.002.roving",
+      "ruleId": "T06",
+      "stepId": "step-004",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.forward.002.unchanged",
+      "ruleId": "T05",
+      "stepId": "step-004",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-0",
+        "selected": "tab-2",
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.forward.002.activated",
+      "ruleId": "T05",
+      "stepId": "step-005",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-0"
+      }
+    },
+    {
+      "checkId": "T06.forward.002.state",
+      "ruleId": "T06",
+      "stepId": "step-005",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-0",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T03.forward.003",
+      "ruleId": "T03",
+      "stepId": "step-006",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-1"
+      }
+    },
+    {
+      "checkId": "T06.forward.003.roving",
+      "ruleId": "T06",
+      "stepId": "step-006",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.forward.003.unchanged",
+      "ruleId": "T05",
+      "stepId": "step-006",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-1",
+        "selected": "tab-0",
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.forward.003.activated",
+      "ruleId": "T05",
+      "stepId": "step-007",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-1"
+      }
+    },
+    {
+      "checkId": "T06.forward.003.state",
+      "ruleId": "T06",
+      "stepId": "step-007",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-1",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T03.backward.001",
+      "ruleId": "T03",
+      "stepId": "step-008",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-0"
+      }
+    },
+    {
+      "checkId": "T06.backward.001.roving",
+      "ruleId": "T06",
+      "stepId": "step-008",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.backward.001.unchanged",
+      "ruleId": "T05",
+      "stepId": "step-008",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-0",
+        "selected": "tab-1",
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.backward.001.activated",
+      "ruleId": "T05",
+      "stepId": "step-009",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-0"
+      }
+    },
+    {
+      "checkId": "T06.backward.001.state",
+      "ruleId": "T06",
+      "stepId": "step-009",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-0",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T03.backward.002",
+      "ruleId": "T03",
+      "stepId": "step-010",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-2"
+      }
+    },
+    {
+      "checkId": "T06.backward.002.roving",
+      "ruleId": "T06",
+      "stepId": "step-010",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.backward.002.unchanged",
+      "ruleId": "T05",
+      "stepId": "step-010",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-2",
+        "selected": "tab-0",
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.backward.002.activated",
+      "ruleId": "T05",
+      "stepId": "step-011",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-2"
+      }
+    },
+    {
+      "checkId": "T06.backward.002.state",
+      "ruleId": "T06",
+      "stepId": "step-011",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-2",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T03.backward.003",
+      "ruleId": "T03",
+      "stepId": "step-012",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-1"
+      }
+    },
+    {
+      "checkId": "T06.backward.003.roving",
+      "ruleId": "T06",
+      "stepId": "step-012",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.backward.003.unchanged",
+      "ruleId": "T05",
+      "stepId": "step-012",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "tab-1",
+        "selected": "tab-2",
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T05.backward.003.activated",
+      "ruleId": "T05",
+      "stepId": "step-013",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-1"
+      }
+    },
+    {
+      "checkId": "T06.backward.003.state",
+      "ruleId": "T06",
+      "stepId": "step-013",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-1",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T06.final",
+      "ruleId": "T06",
+      "stepId": "step-013",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "selected": "tab-1",
+        "selectedCount": 1,
+        "visibleCount": 1,
+        "roving": true
+      }
+    },
+    {
+      "checkId": "T07.exit",
+      "ruleId": "T07",
+      "stepId": "step-014",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+      "expected": {
+        "focus": "panel-1",
+        "inside": false
+      }
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step-001",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "tab-1"
+    },
+    {
+      "stepId": "step-002",
+      "actionKind": "press",
+      "key": "ArrowRight",
+      "targetId": "tab-2"
+    },
+    {
+      "stepId": "step-003",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "tab-2"
+    },
+    {
+      "stepId": "step-004",
+      "actionKind": "press",
+      "key": "ArrowRight",
+      "targetId": "tab-0"
+    },
+    {
+      "stepId": "step-005",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "tab-0"
+    },
+    {
+      "stepId": "step-006",
+      "actionKind": "press",
+      "key": "ArrowRight",
+      "targetId": "tab-1"
+    },
+    {
+      "stepId": "step-007",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "tab-1"
+    },
+    {
+      "stepId": "step-008",
+      "actionKind": "press",
+      "key": "ArrowLeft",
+      "targetId": "tab-0"
+    },
+    {
+      "stepId": "step-009",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "tab-0"
+    },
+    {
+      "stepId": "step-010",
+      "actionKind": "press",
+      "key": "ArrowLeft",
+      "targetId": "tab-2"
+    },
+    {
+      "stepId": "step-011",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "tab-2"
+    },
+    {
+      "stepId": "step-012",
+      "actionKind": "press",
+      "key": "ArrowLeft",
+      "targetId": "tab-1"
+    },
+    {
+      "stepId": "step-013",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "tab-1"
+    },
+    {
+      "stepId": "step-014",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "panel-1"
+    }
+  ],
+  "limitations": [
+    "Chromium; main document; LTR; fixed tabs and panels; roving tabindex; no disabled tabs or aria-activedescendant.",
+    "Manual activation is checked only at observed states within the recorded observation window, not continuously.",
+    "No screen-reader, pointer, scroll, perpendicular-arrow or WCAG-conformance check.",
+    "No application state restoration. Browser calls are cooperative; the Playwright test timeout is the hard stop.",
+    "Own JSON excludes DOM IDs, text and selectors; external Playwright artifacts may contain page data."
+  ]
+}

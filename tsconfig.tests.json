@@ -5,5 +5,9 @@
     "noEmit": true,
     "emitDeclarationOnly": false
   },
-  "include": ["tests/**/*.ts", "playwright.config.ts"]
+  "include": [
+    "tests/**/*.ts",
+    "playwright.config.ts",
+    "benchmarks/**/*.ts"
+  ]
 }

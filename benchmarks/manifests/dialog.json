@@ -1,0 +1,324 @@
+{
+  "fixture": "passes ordinary",
+  "kind": "dialog",
+  "targets": [
+    {
+      "id": "open",
+      "selector": "#open"
+    },
+    {
+      "id": "dialog",
+      "selector": "#dialog"
+    },
+    {
+      "id": "name",
+      "selector": "#name"
+    },
+    {
+      "id": "save",
+      "selector": "#save"
+    },
+    {
+      "id": "close",
+      "selector": "#close"
+    }
+  ],
+  "root": "dialog",
+  "scenario": {
+    "id": "profile-dialog",
+    "kind": "dialog",
+    "contractVersion": "1"
+  },
+  "config": {
+    "maxTabs": 25,
+    "timeoutMs": 2000,
+    "scenarioTimeoutMs": 30000,
+    "observationWindowMs": 200
+  },
+  "checks": [
+    {
+      "checkId": "D01.entry",
+      "ruleId": "D01",
+      "stepId": "step-002",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "open"
+      }
+    },
+    {
+      "checkId": "D02.visible",
+      "ruleId": "D02",
+      "stepId": "step-002",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "visible": true
+      }
+    },
+    {
+      "checkId": "D02.role",
+      "ruleId": "D02",
+      "stepId": "step-002",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "role": "dialog"
+      }
+    },
+    {
+      "checkId": "D02.name",
+      "ruleId": "D02",
+      "stepId": "step-002",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "hasAccessibleName": true
+      }
+    },
+    {
+      "checkId": "D02.modal",
+      "ruleId": "D02",
+      "stepId": "step-002",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "modal": true
+      }
+    },
+    {
+      "checkId": "D03.initial",
+      "ruleId": "D03",
+      "stepId": "step-002",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "name"
+      }
+    },
+    {
+      "checkId": "D05.initial",
+      "ruleId": "D05",
+      "stepId": "step-002",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D04.forward.001",
+      "ruleId": "D04",
+      "stepId": "step-003",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "save"
+      }
+    },
+    {
+      "checkId": "D05.forward.001",
+      "ruleId": "D05",
+      "stepId": "step-003",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D04.forward.002",
+      "ruleId": "D04",
+      "stepId": "step-004",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "close"
+      }
+    },
+    {
+      "checkId": "D05.forward.002",
+      "ruleId": "D05",
+      "stepId": "step-004",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D04.forward.003",
+      "ruleId": "D04",
+      "stepId": "step-005",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "name"
+      }
+    },
+    {
+      "checkId": "D05.forward.003",
+      "ruleId": "D05",
+      "stepId": "step-005",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D04.backward.001",
+      "ruleId": "D04",
+      "stepId": "step-006",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "close"
+      }
+    },
+    {
+      "checkId": "D05.backward.001",
+      "ruleId": "D05",
+      "stepId": "step-006",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D04.backward.002",
+      "ruleId": "D04",
+      "stepId": "step-007",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "save"
+      }
+    },
+    {
+      "checkId": "D05.backward.002",
+      "ruleId": "D05",
+      "stepId": "step-007",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D04.backward.003",
+      "ruleId": "D04",
+      "stepId": "step-008",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "name"
+      }
+    },
+    {
+      "checkId": "D05.backward.003",
+      "ruleId": "D05",
+      "stepId": "step-008",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D05.before-close",
+      "ruleId": "D05",
+      "stepId": "step-008",
+      "basis": "apg_guidance",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "inside": true
+      }
+    },
+    {
+      "checkId": "D06.closed",
+      "ruleId": "D06",
+      "stepId": "step-009",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "visible": false
+      }
+    },
+    {
+      "checkId": "D07.returned",
+      "ruleId": "D07",
+      "stepId": "step-009",
+      "basis": "contract",
+      "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+      "expected": {
+        "focus": "open"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step-001",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "open"
+    },
+    {
+      "stepId": "step-002",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "open"
+    },
+    {
+      "stepId": "step-003",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "save"
+    },
+    {
+      "stepId": "step-004",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "close"
+    },
+    {
+      "stepId": "step-005",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "name"
+    },
+    {
+      "stepId": "step-006",
+      "actionKind": "press",
+      "key": "Shift+Tab",
+      "targetId": "close"
+    },
+    {
+      "stepId": "step-007",
+      "actionKind": "press",
+      "key": "Shift+Tab",
+      "targetId": "save"
+    },
+    {
+      "stepId": "step-008",
+      "actionKind": "press",
+      "key": "Shift+Tab",
+      "targetId": "name"
+    },
+    {
+      "stepId": "step-009",
+      "actionKind": "press",
+      "key": "Escape",
+      "targetId": "open"
+    }
+  ],
+  "limitations": [
+    "This assertion checks the declared dialog journey only; use the CI guard to require complete reports.",
+    "Chromium; main document; one custom ARIA dialog; no iframe, Shadow DOM, native or nested dialogs.",
+    "Checks only observed focus states, not transient focus, pointer blocking or screen-reader behavior.",
+    "No WCAG certification, automated repair or application state restoration.",
+    "Own JSON and messages exclude page text and selectors; Playwright artifacts may contain them.",
+    "Browser calls are cooperatively bounded; the Playwright test timeout remains the hard stop."
+  ]
+}

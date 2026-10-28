@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0-alpha.5",
+  "decisionDate": "2026-10-28",
+  "referenceTargetRounds": 100,
+  "minimumCompletedRounds": 45,
+  "seriesIdentity": "ca1ee2a7953154fe91f0697633bb6d2b30d88d98a6a6060c3d6db334cafb3912",
+  "reason": "The maintainer accepted the completed 45-round scope for this checkpoint and requested moving on. The original 100-round criterion is not claimed as met."
+}
