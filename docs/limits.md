@@ -28,8 +28,9 @@ must not contain private data. This package is not a sandbox for hostile Locator
 Playwright's own HTML reports, internal API steps, traces, screenshots or videos can
 contain page data even when KeyTrail's JSON does not. KeyTrail never changes those settings.
 The examples disable trace/screenshot/video and use only synthetic data. A killed worker
-may produce no attachment. The full CI completeness guard is not implemented in alpha.3;
-do not treat a missing result or a caught assertion as a passing accessibility check.
+may produce no attachment. The opt-in [CI guard](ci-guard.md) rejects missing and incomplete reports, including
+recovered retries. Its guarantee is limited to discovered tests and trusted test code;
+it cannot prove that required files were not excluded or reports were not fabricated.
 
 Tabs support fixed LTR lists with at least two enabled tabs and mounted panels. See
 [the tabs contract](tabs.md) for role relationships, manual observation windows and

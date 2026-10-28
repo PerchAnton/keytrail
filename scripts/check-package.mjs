@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 
 const root = process.cwd();
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
-for (const record of ['journeys', 'repeatability', 'tabs-repeatability', 'forms-repeatability']) {
+for (const record of ['journeys', 'repeatability', 'tabs-repeatability', 'forms-repeatability', 'ci-guard']) {
   const evidence = JSON.parse(await readFile(`docs/evidence/${record}.json`, 'utf8'));
   assert.equal(evidence.version, pkg.version);
   for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
@@ -34,17 +34,23 @@ try {
   const installed = JSON.parse(await readFile(join(consumer, 'node_modules/keytrail/package.json'), 'utf8'));
   assert.equal(installed.version, pkg.version);
   assert.equal(installed.license, 'Apache-2.0');
-  const esm = `import {assertDialogJourney,assertTabsJourney,assertFormErrorsJourney,JourneyAssertionError} from 'keytrail';
+  const esm = `import CiGuard from 'keytrail/ci-guard';
+if(typeof CiGuard!=='function')throw Error('guard export');
+import {assertDialogJourney,assertTabsJourney,assertFormErrorsJourney,JourneyAssertionError} from 'keytrail';
 import schema from 'keytrail/schema/journey-result.v1.json' with {type:'json'};
 if(typeof assertDialogJourney!=='function'||typeof assertTabsJourney!=='function'||typeof assertFormErrorsJourney!=='function'||typeof JourneyAssertionError!=='function'||!schema.$schema)throw Error('exports');`;
-  const cjs = `const {assertDialogJourney,assertTabsJourney,assertFormErrorsJourney,JourneyAssertionError}=require('keytrail');
+  const cjs = `const CiGuard=require('keytrail/ci-guard').default;
+if(typeof CiGuard!=='function')throw Error('guard export');
+const {assertDialogJourney,assertTabsJourney,assertFormErrorsJourney,JourneyAssertionError}=require('keytrail');
 const schema=require('keytrail/schema/journey-result.v1.json');
 if(typeof assertDialogJourney!=='function'||typeof assertTabsJourney!=='function'||typeof assertFormErrorsJourney!=='function'||typeof JourneyAssertionError!=='function'||!schema.$schema)throw Error('exports');`;
   await writeFile(join(consumer, 'smoke.mjs'), esm);
   await writeFile(join(consumer, 'smoke.cjs'), cjs);
   run(process.execPath, ['smoke.mjs'], consumer);
   run(process.execPath, ['smoke.cjs'], consumer);
-  const typed = `import {assertDialogJourney, assertTabsJourney, assertFormErrorsJourney, type DialogContract, type TabsContract, type FormErrorsContract} from 'keytrail';
+  const typed = `import CiGuard, {type CiGuardOptions} from 'keytrail/ci-guard';
+const options:CiGuardOptions={projectName:'journey'}; new CiGuard(options);
+import {assertDialogJourney, assertTabsJourney, assertFormErrorsJourney, type DialogContract, type TabsContract, type FormErrorsContract} from 'keytrail';
 import type {Page,TestInfo} from '@playwright/test';
 declare const page:Page, info:TestInfo, contract:DialogContract;
 void assertDialogJourney(page,info,contract);
@@ -56,11 +62,13 @@ declare const form:FormErrorsContract; void assertFormErrorsJourney(page,info,fo
   await cp(join(root, 'examples/vanilla'), join(consumer, 'example'), { recursive: true });
   const output = run('pnpm', ['exec', 'playwright', 'test', '--config', 'example/playwright.config.ts'], consumer);
   assert.match(output, /6 passed/);
+  const guarded = run('pnpm', ['exec', 'playwright', 'test', '--config', 'example/playwright.guard.config.ts'], consumer);
+  assert.match(guarded, /3 passed/);
   const bytes = await readFile(archive);
   const proof = { package: pkg.name, version: pkg.version, checkedAt: new Date().toISOString(),
     node: process.version, platform: process.platform, playwright: pkg.peerDependencies['@playwright/test'],
     archive: { file: `${pkg.name}-${pkg.version}.tgz`, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), files: inventory.length },
-    checks: { evidenceSourceHashes: true, offlineConsumer: true, esm: true, cjs: true, typesEsm: true, typesCjs: true, browserExamples: 6 },
+    checks: { evidenceSourceHashes: true, offlineConsumer: true, esm: true, cjs: true, typesEsm: true, typesCjs: true, browserExamples: 6, guardedBrowserExamples: 3, guardEsm: true, guardCjs: true },
     published: false };
   await writeFile(join(root, 'artifacts/package-verification.json'), JSON.stringify(proof, null, 2)+'\n');
   console.log(JSON.stringify(proof, null, 2));

@@ -7,10 +7,11 @@ import type { CheckResult, DialogContract, JourneyResult, MessageCode, SafeObser
 import { planDialog } from '../engine/plan.js';
 import { Blocked, BoundaryExit, Driver, type Snapshot } from '../browser/driver.js';
 import { coverage, outcome, JourneyAssertionError } from '../reporting/result.js';
+import { serializeJourneyResult } from '../reporting/serialize.js';
 import { PACKAGE_VERSION, RULESET_VERSION } from '../version.js';
 
 const limitations = [
-  'This assertion checks dialogs only; form errors and CI completeness guard are not implemented.',
+  'This assertion checks the declared dialog journey only; use the CI guard to require complete reports.',
   'Chromium; main document; one custom ARIA dialog; no iframe, Shadow DOM, native or nested dialogs.',
   'Checks only observed focus states, not transient focus, pointer blocking or screen-reader behavior.',
   'No WCAG certification, automated repair or application state restoration.',
@@ -174,7 +175,7 @@ export async function assertDialogJourney(page: Page, testInfo: TestInfo, input:
     result.outcome = outcome(result.coverage);
     result.run.durationMs = Math.max(0, performance.now() - started);
     try {
-      await testInfo.attach('journey-result.json', { body: Buffer.from(JSON.stringify(result)), contentType: 'application/json' });
+      await testInfo.attach('journey-result.json', { body: serializeJourneyResult(result), contentType: 'application/json' });
     } catch { throw new JourneyAssertionError('REPORT_WRITE_FAILED', result); }
   }
   if (result.outcome !== 'passed') {

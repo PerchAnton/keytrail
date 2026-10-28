@@ -9,5 +9,7 @@ Node majors, Firefox, WebKit and Windows are not claimed. Linux CI and macOS run
 dialog, tabs and form tests and clean ESM/CJS consumers. GitHub Actions reports the actual outcome;
 see [verification](verification.md) for recorded results.
 
-Runtime depends only on the Playwright peer and Node built-ins. ajv is a development
-dependency for schema verification; it is not shipped as a runtime dependency.
+The only installed runtime dependency is the Playwright peer. Node built-ins and a
+standalone JSON Schema validator are used at runtime. Ajv compiles the validator during
+the build; its small Unicode helper is bundled with the validator. Consumers do not
+install Ajv. See [third-party notices](../THIRD_PARTY_NOTICES.md).

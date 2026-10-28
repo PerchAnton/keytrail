@@ -5,11 +5,11 @@ expected focus order; KeyTrail presses keys, checks the result and attaches a re
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
+[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
 
-**Status: dialogs, tabs and form errors, `0.1.0-alpha.3` source/package candidate.** No npm
+**Status: dialogs, tabs and form errors, `0.1.0-alpha.4` source/package candidate.** No npm
 publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
-declared form-error recovery. A CI completeness reporter remains a later milestone.
+declared form-error recovery, plus a CI reporter that requires complete results for every discovered journey test and attempt.
 
 ```text
 Tab to trigger → Enter → initial focus → Tab cycle → Shift+Tab cycle → Escape
@@ -44,12 +44,13 @@ On Linux, install Chromium's system dependencies with
 `pnpm exec playwright install --with-deps chromium` when needed.
 The package check packs the actual archive, installs it into a fresh offline consumer,
 checks ESM/CJS imports and types, then runs the working and broken dialog, tabs and form browser examples.
-It leaves `artifacts/keytrail-0.1.0-alpha.3.tgz` and a verification record.
+It also runs the three corrected examples with the installed CI guard.
+It leaves `artifacts/keytrail-0.1.0-alpha.4.tgz` and a verification record.
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.3.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.4.tgz @playwright/test@1.64.1
 ```
 
 ## Write a contract
@@ -100,6 +101,19 @@ Invalid submit → messages + IDREF → focus → optional summary links
 
 See the [Form errors API and flow diagram](docs/form-errors.md) and the
 [working/broken email example](examples/vanilla/form-errors.journey.spec.ts).
+
+## Require complete results in CI
+
+Add the reporter last and run the named project as a required CI job:
+
+```ts
+reporter: [['list'], ['keytrail/ci-guard', { projectName: 'journey' }]],
+projects: [{ name: 'journey', testMatch: '**/*.journey.spec.ts' }],
+```
+
+Skipped tests, missing or incomplete reports, and failed attempts that later pass on
+retry fail the guard. A successful test without a successful journey is insufficient.
+See [setup, diagnostics, boundaries and the flow diagram](docs/ci-guard.md).
 
 ## What the result means
 
