@@ -47,9 +47,9 @@ export function tabsHtml(options: TabsOptions = {}): string {
       index=defect==='no-wrap'?Math.max(0,Math.min(2,index)):(index+3)%3;
       const previous=selected;current=index;
       if(defect==='rerender'){const clone=tabs[index].cloneNode(true);tabs[index].replaceWith(clone);tabs[index]=clone;}
-      if(defect!=='roving')tabs.forEach((tab,i)=>tab.tabIndex=i===index?0:-1);
+      if(defect!=='roving'&&defect!=='focus-drift-before-roving')tabs.forEach((tab,i)=>tab.tabIndex=i===index?0:-1);
       tabs[index].focus();
-      if(defect==='focus-drift')setTimeout(()=>document.getElementById('after').focus(),250);
+      if(defect.startsWith('focus-drift'))setTimeout(()=>document.getElementById('after').focus(),1000);
       if(mode==='automatic'){
         if(defect==='delayed')setTimeout(()=>activate(index),60);else activate(index);
       }else if(defect==='premature')activate(index);

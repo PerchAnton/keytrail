@@ -102,7 +102,7 @@ repair the component. A failed transition stops later keyboard input.
 | T02 | Structure, roles, name, orientation, pairwise IDREF | `STRUCTURE_MISMATCH`, `ROLE_MISMATCH`, `NAME_MISSING`, `ORIENTATION_MISMATCH`, `IDREF_MISMATCH` |
 | T03 | Arrow focus movement and wrap | `FOCUS_MISMATCH` |
 | T04 | Automatic activation | `SELECTION_MISMATCH` |
-| T05 | Manual negative window and activation | `PREMATURE_ACTIVATION`, `SELECTION_MISMATCH` |
+| T05 | Manual negative window and activation | `PREMATURE_ACTIVATION`, `SELECTION_MISMATCH`, `FOCUS_MISMATCH` |
 | T06 | Selection, visibility and roving focus | `SELECTION_MISMATCH`, `ROVING_MISMATCH` |
 | T07 | Exit from the restored initial selection | `FOCUS_MISMATCH` |
 | T08 | Optional Home/End focus movement | `FOCUS_MISMATCH` |
