@@ -5,7 +5,7 @@ expected focus order; KeyTrail presses keys, checks the result and attaches a re
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Roadmap](docs/roadmap.md)
+[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Read reports](docs/reports.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Release checklist](docs/release-checklist.md)
 
 **Status: dialogs, tabs and form errors, `0.1.0-alpha.5` source/package candidate.** No npm
 publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
@@ -35,6 +35,7 @@ is **1.64.1**, with its Chromium **156.0.8078.4**. [Compatibility](docs/compatib
 git clone https://github.com/PerchAnton/keytrail.git
 cd keytrail
 pnpm install --frozen-lockfile --ignore-scripts
+pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
 pnpm exec playwright install chromium
 pnpm build
 pnpm test:package
@@ -42,16 +43,32 @@ pnpm test:package
 
 On Linux, install Chromium's system dependencies with
 `pnpm exec playwright install --with-deps chromium` when needed.
-The package check packs the actual archive, installs it into a fresh offline consumer,
-checks ESM/CJS imports and types, then runs the working and broken dialog, tabs and form browser examples.
-It also runs the three corrected examples with the installed CI guard.
-It leaves `artifacts/keytrail-0.1.0-alpha.5.tgz` and a verification record.
+The package check installs the actual archive into two fresh offline consumers.
+It checks ESM/CJS imports and types, then runs the vanilla dialog, tabs and form
+examples and the React portal example. Corrected journeys also run with the
+installed CI guard; a separate defective React process must exit 1 while preserving
+its HTML/JUnit reports and incomplete attachment. Dependency installation above
+populates the store before these offline checks.
+It leaves `artifacts/keytrail-0.1.0-alpha.5.tgz`, a verification record and `SHA256SUMS`.
 
 Install that archive into an existing Playwright project:
 
 ```sh
 npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.5.tgz @playwright/test@1.64.1
 ```
+
+## Try the React portal
+
+The [React example](examples/react-portal) uses the same dialog contract in
+StrictMode, with the dialog mounted outside the app root. Compare correct behavior,
+wrong initial focus and lost return focus, then inspect the first mismatch:
+
+```sh
+pnpm exec playwright show-report artifacts/consumers/react-portal/reports/teaching/html
+```
+
+See [reading reports](docs/reports.md) for the deliberately failing process and its
+`not_run` observations. React remains an example dependency, not a library dependency.
 
 ## Write a contract
 

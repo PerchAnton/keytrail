@@ -27,12 +27,17 @@ jobs:
           npm install -g --prefix "$RUNNER_TEMP/keytrail-pnpm" pnpm@11.25.0
           echo "$RUNNER_TEMP/keytrail-pnpm/bin" >> "$GITHUB_PATH"
       - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
       - run: pnpm check
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: linux-evidence
-          path: artifacts/*.json
+          path: |
+            artifacts/*.json
+            artifacts/*.tgz
+            artifacts/SHA256SUMS
+            artifacts/consumers/react-portal/
           if-no-files-found: error
   macos:
     name: macOS / Chromium / package consumers
@@ -46,11 +51,16 @@ jobs:
           package-manager-cache: false
       - run: npm install -g pnpm@11.25.0
       - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
       - run: pnpm exec playwright install chromium
       - run: pnpm check
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: macos-evidence
-          path: artifacts/*.json
+          path: |
+            artifacts/*.json
+            artifacts/*.tgz
+            artifacts/SHA256SUMS
+            artifacts/consumers/react-portal/
           if-no-files-found: error

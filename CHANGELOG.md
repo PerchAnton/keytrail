@@ -2,6 +2,11 @@
 
 ## 0.1.0-alpha.5 — source candidate
 
+- Add a separate React 19.3.1 portal example with StrictMode, remounting, two
+  deliberate focus defects and a real failing-process control.
+- Verify two clean offline tarball consumers, standard HTML/JUnit reporters,
+  incomplete attachment dependencies, archive checksums and release artifacts.
+- Add a report-reading guide, first-alpha notes and a release checklist.
 - Resolve independent browser targets and roles concurrently, while awaiting every
   read before observing state or disposing temporary handles. Preserve deterministic
   error ordering and stop before further keyboard actions on failure.
