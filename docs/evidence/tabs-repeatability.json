@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-28T10:36:09.200Z",
+  "recordedAt": "2026-10-28T11:05:26.238Z",
   "version": "0.1.0-alpha.2",
   "environment": {
     "node": "v24.22.1",
@@ -8,14 +8,14 @@
     "playwright": "1.64.1",
     "chromium": "156.0.8078.4"
   },
-  "scope": "20 repetitions of eight tabs cases with four workers. Not full-suite repeatability acceptance or a performance benchmark.",
+  "scope": "20 repetitions of nine tabs cases with four workers. Not full-suite repeatability acceptance or a performance benchmark.",
   "workers": 4,
   "repeats": 20,
   "retries": 0,
   "stats": {
-    "startTime": "2026-10-28T10:33:38.921Z",
-    "duration": 150206.856,
-    "expected": 160,
+    "startTime": "2026-10-28T11:02:49.396Z",
+    "duration": 156752.454,
+    "expected": 180,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
@@ -31,19 +31,24 @@
     "src/index.ts": "320b61da14c86a31a20d0b87065442f39bd5f2af0683c3815290c19a5bcc5529",
     "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
     "src/scenarios/dialog.ts": "35fe5ec503d814992dc116b023a22f7fa2b912d75134ab27496b773f981c060d",
-    "src/scenarios/tabs.ts": "847aa6fe20b90fe031560fb7ec1b8a4c63166f9f3509189bf442e7c149c4d41e",
+    "src/scenarios/tabs.ts": "8120d4b08b2c80a6d46843593f5b1f5ae2c07419561cb78ee45e050f9c20f463",
     "src/version.ts": "c588fe6631b91e76645775987640abf2d1fcbc2d2f9a05196efa78b517bc68ed",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
-    "tests/fixtures/tabs.ts": "67f958b3e8d72b555bbc498890c871515535e16a2f3124814ba976ea9dfdba75",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
     "tests/integration/dialog.spec.ts": "744de3397dbc346c032175677c1fb02d3fd8b0e4e8a4701edc82f53b26513701",
     "tests/integration/observations.spec.ts": "84b63bb79d926834ed76dcac85303deda0bb48c90b024de010df43c4af59b371",
-    "tests/integration/tabs.spec.ts": "89fc3613dd412eb6927368fcf0f6ea1e0803f9b6a30e64fcb00a11287f9b7f0f",
+    "tests/integration/tabs.spec.ts": "b0d4155b1821ba86b6946c88931ee7c069f040101d9330ea148daa614210dd14",
     "tests/unit/contracts.test.mjs": "8de8d66e1a95143d9af4b9db172ed8211eb8924741c3f5f583b5f3db8e5b4143",
     "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb"
   },
   "cases": [
     {
       "fixture": "tabs detect focus-drift",
+      "runs": 20,
+      "passed": 20
+    },
+    {
+      "fixture": "tabs detect focus-drift-before-roving",
       "runs": 20,
       "passed": 20
     },

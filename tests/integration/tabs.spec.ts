@@ -50,6 +50,7 @@ const defects: [string, string, string, TabsOptions?][] = [
   ['late-premature', 'T05.forward.001.unchanged', 'PREMATURE_ACTIVATION', { activation: 'manual' }],
   ['transient-premature', 'T05.forward.001.unchanged', 'PREMATURE_ACTIVATION', { activation: 'manual' }],
   ['focus-drift', 'T05.forward.001.unchanged', 'FOCUS_MISMATCH', { activation: 'manual' }],
+  ['focus-drift-before-roving', 'T05.forward.001.unchanged', 'FOCUS_MISMATCH', { activation: 'manual' }],
   ['multiple-selected', 'T06.initial', 'SELECTION_MISMATCH'], ['multiple-panels', 'T06.initial', 'SELECTION_MISMATCH'],
   ['idref', 'T02.item.001.controls', 'IDREF_MISMATCH'], ['labelledby', 'T02.item.001.labelledby', 'IDREF_MISMATCH'],
   ['duplicate-id', 'T02.item.001.controls', 'IDREF_MISMATCH'], ['exit', 'T07.exit', 'FOCUS_MISMATCH'],
@@ -63,14 +64,15 @@ for (const [defect, check, code, base] of defects) test(`tabs detect ${defect}`,
   const options = { ...base, defect };
   await page.setContent(tabsHtml(options));
   const contract = tabsContract(page, options);
-  const error = await failure(page, info, ['focus-drift', 'late-premature', 'transient-premature'].includes(defect) ? { ...contract, observationWindowMs: 500 } : contract);
+  const observationWindowMs = defect.startsWith('focus-drift') ? 1500 : ['late-premature', 'transient-premature'].includes(defect) ? 500 : 200;
+  const error = await failure(page, info, { ...contract, observationWindowMs });
   expect(error.code).toBe(code);
   expect(error.result.checks.find(c => c.checkId === check)?.status).toBe('fail');
   if (code === 'PREMATURE_ACTIVATION') expect(error.message).toBe('T05 PREMATURE_ACTIVATION expected-selected=tab-1 observed-selected=tab-2');
   const keys = await page.evaluate(() => (window as any).keytrailKeys.length);
   await page.waitForTimeout(220);
   expect(await page.evaluate(() => (window as any).keytrailKeys.length)).toBe(keys);
-  if (code === 'PREMATURE_ACTIVATION' || defect === 'focus-drift') expect(error.result.steps.some(s => s.key === 'Enter' || s.key === 'Space')).toBe(false);
+  if (code === 'PREMATURE_ACTIVATION' || defect.startsWith('focus-drift')) expect(error.result.steps.some(s => s.key === 'Enter' || s.key === 'Space')).toBe(false);
 });
 for (const [defect, code] of [['rtl', 'UNSUPPORTED_TABS'], ['disabled', 'UNSUPPORTED_TABS'],
   ['activedescendant', 'UNSUPPORTED_TABS'], ['dynamic', 'UNSUPPORTED_TABS'], ['popup', 'POPUP'], ['navigation', 'NAVIGATION']] as const) {

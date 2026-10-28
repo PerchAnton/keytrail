@@ -8,6 +8,8 @@
 - Observe manual selection before activation, record the window, and stop on focus drift.
 - Extend schema v1 with tabs observations and keyboard keys; ruleset version is 0.2.0.
 - Add correct/broken packaged tabs examples and verification evidence.
+- Report manual focus loss during the roving-state wait as `FOCUS_MISMATCH`, with a
+  dedicated regression and timing margins for hosted runners.
 - Forms and CI completeness enforcement remain pending. No package release published.
 
 ## 0.1.0-alpha.1 — source checkpoint

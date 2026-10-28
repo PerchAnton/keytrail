@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 
 assert(process.argv.length <= 3 && (!process.argv[2] || process.argv[2] === 'tabs'));
 const tabs = process.argv[2] === 'tabs';
-const workers = tabs ? 4 : 1, repeats = tabs ? 20 : 100, executions = repeats * 8;
+const workers = tabs ? 4 : 1, repeats = tabs ? 20 : 100, caseCount = tabs ? 9 : 8, executions = repeats * caseCount;
 const report = JSON.parse(await readFile(tabs ? 'artifacts/tabs-repeatability-results.json' : 'artifacts/repeatability-results.json', 'utf8'));
 const baseline = JSON.parse(await readFile('docs/evidence/journeys.json', 'utf8'));
 assert.equal(report.config.workers, workers);
@@ -28,7 +28,7 @@ function walk(suite) {
 }
 for (const suite of report.suites) walk(suite);
 const cases = [...byFixture.values()];
-assert.equal(cases.length, 8);
+assert.equal(cases.length, caseCount);
 for (const fixture of cases) assert.equal(fixture.runs, repeats);
 assert.equal(report.stats.expected, executions);
 for (const [path, expected] of Object.entries(baseline.sourceHashes)) {
@@ -37,8 +37,8 @@ for (const [path, expected] of Object.entries(baseline.sourceHashes)) {
 }
 const evidence = { recordedAt: new Date().toISOString(), version: baseline.version,
   environment: baseline.environment,
-  scope: tabs ? '20 repetitions of eight tabs cases with four workers. Not full-suite repeatability acceptance or a performance benchmark.' : '100 sequential repetitions of eight focus regressions. Not full-suite repeatability acceptance or a performance benchmark.',
+  scope: tabs ? '20 repetitions of nine tabs cases with four workers. Not full-suite repeatability acceptance or a performance benchmark.' : '100 sequential repetitions of eight focus regressions. Not full-suite repeatability acceptance or a performance benchmark.',
   workers, repeats, retries: 0, stats: report.stats, sourceHashes: baseline.sourceHashes,
   cases: cases.sort((a, b) => a.fixture.localeCompare(b.fixture)) };
 await writeFile(tabs ? 'docs/evidence/tabs-repeatability.json' : 'docs/evidence/repeatability.json', JSON.stringify(evidence, null, 2) + '\n');
-console.log(`Recorded ${executions} passed executions across eight ${tabs ? 'tabs cases' : 'focus regressions'}, without retries.`);
+console.log(`Recorded ${executions} passed executions across ${caseCount} ${tabs ? 'tabs cases' : 'focus regressions'}, without retries.`);

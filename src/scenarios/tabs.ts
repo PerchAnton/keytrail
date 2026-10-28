@@ -116,12 +116,19 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
             finish(unchanged, selection(state, selected), 'PREMATURE_ACTIVATION'); throw new Stop();
           }
         };
-        const ready = (state: Snapshot) => {
+        const inspectFocused = (state: Snapshot) => {
           inspect(state);
-          if (!state.focused.has(transition.target.id) || !state.tabs!.roving) {
+          if (contract.activation === 'manual' && !state.focused.has(transition.target.id)) {
             finish(unchanged, { ok: false, observed: { ...selection(state, selected).observed,
-              roving: state.tabs!.roving, focus: state.focus } },
-              state.focused.has(transition.target.id) ? 'ROVING_MISMATCH' : 'FOCUS_MISMATCH');
+              roving: state.tabs!.roving, focus: state.focus } }, 'FOCUS_MISMATCH');
+            throw new Stop();
+          }
+        };
+        const ready = (state: Snapshot) => {
+          inspectFocused(state);
+          if (!state.tabs!.roving) {
+            finish(unchanged, { ok: false, observed: { ...selection(state, selected).observed,
+              roving: false, focus: state.focus } }, 'ROVING_MISMATCH');
             throw new Stop();
           }
         };
@@ -134,7 +141,7 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
         }
         inspect(state);
         await observe(transition.focusCheck, 'FOCUS_MISMATCH', s => ({ ok: s.focused.has(transition.target.id), observed: { focus: s.focus } }), inspect);
-        await observe(`T06.${transition.suffix}.roving`, 'ROVING_MISMATCH', s => ({ ok: s.tabs!.roving, observed: { roving: s.tabs!.roving } }), inspect);
+        await observe(`T06.${transition.suffix}.roving`, 'ROVING_MISMATCH', s => ({ ok: s.tabs!.roving, observed: { roving: s.tabs!.roving } }), inspectFocused);
         if (contract.activation === 'manual') {
           select(unchanged);
           const windowStarted = performance.now();

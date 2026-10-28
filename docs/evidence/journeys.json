@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-28T10:28:47.774Z",
+  "recordedAt": "2026-10-28T10:58:04.399Z",
   "package": "keytrail",
   "version": "0.1.0-alpha.2",
   "environment": {
@@ -12,17 +12,17 @@
   "scope": "Synthetic dialog and tabs checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
   "browsers": {
     "workers1": {
-      "startTime": "2026-10-28T10:27:02.508Z",
-      "duration": 104915.17199999999,
-      "expected": 86,
+      "startTime": "2026-10-28T10:56:17.413Z",
+      "duration": 106623.153,
+      "expected": 87,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
     },
     "workers4": {
-      "startTime": "2026-10-28T10:26:24.992Z",
-      "duration": 36768.549999999996,
-      "expected": 86,
+      "startTime": "2026-10-28T10:55:39.376Z",
+      "duration": 37279.19300000001,
+      "expected": 87,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
@@ -41,13 +41,13 @@
     "src/index.ts": "320b61da14c86a31a20d0b87065442f39bd5f2af0683c3815290c19a5bcc5529",
     "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
     "src/scenarios/dialog.ts": "35fe5ec503d814992dc116b023a22f7fa2b912d75134ab27496b773f981c060d",
-    "src/scenarios/tabs.ts": "847aa6fe20b90fe031560fb7ec1b8a4c63166f9f3509189bf442e7c149c4d41e",
+    "src/scenarios/tabs.ts": "8120d4b08b2c80a6d46843593f5b1f5ae2c07419561cb78ee45e050f9c20f463",
     "src/version.ts": "c588fe6631b91e76645775987640abf2d1fcbc2d2f9a05196efa78b517bc68ed",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
-    "tests/fixtures/tabs.ts": "67f958b3e8d72b555bbc498890c871515535e16a2f3124814ba976ea9dfdba75",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
     "tests/integration/dialog.spec.ts": "744de3397dbc346c032175677c1fb02d3fd8b0e4e8a4701edc82f53b26513701",
     "tests/integration/observations.spec.ts": "84b63bb79d926834ed76dcac85303deda0bb48c90b024de010df43c4af59b371",
-    "tests/integration/tabs.spec.ts": "89fc3613dd412eb6927368fcf0f6ea1e0803f9b6a30e64fcb00a11287f9b7f0f",
+    "tests/integration/tabs.spec.ts": "b0d4155b1821ba86b6946c88931ee7c069f040101d9330ea148daa614210dd14",
     "tests/unit/contracts.test.mjs": "8de8d66e1a95143d9af4b9db172ed8211eb8924741c3f5f583b5f3db8e5b4143",
     "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb"
   },
@@ -8247,6 +8247,302 @@
           "id": "T06.forward.001.roving",
           "status": "pass",
           "code": "OK"
+        },
+        {
+          "id": "T05.forward.001.unchanged",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "T05.forward.001.activated",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.forward.001.state",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T03.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.forward.002.roving",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.forward.002.unchanged",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.forward.002.activated",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.forward.002.state",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T03.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.forward.003.roving",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.forward.003.unchanged",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.forward.003.activated",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.forward.003.state",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T03.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.backward.001.roving",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.backward.001.unchanged",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.backward.001.activated",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.backward.001.state",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T03.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.backward.002.roving",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.backward.002.unchanged",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.backward.002.activated",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.backward.002.state",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T03.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.backward.003.roving",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.backward.003.unchanged",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T05.backward.003.activated",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.backward.003.state",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T06.final",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        },
+        {
+          "id": "T07.exit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
+        }
+      ]
+    },
+    {
+      "fixture": "tabs detect focus-drift-before-roving",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 50,
+        "passed": 19,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 30,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "T01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.orientation",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.001.tab-role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.001.panel-role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.001.controls",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.001.labelledby",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.002.tab-role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.002.panel-role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.002.controls",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.002.labelledby",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.003.tab-role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.003.panel-role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.003.controls",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T02.item.003.labelledby",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T06.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T03.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "T06.forward.001.roving",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "T05.forward.001.unchanged"
         },
         {
           "id": "T05.forward.001.unchanged",

@@ -7,7 +7,7 @@ Chromium 156.0.8078.4. These are results from synthetic fixtures, not customer d
 | --- | --- |
 | TypeScript | Strict checks for library source, integration tests and Playwright configuration |
 | Unit tests | 14 passed: validation, snapshot isolation, traversal plan and outcome/coverage |
-| Chromium integration tests | 86 passed with 4 workers and 86 passed with 1 worker |
+| Chromium integration tests | 87 passed with 4 workers and 87 passed with 1 worker |
 | Observation comparison | All check IDs, statuses, message codes, dependencies and coverage agree across the two runs |
 | Required correct dialog variants | Ordinary cycle, single stop, static heading, alternate return Target |
 | Required defects | Wrong initial focus, escape outside, broken reverse cycle, Escape ignored, lost return focus, missing accessible name |
@@ -63,14 +63,15 @@ PLAYWRIGHT_JSON_OUTPUT_FILE=artifacts/repeatability-results.json \
 node scripts/record-repeatability.mjs
 ```
 
-The tabs repeatability run covers eight cases 20 times with four workers: the four
-required modes, manual Home/End, immediate/delayed premature activation and focus drift.
+The tabs repeatability run covers nine cases 20 times with four workers: the four
+required modes, manual Home/End, immediate/delayed premature activation and focus drift
+both before roving state settles and within the negative observation window.
 [Its record](evidence/tabs-repeatability.json) is separate from the sequential focus run.
 
 ```sh
 PLAYWRIGHT_JSON_OUTPUT_FILE=artifacts/tabs-repeatability-results.json \
   pnpm exec playwright test tabs.spec.ts \
-  --grep 'tabs pass (horizontal automatic|vertical automatic|manual Enter|manual Space|manual Home End)$|tabs detect (premature|late-premature|focus-drift)$' \
+  --grep 'tabs pass (horizontal automatic|vertical automatic|manual Enter|manual Space|manual Home End)$|tabs detect (premature|late-premature|focus-drift|focus-drift-before-roving)$' \
   --repeat-each=20 --workers=4 --reporter=json
 node scripts/record-repeatability.mjs tabs
 pnpm test:package
@@ -84,3 +85,10 @@ That hash is kept outside the packed docs to avoid a self-referential archive ha
 The CI badge links to current Linux/macOS results; this page records the local DEV06
 verification. The full-suite 100-run repeatability criterion and equivalent native performance
 benchmark have **not** been completed. The form-errors and CI-guard milestones are pending.
+
+A hosted CI run exposed a diagnostic race: focus leaving during the roving-state wait
+was reported as `ROVING_MISMATCH`. The runner now reports `FOCUS_MISMATCH` as soon as
+that loss is observed after confirmed focus. The dedicated before-roving fixture
+fails against the previous implementation and passes with the fix. Timed window
+fixtures use a wider setup margin so runner load does not move the intended defect
+into the preceding check. Keyboard activation remains forbidden after focus loss.
