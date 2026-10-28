@@ -16,7 +16,11 @@ export async function checkReactConsumer({ root, archive, storeDirectory, versio
   };
   try {
     await cp(join(root, 'examples/react-portal'), consumer, { recursive: true,
-      filter: path => !['node_modules', 'dist', 'reports', 'test-results'].includes(basename(path)) });
+      // The source lockfile warms the store. Adding a tarball changes its importer;
+      // resolving that copied lock offline also requires metadata for every locked
+      // foreign-platform esbuild binary. Start this fresh consumer with exact pins
+      // instead, as for vanilla, and let pnpm skip unsupported optional binaries.
+      filter: path => !['node_modules', 'dist', 'reports', 'test-results', 'pnpm-lock.yaml'].includes(basename(path)) });
     const pkg = JSON.parse(await readFile(join(consumer, 'package.json'), 'utf8'));
     pkg.devDependencies.keytrail = `file:${archive}`;
     await writeFile(join(consumer, 'package.json'), JSON.stringify(pkg, null, 2));
