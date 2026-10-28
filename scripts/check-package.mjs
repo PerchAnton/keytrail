@@ -7,12 +7,14 @@ import { createHash } from 'node:crypto';
 
 const root = process.cwd();
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
-const evidence = JSON.parse(await readFile('docs/evidence/dialog.json', 'utf8'));
-assert.equal(evidence.version, pkg.version);
-for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
-  assert(resolve(file).startsWith(root + '/'));
-  const actual = createHash('sha256').update((await readFile(file, 'utf8')).replaceAll('\r\n', '\n')).digest('hex');
-  assert.equal(actual, expected, `Refresh fixture evidence after changing ${file}`);
+for (const record of ['dialog', 'repeatability']) {
+  const evidence = JSON.parse(await readFile(`docs/evidence/${record}.json`, 'utf8'));
+  assert.equal(evidence.version, pkg.version);
+  for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
+    assert(resolve(file).startsWith(root + '/'));
+    const actual = createHash('sha256').update((await readFile(file, 'utf8')).replaceAll('\r\n', '\n')).digest('hex');
+    assert.equal(actual, expected, `Refresh ${record} evidence after changing ${file}`);
+  }
 }
 const run = (command, args, cwd) => execFileSync(command, args, { cwd, env: process.env, encoding: 'utf8', timeout: 120000 });
 // A container checkout and /tmp may otherwise select different filesystem-local stores.

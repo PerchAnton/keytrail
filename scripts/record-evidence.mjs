@@ -11,6 +11,11 @@ function cases(report) {
       const run = test.results[0];
       assert.equal(run.status, 'passed');
       const attachments = run.attachments.filter(a => a.name === 'journey-result.json');
+      if (spec.file.endsWith('observations.spec.ts')) {
+        assert.equal(attachments.length, 0);
+        result.push({ fixture: spec.title, testPassed: true, kind: 'engine-observation' });
+        continue;
+      }
       assert.equal(attachments.length, 1);
       const journey = JSON.parse(Buffer.from(attachments[0].body, 'base64').toString());
       result.push({ fixture: spec.title, testPassed: true, journeyOutcome: journey.outcome,
@@ -25,6 +30,13 @@ function cases(report) {
 }
 const one = JSON.parse(await readFile('artifacts/browser-results.json', 'utf8'));
 const four = JSON.parse(await readFile('artifacts/browser-results-workers4.json', 'utf8'));
+for (const [report, workers] of [[one, 1], [four, 4]]) {
+  assert.equal(report.config.workers, workers);
+  assert.deepEqual(report.errors, []);
+  assert.equal(report.stats.unexpected + report.stats.flaky + report.stats.skipped, 0);
+  assert(report.stats.expected > 0);
+  assert.equal(cases(report).length, report.stats.expected);
+}
 const outcomes = cases(one);
 assert.deepEqual(outcomes, cases(four), 'Exact observation statuses/codes must match across workers');
 const hashes = {};

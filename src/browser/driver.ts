@@ -1,4 +1,5 @@
-import type { Dialog, Frame, Page } from '@playwright/test';
+import { setTimeout as delay } from 'node:timers/promises';
+import type { Dialog, ElementHandle, Frame, Locator, Page } from '@playwright/test';
 import type { AppliedConfig, Focus, MessageCode, StepResult, Target } from '../contracts/types.js';
 
 export class Blocked extends Error {
@@ -51,49 +52,76 @@ export class Driver {
     return new Blocked('BROWSER_ERROR');
   }
   async snapshot(): Promise<Snapshot> {
-    this.guard();
+    const deadline = performance.now() + this.remaining();
     try {
-      const present = new Set<string>(), focused = new Set<string>();
-      let focus: Focus = await this.page.evaluate(() => {
-        const el = document.activeElement;
-        if (!el) return 'none';
-        if (el === document.body || el === document.documentElement) return 'body';
-        return el.shadowRoot || el.tagName === 'IFRAME' ? 'unsupported' : 'unknown';
-      });
-      this.guard();
-      for (const target of this.targets) {
+      while (true) {
         this.guard();
-        if (target.locator.page() !== this.page) throw new Blocked('UNSUPPORTED_CONTEXT');
-        const count = await target.locator.count();
-        this.guard();
-        if (count > 1) throw new Blocked('TARGET_AMBIGUOUS');
-        if (!count) continue;
-        const state = await target.locator.evaluate(el => ({
-          supported: window === window.top && el.getRootNode() === document,
-          native: !!el.closest('dialog'), focused: document.activeElement === el,
-        }), undefined, { timeout: this.remaining() });
-        this.guard();
-        if (!state.supported) throw new Blocked('UNSUPPORTED_CONTEXT');
-        if (state.native) throw new Blocked('UNSUPPORTED_DIALOG');
-        for (const other of this.targets) {
-          if (!present.has(other.id)) continue;
+        // Handles exist only for this observation. Resolve locators again after
+        // detachment and before every later observation; never act on a handle.
+        const handles: ElementHandle[] = [];
+        try {
+          const resolve = async (locator: Locator) => {
+            this.guard();
+            if (locator.page() !== this.page) throw new Blocked('UNSUPPORTED_CONTEXT');
+            const nodes = await locator.elementHandles();
+            handles.push(...nodes);
+            this.guard();
+            return nodes;
+          };
+          const targets: { id: string; node: ElementHandle | null }[] = [];
+          for (const target of this.targets) {
+            const nodes = await resolve(target.locator);
+            if (nodes.length > 1) throw new Blocked('TARGET_AMBIGUOUS');
+            const node = nodes[0] ?? null;
+            if (node && await node.ownerFrame() !== this.page.mainFrame()) throw new Blocked('UNSUPPORTED_CONTEXT');
+            targets.push({ id: target.id, node });
+          }
+          // Use Playwright's role resolution, including fallback role tokens.
+          const dialogs = await resolve(this.page.getByRole('dialog', { includeHidden: true }));
+          const alerts = await resolve(this.page.getByRole('alertdialog', { includeHidden: true }));
           this.guard();
-          if (await target.locator.and(other.locator).count()) throw new Blocked('TARGET_ALIAS');
+          const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts }) => {
+            const result = { code: '' as MessageCode | '', detached: false,
+              focus: 'unknown', focused: [] as string[], present: [] as string[], inside: false };
+            const nodes = [...targets.flatMap(t => t.node ? [t.node] : []), ...dialogs, ...alerts];
+            if (nodes.some(node => !node.isConnected)) return { ...result, detached: true };
+            if (targets.some(({ node }) => node && (!(node instanceof Element) || node.getRootNode() !== document))) return { ...result, code: 'UNSUPPORTED_CONTEXT' as const };
+            const active = document.activeElement;
+            // Context is independent of caller-controlled target IDs.
+            if (active?.shadowRoot || active?.tagName === 'IFRAME') return { ...result, code: 'UNSUPPORTED_CONTEXT' as const };
+            const visible = (node: Node) => {
+              if (!(node instanceof Element)) return false;
+              const rect = node.getBoundingClientRect();
+              const visibility = getComputedStyle(node).visibility;
+              return rect.width > 0 && rect.height > 0 && visibility !== 'hidden' && visibility !== 'collapse';
+            };
+            const layers = new Set([...dialogs, ...alerts, ...document.querySelectorAll('dialog')].filter(visible));
+            if ([...layers].some(node => node.getRootNode() !== document)) return { ...result, code: 'UNSUPPORTED_CONTEXT' as const };
+            if (layers.size > 1 || [...layers].some(node => (node instanceof Element && node.tagName === 'DIALOG') || alerts.includes(node)) ||
+                targets.some(t => t.node instanceof Element && t.node.closest('dialog'))) return { ...result, code: 'UNSUPPORTED_DIALOG' as const };
+            const seen = new Set<Node>();
+            result.focus = !active ? 'none' : active === document.body || active === document.documentElement ? 'body' : 'unknown';
+            for (const { id, node } of targets) {
+              if (!node) continue;
+              if (seen.has(node)) return { ...result, code: 'TARGET_ALIAS' as const };
+              seen.add(node);
+              result.present.push(id);
+              if (node === active) { result.focused.push(id); result.focus = id; }
+              if (id === dialogId) result.inside = !!active && node.contains(active);
+            }
+            return result;
+          }, { targets, dialogId: this.dialog.id, dialogs, alerts });
+          this.guard();
+          if (state.code) throw new Blocked(state.code);
+          if (!state.detached) return { focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside };
+        } finally {
+          // Page closure can destroy a handle before disposal; preserve the primary result.
+          await Promise.allSettled(handles.map(handle => handle.dispose()));
         }
-        present.add(target.id);
-        if (state.focused) { focused.add(target.id); focus = target.id; }
+        this.guard();
+        if (performance.now() >= deadline) throw new Blocked('EXPECTATION_TIMEOUT');
+        await delay(Math.max(1, Math.min(20, deadline - performance.now(), this.remaining())));
       }
-      this.guard();
-      const unsupportedLayers = await this.page.locator('dialog, [role="dialog"], [role="alertdialog"]').evaluateAll(elements => {
-        const visible = elements.filter(el => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden');
-        return visible.some(el => el.tagName === 'DIALOG' || el.getAttribute('role') === 'alertdialog') || visible.length > 1;
-      });
-      if (unsupportedLayers) throw new Blocked('UNSUPPORTED_DIALOG');
-      const inside = present.has(this.dialog.id) && await this.dialog.locator.evaluate(
-        el => !!document.activeElement && el.contains(document.activeElement), undefined, { timeout: this.remaining() });
-      this.guard();
-      if (focus === 'unsupported') throw new Blocked('UNSUPPORTED_CONTEXT');
-      return { focus, focused, present, inside };
     } catch (error) { throw this.normalize(error); }
   }
   async press(key: StepResult['key'], target: Target | null, requireInside = false): Promise<Snapshot> {

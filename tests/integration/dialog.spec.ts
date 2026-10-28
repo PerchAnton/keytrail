@@ -1,10 +1,10 @@
 import { test, expect, type TestInfo, type Page } from '@playwright/test';
-import Ajv from 'ajv/dist/2020.js';
+import { Ajv2020 } from 'ajv/dist/2020.js';
 import { readFileSync } from 'node:fs';
 import { assertDialogJourney, JourneyAssertionError, type JourneyResult } from '../../src/index.js';
 import { dialogHtml, dialogContract, type Variant } from '../fixtures/dialog.js';
 
-const validate = new Ajv({ strict: true }).compile(JSON.parse(readFileSync('schema/journey-result.v1.json', 'utf8')));
+const validate = new Ajv2020({ strict: true }).compile(JSON.parse(readFileSync('schema/journey-result.v1.json', 'utf8')));
 function verifyResult(result: JourneyResult, info: TestInfo) {
   expect(validate(result), JSON.stringify(validate.errors)).toBe(true);
   const c = result.coverage;
@@ -210,4 +210,56 @@ test('report-write error preserves the original primary failure', async ({ page 
   expect(error.code).toBe('REPORT_WRITE_FAILED');
   expect(error.result.checks.find(c => c.status === 'fail')?.checkId).toBe('D07.returned');
   expect(error.message).not.toContain('CANARY_raw_attach_35');
+});
+
+test('a declared target named unsupported is a valid focus target', async ({ page }, info) => {
+  await page.setContent(dialogHtml());
+  const contract = dialogContract(page);
+  const trigger = { ...contract.trigger, id: 'unsupported' };
+  const result = await assertDialogJourney(page, info, { ...contract, trigger, returnFocus: trigger });
+  verifyResult(result, info);
+  expect(result.outcome).toBe('passed');
+  expect(result.checks.at(-1)?.observed.focus).toBe('unsupported');
+});
+for (const kind of ['shadow', 'iframe'] as const) {
+  test(`declared ${kind} host cannot mask unsupported return focus`, async ({ page }, info) => {
+    await page.setContent(dialogHtml() + (kind === 'shadow' ? '<div id="host"></div>' : '<iframe id="host" srcdoc="<input>"></iframe>'));
+    if (kind === 'iframe') await expect(page.frameLocator('#host').locator('input')).toBeVisible();
+    await page.evaluate(kind => {
+      const host = document.getElementById('host')!;
+      if (kind === 'shadow') host.attachShadow({ mode: 'open' }).innerHTML = '<input>';
+      document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        const root = kind === 'shadow' ? host.shadowRoot! : (host as HTMLIFrameElement).contentDocument!;
+        root.querySelector('input')!.focus();
+      });
+    }, kind);
+    const contract = { ...dialogContract(page), returnFocus: { id: 'host', locator: page.locator('#host') } };
+    const error = await failure(page, info, contract);
+    expect(error.code).toBe('UNSUPPORTED_CONTEXT');
+    expect(error.result.steps.at(-1)?.key).toBe('Escape');
+    expect(error.result.checks.at(-1)?.status).toBe('not_run');
+  });
+}
+test('visible nested dialog with role fallback tokens is unsupported', async ({ page }, info) => {
+  await page.setContent(dialogHtml());
+  await page.locator('#dialog').evaluate(el => el.insertAdjacentHTML('beforeend', '<div role="dialog region" aria-label="Inner">Inner</div>'));
+  const error = await failure(page, info);
+  expect(error.code).toBe('UNSUPPORTED_DIALOG');
+});
+test('a region with a dialog fallback is not a second dialog', async ({ page }, info) => {
+  await page.setContent(dialogHtml());
+  await page.locator('#dialog').evaluate(el => el.insertAdjacentHTML('beforeend', '<div role="region dialog" aria-label="Details">Details</div>'));
+  const result = await assertDialogJourney(page, info, dialogContract(page));
+  verifyResult(result, info);
+  expect(result.outcome).toBe('passed');
+});
+test('an unrelated hidden shadow dialog does not block the main-document journey', async ({ page }, info) => {
+  await page.setContent(dialogHtml() + '<div id="host" hidden></div>');
+  await page.locator('#host').evaluate(el => {
+    el.attachShadow({ mode: 'open' }).innerHTML = '<div role="dialog" aria-label="Other">Other</div>';
+  });
+  const result = await assertDialogJourney(page, info, dialogContract(page));
+  verifyResult(result, info);
+  expect(result.outcome).toBe('passed');
 });

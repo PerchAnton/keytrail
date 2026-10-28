@@ -21,5 +21,5 @@ The future benchmark must use identical actions, observations, limits and serial
 The 20% median overhead criterion is a target, not an existing measurement.
 
 Later candidates may expand browsers and dialog modes only with concrete tests and an
-explicit compatibility update. No cloud dashboard, AI scoring, telemetry or unrelated
-integrations are part of this milestone.
+explicit compatibility update. This milestone remains a local test library without
+a hosted dashboard, telemetry or unrelated integrations.

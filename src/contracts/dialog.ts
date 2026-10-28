@@ -28,11 +28,11 @@ export function validateDialog(value: unknown): ValidatedDialog | null {
       !integer(config.scenarioTimeoutMs, 1000, 120000) || !integer(config.observationWindowMs, 50, 2000) ||
       config.observationWindowMs > config.timeoutMs) return null;
   if (value.openKey !== 'Enter' && value.openKey !== 'Space') return null;
-  if (value.closeKey !== 'Escape' || !Array.isArray(value.tabOrder) || !value.tabOrder.length) return null;
+  if (value.closeKey !== 'Escape' || !Array.isArray(value.tabOrder) || !value.tabOrder.length || value.tabOrder.length > 100) return null;
   const byId = new Map<string, Target>();
   for (const target of [value.trigger, value.dialog, value.initialFocus, ...value.tabOrder, value.returnFocus]) {
     if (!object(target) || typeof target.id !== 'string' || !ID.test(target.id) || !object(target.locator)) return null;
-    for (const method of ['count', 'page', 'evaluate', 'isVisible', 'and']) {
+    for (const method of ['count', 'page', 'elementHandles', 'isVisible', 'and', 'getAttribute']) {
       if (typeof target.locator[method] !== 'function') return null;
     }
     if (byId.has(target.id) && byId.get(target.id) !== target) return null;

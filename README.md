@@ -5,7 +5,7 @@ expected focus order; KeyTrail presses keys, checks the result and attaches a re
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[Русский](README.ru.md) · [API](docs/api.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
+[API](docs/api.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
 
 **Status: first working prototype, `0.1.0-alpha.1` source/package candidate.** No npm
 publication or GitHub release yet. This milestone implements custom ARIA dialogs.
