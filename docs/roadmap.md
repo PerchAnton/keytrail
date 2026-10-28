@@ -2,7 +2,7 @@
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated
-`0.1.0-alpha.1`. The current `0.1.0-alpha.3` source candidate includes DEV06–DEV07.
+`0.1.0-alpha.1`. The current `0.1.0-alpha.4` source candidate includes DEV06–DEV08.
 These checkpoints are not full 0.1.0 acceptance.
 
 | Stage | Scope | Status |
@@ -12,7 +12,7 @@ These checkpoints are not full 0.1.0 acceptance.
 | DEV05 | Dialog, four required correct cases and six required defects, packaged example | Implemented; see verification record |
 | DEV06 | Horizontal/vertical tabs, automatic/manual activation, Home/End and exit | Implemented; see [tabs contract](tabs.md) |
 | DEV07 | Form errors, IDREF relationships, focus policies and declarative correction | Implemented; see [form errors contract](form-errors.md) |
-| DEV08 | CI completeness guard and subprocess failure tests | Not started |
+| DEV08 | CI completeness guard and subprocess failure tests | Implemented; see [CI guard](ci-guard.md) |
 | DEV09 | 100-run full-suite repeatability, 1/4-worker comparison, equivalent native benchmark | Not accepted yet |
 | DEV10 | Full API docs, vanilla + React portal consumers, full 0.1 release checklist | Partial: vanilla dialog, tabs and forms |
 

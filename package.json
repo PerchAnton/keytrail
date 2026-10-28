@@ -1,6 +1,6 @@
 {
   "name": "keytrail",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "description": "Keyboard journey checks for dialogs, tabs and form errors in Playwright",
   "type": "module",
   "license": "Apache-2.0",
@@ -28,7 +28,17 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./schema/journey-result.v1.json": "./schema/journey-result.v1.json"
+    "./schema/journey-result.v1.json": "./schema/journey-result.v1.json",
+    "./ci-guard": {
+      "import": {
+        "types": "./dist/ci-guard.d.ts",
+        "default": "./dist/ci-guard.js"
+      },
+      "require": {
+        "types": "./dist/ci-guard.d.cts",
+        "default": "./dist/ci-guard.cjs"
+      }
+    }
   },
   "files": [
     "dist",
@@ -37,7 +47,8 @@
     "README.md",
     "LICENSE",
     "CHANGELOG.md",
-    "SECURITY.md"
+    "SECURITY.md",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "publishConfig": {
     "access": "public",
@@ -59,8 +70,9 @@
     "test:unit": "node --test tests/unit/*.test.mjs",
     "test:browser": "playwright test",
     "test:package": "node scripts/check-package.mjs",
-    "check": "pnpm build && pnpm test:types && pnpm test:unit && pnpm test:browser && pnpm test:package",
+    "check": "pnpm build && pnpm test:types && pnpm test:unit && pnpm test:guard && pnpm test:browser && pnpm test:package",
     "prepack": "pnpm build",
-    "test:types": "tsc -p tsconfig.tests.json"
+    "test:types": "tsc -p tsconfig.tests.json",
+    "test:guard": "node scripts/check-guard.mjs"
   }
 }

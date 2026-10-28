@@ -53,6 +53,7 @@ async function hashDir(dir) {
 }
 await hashDir('src');
 await hashDir('tests');
+for (const path of ['schema/journey-result.v1.json', 'scripts/build.mjs']) hashes[path] = createHash('sha256').update((await readFile(path, 'utf8')).replaceAll('\r\n', '\n')).digest('hex');
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 const evidence = { recordedAt: new Date().toISOString(), package: 'keytrail', version: pkg.version,
   environment: { node: process.version, platform: process.platform, arch: process.arch, playwright: '1.64.1', chromium: '156.0.8078.4' },

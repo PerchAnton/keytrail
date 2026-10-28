@@ -61,7 +61,7 @@ test('failure takes precedence over blocked while incomplete coverage remains vi
 test('package and source version agree; published exports contain no future stubs', () => {
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
   assert.match(readFileSync('src/version.ts', 'utf8'), new RegExp(pkg.version.replaceAll('.', '\\.')));
-  assert.deepEqual(Object.keys(pkg.exports), ['.', './schema/journey-result.v1.json']);
+  assert.deepEqual(Object.keys(pkg.exports), ['.', './schema/journey-result.v1.json', './ci-guard']);
 });
 
 test('rejects incomplete locator implementations before browser work', () => {

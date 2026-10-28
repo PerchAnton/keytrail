@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.4 — source candidate
+
+- Add the opt-in `keytrail/ci-guard` reporter: require one schema-valid, complete
+  passing journey for every discovered test and attempt in a named project.
+- Reject skipped/expected failures, missing reports and recovered retries; preserve
+  overall failures, interruption and timeout. Bound attachments to 5 MiB.
+- Convert reporter read/parse/internal errors into an explicit failed run status.
+- Centralize allowlist serialization and report relationship validation. Compile the
+  schema validator at build time without adding an installed runtime dependency.
+- Add actual subprocess exit-code checks and a guarded package consumer example.
+- Ruleset 0.3.0 and schema version 1 remain; check/dependency IDs now have an explicit
+  technical-identifier pattern. Full 0.1 acceptance and publication remain pending.
+
 ## 0.1.0-alpha.3 — source candidate
 
 - Add `assertFormErrorsJourney` and `FormErrorsContract` with first-invalid, summary

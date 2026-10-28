@@ -6,7 +6,7 @@ Chromium 156.0.8078.4. These are results from synthetic fixtures, not customer d
 | Check | Result |
 | --- | --- |
 | TypeScript | Strict checks for library source, integration tests and Playwright configuration |
-| Unit tests | 21 passed: validation, snapshot isolation, traversal plan and outcome/coverage |
+| Unit tests | 28 passed: validation, snapshot isolation, traversal plan, outcome/coverage, safe serialization and reporter failure handling |
 | Chromium integration tests | 146 passed with 4 workers and 146 passed with 1 worker |
 | Observation comparison | All check IDs, statuses, message codes, dependencies and coverage agree across the two runs |
 | Required correct dialog variants | Ordinary cycle, single stop, static heading, alternate return Target |
@@ -16,7 +16,8 @@ Chromium 156.0.8078.4. These are results from synthetic fixtures, not customer d
 | Tabs defects and boundaries | Wrong arrow, missing wrap, premature/manual activation, focus drift, selected/visible counts, IDREF, roving, exit, unsupported modes, budgets and safe reports |
 | Form cases | First-invalid/live, summary/resubmit, stay, summary links, external messages, supported native controls, Unicode/empty correction and replaced fields |
 | Form defects and boundaries | Text, IDREF and invalid state, wrong focus/link, focus loss before insertion, non-editable fields, uncleared errors, limits, contexts and safe reports |
-| Package consumers | Fresh offline install; ESM/CJS imports and declarations; six Chromium examples from the installed archive |
+| CI guard subprocesses | 48 cases with asserted actual exit codes; [record](evidence/ci-guard.json) |
+| Package consumers | Fresh offline install; ESM/CJS imports and declarations; six Chromium examples plus three corrected journeys with the installed CI guard |
 
 Defect tests pass because they observe the expected failures. They do not count
 as accessible components. [Raw outcomes and source hashes](evidence/journeys.json) record
@@ -91,14 +92,14 @@ node scripts/record-repeatability.mjs forms
 pnpm test:package
 ```
 
-After changing source or tests, refresh all four records before packing. The package
+After changing source or tests, refresh the four journey/repeatability records and the guard record before packing. The package
 check rejects evidence whose recorded source hashes no longer match the checkout.
 
 The package command writes its archive hash to `artifacts/package-verification.json`.
 That hash is kept outside the packed docs to avoid a self-referential archive hash.
-The CI badge links to current Linux/macOS results; this page records the local DEV07
+The CI badge links to current Linux/macOS results; this page records the local DEV08
 verification. The full-suite 100-run repeatability criterion and equivalent native performance
-benchmark have **not** been completed. The CI-guard milestone is pending.
+benchmark have **not** been completed. The CI guard is implemented; its scope and limits are documented separately.
 
 A hosted CI run exposed a diagnostic race: focus leaving during the roving-state wait
 was reported as `ROVING_MISMATCH`. The runner now reports `FOCUS_MISMATCH` as soon as
@@ -117,3 +118,28 @@ Native summary links were also reproduced as an incorrect `NAVIGATION` block dur
 development. Their fragment change is now allowed only for the declared link action,
 with the original Document handle verified afterward. A companion fixture reloads
 the same URL and must remain blocked before any correction input.
+
+Reproduce guard evidence after building:
+
+```sh
+pnpm test:guard
+cp artifacts/guard-verification.json docs/evidence/ci-guard.json
+```
+
+The guard cases use synthetic wire-format reports to isolate reporter decisions. They
+check real process exits, not only method return values. Separate installed-package
+browser tests verify reports from actual dialog, tabs and form assertions.
+
+An initial local focus-repeat run had 798 passes and two timeouts. Both timed-out
+tests overlapped host sleep intervals of 61 and 67 seconds in the macOS power log.
+That run is excluded from the passing record; [the diagnostic summary](evidence/repeatability-host-sleep.json)
+is retained separately. The same source and timeouts were rerun with sleep inhibited
+for the command (`caffeinate -is` on macOS), without enabling retries.
+
+The first DEV08 hosted macOS run passed the guard subprocess cases but the integration
+harness stopped two long manual Home/End journeys at its 20-second test timeout.
+That outer limit was shorter than the library's default 30-second scenario budget.
+The harness now allows 45 seconds, matching the consumer examples and leaving setup
+and attachment time. Library budgets, expected observations and retries are unchanged.
+The recorded local worker/repeat runs above passed under the previous, stricter outer
+limit; hosted CI checks the updated harness.

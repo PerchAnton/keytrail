@@ -8,6 +8,7 @@ import type { CheckResult, JourneyResult, MessageCode, SafeObservation, FormErro
 import { ordinal, planFormErrors } from '../engine/form-errors-plan.js';
 import { Blocked, Driver, type Snapshot } from '../browser/driver.js';
 import { coverage, outcome, JourneyAssertionError } from '../reporting/result.js';
+import { serializeJourneyResult } from '../reporting/serialize.js';
 import { PACKAGE_VERSION, RULESET_VERSION } from '../version.js';
 
 class Stop extends Error {}
@@ -179,7 +180,7 @@ export async function assertFormErrorsJourney(page: Page, info: TestInfo, input:
     for (const check of plan.checks) if (check.status === 'not_run') check.blockedBy = first?.checkId ?? 'E_ABORTED';
     result.coverage = coverage(plan.checks, result.coverage.entryEvidence); result.outcome = outcome(result.coverage);
     result.run.durationMs = performance.now() - started;
-    try { await info.attach('journey-result.json', { body: Buffer.from(JSON.stringify(result)), contentType: 'application/json' }); }
+    try { await info.attach('journey-result.json', { body: serializeJourneyResult(result), contentType: 'application/json' }); }
     catch { throw new JourneyAssertionError('REPORT_WRITE_FAILED', result); }
   }
   if (result.outcome !== 'passed') throw new JourneyAssertionError(plan.checks.find(c => c.status === 'fail' || c.status === 'blocked')?.messageCode ?? 'BROWSER_ERROR', result);

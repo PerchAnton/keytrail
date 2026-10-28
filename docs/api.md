@@ -50,4 +50,4 @@ if you want unambiguous human-readable reports.
 
 The root API exports `assertDialogJourney`, `assertTabsJourney` and
 [`assertFormErrorsJourney`](form-errors.md). The JSON schema is available at
-`/schema/journey-result.v1.json`. The CI-guard API remains pending.
+`/schema/journey-result.v1.json`. The opt-in `keytrail/ci-guard` reporter is described in [CI guard](ci-guard.md).

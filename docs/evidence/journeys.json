@@ -1,7 +1,7 @@
 {
-  "recordedAt": "2026-10-28T12:00:15.534Z",
+  "recordedAt": "2026-10-28T13:17:08.335Z",
   "package": "keytrail",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.4",
   "environment": {
     "node": "v24.22.1",
     "platform": "darwin",
@@ -12,16 +12,16 @@
   "scope": "Synthetic dialog, tabs and form-errors checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
   "browsers": {
     "workers1": {
-      "startTime": "2026-10-28T11:57:23.977Z",
-      "duration": 171039.383,
+      "startTime": "2026-10-28T13:14:17.376Z",
+      "duration": 170444.857,
       "expected": 146,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
     },
     "workers4": {
-      "startTime": "2026-10-28T11:56:24.720Z",
-      "duration": 58358.495,
+      "startTime": "2026-10-28T13:13:18.328Z",
+      "duration": 58138.316999999995,
       "expected": 146,
       "skipped": 0,
       "unexpected": 0,
@@ -32,6 +32,7 @@
   "sourceHashFormat": "SHA-256 of UTF-8 text with LF line endings",
   "sourceHashes": {
     "src/browser/driver.ts": "55fbdfa04631bd216c61438013bf0d655dff4210984bf6f79058d31fee9ced91",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
     "src/contracts/form-errors.ts": "6c46b41d4b11e76db1ab4357b5c7ad7cfe514c6b5f0d655818b585a085b54650",
@@ -42,20 +43,30 @@
     "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
     "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
     "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
-    "src/scenarios/dialog.ts": "35fe5ec503d814992dc116b023a22f7fa2b912d75134ab27496b773f981c060d",
-    "src/scenarios/form-errors.ts": "f5ebaff7ee929c3846cc47b827187680bde869a6836d6bdba1ef3562fb846d33",
-    "src/scenarios/tabs.ts": "8120d4b08b2c80a6d46843593f5b1f5ae2c07419561cb78ee45e050f9c20f463",
-    "src/version.ts": "27c668afeb694085448f4a6deb936bd6ae68f7fd2096808694f986d4b3f6b2e8",
+    "src/reporting/serialize.ts": "da5647dbfd9a038050d3f97093d86a9932980b476b8f3e7f20c64986e992489f",
+    "src/reporting/validate.ts": "f6a550fedd17a6b41390bb4cf8a6d25293b60d6eedb38dfa0ac424a0dc8c9e3d",
+    "src/scenarios/dialog.ts": "beddf26e5c4b7397a60778ff9ffe67e1cc7af17ef8a7a2789e45f4a0d24b3515",
+    "src/scenarios/form-errors.ts": "e240262f2d0cafc413a808e23ea86617a9bf15f982212f990621d73e5661dde1",
+    "src/scenarios/tabs.ts": "4683bc0698598748a66b21bb879a12f2ed21f2b6ca7cfbd92225c08e07062581",
+    "src/version.ts": "b4f20e4018920a95ff4998d7d6f83f8393872ac4ce64cd397920153a47867122",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "f0bf2bc61665a10118052b7c777b5db509fdb06c927c09bf26c33678a0e2146a",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
     "tests/integration/dialog.spec.ts": "744de3397dbc346c032175677c1fb02d3fd8b0e4e8a4701edc82f53b26513701",
     "tests/integration/form-errors.spec.ts": "a0617456b7572b47d34bca72d6106ea32e6aa582187a79a88c00cdc58da20850",
     "tests/integration/observations.spec.ts": "84b63bb79d926834ed76dcac85303deda0bb48c90b024de010df43c4af59b371",
     "tests/integration/tabs.spec.ts": "868b38fe139ec971ed7f8de75fdc42dfe3ff5f6ee5af40ceeafeeedf7dcfc87a",
-    "tests/unit/contracts.test.mjs": "8de8d66e1a95143d9af4b9db172ed8211eb8924741c3f5f583b5f3db8e5b4143",
+    "tests/unit/contracts.test.mjs": "1ce78e70acbce14e55c712c33e38a0fb26781e463dc2d655abf9d49e655233b9",
     "tests/unit/form-errors.test.mjs": "5cf0c16d69b6950b33c55a02664691bca115ca04defec74681d8369bc255968f",
-    "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb"
+    "tests/unit/reporting.test.mjs": "8b76f84fac3bbc0134f2fe50ad81900e3e20255ed483e3e34dd140bb7654ba34",
+    "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb",
+    "schema/journey-result.v1.json": "724dc6784af0058f2b12068c302775d250ca070a57030a388545470ba495ee57",
+    "scripts/build.mjs": "13e6ab25d84750b19cefe1c6166f5cf4ffb7d28e294aacc91a4ff3348fa4da5c"
   },
   "cases": [
     {

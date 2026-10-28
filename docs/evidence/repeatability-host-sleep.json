@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-28",
+  "scope": "Initial local focused dialog/driver repeat run; excluded from passing repeatability evidence.",
+  "tests": 800,
+  "passed": 798,
+  "timedOut": 2,
+  "failures": [
+    {
+      "fixture": "passes rerender",
+      "startedAt": "2026-10-28T13:20:19.536Z",
+      "durationMs": 59502,
+      "hostSleepAt": "2026-10-28T13:20:18Z",
+      "hostSleepSeconds": 61
+    },
+    {
+      "fixture": "declared iframe host cannot mask unsupported return focus",
+      "startedAt": "2026-10-28T13:23:21.077Z",
+      "durationMs": 66575,
+      "hostSleepAt": "2026-10-28T13:23:20Z",
+      "hostSleepSeconds": 67
+    }
+  ],
+  "diagnosis": "Both failures overlap macOS power-log sleep intervals. The 20-second test timeout could not run while the host was suspended.",
+  "followup": "Repeat the same source and timeouts with sleep inhibited for the local command; no product timeout increase or retry enabled."
+}
