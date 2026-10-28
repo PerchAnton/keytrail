@@ -13,14 +13,16 @@ These checkpoints are not full 0.1.0 acceptance.
 | DEV06 | Horizontal/vertical tabs, automatic/manual activation, Home/End and exit | Implemented; see [tabs contract](tabs.md) |
 | DEV07 | Form errors, IDREF relationships, focus policies and declarative correction | Implemented; see [form errors contract](form-errors.md) |
 | DEV08 | CI completeness guard and subprocess failure tests | Implemented; see [CI guard](ci-guard.md) |
-| DEV09 | 100-run full-suite repeatability, 1/4-worker comparison, equivalent native benchmark | Not accepted yet |
+| DEV09 | Repeatability, 1/4-worker comparison, canaries, equivalent native benchmark | Verified checkpoint; maintainer accepted 45 rounds instead of 100; [scope and evidence](reliability.md) |
 | DEV10 | Full API docs, vanilla + React portal consumers, full 0.1 release checklist | Partial: vanilla dialog, tabs and forms |
 
 No performance, superiority or adoption claim follows from passing the teaching fixtures.
 The [benchmark](performance.md) uses equivalent actions, observations, limits and
 serialization, with 5 warmups and 30 alternating measured runs. Its 20% criterion
 is evaluated per workload; no average across workloads hides a missed target.
-[Full-suite repeatability](reliability.md) requires 100 complete rounds without retries.
+[Full-suite repeatability](reliability.md) retains the original 100-round target.
+The maintainer accepted 45 complete rounds for this checkpoint; the original target
+is explicitly not marked as met.
 
 Later candidates may expand browsers and dialog modes only with concrete tests and an
 explicit compatibility update. This milestone remains a local test library without

@@ -10,13 +10,13 @@ component is accessible.
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 30 passed |
 | Browser suite | 153 passed with one worker; 153 passed with four workers |
-| Worker isolation | Identical semantic observations; 300 distinct journey UUIDs; three engine-only tests per run |
+| Worker isolation | Final 4-worker run matches all 45 sequential rounds; 6,900 distinct journey UUIDs across these runs; three engine-only tests per run |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 48 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | All three fixed workloads below the 20% median overhead target; [protocol and raw samples](performance.md) |
-| Full repeatability | The 100-round acceptance run is in progress; not yet accepted |
-| Package consumers | Current candidate verification follows the completed acceptance record |
+| Repeatability | 45 full sequential rounds: 6,885 passed without retries or semantic differences; original 100-round target not completed |
+| Package consumers | Clean offline ESM/CJS and declaration checks; six browser examples plus three guarded journeys |
 
 ## Performance
 
@@ -34,9 +34,16 @@ advantage or replace checks in a consumer application.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
-snapshots. The package gate requires a completed 100-round record and passing
-performance records for the current source. Historical focused runs are not counted
-as full-suite repetitions.
+snapshots. The maintainer accepted 45 completed rounds for this checkpoint and requested stopping.
+The partial 46th round was interrupted and excluded: 92 tests had passed before the
+stop, with no unexpected failures. It is not added to the 6,885 count. The final
+4-worker run passed all 153 tests and matched every completed round.
+
+[The record](evidence/reliability.json) and [version-bound acceptance policy](evidence/acceptance-policy.json)
+preserve the original 100-round target with `acceptance: false`. The package gate
+requires at least the approved 45 complete rounds, matching source hashes and
+passing performance records. This is a reduced-scope checkpoint, not a claim that
+the original 100-round criterion was met. Historical focused runs are not added to it.
 
 The canary tests inspect only KeyTrail's own JSON, messages and stdout/stderr.
 External Playwright artifacts are outside that guarantee. Budget, focus-loss and

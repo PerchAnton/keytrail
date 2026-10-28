@@ -153,7 +153,10 @@ unsupported contexts, bounded entry, scenario deadlines and safe own reports.
 The [verification record](docs/verification.md) separates completed checks from the
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
-repeatability and attachment isolation. Real-world adoption has not been established.
+repeatability and attachment isolation. This checkpoint has 45 full sequential rounds
+(6,885 executions), accepted by the maintainer, plus a matching 153-test four-worker
+run. The original 100-round target was not completed. Real-world adoption has not
+been established.
 
 ### Measured overhead
 

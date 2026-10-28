@@ -11,6 +11,9 @@
 - Add a resumable, source-bound 100-round full-suite verifier and worker comparison.
 - Add a fixture-specific native Playwright benchmark with paired measurements,
   semantic equivalence checks, negative controls and published raw timing samples.
+- Record 45 full sequential rounds (6,885 executions) and matching four-worker
+  results. The maintainer accepted this reduced scope; retain the interrupted
+  next round separately and do not claim the original 100-round target.
 - Ruleset 0.3.0 and schema version 1 remain. No package or GitHub release published.
 
 ## 0.1.0-alpha.4 — source candidate
