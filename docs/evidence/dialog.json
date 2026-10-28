@@ -1,0 +1,4442 @@
+{
+  "recordedAt": "2026-10-28T09:01:06.471Z",
+  "package": "keytrail",
+  "version": "0.1.0-alpha.1",
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "darwin",
+    "arch": "arm64",
+    "playwright": "1.64.1",
+    "chromium": "156.0.8078.4"
+  },
+  "scope": "Synthetic dialog checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
+  "browsers": {
+    "workers1": {
+      "startTime": "2026-10-28T08:59:47.099Z",
+      "duration": 14287.293,
+      "expected": 33,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "workers4": {
+      "startTime": "2026-10-28T08:57:21.260Z",
+      "duration": 7125.299,
+      "expected": 33,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "statusesAndCodesIdentical": true
+  },
+  "sourceHashFormat": "SHA-256 of UTF-8 text with LF line endings",
+  "sourceHashes": {
+    "src/browser/driver.ts": "9291530c84652fae7887b1439ffd4574aeeacf08d81c9e49eb1cd7510c8863f4",
+    "src/contracts/dialog.ts": "e9c2c5dfbf9328ce581c5cf37912bbb665d9f2152c7b741b7c69f85191b79090",
+    "src/contracts/types.ts": "47acd0798d99f72d0f35deb86542bd8c27583adc27835b0fc2d88fee495df5dd",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/index.ts": "ae6f26a54ab444cf9797d51c3002a7bb1d7e7a28498ecea1e92afde890746555",
+    "src/reporting/result.ts": "8583cec5472b43479c3046e1aa4f81803dd33501b8534e1c86320f27ef5ab1c9",
+    "src/scenarios/dialog.ts": "9e8404e2696cfb53ddc9f0f7490cf990ab87bd51ddc8b60fa05a13e22f83f358",
+    "src/version.ts": "0523b7864e425aaad07a93fe9ddac9c15f3b6e30e21f51fd42a2c1c2efe659c9",
+    "tests/fixtures/dialog.ts": "dadeafd1b4bac649c94dde7096d1a98fffe0df28796a94622fb4a5cd0acd16f0",
+    "tests/integration/dialog.spec.ts": "19d9f1dbc5207a97aa8331feb2cfd58839e7d2e7ea3cbdf38557fbec606de386",
+    "tests/unit/contracts.test.mjs": "698967009ad2feee9f63db16c0c627a8d11db37a32330f33632e4386dde96877"
+  },
+  "cases": [
+    {
+      "fixture": "ambiguous target blocks before keyboard input",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "TARGET_AMBIGUOUS"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "an observed escape cannot be hidden by a later focus return",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 11,
+        "failed": 2,
+        "blocked": 0,
+        "notRun": 9,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "fail",
+          "code": "FOCUS_OUTSIDE_DIALOG"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        }
+      ]
+    },
+    {
+      "fixture": "an unregistered focus target is represented as unknown",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 21,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        }
+      ]
+    },
+    {
+      "fixture": "blocks native-alert",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_DIALOG"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "blocks navigation",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "NAVIGATION"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "blocks popup",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "POPUP"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "closed Page is blocked with an attached result",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "PAGE_CLOSED"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "detects bad-reverse",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 14,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 7,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.backward.001"
+        }
+      ]
+    },
+    {
+      "fixture": "detects escape-focus",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 11,
+        "failed": 2,
+        "blocked": 0,
+        "notRun": 9,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "fail",
+          "code": "FOCUS_OUTSIDE_DIALOG"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D04.forward.003"
+        }
+      ]
+    },
+    {
+      "fixture": "detects no-close",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 20,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "fail",
+          "code": "EXPECTATION_TIMEOUT"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D06.closed"
+        }
+      ]
+    },
+    {
+      "fixture": "detects no-name",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 18,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "fail",
+          "code": "NAME_MISSING"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        }
+      ]
+    },
+    {
+      "fixture": "detects no-return",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 21,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        }
+      ]
+    },
+    {
+      "fixture": "detects wrong-initial",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 5,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 16,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D03.initial"
+        }
+      ]
+    },
+    {
+      "fixture": "entry limit preserves unreached observations",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "ENTRY_LIMIT"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "foreign Page target is blocked",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "iframe target is blocked",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "invalid contract never serializes arbitrary fields",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 1,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 0,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "E_CONFIG",
+          "status": "blocked",
+          "code": "CONFIG_INVALID"
+        }
+      ]
+    },
+    {
+      "fixture": "missing dialog is a failed expectation, not an empty pass",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 1,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 20,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "fail",
+          "code": "EXPECTATION_TIMEOUT"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.visible"
+        }
+      ]
+    },
+    {
+      "fixture": "native HTML dialog is blocked",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_DIALOG"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "own report excludes DOM, names, values and URL",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 21,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        }
+      ]
+    },
+    {
+      "fixture": "passes alternate",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "passes delayed",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "passes heading",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 24,
+        "passed": 24,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.004",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.004",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "passes ordinary",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "passes rerender",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "passes single",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 14,
+        "passed": 14,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "raw browser errors are replaced with a safe code",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "BROWSER_ERROR"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "report-write error preserves the original primary failure",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 21,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        }
+      ]
+    },
+    {
+      "fixture": "same DOM node with different ids is blocked",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "TARGET_ALIAS"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "scenario budget dominates a longer assertion timeout",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 3,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 18,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "blocked",
+          "code": "SCENARIO_TIMEOUT"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D02.name"
+        }
+      ]
+    },
+    {
+      "fixture": "ShadowRoot target is blocked",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "Space activation and already-focused entry",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "already_focused"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "visible nested dialog is unsupported",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_DIALOG"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    }
+  ]
+}

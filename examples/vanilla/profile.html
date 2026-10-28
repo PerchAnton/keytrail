@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>KeyTrail dialog example</title>
+<style>
+  [hidden] { display: none !important; }
+  body { margin: 3rem; font: 18px system-ui; color: #19362e; }
+  button, input { font: inherit; padding: .5rem; margin: .5rem; }
+  :focus { outline: 3px solid #245ddd; outline-offset: 3px; }
+  [role="dialog"] { padding: 2rem; border: 2px solid #168064; max-width: 30rem; }
+</style>
+<h1>Profile settings</h1>
+<button id="open">Edit profile</button>
+<section role="dialog" aria-modal="true" aria-labelledby="title" hidden>
+  <h2 id="title">Edit profile</h2>
+  <label>Display name <input value="Example"></label>
+  <button id="close">Close</button>
+</section>
+<script>
+  const opener = document.getElementById('open');
+  const box = document.querySelector('[role="dialog"]');
+  const input = box.querySelector('input');
+  const closeButton = document.getElementById('close');
+  function close() {
+    box.hidden = true;
+    opener.focus();
+  }
+  opener.addEventListener('click', () => { box.hidden = false; input.focus(); });
+  closeButton.addEventListener('click', close);
+  box.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { event.preventDefault(); close(); }
+    if (event.key !== 'Tab') return;
+    if (event.shiftKey && document.activeElement === input) { event.preventDefault(); closeButton.focus(); }
+    if (!event.shiftKey && document.activeElement === closeButton) { event.preventDefault(); input.focus(); }
+  });
+</script>
+</html>
