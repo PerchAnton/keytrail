@@ -21,17 +21,30 @@ export type DialogContract = CommonContract & Readonly<{
 export type AppliedConfig = {
   maxTabs: number; timeoutMs: number; scenarioTimeoutMs: number; observationWindowMs: number;
 };
+export type TabsContract = CommonContract & Readonly<{
+  tablist: Target;
+  items: readonly Readonly<{ tab: Target; panel: Target }>[];
+  initialTabId: string;
+  orientation: 'horizontal' | 'vertical';
+  nextTabStop: Target;
+  homeEnd?: boolean;
+}> & (Readonly<{ activation: 'automatic'; activationKey?: never }> |
+  Readonly<{ activation: 'manual'; activationKey: 'Enter' | 'Space' }>);
 export type CheckStatus = 'pass' | 'fail' | 'blocked' | 'not_run';
 export type Focus = string;
 export type MessageCode = 'OK' | 'NOT_RUN' | 'CONFIG_INVALID' | 'TARGET_AMBIGUOUS'
   | 'TARGET_ALIAS' | 'UNSUPPORTED_CONTEXT' | 'UNSUPPORTED_DIALOG' | 'PAGE_CLOSED'
   | 'NAVIGATION' | 'POPUP' | 'ENTRY_LIMIT' | 'SCENARIO_TIMEOUT' | 'ACTION_LIMIT'
   | 'EXPECTATION_TIMEOUT' | 'FOCUS_MISMATCH' | 'FOCUS_OUTSIDE_DIALOG' | 'ROLE_MISMATCH'
-  | 'NAME_MISSING' | 'MODAL_MISMATCH' | 'BROWSER_ERROR' | 'REPORT_WRITE_FAILED';
+  | 'NAME_MISSING' | 'MODAL_MISMATCH' | 'BROWSER_ERROR' | 'REPORT_WRITE_FAILED'
+  | 'UNSUPPORTED_TABS' | 'STRUCTURE_MISMATCH' | 'IDREF_MISMATCH' | 'ORIENTATION_MISMATCH'
+  | 'SELECTION_MISMATCH' | 'ROVING_MISMATCH' | 'PREMATURE_ACTIVATION';
 /** Only technical identifiers and measured facts belong in this allowlist. */
 export type SafeObservation = {
-  focus?: Focus; visible?: boolean; role?: 'dialog'; hasAccessibleName?: boolean;
+  focus?: Focus; visible?: boolean; role?: 'dialog' | 'tablist' | 'tab' | 'tabpanel'; hasAccessibleName?: boolean;
   modal?: boolean; inside?: boolean; count?: number; maxTabs?: number; matched?: boolean;
+  selected?: string; selectedCount?: number; visibleCount?: number; roving?: boolean;
+  orientation?: 'horizontal' | 'vertical'; observationWindowMs?: number;
 };
 export type CheckResult = {
   checkId: string; ruleId: string; stepId: string | null; status: CheckStatus;
@@ -39,7 +52,8 @@ export type CheckResult = {
   basis: 'contract' | 'apg_guidance'; blockedBy?: string; guidanceUrl?: string;
 };
 export type StepResult = {
-  stepId: string; actionKind: 'press'; key: 'Tab' | 'Shift+Tab' | 'Enter' | 'Space' | 'Escape';
+  stepId: string; actionKind: 'press'; key: 'Tab' | 'Shift+Tab' | 'Enter' | 'Space' | 'Escape'
+    | 'ArrowRight' | 'ArrowLeft' | 'ArrowDown' | 'ArrowUp' | 'Home' | 'End';
   targetId: string | null; beforeFocus: Focus; afterFocus: Focus; elapsedMs: number;
   observationWindowMs: number;
 };
@@ -47,7 +61,7 @@ export type JourneyResult = {
   schemaVersion: '1'; rulesetVersion: string; packageVersion: string;
   run: { runId: string; testRef: string; attempt: number; startedAt: string; durationMs: number;
     nodeVersion: string; playwrightVersion: string; browserVersion: string };
-  scenario: { id: string; kind: 'dialog'; contractVersion: string };
+  scenario: { id: string; kind: 'dialog' | 'tabs'; contractVersion: string };
   config: AppliedConfig; outcome: 'passed' | 'failed' | 'blocked';
   coverage: { planned: number; passed: number; failed: number; blocked: number; notRun: number;
     complete: boolean; entryEvidence: 'tab' | 'already_focused' | 'unreached' };

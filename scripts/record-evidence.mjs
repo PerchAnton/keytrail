@@ -38,7 +38,11 @@ for (const [report, workers] of [[one, 1], [four, 4]]) {
   assert.equal(cases(report).length, report.stats.expected);
 }
 const outcomes = cases(one);
-assert.deepEqual(outcomes, cases(four), 'Exact observation statuses/codes must match across workers');
+const parallel = cases(four);
+assert.equal(outcomes.length, parallel.length);
+for (let index = 0; index < outcomes.length; index++) {
+  assert.deepEqual(outcomes[index], parallel[index], `Observation mismatch for ${outcomes[index].fixture}`);
+}
 const hashes = {};
 async function hashDir(dir) {
   for (const file of await readdir(dir, { withFileTypes: true })) {
@@ -49,11 +53,12 @@ async function hashDir(dir) {
 }
 await hashDir('src');
 await hashDir('tests');
-const evidence = { recordedAt: new Date().toISOString(), package: 'keytrail', version: '0.1.0-alpha.1',
+const pkg = JSON.parse(await readFile('package.json', 'utf8'));
+const evidence = { recordedAt: new Date().toISOString(), package: 'keytrail', version: pkg.version,
   environment: { node: process.version, platform: process.platform, arch: process.arch, playwright: '1.64.1', chromium: '156.0.8078.4' },
-  scope: 'Synthetic dialog checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.',
+  scope: 'Synthetic dialog and tabs checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.',
   browsers: { workers1: one.stats, workers4: four.stats, statusesAndCodesIdentical: true },
   sourceHashFormat: 'SHA-256 of UTF-8 text with LF line endings', sourceHashes: hashes, cases: outcomes };
 await mkdir('docs/evidence', { recursive: true });
-await writeFile('docs/evidence/dialog.json', JSON.stringify(evidence, null, 2)+'\n');
+await writeFile('docs/evidence/journeys.json', JSON.stringify(evidence, null, 2)+'\n');
 console.log(`Recorded ${outcomes.length} fixture tests with identical statuses/codes on 1 and 4 workers.`);

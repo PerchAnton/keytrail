@@ -1,6 +1,6 @@
 # Limits and data handling
 
-The first milestone supports one custom ARIA dialog in the main document, including a
+The dialog scenario supports one custom ARIA dialog in the main document, including a
 portal into that same document. It targets Chromium only. Native HTML dialogs,
 alertdialog, multiple visible/nested dialogs, iframe targets, ShadowRoot targets,
 navigation, popups and Page closure are blocked when observed. It cannot detect all
@@ -28,5 +28,9 @@ must not contain private data. This package is not a sandbox for hostile Locator
 Playwright's own HTML reports, internal API steps, traces, screenshots or videos can
 contain page data even when KeyTrail's JSON does not. KeyTrail never changes those settings.
 The examples disable trace/screenshot/video and use only synthetic data. A killed worker
-may produce no attachment. The full CI completeness guard is not implemented in alpha.1;
+may produce no attachment. The full CI completeness guard is not implemented in alpha.2;
 do not treat a missing result or a caught assertion as a passing accessibility check.
+
+Tabs support fixed LTR lists with at least two enabled tabs and mounted panels. See
+[the tabs contract](tabs.md) for role relationships, manual observation windows and
+unsupported modes. Perpendicular arrows, scrolling and screen-reader output are not tested.

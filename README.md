@@ -1,15 +1,15 @@
 # KeyTrail
 
-**Check a dialog's keyboard journey in your existing Playwright tests.** Declare the
+**Check dialog and tabs keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[API](docs/api.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
+[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
 
-**Status: first working prototype, `0.1.0-alpha.1` source/package candidate.** No npm
-publication or GitHub release yet. This milestone implements custom ARIA dialogs.
-Tabs, forms, and a CI completeness reporter are planned for later milestones.
+**Status: dialog and tabs prototype, `0.1.0-alpha.2` source/package candidate.** No npm
+publication or GitHub release yet. This milestone implements custom ARIA dialogs and fixed tab lists.
+Forms and a CI completeness reporter are planned for later milestones.
 
 ```text
 Tab to trigger → Enter → initial focus → Tab cycle → Shift+Tab cycle → Escape
@@ -43,13 +43,13 @@ pnpm test:package
 On Linux, install Chromium's system dependencies with
 `pnpm exec playwright install --with-deps chromium` when needed.
 The package check packs the actual archive, installs it into a fresh offline consumer,
-checks ESM/CJS imports and types, then runs the working and broken browser examples.
-It leaves `artifacts/keytrail-0.1.0-alpha.1.tgz` and a verification record.
+checks ESM/CJS imports and types, then runs the working and broken dialog/tabs browser examples.
+It leaves `artifacts/keytrail-0.1.0-alpha.2.tgz` and a verification record.
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.1.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.2.tgz @playwright/test@1.64.1
 ```
 
 ## Write a contract
@@ -77,6 +77,15 @@ Use one journey per test, allow time for setup and reporting (the example uses 4
 and let `JourneyAssertionError` fail application tests. Do not catch and ignore it.
 The [standalone example](examples/vanilla) provides the actual HTML and configuration;
 `/profile` above is an application route, not a service supplied by this package.
+
+## Test a tab list
+
+`assertTabsJourney` checks horizontal/vertical arrow navigation, wraparound, automatic
+or manual activation, optional Home/End and the final Tab exit. Manual activation
+checks that focus moves while selection stays unchanged until Enter or Space.
+
+See the [Tabs API and flow diagram](docs/tabs.md) and the
+[runnable manual-tabs example](examples/vanilla/tabs.journey.spec.ts).
 
 ## What the result means
 
