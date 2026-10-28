@@ -1,0 +1,289 @@
+{
+  "fixture": "forms pass firstInvalid live",
+  "kind": "formErrors",
+  "targets": [
+    {
+      "id": "form",
+      "selector": "#form"
+    },
+    {
+      "id": "submit",
+      "selector": "#submit"
+    },
+    {
+      "id": "field-0",
+      "selector": "#field-0"
+    },
+    {
+      "id": "error-0",
+      "selector": "#error-0"
+    },
+    {
+      "id": "field-1",
+      "selector": "#field-1"
+    },
+    {
+      "id": "error-1",
+      "selector": "#error-1"
+    }
+  ],
+  "root": "form",
+  "scenario": {
+    "id": "profile-errors",
+    "kind": "formErrors",
+    "contractVersion": "1"
+  },
+  "config": {
+    "maxTabs": 25,
+    "timeoutMs": 2000,
+    "scenarioTimeoutMs": 30000,
+    "observationWindowMs": 200
+  },
+  "checks": [
+    {
+      "checkId": "F01.structure",
+      "ruleId": "F01",
+      "stepId": null,
+      "basis": "contract",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F01.entry",
+      "ruleId": "F01",
+      "stepId": "step-004",
+      "basis": "contract",
+      "expected": {
+        "focus": "submit"
+      }
+    },
+    {
+      "checkId": "F01.submit",
+      "ruleId": "F01",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F02.message.001",
+      "ruleId": "F02",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "visible": true,
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F02.message.002",
+      "ruleId": "F02",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "visible": true,
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F03.field.001.invalid",
+      "ruleId": "F03",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "checkId": "F03.field.001.idref",
+      "ruleId": "F03",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F03.field.002.invalid",
+      "ruleId": "F03",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "invalid": true
+      }
+    },
+    {
+      "checkId": "F03.field.002.idref",
+      "ruleId": "F03",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F04.focus",
+      "ruleId": "F04",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "focus": "field-0"
+      }
+    },
+    {
+      "checkId": "F06.field.001.entry",
+      "ruleId": "F06",
+      "stepId": "step-005",
+      "basis": "contract",
+      "expected": {
+        "focus": "field-0"
+      }
+    },
+    {
+      "checkId": "F06.field.001.value",
+      "ruleId": "F06",
+      "stepId": "step-007",
+      "basis": "contract",
+      "expected": {
+        "matched": true,
+        "editable": true
+      }
+    },
+    {
+      "checkId": "F06.field.001.blur",
+      "ruleId": "F06",
+      "stepId": "step-008",
+      "basis": "contract",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F06.field.002.entry",
+      "ruleId": "F06",
+      "stepId": "step-008",
+      "basis": "contract",
+      "expected": {
+        "focus": "field-1"
+      }
+    },
+    {
+      "checkId": "F06.field.002.value",
+      "ruleId": "F06",
+      "stepId": "step-010",
+      "basis": "contract",
+      "expected": {
+        "matched": true,
+        "editable": true
+      }
+    },
+    {
+      "checkId": "F06.field.002.blur",
+      "ruleId": "F06",
+      "stepId": "step-011",
+      "basis": "contract",
+      "expected": {
+        "matched": true
+      }
+    },
+    {
+      "checkId": "F06.clear.001",
+      "ruleId": "F06",
+      "stepId": "step-011",
+      "basis": "contract",
+      "expected": {
+        "visible": false,
+        "invalid": false
+      }
+    },
+    {
+      "checkId": "F06.clear.002",
+      "ruleId": "F06",
+      "stepId": "step-011",
+      "basis": "contract",
+      "expected": {
+        "visible": false,
+        "invalid": false
+      }
+    }
+  ],
+  "steps": [
+    {
+      "stepId": "step-001",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "submit"
+    },
+    {
+      "stepId": "step-002",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "submit"
+    },
+    {
+      "stepId": "step-003",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "submit"
+    },
+    {
+      "stepId": "step-004",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": "submit"
+    },
+    {
+      "stepId": "step-005",
+      "actionKind": "press",
+      "key": "Enter",
+      "targetId": "submit"
+    },
+    {
+      "stepId": "step-006",
+      "actionKind": "press",
+      "key": "ControlOrMeta+A",
+      "targetId": "field-0"
+    },
+    {
+      "stepId": "step-007",
+      "actionKind": "insertText",
+      "key": null,
+      "targetId": "field-0"
+    },
+    {
+      "stepId": "step-008",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": null
+    },
+    {
+      "stepId": "step-009",
+      "actionKind": "press",
+      "key": "ControlOrMeta+A",
+      "targetId": "field-1"
+    },
+    {
+      "stepId": "step-010",
+      "actionKind": "insertText",
+      "key": null,
+      "targetId": "field-1"
+    },
+    {
+      "stepId": "step-011",
+      "actionKind": "press",
+      "key": "Tab",
+      "targetId": null
+    }
+  ],
+  "limitations": [
+    "Chromium; main document; novalidate form; native text inputs and textarea; at most 20 declared fields.",
+    "Correction uses select-all and keyboard.insertText, or Backspace for an empty value; no IME or per-character key-event check.",
+    "Fragment changes are allowed only during declared summary-link activation with verified Document identity.",
+    "Only declared errors are checked. Clearing them does not prove server persistence, success announcements or WCAG conformance.",
+    "Use synthetic values and mock network requests in test setup. No application state restoration.",
+    "Browser calls are cooperative; the Playwright test timeout is the hard stop.",
+    "Own JSON excludes values, error text and selectors; external Playwright artifacts may contain them."
+  ]
+}

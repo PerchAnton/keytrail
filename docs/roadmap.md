@@ -2,7 +2,7 @@
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated
-`0.1.0-alpha.1`. The current `0.1.0-alpha.4` source candidate includes DEV06–DEV08.
+`0.1.0-alpha.1`. The current `0.1.0-alpha.5` source candidate adds the DEV09 verification tools and browser-read optimization.
 These checkpoints are not full 0.1.0 acceptance.
 
 | Stage | Scope | Status |
@@ -17,9 +17,10 @@ These checkpoints are not full 0.1.0 acceptance.
 | DEV10 | Full API docs, vanilla + React portal consumers, full 0.1 release checklist | Partial: vanilla dialog, tabs and forms |
 
 No performance, superiority or adoption claim follows from passing the teaching fixtures.
-The future benchmark must use identical actions, observations, limits and serialization,
-5 warmups and 30 alternating measured runs, with median/p95 and environment details.
-The 20% median overhead criterion is a target, not an existing measurement.
+The [benchmark](performance.md) uses equivalent actions, observations, limits and
+serialization, with 5 warmups and 30 alternating measured runs. Its 20% criterion
+is evaluated per workload; no average across workloads hides a missed target.
+[Full-suite repeatability](reliability.md) requires 100 complete rounds without retries.
 
 Later candidates may expand browsers and dialog modes only with concrete tests and an
 explicit compatibility update. This milestone remains a local test library without

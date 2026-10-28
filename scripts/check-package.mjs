@@ -7,9 +7,21 @@ import { createHash } from 'node:crypto';
 
 const root = process.cwd();
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
-for (const record of ['journeys', 'repeatability', 'tabs-repeatability', 'forms-repeatability', 'ci-guard']) {
+for (const record of ['reliability', 'benchmark-dialog', 'benchmark-tabs', 'benchmark-formErrors', 'ci-guard']) {
   const evidence = JSON.parse(await readFile(`docs/evidence/${record}.json`, 'utf8'));
   assert.equal(evidence.version, pkg.version);
+  if (record === 'reliability') {
+    assert.equal(evidence.status, 'passed'); assert.equal(evidence.acceptance, true);
+    assert.equal(evidence.targetRounds, 100); assert.equal(evidence.rounds.length, 100);
+    assert.equal(evidence.workers, 1); assert.equal(evidence.parallel.workers, 4);
+    assert.equal(evidence.retries, 0); assert.equal(evidence.totalSequentialExecutions, evidence.caseCount * 100);
+    assert.equal(evidence.parallel.passed, evidence.caseCount);
+    assert(evidence.rounds.every(r => r.passed === evidence.caseCount && r.signature === evidence.parallel.signature));
+  } else if (record.startsWith('benchmark-')) {
+    assert.equal(evidence.pilot, false); assert.equal(evidence.samplesPerArm, 30);
+    assert.equal(evidence.warmupsPerArm, 5); assert.equal(evidence.summary.targetMet, true);
+    assert.equal(evidence.pairs.length, 30);
+  }
   for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
     assert(resolve(file).startsWith(root + '/'));
     const actual = createHash('sha256').update((await readFile(file, 'utf8')).replaceAll('\r\n', '\n')).digest('hex');

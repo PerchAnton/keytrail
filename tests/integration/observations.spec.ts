@@ -55,3 +55,23 @@ test('replacement during observation is re-resolved and temporary handles are re
     expect(driver.steps).toHaveLength(0);
   } finally { await driver.dispose(); }
 });
+
+test('an early resolution error awaits and disposes slower sibling handles', async ({ page }) => {
+  await page.setContent('<section id="dialog"><button>A</button><button>B</button></section>');
+  const ambiguous = { id: 'ambiguous', locator: page.locator('button') };
+  const slow = { id: 'slow', locator: page.locator('#dialog') };
+  const elements = slow.locator.elementHandles.bind(slow.locator);
+  const issued: Awaited<ReturnType<typeof elements>> = [];
+  let completed = false;
+  slow.locator.elementHandles = async () => {
+    await new Promise(resolve => setTimeout(resolve, 30));
+    const nodes = await elements(); issued.push(...nodes); completed = true; return nodes;
+  };
+  const driver = new Driver(page, [ambiguous, slow], slow, { ...DEFAULTS }, performance.now());
+  try {
+    await expect(driver.snapshot()).rejects.toMatchObject({ code: 'TARGET_AMBIGUOUS' });
+    expect(completed).toBe(true); expect(issued).toHaveLength(1);
+    for (const node of issued) await expect(node.evaluate(el => el.isConnected)).rejects.toThrow();
+    expect(driver.steps).toHaveLength(0);
+  } finally { await driver.dispose(); }
+});

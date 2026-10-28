@@ -87,23 +87,36 @@ export class Driver {
             this.guard();
             return nodes;
           };
-          const targets: { id: string; node: ElementHandle | null }[] = [];
-          for (const target of this.targets) {
+          // Independent reads can overlap, but every read must settle before the
+          // observation or cleanup. In particular, an early failure must not leak
+          // handles returned by a slower sibling. Preserve target-order errors.
+          const unwrap = <T>(result: PromiseSettledResult<T>): T => {
+            if (result.status === 'rejected') throw result.reason;
+            return result.value;
+          };
+          const targetReads = Promise.allSettled(this.targets.map(async target => {
             const nodes = await resolve(target.locator);
             if (nodes.length > 1) throw new Blocked('TARGET_AMBIGUOUS');
             const node = nodes[0] ?? null;
             if (node && await node.ownerFrame() !== this.page.mainFrame()) throw new Blocked('UNSUPPORTED_CONTEXT');
-            targets.push({ id: target.id, node });
-          }
+            return { id: target.id, node };
+          }));
           // Use Playwright's role resolution, including fallback role tokens.
-          const dialogs = await resolve(this.page.getByRole('dialog', { includeHidden: true }));
-          const alerts = await resolve(this.page.getByRole('alertdialog', { includeHidden: true }));
-          const tabRoles = this.tabsContract ? {
-            lists: await resolve(this.page.getByRole('tablist', { includeHidden: true })),
-            named: await resolve(this.page.getByRole('tablist', { name: /\S/, includeHidden: true })),
-            tabs: await resolve(this.page.getByRole('tab', { includeHidden: true })),
-            panels: await resolve(this.page.getByRole('tabpanel', { includeHidden: true })),
-          } : null;
+          const roleReads = Promise.allSettled([
+            resolve(this.page.getByRole('dialog', { includeHidden: true })),
+            resolve(this.page.getByRole('alertdialog', { includeHidden: true })),
+            ...(this.tabsContract ? [
+              resolve(this.page.getByRole('tablist', { includeHidden: true })),
+              resolve(this.page.getByRole('tablist', { name: /\S/, includeHidden: true })),
+              resolve(this.page.getByRole('tab', { includeHidden: true })),
+              resolve(this.page.getByRole('tabpanel', { includeHidden: true })),
+            ] : []),
+            ...(this.formContract?.summaryLinks?.length ? [resolve(this.page.getByRole('link', { includeHidden: true }))] : []),
+          ]);
+          const [targetResults, roleResults] = await Promise.all([targetReads, roleReads]);
+          const targets = targetResults.map(unwrap), roles = roleResults.map(unwrap);
+          const dialogs = roles[0]!, alerts = roles[1]!;
+          const tabRoles = this.tabsContract ? { lists: roles[2]!, named: roles[3]!, tabs: roles[4]!, panels: roles[5]! } : null;
           const tabs = this.tabsContract ? { orientation: this.tabsContract.orientation,
             items: this.tabsContract.items.map(item => ({ tab: item.tab.id, panel: item.panel.id })) } : null;
           const form = this.formContract ? { submit: this.formContract.submit.id,
@@ -112,7 +125,7 @@ export class Driver {
                 { source: error.expectedText.source, flags: error.expectedText.flags },
               value: this.formContract!.correction.find(c => c.field === error.field)!.value })),
             links: this.formContract.summaryLinks?.map(l => l.link.id) ?? [] } : null;
-          const linkRoles = form ? await resolve(this.page.getByRole('link', { includeHidden: true })) : [];
+          const linkRoles = form?.links.length ? roles[2]! : [];
           this.guard();
           const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts, tabRoles, tabs, form, linkRoles }) => {
             const result = { code: '' as MessageCode | '', detached: false,
