@@ -1,10 +1,14 @@
 # Contributing
 
+Public documentation, examples, issue templates and release notes are written in English.
+
 Start with a synthetic fixture, the declared expectation and the observed result.
 Include Node, Playwright and browser versions, checkId, messageCode and a safe report.
 Do not include private page data. Use branches named `keytrail/<task>`.
 
 Run `pnpm install --frozen-lockfile --ignore-scripts`, install Chromium, then `pnpm check`.
+After changing source or tests, refresh both [verification records](docs/verification.md)
+before the package check. Evidence must describe the source being packed.
 Tests must exercise real keyboard behavior and exact failing observations. Keep browser
 actions separate from read-only observations; do not force focus to repair a component.
 Maintain ESM/CJS consumer checks and the schema together with public types.

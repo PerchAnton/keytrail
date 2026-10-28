@@ -16,8 +16,10 @@ Required dialog fields: `id`, `trigger`, `dialog`, `openKey` (`Enter` or `Space`
 The nonempty `tabOrder` declares the complete forward cycle without repeated Targets.
 `initialFocus` may be a static heading outside that cycle; `returnFocus` may differ
 from `trigger`. Locators are resolved again for each observation, so replacing a node
-does not retain a stale ElementHandle. The contract's IDs, references and ordering
-are snapshotted before any await.
+does not retain a stale ElementHandle. Temporary handles are released after each
+observation and are never used for actions. Focus identity and dialog containment
+are read together in one browser evaluation; a detached node triggers fresh resolution.
+The contract's IDs, references and ordering are snapshotted before any await.
 
 | Optional field | Default | Accepted range |
 | --- | --- | --- |

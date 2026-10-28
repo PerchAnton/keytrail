@@ -5,7 +5,7 @@ import { validateDialog } from '../../artifacts/unit/validation.js';
 import { planDialog } from '../../artifacts/unit/plan.js';
 import { coverage, outcome } from '../../artifacts/unit/result.js';
 
-const target = id => ({ id, locator: { page() {}, count() {}, evaluate() {}, isVisible() {}, and() {} } });
+const target = id => ({ id, locator: { page() {}, count() {}, elementHandles() {}, isVisible() {}, and() {}, getAttribute() {} } });
 function base() {
   const trigger = target('open'), name = target('name'), save = target('save');
   return { id: 'profile', trigger, returnFocus: trigger, dialog: target('dialog'),
@@ -62,4 +62,18 @@ test('package and source version agree; published exports contain no future stub
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
   assert.match(readFileSync('src/version.ts', 'utf8'), new RegExp(pkg.version.replaceAll('.', '\\.')));
   assert.deepEqual(Object.keys(pkg.exports), ['.', './schema/journey-result.v1.json']);
+});
+
+test('rejects incomplete locator implementations before browser work', () => {
+  for (const method of ['count', 'page', 'elementHandles', 'isVisible', 'and', 'getAttribute']) {
+    const contract = base();
+    delete contract.trigger.locator[method];
+    assert.equal(validateDialog(contract), null, method);
+  }
+});
+test('rejects oversized tab order before iterating its entries', () => {
+  const contract = base();
+  const tabOrder = Array(101);
+  Object.defineProperty(tabOrder, '0', { get() { throw new Error('Oversized input was traversed'); } });
+  assert.equal(validateDialog({ ...contract, tabOrder }), null);
 });

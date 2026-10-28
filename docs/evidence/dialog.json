@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-28T09:10:04.329Z",
+  "recordedAt": "2026-10-28T09:43:49.701Z",
   "package": "keytrail",
   "version": "0.1.0-alpha.1",
   "environment": {
@@ -12,17 +12,17 @@
   "scope": "Synthetic dialog checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
   "browsers": {
     "workers1": {
-      "startTime": "2026-10-28T09:09:33.966Z",
-      "duration": 30149.373,
-      "expected": 33,
+      "startTime": "2026-10-28T09:43:20.004Z",
+      "duration": 29559.267,
+      "expected": 41,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
     },
     "workers4": {
-      "startTime": "2026-10-28T09:09:22.099Z",
-      "duration": 11264.232,
-      "expected": 33,
+      "startTime": "2026-10-28T09:43:09.295Z",
+      "duration": 10175.868999999999,
+      "expected": 41,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
@@ -31,8 +31,8 @@
   },
   "sourceHashFormat": "SHA-256 of UTF-8 text with LF line endings",
   "sourceHashes": {
-    "src/browser/driver.ts": "9291530c84652fae7887b1439ffd4574aeeacf08d81c9e49eb1cd7510c8863f4",
-    "src/contracts/dialog.ts": "e9c2c5dfbf9328ce581c5cf37912bbb665d9f2152c7b741b7c69f85191b79090",
+    "src/browser/driver.ts": "3d300389891c0c93ec5e1c8d620a3cdbc23d23de34f127afeefc329f6bfcc9d4",
+    "src/contracts/dialog.ts": "3a490155eac7341b9479e5f9695fc801aa6eb24bfbac48727cd75d5391aed1a5",
     "src/contracts/types.ts": "47acd0798d99f72d0f35deb86542bd8c27583adc27835b0fc2d88fee495df5dd",
     "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
     "src/index.ts": "ae6f26a54ab444cf9797d51c3002a7bb1d7e7a28498ecea1e92afde890746555",
@@ -40,10 +40,268 @@
     "src/scenarios/dialog.ts": "9e8404e2696cfb53ddc9f0f7490cf990ab87bd51ddc8b60fa05a13e22f83f358",
     "src/version.ts": "0523b7864e425aaad07a93fe9ddac9c15f3b6e30e21f51fd42a2c1c2efe659c9",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
-    "tests/integration/dialog.spec.ts": "a35aa7013c22741a00a4adda7364eb83ca3db4cba8ad8f0de5816569aadb6b1b",
-    "tests/unit/contracts.test.mjs": "698967009ad2feee9f63db16c0c627a8d11db37a32330f33632e4386dde96877"
+    "tests/integration/dialog.spec.ts": "744de3397dbc346c032175677c1fb02d3fd8b0e4e8a4701edc82f53b26513701",
+    "tests/integration/observations.spec.ts": "84b63bb79d926834ed76dcac85303deda0bb48c90b024de010df43c4af59b371",
+    "tests/unit/contracts.test.mjs": "8de8d66e1a95143d9af4b9db172ed8211eb8924741c3f5f583b5f3db8e5b4143"
   },
   "cases": [
+    {
+      "fixture": "a declared target named unsupported is a valid focus target",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "a focus observation cannot combine two different instants",
+      "testPassed": true,
+      "kind": "engine-observation"
+    },
+    {
+      "fixture": "a region with a dialog fallback is not a second dialog",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
     {
       "fixture": "ambiguous target blocks before keyboard input",
       "testPassed": true,
@@ -449,6 +707,132 @@
           "id": "D07.returned",
           "status": "fail",
           "code": "FOCUS_MISMATCH"
+        }
+      ]
+    },
+    {
+      "fixture": "an unrelated hidden shadow dialog does not block the main-document journey",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D07.returned",
+          "status": "pass",
+          "code": "OK"
         }
       ]
     },
@@ -1037,6 +1421,260 @@
           "status": "not_run",
           "code": "NOT_RUN",
           "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "declared iframe host cannot mask unsupported return focus",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 20,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D06.closed"
+        }
+      ]
+    },
+    {
+      "fixture": "declared shadow host cannot mask unsupported return focus",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 20,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.visible",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.role",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.name",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D02.modal",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D03.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.initial",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "D06.closed",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D06.closed"
         }
       ]
     },
@@ -3602,6 +4240,11 @@
       ]
     },
     {
+      "fixture": "replacement during observation is re-resolved and temporary handles are released",
+      "testPassed": true,
+      "kind": "engine-observation"
+    },
+    {
       "fixture": "report-write error preserves the original primary failure",
       "testPassed": true,
       "journeyOutcome": "failed",
@@ -4293,6 +4936,153 @@
     },
     {
       "fixture": "visible nested dialog is unsupported",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "D01.entry",
+          "status": "blocked",
+          "code": "UNSUPPORTED_DIALOG"
+        },
+        {
+          "id": "D02.visible",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.role",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.name",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D02.modal",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D03.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.initial",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.forward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D04.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.backward.003",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D05.before-close",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D06.closed",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        },
+        {
+          "id": "D07.returned",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "visible nested dialog with role fallback tokens is unsupported",
       "testPassed": true,
       "journeyOutcome": "blocked",
       "coverage": {

@@ -35,7 +35,6 @@
     "schema",
     "docs",
     "README.md",
-    "README.ru.md",
     "LICENSE",
     "CHANGELOG.md",
     "SECURITY.md"
@@ -60,7 +59,8 @@
     "test:unit": "node --test tests/unit/*.test.mjs",
     "test:browser": "playwright test",
     "test:package": "node scripts/check-package.mjs",
-    "check": "pnpm build && pnpm test:unit && pnpm test:browser && pnpm test:package",
-    "prepack": "pnpm build"
+    "check": "pnpm build && pnpm test:types && pnpm test:unit && pnpm test:browser && pnpm test:package",
+    "prepack": "pnpm build",
+    "test:types": "tsc -p tsconfig.tests.json"
   }
 }
