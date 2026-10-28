@@ -15,12 +15,22 @@ for (const record of ['reliability', 'benchmark-dialog', 'benchmark-tabs', 'benc
     assert.equal(evidence.targetRounds, 100); assert.equal(evidence.rounds.length, 100);
     assert.equal(evidence.workers, 1); assert.equal(evidence.parallel.workers, 4);
     assert.equal(evidence.retries, 0); assert.equal(evidence.totalSequentialExecutions, evidence.caseCount * 100);
+    assert(evidence.caseCount > 0); assert.equal(evidence.cases.length, evidence.caseCount);
+    const signature = createHash('sha256').update(JSON.stringify(evidence.cases)).digest('hex');
+    assert.equal(signature, evidence.parallel.signature);
     assert.equal(evidence.parallel.passed, evidence.caseCount);
     assert(evidence.rounds.every(r => r.passed === evidence.caseCount && r.signature === evidence.parallel.signature));
   } else if (record.startsWith('benchmark-')) {
     assert.equal(evidence.pilot, false); assert.equal(evidence.samplesPerArm, 30);
     assert.equal(evidence.warmupsPerArm, 5); assert.equal(evidence.summary.targetMet, true);
     assert.equal(evidence.pairs.length, 30);
+    assert(evidence.pairs.every(p => Number.isFinite(p.keytrailMs) && Number.isFinite(p.nativeMs) && p.keytrailMs > 0 && p.nativeMs > 0));
+    const median = values => { const sorted = [...values].sort((a, b) => a - b); return (sorted[14] + sorted[15]) / 2; };
+    const paired = median(evidence.pairs.map(p => (p.keytrailMs / p.nativeMs - 1) * 100));
+    const ratio = (median(evidence.pairs.map(p => p.keytrailMs)) / median(evidence.pairs.map(p => p.nativeMs)) - 1) * 100;
+    assert.equal(paired, evidence.summary.pairedMedianOverheadPercent);
+    assert.equal(ratio, evidence.summary.ratioOfMediansOverheadPercent);
+    assert(paired <= 20 && ratio <= 20);
   }
   for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
     assert(resolve(file).startsWith(root + '/'));
