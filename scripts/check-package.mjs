@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 
@@ -15,6 +15,8 @@ for (const [file, expected] of Object.entries(evidence.sourceHashes)) {
   assert.equal(actual, expected, `Refresh fixture evidence after changing ${file}`);
 }
 const run = (command, args, cwd) => execFileSync(command, args, { cwd, env: process.env, encoding: 'utf8', timeout: 120000 });
+// A container checkout and /tmp may otherwise select different filesystem-local stores.
+const storeDirectory = dirname(run('pnpm', ['store', 'path'], root).trim());
 run('pnpm', ['pack', '--pack-destination', 'artifacts'], root);
 const archive = resolve('artifacts', `${pkg.name}-${pkg.version}.tgz`);
 const inventory = run('tar', ['-tzf', archive], root).trim().split('\n');
@@ -26,7 +28,7 @@ try {
   await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module',
     dependencies: { keytrail: `file:${archive}`, '@playwright/test': pkg.peerDependencies['@playwright/test'] },
     devDependencies: { typescript: pkg.devDependencies.typescript, '@types/node': pkg.devDependencies['@types/node'] } }));
-  run('pnpm', ['install', '--offline', '--ignore-scripts'], consumer);
+  run('pnpm', ['install', '--offline', '--ignore-scripts', '--store-dir', storeDirectory], consumer);
   const installed = JSON.parse(await readFile(join(consumer, 'node_modules/keytrail/package.json'), 'utf8'));
   assert.equal(installed.version, pkg.version);
   assert.equal(installed.license, 'Apache-2.0');

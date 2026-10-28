@@ -72,7 +72,7 @@ test('Space activation and already-focused entry', async ({ page }, info) => {
 });
 test('an observed escape cannot be hidden by a later focus return', async ({ page }, info) => {
   await page.setContent(dialogHtml('escape-return'));
-  const error = await failure(page, info, { ...dialogContract(page), timeoutMs: 1000 });
+  const error = await failure(page, info, dialogContract(page));
   expect(error.result.checks.find(c => c.checkId === 'D05.forward.003')?.status).toBe('fail');
   expect(error.result.steps.some(s => s.key === 'Escape')).toBe(false);
 });

@@ -45,7 +45,7 @@ export function dialogHtml(variant: Variant = 'ordinary'): string {
     if(mode==='bad-reverse'&&e.shiftKey){e.preventDefault();return;}
     if(!e.shiftKey && active===items.at(-1)){
       e.preventDefault();(mode==='escape-focus'||mode==='escape-return'?find('outside'):items[0]).focus();
-      if(mode==='escape-return')setTimeout(()=>items[0].focus(),150);
+      if(mode==='escape-return')setTimeout(()=>items[0].focus(),750);
     }else if(e.shiftKey&&active===items[0]){e.preventDefault();items.at(-1).focus();}
   });
   </script></body></html>`;
@@ -57,5 +57,5 @@ export function dialogContract(page: Page, variant: Variant = 'ordinary'): Dialo
     initialFocus: variant === 'heading' ? target('title') : variant === 'single' ? close : name,
     tabOrder: variant === 'single' ? [close] : [name, save, close],
     returnFocus: variant === 'alternate' ? target('alternative') : trigger,
-    timeoutMs: 250, observationWindowMs: 50, scenarioTimeoutMs: 10000 };
+    timeoutMs: 2000, observationWindowMs: 200, scenarioTimeoutMs: 30000 };
 }

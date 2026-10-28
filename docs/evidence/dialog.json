@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-10-28T09:01:06.471Z",
+  "recordedAt": "2026-10-28T09:10:04.329Z",
   "package": "keytrail",
   "version": "0.1.0-alpha.1",
   "environment": {
@@ -12,16 +12,16 @@
   "scope": "Synthetic dialog checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
   "browsers": {
     "workers1": {
-      "startTime": "2026-10-28T08:59:47.099Z",
-      "duration": 14287.293,
+      "startTime": "2026-10-28T09:09:33.966Z",
+      "duration": 30149.373,
       "expected": 33,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
     },
     "workers4": {
-      "startTime": "2026-10-28T08:57:21.260Z",
-      "duration": 7125.299,
+      "startTime": "2026-10-28T09:09:22.099Z",
+      "duration": 11264.232,
       "expected": 33,
       "skipped": 0,
       "unexpected": 0,
@@ -39,8 +39,8 @@
     "src/reporting/result.ts": "8583cec5472b43479c3046e1aa4f81803dd33501b8534e1c86320f27ef5ab1c9",
     "src/scenarios/dialog.ts": "9e8404e2696cfb53ddc9f0f7490cf990ab87bd51ddc8b60fa05a13e22f83f358",
     "src/version.ts": "0523b7864e425aaad07a93fe9ddac9c15f3b6e30e21f51fd42a2c1c2efe659c9",
-    "tests/fixtures/dialog.ts": "dadeafd1b4bac649c94dde7096d1a98fffe0df28796a94622fb4a5cd0acd16f0",
-    "tests/integration/dialog.spec.ts": "19d9f1dbc5207a97aa8331feb2cfd58839e7d2e7ea3cbdf38557fbec606de386",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/integration/dialog.spec.ts": "a35aa7013c22741a00a4adda7364eb83ca3db4cba8ad8f0de5816569aadb6b1b",
     "tests/unit/contracts.test.mjs": "698967009ad2feee9f63db16c0c627a8d11db37a32330f33632e4386dde96877"
   },
   "cases": [
