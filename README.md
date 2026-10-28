@@ -47,8 +47,10 @@ The package check installs the actual archive into two fresh offline consumers.
 It checks ESM/CJS imports and types, then runs the vanilla dialog, tabs and form
 examples and the React portal example. Corrected journeys also run with the
 installed CI guard; a separate defective React process must exit 1 while preserving
-its HTML/JUnit reports and incomplete attachment. Dependency installation above
-populates the store before these offline checks.
+its HTML/JUnit reports and incomplete attachment. Dependency installation and the
+React lockfile preparation use the registry. The actual consumer installation then
+uses `--offline --frozen-lockfile` in a separate empty directory; browser tests need
+only the local fixture server.
 It leaves `artifacts/keytrail-0.1.0-alpha.5.tgz`, a verification record and `SHA256SUMS`.
 
 Install that archive into an existing Playwright project:

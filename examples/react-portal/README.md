@@ -18,8 +18,10 @@ pnpm test:package
 pnpm exec playwright show-report artifacts/consumers/react-portal/reports/teaching/html
 ```
 
-The check copies this example into a fresh temporary directory and installs the
-actual KeyTrail tarball offline. It type-checks, builds and runs the example there,
+The check first prepares a lockfile with the local tarball and registry metadata
+in a temporary directory, without installing node_modules. It then copies that
+prepared input into a separate empty consumer and installs with
+`--offline --frozen-lockfile`. It type-checks, builds and runs the example there,
 without resolving KeyTrail from the source checkout. React dependencies have their
 own lockfile; they are not added to the library's dependencies.
 

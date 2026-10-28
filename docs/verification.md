@@ -70,6 +70,7 @@ sleep. Run performance measurements without concurrent verification jobs. After
 recording the resulting evidence in `docs/evidence/`, `pnpm test:package` checks
 source hashes, packs the archive, installs it into two clean offline consumers,
 checks ESM/CJS imports and declarations, and runs the vanilla and React examples.
+React lockfile preparation fetches registry metadata before the separate frozen offline install.
 Install the separate React lockfile first as described in the [release checklist](release-checklist.md).
 Archive size/hash are written outside the package to avoid a
 self-referential archive checksum.

@@ -28,7 +28,16 @@ jobs:
           echo "$RUNNER_TEMP/keytrail-pnpm/bin" >> "$GITHUB_PATH"
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
-      - run: pnpm check
+      - name: Verify tarball consumers
+        run: |
+          pnpm build
+          pnpm test:package
+      - name: Run regression suite
+        run: |
+          pnpm test:types
+          pnpm test:unit
+          pnpm test:guard
+          pnpm test:browser
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
@@ -53,7 +62,16 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
       - run: pnpm exec playwright install chromium
-      - run: pnpm check
+      - name: Verify tarball consumers
+        run: |
+          pnpm build
+          pnpm test:package
+      - name: Run regression suite
+        run: |
+          pnpm test:types
+          pnpm test:unit
+          pnpm test:guard
+          pnpm test:browser
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:

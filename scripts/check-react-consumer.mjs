@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
+import { cp, copyFile, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { basename, join } from 'node:path';
 import { tmpdir } from 'node:os';
+import { existsSync } from 'node:fs';
 
-export async function checkReactConsumer({ root, archive, storeDirectory, version }) {
+export async function checkReactConsumer({ root, archive, storeDirectory, version, cacheDirectory }) {
   const consumer = await mkdtemp(join(tmpdir(), 'keytrail-react-consumer-'));
-  const run = (args, expectedStatus = 0, extraEnv = {}) => {
-    const result = spawnSync('pnpm', args, { cwd: consumer, env: { ...process.env, ...extraEnv },
+  const preparation = await mkdtemp(join(tmpdir(), 'keytrail-react-preparation-'));
+  const run = (args, expectedStatus = 0, extraEnv = {}, cwd = consumer) => {
+    const result = spawnSync('pnpm', [...(cacheDirectory && args[0] === 'install' ? ['--cache-dir', cacheDirectory] : []), ...args], { cwd, env: { ...process.env, ...extraEnv },
       encoding: 'utf8', timeout: 120000, maxBuffer: 4 * 1024 * 1024 });
     assert.ifError(result.error);
     assert.equal(result.signal, null);
@@ -15,16 +17,21 @@ export async function checkReactConsumer({ root, archive, storeDirectory, versio
     return result;
   };
   try {
-    await cp(join(root, 'examples/react-portal'), consumer, { recursive: true,
-      // The source lockfile warms the store. Adding a tarball changes its importer;
-      // resolving that copied lock offline also requires metadata for every locked
-      // foreign-platform esbuild binary. Start this fresh consumer with exact pins
-      // instead, as for vanilla, and let pnpm skip unsupported optional binaries.
-      filter: path => !['node_modules', 'dist', 'reports', 'test-results', 'pnpm-lock.yaml'].includes(basename(path)) });
-    const pkg = JSON.parse(await readFile(join(consumer, 'package.json'), 'utf8'));
-    pkg.devDependencies.keytrail = `file:${archive}`;
-    await writeFile(join(consumer, 'package.json'), JSON.stringify(pkg, null, 2));
-    run(['install', '--offline', '--ignore-scripts', '--no-frozen-lockfile', '--store-dir', storeDirectory]);
+    await cp(join(root, 'examples/react-portal'), preparation, { recursive: true,
+      filter: path => !['node_modules', 'dist', 'reports', 'test-results'].includes(basename(path)) });
+    const pkg = JSON.parse(await readFile(join(preparation, 'package.json'), 'utf8'));
+    pkg.devDependencies.keytrail = 'file:./keytrail.tgz';
+    await copyFile(archive, join(preparation, 'keytrail.tgz'));
+    await writeFile(join(preparation, 'package.json'), JSON.stringify(pkg, null, 2));
+    // Resolve the local archive and fetch required registry policy metadata before
+    // the offline check. This preparation creates a lockfile, not an installation.
+    // Never re-resolve esbuild's optional platform graph during the offline phase.
+    run(['install', '--lockfile-only', '--no-frozen-lockfile', '--ignore-scripts', '--store-dir', storeDirectory], 0, {}, preparation);
+    assert.equal(existsSync(join(preparation, 'node_modules')), false);
+    await cp(preparation, consumer, { recursive: true });
+    const lock = await readFile(join(consumer, 'pnpm-lock.yaml'), 'utf8');
+    run(['install', '--offline', '--frozen-lockfile', '--ignore-scripts', '--store-dir', storeDirectory]);
+    assert.equal(await readFile(join(consumer, 'pnpm-lock.yaml'), 'utf8'), lock);
     const installed = JSON.parse(await readFile(join(consumer, 'node_modules/keytrail/package.json'), 'utf8'));
     assert.equal(installed.version, version);
     assert.equal(installed.dependencies?.react, undefined);
@@ -67,8 +74,8 @@ export async function checkReactConsumer({ root, archive, storeDirectory, versio
     await rm(reports, { recursive: true, force: true });
     await cp(join(consumer, 'reports'), join(reports, 'reports'), { recursive: true });
     await cp(join(consumer, 'test-results'), join(reports, 'test-results'), { recursive: true });
-    return { offlineInstall: true, react: pkg.dependencies.react, reactDom: pkg.dependencies['react-dom'],
+    return { registryMetadataPreparation: true, offlineInstall: true, frozenDependencyGraph: true, react: pkg.dependencies.react, reactDom: pkg.dependencies['react-dom'],
       types: true, strictMode: true, browserTests: 3, guardedJourneys: 1, negativeExitCode: 1,
       html: true, junit: true, failedAttachment: true, dependencyReferences: true };
-  } finally { await rm(consumer, { recursive: true, force: true }); }
+  } finally { await Promise.all([consumer, preparation].map(path => rm(path, { recursive: true, force: true }))); }
 }

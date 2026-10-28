@@ -18,7 +18,9 @@ pnpm check
 
 On Linux, add `--with-deps` to the Chromium install when system libraries are
 missing. On macOS, `caffeinate -is pnpm check` prevents sleep during browser runs.
-Dependency installation needs a registry connection; the two subsequent clean
+Dependency installation and the React consumer lockfile preparation need a registry
+connection. The package check prepares metadata without installing node_modules,
+then uses a separate empty consumer for the frozen offline installation. Both
 tarball consumers install offline from the populated store. No account, API key
 or external service is needed to run their browser tests.
 
