@@ -1,6 +1,16 @@
 # Changelog
 
-## 0.1.0-alpha.1 — source candidate
+## 0.1.0-alpha.2 — source candidate
+
+- Add `assertTabsJourney` and `TabsContract`: horizontal/vertical navigation, automatic
+  and manual activation, full wrap in both directions, optional Home/End and Tab exit.
+- Check per-pair roles and IDREF, unique selection, visible panels and roving tabindex.
+- Observe manual selection before activation, record the window, and stop on focus drift.
+- Extend schema v1 with tabs observations and keyboard keys; ruleset version is 0.2.0.
+- Add correct/broken packaged tabs examples and verification evidence.
+- Forms and CI completeness enforcement remain pending. No package release published.
+
+## 0.1.0-alpha.1 — source checkpoint
 
 - First dialog checkpoint: keyboard entry, semantics, focus cycles, Escape and return.
 - Preplanned observations, explicit incomplete coverage and safe JSON attachment.

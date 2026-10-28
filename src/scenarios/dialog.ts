@@ -10,7 +10,7 @@ import { coverage, outcome, JourneyAssertionError } from '../reporting/result.js
 import { PACKAGE_VERSION, RULESET_VERSION } from '../version.js';
 
 const limitations = [
-  'Dialog-only alpha: tabs, form errors and CI completeness guard are not implemented.',
+  'This assertion checks dialogs only; form errors and CI completeness guard are not implemented.',
   'Chromium; main document; one custom ARIA dialog; no iframe, Shadow DOM, native or nested dialogs.',
   'Checks only observed focus states, not transient focus, pointer blocking or screen-reader behavior.',
   'No WCAG certification, automated repair or application state restoration.',

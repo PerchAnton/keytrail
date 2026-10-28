@@ -7,7 +7,7 @@ Include Node, Playwright and browser versions, checkId, messageCode and a safe r
 Do not include private page data. Use branches named `keytrail/<task>`.
 
 Run `pnpm install --frozen-lockfile --ignore-scripts`, install Chromium, then `pnpm check`.
-After changing source or tests, refresh both [verification records](docs/verification.md)
+After changing source or tests, refresh the [verification records](docs/verification.md)
 before the package check. Evidence must describe the source being packed.
 Tests must exercise real keyboard behavior and exact failing observations. Keep browser
 actions separate from read-only observations; do not force focus to repair a component.

@@ -2,10 +2,13 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 
-const report = JSON.parse(await readFile('artifacts/repeatability-results.json', 'utf8'));
-const baseline = JSON.parse(await readFile('docs/evidence/dialog.json', 'utf8'));
-assert.equal(report.config.workers, 1);
-assert.equal(report.config.projects[0].repeatEach, 100);
+assert(process.argv.length <= 3 && (!process.argv[2] || process.argv[2] === 'tabs'));
+const tabs = process.argv[2] === 'tabs';
+const workers = tabs ? 4 : 1, repeats = tabs ? 20 : 100, executions = repeats * 8;
+const report = JSON.parse(await readFile(tabs ? 'artifacts/tabs-repeatability-results.json' : 'artifacts/repeatability-results.json', 'utf8'));
+const baseline = JSON.parse(await readFile('docs/evidence/journeys.json', 'utf8'));
+assert.equal(report.config.workers, workers);
+assert.equal(report.config.projects[0].repeatEach, repeats);
 assert.equal(report.stats.unexpected + report.stats.flaky + report.stats.skipped, 0);
 assert.deepEqual(report.errors, []);
 const byFixture = new Map();
@@ -26,16 +29,16 @@ function walk(suite) {
 for (const suite of report.suites) walk(suite);
 const cases = [...byFixture.values()];
 assert.equal(cases.length, 8);
-for (const fixture of cases) assert.equal(fixture.runs, 100);
-assert.equal(report.stats.expected, 800);
+for (const fixture of cases) assert.equal(fixture.runs, repeats);
+assert.equal(report.stats.expected, executions);
 for (const [path, expected] of Object.entries(baseline.sourceHashes)) {
   const actual = createHash('sha256').update((await readFile(path, 'utf8')).replaceAll('\r\n', '\n')).digest('hex');
   assert.equal(actual, expected, `Source changed during repeatability run: ${path}`);
 }
 const evidence = { recordedAt: new Date().toISOString(), version: baseline.version,
   environment: baseline.environment,
-  scope: '100 sequential repetitions of eight focus regressions. Not the full-suite repeatability acceptance criterion or a performance benchmark.',
-  workers: 1, repeats: 100, retries: 0, stats: report.stats, sourceHashes: baseline.sourceHashes,
+  scope: tabs ? '20 repetitions of eight tabs cases with four workers. Not full-suite repeatability acceptance or a performance benchmark.' : '100 sequential repetitions of eight focus regressions. Not full-suite repeatability acceptance or a performance benchmark.',
+  workers, repeats, retries: 0, stats: report.stats, sourceHashes: baseline.sourceHashes,
   cases: cases.sort((a, b) => a.fixture.localeCompare(b.fixture)) };
-await writeFile('docs/evidence/repeatability.json', JSON.stringify(evidence, null, 2) + '\n');
-console.log('Recorded 800 passed executions across eight focus regressions, without retries.');
+await writeFile(tabs ? 'docs/evidence/tabs-repeatability.json' : 'docs/evidence/repeatability.json', JSON.stringify(evidence, null, 2) + '\n');
+console.log(`Recorded ${executions} passed executions across eight ${tabs ? 'tabs cases' : 'focus regressions'}, without retries.`);

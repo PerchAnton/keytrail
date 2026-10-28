@@ -1,11 +1,16 @@
 import { setTimeout as delay } from 'node:timers/promises';
 import type { Dialog, ElementHandle, Frame, Locator, Page } from '@playwright/test';
-import type { AppliedConfig, Focus, MessageCode, StepResult, Target } from '../contracts/types.js';
+import type { AppliedConfig, Focus, MessageCode, StepResult, TabsContract, Target } from '../contracts/types.js';
 
 export class Blocked extends Error {
   constructor(readonly code: MessageCode) { super(code); }
 }
-export type Snapshot = { focus: Focus; focused: Set<string>; present: Set<string>; inside: boolean };
+export type TabsState = {
+  structure: boolean; role: boolean; named: boolean; orientation: boolean;
+  selected: string[]; visiblePanels: string[]; selectionValid: boolean; roving: boolean;
+  items: { tabRole: boolean; panelRole: boolean; controls: boolean; labelledby: boolean }[];
+};
+export type Snapshot = { focus: Focus; focused: Set<string>; present: Set<string>; inside: boolean; tabs?: TabsState };
 export class BoundaryExit extends Error {}
 /** Browser calls are awaited; there is no background action chain or Promise.race. */
 export class Driver {
@@ -23,7 +28,7 @@ export class Driver {
     this.dismissals.push(dialog.dismiss().catch(() => undefined));
   };
   constructor(readonly page: Page, readonly targets: readonly Target[], readonly dialog: Target,
-    readonly config: AppliedConfig, readonly started: number) {
+    readonly config: AppliedConfig, readonly started: number, readonly tabsContract?: TabsContract) {
     page.on('framenavigated', this.onNavigation);
     page.on('popup', this.onPopup);
     page.on('close', this.onClose);
@@ -79,11 +84,20 @@ export class Driver {
           // Use Playwright's role resolution, including fallback role tokens.
           const dialogs = await resolve(this.page.getByRole('dialog', { includeHidden: true }));
           const alerts = await resolve(this.page.getByRole('alertdialog', { includeHidden: true }));
+          const tabRoles = this.tabsContract ? {
+            lists: await resolve(this.page.getByRole('tablist', { includeHidden: true })),
+            named: await resolve(this.page.getByRole('tablist', { name: /\S/, includeHidden: true })),
+            tabs: await resolve(this.page.getByRole('tab', { includeHidden: true })),
+            panels: await resolve(this.page.getByRole('tabpanel', { includeHidden: true })),
+          } : null;
+          const tabs = this.tabsContract ? { orientation: this.tabsContract.orientation,
+            items: this.tabsContract.items.map(item => ({ tab: item.tab.id, panel: item.panel.id })) } : null;
           this.guard();
-          const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts }) => {
+          const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts, tabRoles, tabs }) => {
             const result = { code: '' as MessageCode | '', detached: false,
-              focus: 'unknown', focused: [] as string[], present: [] as string[], inside: false };
-            const nodes = [...targets.flatMap(t => t.node ? [t.node] : []), ...dialogs, ...alerts];
+              focus: 'unknown', focused: [] as string[], present: [] as string[], inside: false, tabs: null as TabsState | null };
+            const nodes = [...targets.flatMap(t => t.node ? [t.node] : []), ...dialogs, ...alerts,
+              ...Object.values(tabRoles ?? {}).flat()];
             if (nodes.some(node => !node.isConnected)) return { ...result, detached: true };
             if (targets.some(({ node }) => node && (!(node instanceof Element) || node.getRootNode() !== document))) return { ...result, code: 'UNSUPPORTED_CONTEXT' as const };
             const active = document.activeElement;
@@ -109,11 +123,46 @@ export class Driver {
               if (node === active) { result.focused.push(id); result.focus = id; }
               if (id === dialogId) result.inside = !!active && node.contains(active);
             }
+            if (tabs && tabRoles) {
+              const node = (id: string): Element | null => {
+                const found = targets.find(t => t.id === id)?.node;
+                return found instanceof Element ? found : null;
+              };
+              const root = node(dialogId);
+              const members = tabs.items.map(item => ({ ...item, tabNode: node(item.tab), panelNode: node(item.panel) }));
+              if (root && (getComputedStyle(root).direction === 'rtl' || root.hasAttribute('aria-activedescendant') ||
+                  root.getAttribute('aria-disabled') === 'true' || members.some(item => item.tabNode &&
+                  (item.tabNode.hasAttribute('aria-activedescendant') || item.tabNode.matches(':disabled') || item.tabNode.getAttribute('aria-disabled') === 'true')))) {
+                return { ...result, code: 'UNSUPPORTED_TABS' as const };
+              }
+              const ids = new Map<string, Element[]>();
+              for (const el of document.querySelectorAll('[id]')) ids.set(el.id, [...(ids.get(el.id) ?? []), el]);
+              const unique = (el: Element | null) => !!el?.id && ids.get(el.id)?.length === 1 && ids.get(el.id)![0] === el;
+              const tokens = (el: Element | null, attribute: string) => el?.getAttribute(attribute)?.trim().split(/\s+/).filter(Boolean) ?? [];
+              const actualTabs = tabRoles.tabs.filter(el => root?.contains(el));
+              const selected = members.filter(item => item.tabNode?.getAttribute('aria-selected') === 'true').map(item => item.tab);
+              result.tabs = {
+                structure: !!root && members.every(item => item.tabNode && item.panelNode && root.contains(item.tabNode)) &&
+                  actualTabs.length === members.length && actualTabs.every(el => members.some(item => item.tabNode === el)),
+                role: !!root && tabRoles.lists.includes(root), named: !!root && tabRoles.named.includes(root),
+                orientation: !!root && (root.getAttribute('aria-orientation') === tabs.orientation ||
+                  (tabs.orientation === 'horizontal' && !root.hasAttribute('aria-orientation'))),
+                selected, visiblePanels: members.filter(item => item.panelNode && visible(item.panelNode)).map(item => item.panel),
+                selectionValid: members.every(item => ['true', 'false'].includes(item.tabNode?.getAttribute('aria-selected') ?? '')),
+                roving: members.some(item => item.tabNode === active) && members.every(item => item.tabNode &&
+                  (item.tabNode as HTMLElement).tabIndex === (item.tabNode === active ? 0 : -1)),
+                items: members.map(item => ({ tabRole: !!item.tabNode && tabRoles.tabs.includes(item.tabNode),
+                  panelRole: !!item.panelNode && tabRoles.panels.includes(item.panelNode),
+                  controls: unique(item.panelNode) && tokens(item.tabNode, 'aria-controls').length === 1 && tokens(item.tabNode, 'aria-controls')[0] === item.panelNode?.id,
+                  labelledby: unique(item.tabNode) && tokens(item.panelNode, 'aria-labelledby').includes(item.tabNode!.id) })),
+              };
+            }
             return result;
-          }, { targets, dialogId: this.dialog.id, dialogs, alerts });
+          }, { targets, dialogId: this.dialog.id, dialogs, alerts, tabRoles, tabs });
           this.guard();
           if (state.code) throw new Blocked(state.code);
-          if (!state.detached) return { focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside };
+          if (!state.detached) return { focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,
+            ...(state.tabs ? { tabs: state.tabs } : {}) };
         } finally {
           // Page closure can destroy a handle before disposal; preserve the primary result.
           await Promise.allSettled(handles.map(handle => handle.dispose()));
@@ -124,8 +173,10 @@ export class Driver {
       }
     } catch (error) { throw this.normalize(error); }
   }
-  async press(key: StepResult['key'], target: Target | null, requireInside = false): Promise<Snapshot> {
+  async press(key: StepResult['key'], target: Target | null, requireInside = false,
+    inspectBefore?: (state: Snapshot) => void): Promise<Snapshot> {
     const before = await this.snapshot();
+    inspectBefore?.(before);
     if (requireInside && !before.inside) throw new BoundaryExit();
     this.guard();
     if (this.actions >= 500) throw new Blocked('ACTION_LIMIT');

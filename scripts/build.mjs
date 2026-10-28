@@ -21,5 +21,5 @@ for (const format of ['esm', 'cjs']) {
   await build({ entryPoints: ['src/index.ts'], outfile: `dist/index.${format === 'esm' ? 'js' : 'cjs'}`,
     format, platform: 'node', target: 'node24', bundle: true, packages: 'external' });
 }
-await build({ entryPoints: { validation: 'src/contracts/dialog.ts', plan: 'src/engine/plan.ts', result: 'src/reporting/result.ts' },
+await build({ entryPoints: { validation: 'src/contracts/dialog.ts', tabsValidation: 'src/contracts/tabs.ts', tabsPlan: 'src/engine/tabs-plan.ts', plan: 'src/engine/plan.ts', result: 'src/reporting/result.ts' },
   outdir: 'artifacts/unit', format: 'esm', platform: 'node', target: 'node24', bundle: true, packages: 'external' });

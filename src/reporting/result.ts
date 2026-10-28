@@ -15,7 +15,9 @@ export class JourneyAssertionError extends Error {
   constructor(code: MessageCode, result: JourneyResult) {
     const first = result.checks.find(c => c.status === 'fail' || c.status === 'blocked');
     const focus = first?.expected.focus ? ` expected=${first.expected.focus} observed=${first.observed.focus ?? 'unknown'}` : '';
-    super(`${first?.ruleId ?? 'E_REPORT'} ${code}${focus}`);
+    const selection = (code === 'PREMATURE_ACTIVATION' || code === 'SELECTION_MISMATCH') && first?.expected.selected ?
+      ` expected-selected=${first.expected.selected} observed-selected=${first.observed.selected ?? 'unknown'}` : null;
+    super(`${first?.ruleId ?? 'E_REPORT'} ${code}${selection ?? focus}`);
     this.name = 'JourneyAssertionError';
     this.code = code;
     this.result = result;

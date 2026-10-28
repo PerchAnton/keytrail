@@ -1,7 +1,7 @@
 {
   "name": "keytrail",
-  "version": "0.1.0-alpha.1",
-  "description": "Test keyboard journeys and focus transitions in Playwright.",
+  "version": "0.1.0-alpha.2",
+  "description": "Keyboard journey checks for dialogs and tabs in Playwright",
   "type": "module",
   "license": "Apache-2.0",
   "author": "PerchAnton",

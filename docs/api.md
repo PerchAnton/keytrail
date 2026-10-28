@@ -32,8 +32,8 @@ The contract's IDs, references and ordering are snapshotted before any await.
 No coercion or clamping. Up to 100 unique Targets, 500 keyboard actions and 5000
 planned observations. Invalid configuration gives one `E_CONFIG` blocked observation
 and performs no browser action. `observationWindowMs` is retained for the common
-contract; this dialog milestone has positive waits, not the future tabs' negative
-observation windows.
+contract; dialog checks use positive waits. [Tabs journeys](tabs.md) also use it
+for the manual activation observation window.
 
 The runner never clicks, fills, forces focus, dispatches events or changes DOM to make
 the component pass. Entry starts at the existing focus and uses Tab. Each activation
@@ -41,12 +41,12 @@ key is sent once; polling repeats only observations. If focus leaves the dialog 
 another check fails, traversal stops and remaining checks are `not_run` with `blockedBy`.
 There is no optional cleanup-Escape branch in this milestone.
 
-Result schema version is `1`; ruleset version is `0.1.0`; package version is separate.
+Result schema version is `1`; ruleset version is `0.2.0`; package version is separate.
 The schema rejects unknown properties. Consumers must also verify coverage arithmetic;
 cross-field counts are calculated by the library, not expressed by JSON Schema alone.
 Focus is a declared Target ID or `body`, `unknown`, `none`, `unsupported`; comparisons
 use actual node identity, not these labels. Avoid those four labels for Target IDs
 if you want unambiguous human-readable reports.
 
-Only the root API and `/schema/journey-result.v1.json` are exported. Future tabs,
-form and CI-guard APIs are deliberately absent until implemented and tested.
+The root API exports `assertDialogJourney` and `assertTabsJourney`; the JSON schema is
+available at `/schema/journey-result.v1.json`. Form and CI-guard APIs remain pending.

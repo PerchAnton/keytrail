@@ -1,4 +1,4 @@
-# Standalone dialog demonstration
+# Standalone dialog and tabs demonstrations
 
 `profile.html` is a synthetic dialog with two Tab stops. `profile.journey.spec.ts`
 runs it, then removes only its return-focus statement to demonstrate `D07 FOCUS_MISMATCH`.
@@ -18,3 +18,7 @@ npx playwright show-report
 No server or credentials are needed. You can also open `profile.html` in a browser
 and traverse it using Tab, Shift+Tab, Enter and Escape. The component's own code moves
 focus; the KeyTrail driver only sends keyboard input and reads state.
+
+`tabs.html` demonstrates manual activation with Enter/Space, arrow navigation and
+Home/End. Its test also injects premature selection and expects `T05 PREMATURE_ACTIVATION`.
+All four example tests run from the installed archive; two intentionally detect defects.

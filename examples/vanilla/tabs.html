@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KeyTrail manual tabs example</title>
+<style>
+  body { font: 18px/1.5 system-ui; max-width: 42rem; margin: 3rem auto; padding: 1rem; }
+  button { font: inherit; padding: .6rem 1rem; }
+  :focus-visible { outline: 3px solid #235de0; outline-offset: 3px; }
+  [role="tabpanel"] { min-height: 5rem; margin-top: 1rem; padding: 1rem; border: 1px solid #888; }
+  [aria-selected="true"] { font-weight: bold; }
+  [hidden] { display: none !important; }
+</style>
+<h1>Account preferences</h1>
+<p>Use Tab to enter, arrows to move focus, and Enter or Space to select a section.
+  Home and End move to the first and last tab. Tab leaves the tab list.</p>
+<div id="preferences" role="tablist" aria-label="Account preferences">
+  <button id="general-tab" role="tab" aria-controls="general-panel" aria-selected="true" tabindex="0">General</button>
+  <button id="privacy-tab" role="tab" aria-controls="privacy-panel" aria-selected="false" tabindex="-1">Privacy</button>
+</div>
+<section id="general-panel" role="tabpanel" aria-labelledby="general-tab" tabindex="0">General preferences.</section>
+<section id="privacy-panel" role="tabpanel" aria-labelledby="privacy-tab" tabindex="0" hidden>Privacy preferences.</section>
+<script>
+  const list = document.getElementById('preferences');
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+  let focused = 0;
+  function select(index) {
+    tabs.forEach((tab, i) => tab.setAttribute('aria-selected', String(i === index)));
+    panels.forEach((panel, i) => panel.hidden = i !== index);
+  }
+  tabs.forEach((tab, index) => tab.addEventListener('click', () => {
+    focused = index;
+    tabs.forEach((item, i) => item.tabIndex = i === index ? 0 : -1);
+    select(index);
+  }));
+  list.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault(); select(focused); return;
+    }
+    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    focused = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
+      (focused + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    tabs.forEach((tab, index) => tab.tabIndex = index === focused ? 0 : -1);
+    tabs[focused].focus();
+    // Manual activation leaves the selected panel unchanged here.
+  });
+</script>
+</html>
