@@ -6,7 +6,7 @@ shell **156.0.8078.4**, Playwright browser revision **1248**. Development uses p
 
 The Playwright peer range is the exact tested version. Future Playwright versions,
 Node majors, Firefox, WebKit and Windows are not claimed. Linux CI and macOS run the
-dialog/tabs tests and clean ESM/CJS consumers. GitHub Actions reports the actual outcome;
+dialog, tabs and form tests and clean ESM/CJS consumers. GitHub Actions reports the actual outcome;
 see [verification](verification.md) for recorded results.
 
 Runtime depends only on the Playwright peer and Node built-ins. ajv is a development

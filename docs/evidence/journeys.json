@@ -1,7 +1,7 @@
 {
-  "recordedAt": "2026-10-28T10:58:04.399Z",
+  "recordedAt": "2026-10-28T12:00:15.534Z",
   "package": "keytrail",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "environment": {
     "node": "v24.22.1",
     "platform": "darwin",
@@ -9,20 +9,20 @@
     "playwright": "1.64.1",
     "chromium": "156.0.8078.4"
   },
-  "scope": "Synthetic dialog and tabs checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
+  "scope": "Synthetic dialog, tabs and form-errors checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.",
   "browsers": {
     "workers1": {
-      "startTime": "2026-10-28T10:56:17.413Z",
-      "duration": 106623.153,
-      "expected": 87,
+      "startTime": "2026-10-28T11:57:23.977Z",
+      "duration": 171039.383,
+      "expected": 146,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
     },
     "workers4": {
-      "startTime": "2026-10-28T10:55:39.376Z",
-      "duration": 37279.19300000001,
-      "expected": 87,
+      "startTime": "2026-10-28T11:56:24.720Z",
+      "duration": 58358.495,
+      "expected": 146,
       "skipped": 0,
       "unexpected": 0,
       "flaky": 0
@@ -31,24 +31,30 @@
   },
   "sourceHashFormat": "SHA-256 of UTF-8 text with LF line endings",
   "sourceHashes": {
-    "src/browser/driver.ts": "bf3e13e1284179e3d602aa827fab220c43dc12f5afee2f49478d5bd140adacdb",
+    "src/browser/driver.ts": "55fbdfa04631bd216c61438013bf0d655dff4210984bf6f79058d31fee9ced91",
     "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "6c46b41d4b11e76db1ab4357b5c7ad7cfe514c6b5f0d655818b585a085b54650",
     "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
-    "src/contracts/types.ts": "c3606716519505f9f359aad67d94829bda227d6a9422ec1be7929049b4ca9028",
+    "src/contracts/types.ts": "68789401507085961557a0a9b7fba17519396297e7e368cae1d25edb401b02ba",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
     "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
-    "src/engine/tabs-plan.ts": "327dea210968dde9bdea844d2debfa8b32018f6d8a489c5e7b49efa1334155b0",
-    "src/index.ts": "320b61da14c86a31a20d0b87065442f39bd5f2af0683c3815290c19a5bcc5529",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
     "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
     "src/scenarios/dialog.ts": "35fe5ec503d814992dc116b023a22f7fa2b912d75134ab27496b773f981c060d",
+    "src/scenarios/form-errors.ts": "f5ebaff7ee929c3846cc47b827187680bde869a6836d6bdba1ef3562fb846d33",
     "src/scenarios/tabs.ts": "8120d4b08b2c80a6d46843593f5b1f5ae2c07419561cb78ee45e050f9c20f463",
-    "src/version.ts": "c588fe6631b91e76645775987640abf2d1fcbc2d2f9a05196efa78b517bc68ed",
+    "src/version.ts": "27c668afeb694085448f4a6deb936bd6ae68f7fd2096808694f986d4b3f6b2e8",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
     "tests/integration/dialog.spec.ts": "744de3397dbc346c032175677c1fb02d3fd8b0e4e8a4701edc82f53b26513701",
+    "tests/integration/form-errors.spec.ts": "a0617456b7572b47d34bca72d6106ea32e6aa582187a79a88c00cdc58da20850",
     "tests/integration/observations.spec.ts": "84b63bb79d926834ed76dcac85303deda0bb48c90b024de010df43c4af59b371",
-    "tests/integration/tabs.spec.ts": "b0d4155b1821ba86b6946c88931ee7c069f040101d9330ea148daa614210dd14",
+    "tests/integration/tabs.spec.ts": "868b38fe139ec971ed7f8de75fdc42dfe3ff5f6ee5af40ceeafeeedf7dcfc87a",
     "tests/unit/contracts.test.mjs": "8de8d66e1a95143d9af4b9db172ed8211eb8924741c3f5f583b5f3db8e5b4143",
+    "tests/unit/form-errors.test.mjs": "5cf0c16d69b6950b33c55a02664691bca115ca04defec74681d8369bc255968f",
     "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb"
   },
   "cases": [
@@ -2783,6 +2789,6684 @@
           "status": "not_run",
           "code": "NOT_RUN",
           "blockedBy": "D01.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "forms already focused submit records entry without extra Tab",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "already_focused"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block aria-disabled",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "blocked",
+          "code": "NOT_EDITABLE"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block button-type",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "UNSUPPORTED_FORM"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block navigation",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 2,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 15,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "blocked",
+          "code": "NAVIGATION"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block no-novalidate",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "UNSUPPORTED_FORM"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block number",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "UNSUPPORTED_FORM"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block popup",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 2,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 15,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "blocked",
+          "code": "POPUP"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.submit"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block readonly",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "blocked",
+          "code": "NOT_EDITABLE"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block unreachable-correction",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 10,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 7,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "blocked",
+          "code": "ENTRY_LIMIT"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "forms block unreachable-link",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 10,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 11,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.entry",
+          "status": "blocked",
+          "code": "ENTRY_LIMIT"
+        },
+        {
+          "id": "F05.link.001.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F05.link.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F05.link.002.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.entry"
+        }
+      ]
+    },
+    {
+      "fixture": "forms browser errors do not leak inserted values or underlying errors",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "blocked",
+          "code": "BROWSER_ERROR"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        }
+      ]
+    },
+    {
+      "fixture": "forms can correct declared fields in a different order",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms closed page attaches a blocked result",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "PAGE_CLOSED"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect empty-text",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect extra-message-idref",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 6,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 11,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "fail",
+          "code": "IDREF_MISMATCH"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect hidden-text",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect idref",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 6,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 11,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "fail",
+          "code": "IDREF_MISMATCH"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect no-invalid",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 5,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 12,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "fail",
+          "code": "INVALID_STATE_MISMATCH"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.invalid"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect not-cleared",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 16,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "fail",
+          "code": "ERROR_NOT_CLEARED"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.clear.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect outside-field",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "fail",
+          "code": "STRUCTURE_MISMATCH"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect reappeared-error",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 16,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "fail",
+          "code": "ERROR_NOT_CLEARED"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.clear.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect select-drift",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect select-prevented",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "fail",
+          "code": "VALUE_MISMATCH"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect stale-invalid",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 16,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "fail",
+          "code": "ERROR_NOT_CLEARED"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.clear.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect value-transform",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "fail",
+          "code": "VALUE_MISMATCH"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.field.001.value"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect wrong-focus",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 9,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 8,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F04.focus"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect wrong-link",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 11,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 10,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.focus",
+          "status": "fail",
+          "code": "FOCUS_MISMATCH"
+        },
+        {
+          "id": "F05.link.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F05.link.002.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        }
+      ]
+    },
+    {
+      "fixture": "forms detect wrong-text",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms foreign-page target blocks before any keyboard action",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms identify second message",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.002"
+        }
+      ]
+    },
+    {
+      "fixture": "forms identify second uncleared error",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 16,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 1,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F06.clear.002"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "fail",
+          "code": "ERROR_NOT_CLEARED"
+        }
+      ]
+    },
+    {
+      "fixture": "forms invalid contract acts on nothing and does not expose input",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 1,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 0,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "E_CONFIG",
+          "status": "blocked",
+          "code": "CONFIG_INVALID"
+        }
+      ]
+    },
+    {
+      "fixture": "forms missing messages fail without typing corrections",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms normalize complete text and support non-stateful regular expressions",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms own successful report omits text that was actually entered",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass delayed errors",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass email",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass empty correction",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass errormessage and external messages",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass firstInvalid live",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass manual submit Space",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.resubmit.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.resubmit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass native fragment summary links",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.002.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.resubmit.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.resubmit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass password",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass removed messages",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass rerendered fields",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass search",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass stay",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass summary resubmit and links",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 22,
+        "passed": 22,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.002.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.resubmit.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.resubmit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass tel",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass textarea",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass unicode correction",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms pass url",
+      "testPassed": true,
+      "journeyOutcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "pass",
+          "code": "OK"
+        }
+      ]
+    },
+    {
+      "fixture": "forms preserve the detected defect when attachment writing fails",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms reject duplicate DOM message IDs with a unique locator",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 6,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 11,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "fail",
+          "code": "IDREF_MISMATCH"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F03.field.001.idref"
+        }
+      ]
+    },
+    {
+      "fixture": "forms reports omit correction values, expected text, DOM IDs and unexpected errors",
+      "testPassed": true,
+      "journeyOutcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "fail",
+          "code": "TEXT_MISMATCH"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms scenario budget stops waiting without further actions",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 3,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 14,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "blocked",
+          "code": "SCENARIO_TIMEOUT"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F02.message.001"
+        }
+      ]
+    },
+    {
+      "fixture": "forms shadow target blocks before any keyboard action",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "UNSUPPORTED_CONTEXT"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        }
+      ]
+    },
+    {
+      "fixture": "forms still block a real reload during a summary link",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 22,
+        "passed": 11,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 10,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F01.submit",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F04.focus",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.entry",
+          "status": "pass",
+          "code": "OK"
+        },
+        {
+          "id": "F05.link.001.focus",
+          "status": "blocked",
+          "code": "NAVIGATION"
+        },
+        {
+          "id": "F05.link.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F05.link.002.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F05.link.001.focus"
+        }
+      ]
+    },
+    {
+      "fixture": "forms stop on ambiguous targets before submitting",
+      "testPassed": true,
+      "journeyOutcome": "blocked",
+      "coverage": {
+        "planned": 18,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 17,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "id": "F01.structure",
+          "status": "blocked",
+          "code": "TARGET_AMBIGUOUS"
+        },
+        {
+          "id": "F01.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F01.submit",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F02.message.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.001.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.invalid",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F03.field.002.idref",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F04.focus",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.001.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.entry",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.value",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.field.002.blur",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.001",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
+        },
+        {
+          "id": "F06.clear.002",
+          "status": "not_run",
+          "code": "NOT_RUN",
+          "blockedBy": "F01.structure"
         }
       ]
     },

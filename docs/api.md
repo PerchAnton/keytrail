@@ -41,12 +41,13 @@ key is sent once; polling repeats only observations. If focus leaves the dialog 
 another check fails, traversal stops and remaining checks are `not_run` with `blockedBy`.
 There is no optional cleanup-Escape branch in this milestone.
 
-Result schema version is `1`; ruleset version is `0.2.0`; package version is separate.
+Result schema version is `1`; ruleset version is `0.3.0`; package version is separate.
 The schema rejects unknown properties. Consumers must also verify coverage arithmetic;
 cross-field counts are calculated by the library, not expressed by JSON Schema alone.
 Focus is a declared Target ID or `body`, `unknown`, `none`, `unsupported`; comparisons
 use actual node identity, not these labels. Avoid those four labels for Target IDs
 if you want unambiguous human-readable reports.
 
-The root API exports `assertDialogJourney` and `assertTabsJourney`; the JSON schema is
-available at `/schema/journey-result.v1.json`. Form and CI-guard APIs remain pending.
+The root API exports `assertDialogJourney`, `assertTabsJourney` and
+[`assertFormErrorsJourney`](form-errors.md). The JSON schema is available at
+`/schema/journey-result.v1.json`. The CI-guard API remains pending.

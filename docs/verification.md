@@ -1,4 +1,4 @@
-# Verification of dialogs and tabs
+# Verification of dialogs, tabs and form errors
 
 Recorded 28 October 2026 on macOS arm64, Node 24.22.1, Playwright 1.64.1,
 Chromium 156.0.8078.4. These are results from synthetic fixtures, not customer data.
@@ -6,15 +6,17 @@ Chromium 156.0.8078.4. These are results from synthetic fixtures, not customer d
 | Check | Result |
 | --- | --- |
 | TypeScript | Strict checks for library source, integration tests and Playwright configuration |
-| Unit tests | 14 passed: validation, snapshot isolation, traversal plan and outcome/coverage |
-| Chromium integration tests | 87 passed with 4 workers and 87 passed with 1 worker |
+| Unit tests | 21 passed: validation, snapshot isolation, traversal plan and outcome/coverage |
+| Chromium integration tests | 146 passed with 4 workers and 146 passed with 1 worker |
 | Observation comparison | All check IDs, statuses, message codes, dependencies and coverage agree across the two runs |
 | Required correct dialog variants | Ordinary cycle, single stop, static heading, alternate return Target |
 | Required defects | Wrong initial focus, escape outside, broken reverse cycle, Escape ignored, lost return focus, missing accessible name |
 | Further regressions | Coherent focus snapshots, replacement during observation, fallback roles, reserved-looking IDs, unsupported return focus, limits, safe reports and attachment failure |
 | Tabs cases | Horizontal/vertical automatic, manual Enter/Space, Home/End restoration, delayed activation and replaced nodes |
 | Tabs defects and boundaries | Wrong arrow, missing wrap, premature/manual activation, focus drift, selected/visible counts, IDREF, roving, exit, unsupported modes, budgets and safe reports |
-| Package consumers | Fresh offline install; ESM/CJS imports and declarations; four Chromium examples from the installed archive |
+| Form cases | First-invalid/live, summary/resubmit, stay, summary links, external messages, supported native controls, Unicode/empty correction and replaced fields |
+| Form defects and boundaries | Text, IDREF and invalid state, wrong focus/link, focus loss before insertion, non-editable fields, uncleared errors, limits, contexts and safe reports |
+| Package consumers | Fresh offline install; ESM/CJS imports and declarations; six Chromium examples from the installed archive |
 
 Defect tests pass because they observe the expected failures. They do not count
 as accessible components. [Raw outcomes and source hashes](evidence/journeys.json) record
@@ -74,17 +76,29 @@ PLAYWRIGHT_JSON_OUTPUT_FILE=artifacts/tabs-repeatability-results.json \
   --grep 'tabs pass (horizontal automatic|vertical automatic|manual Enter|manual Space|manual Home End)$|tabs detect (premature|late-premature|focus-drift|focus-drift-before-roving)$' \
   --repeat-each=20 --workers=4 --reporter=json
 node scripts/record-repeatability.mjs tabs
+```
+
+The form repeatability run covers ten cases 20 times with four workers: the three
+focus policies, focus drift before insertion, Unicode/empty replacement and mismatches
+in a later message, native fragment links and real reload detection. [Its record](evidence/forms-repeatability.json) contains per-case counts.
+
+```sh
+PLAYWRIGHT_JSON_OUTPUT_FILE=artifacts/forms-repeatability-results.json \
+  pnpm exec playwright test form-errors.spec.ts \
+  --grep 'forms pass (firstInvalid live|summary resubmit and links|stay|unicode correction|empty correction)$|forms detect select-drift$|forms identify (second message|second uncleared error)$|forms pass native fragment summary links$|forms still block a real reload during a summary link$' \
+  --repeat-each=20 --workers=4 --reporter=json
+node scripts/record-repeatability.mjs forms
 pnpm test:package
 ```
 
-After changing source or tests, refresh all three records before packing. The package
+After changing source or tests, refresh all four records before packing. The package
 check rejects evidence whose recorded source hashes no longer match the checkout.
 
 The package command writes its archive hash to `artifacts/package-verification.json`.
 That hash is kept outside the packed docs to avoid a self-referential archive hash.
-The CI badge links to current Linux/macOS results; this page records the local DEV06
+The CI badge links to current Linux/macOS results; this page records the local DEV07
 verification. The full-suite 100-run repeatability criterion and equivalent native performance
-benchmark have **not** been completed. The form-errors and CI-guard milestones are pending.
+benchmark have **not** been completed. The CI-guard milestone is pending.
 
 A hosted CI run exposed a diagnostic race: focus leaving during the roving-state wait
 was reported as `ROVING_MISMATCH`. The runner now reports `FOCUS_MISMATCH` as soon as
@@ -92,3 +106,14 @@ that loss is observed after confirmed focus. The dedicated before-roving fixture
 fails against the previous implementation and passes with the fix. Timed window
 fixtures use a wider setup margin so runner load does not move the intended defect
 into the preceding check. Keyboard activation remains forbidden after focus loss.
+
+The form implementation has a regression for multi-field diagnosis: if the first
+message matches but a later one does not, the group reports the actual mismatching
+message, rather than timing out the first matched message. Both visible-message and
+clearing phases require one observation in which all declared messages meet the
+contract. A failed group leaves the other group members unconfirmed (`not_run`).
+
+Native summary links were also reproduced as an incorrect `NAVIGATION` block during
+development. Their fragment change is now allowed only for the declared link action,
+with the original Document handle verified afterward. A companion fixture reloads
+the same URL and must remain blocked before any correction input.
