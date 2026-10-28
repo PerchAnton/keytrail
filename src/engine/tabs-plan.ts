@@ -1,6 +1,6 @@
 import type { CheckResult, StepResult, TabsContract, Target } from '../contracts/types.js';
 
-export type TabsTransition = { key: StepResult['key']; target: Target; index: number; suffix: string; focusCheck: string };
+export type TabsTransition = { key: NonNullable<StepResult['key']>; target: Target; index: number; suffix: string; focusCheck: string };
 export function planTabs(contract: TabsContract) {
   const checks: CheckResult[] = [], transitions: TabsTransition[] = [];
   const add = (checkId: string, ruleId: string, expected: CheckResult['expected']) => checks.push({
@@ -24,7 +24,7 @@ export function planTabs(contract: TabsContract) {
   const initial = position, n = contract.items.length;
   const forward = contract.orientation === 'horizontal' ? 'ArrowRight' : 'ArrowDown';
   const backward = contract.orientation === 'horizontal' ? 'ArrowLeft' : 'ArrowUp';
-  const move = (key: StepResult['key'], index: number, suffix: string, rule = 'T03') => {
+  const move = (key: NonNullable<StepResult['key']>, index: number, suffix: string, rule = 'T03') => {
     const target = contract.items[index]!.tab;
     const focusCheck = `${rule}.${suffix}`;
     add(focusCheck, rule, { focus: target.id });

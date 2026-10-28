@@ -56,7 +56,7 @@ await hashDir('tests');
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 const evidence = { recordedAt: new Date().toISOString(), package: 'keytrail', version: pkg.version,
   environment: { node: process.version, platform: process.platform, arch: process.arch, playwright: '1.64.1', chromium: '156.0.8078.4' },
-  scope: 'Synthetic dialog and tabs checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.',
+  scope: 'Synthetic dialog, tabs and form-errors checkpoint, not full 0.1 acceptance, an accessibility audit or a performance benchmark.',
   browsers: { workers1: one.stats, workers4: four.stats, statusesAndCodesIdentical: true },
   sourceHashFormat: 'SHA-256 of UTF-8 text with LF line endings', sourceHashes: hashes, cases: outcomes };
 await mkdir('docs/evidence', { recursive: true });

@@ -81,7 +81,8 @@
         "kind": {
           "enum": [
             "dialog",
-            "tabs"
+            "tabs",
+            "formErrors"
           ]
         },
         "contractVersion": {
@@ -214,7 +215,13 @@
               "T05",
               "T06",
               "T07",
-              "T08"
+              "T08",
+              "F01",
+              "F02",
+              "F03",
+              "F04",
+              "F05",
+              "F06"
             ]
           },
           "stepId": {
@@ -265,7 +272,13 @@
               "ORIENTATION_MISMATCH",
               "SELECTION_MISMATCH",
               "ROVING_MISMATCH",
-              "PREMATURE_ACTIVATION"
+              "PREMATURE_ACTIVATION",
+              "UNSUPPORTED_FORM",
+              "TEXT_MISMATCH",
+              "INVALID_STATE_MISMATCH",
+              "NOT_EDITABLE",
+              "VALUE_MISMATCH",
+              "ERROR_NOT_CLEARED"
             ]
           },
           "expected": {
@@ -335,6 +348,12 @@
               "observationWindowMs": {
                 "type": "number",
                 "minimum": 0
+              },
+              "invalid": {
+                "type": "boolean"
+              },
+              "editable": {
+                "type": "boolean"
               }
             },
             "required": []
@@ -406,6 +425,12 @@
               "observationWindowMs": {
                 "type": "number",
                 "minimum": 0
+              },
+              "invalid": {
+                "type": "boolean"
+              },
+              "editable": {
+                "type": "boolean"
               }
             },
             "required": []
@@ -452,7 +477,10 @@
             "pattern": "^step-[0-9]{3}$"
           },
           "actionKind": {
-            "const": "press"
+            "enum": [
+              "press",
+              "insertText"
+            ]
           },
           "key": {
             "enum": [
@@ -466,7 +494,10 @@
               "ArrowDown",
               "ArrowUp",
               "Home",
-              "End"
+              "End",
+              "ControlOrMeta+A",
+              "Backspace",
+              null
             ]
           },
           "targetId": {
@@ -506,6 +537,31 @@
           "afterFocus",
           "elapsedMs",
           "observationWindowMs"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "actionKind": {
+                  "const": "insertText"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "key": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "key": {
+                  "type": "string"
+                }
+              }
+            }
+          }
         ]
       }
     },

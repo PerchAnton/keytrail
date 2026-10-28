@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>KeyTrail form error example</title>
+<style>
+  body { font: 1rem/1.5 system-ui; max-width: 38rem; margin: 3rem auto; padding: 1rem; }
+  label, input { display: block; } input, button { font: inherit; padding: .5rem; }
+  :focus { outline: 3px solid #365bd1; outline-offset: 3px; }
+  #email-error { color: #a11; }
+</style>
+<h1>Update your contact email</h1>
+<p>This local example uses synthetic data and does not send network requests.</p>
+<form id="contact" novalidate>
+  <label for="email">Email</label>
+  <input id="email" type="email" value="invalid" aria-describedby="email-hint">
+  <p id="email-hint">Use the sample address reader@example.test.</p>
+  <p id="email-error" hidden>Enter a valid email address.</p>
+  <button type="submit">Save</button>
+</form>
+<p id="status" role="status"></p>
+<script>
+  const form = document.querySelector('#contact');
+  const email = document.querySelector('#email');
+  const error = document.querySelector('#email-error');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (email.value !== 'reader@example.test') {
+      error.hidden = false;
+      email.setAttribute('aria-invalid', 'true');
+      email.setAttribute('aria-describedby', 'email-hint email-error');
+      email.focus();
+    }
+  });
+  email.addEventListener('blur', () => {
+    if (email.value === 'reader@example.test') {
+      error.hidden = true;
+      email.removeAttribute('aria-invalid');
+      document.querySelector('#status').textContent = 'The declared error is cleared.';
+    }
+  });
+</script>
+</html>

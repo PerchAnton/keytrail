@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-alpha.3 — source candidate
+
+- Add `assertFormErrorsJourney` and `FormErrorsContract` with first-invalid, summary
+  and stay focus policies, summary links, live validation and resubmission.
+- Check rendered error text, unique message IDREF, invalid state, exact correction
+  values and simultaneous clearing of all declared errors.
+- Support native fragment summary links while blocking actual document replacement.
+- Reach fields with Tab; confirm focus/editability before select-all and text insertion.
+  Stop before inserting when focus has moved. Keep text and values out of own reports.
+- Add F01–F06 plans, form codes and value-free insertion steps to schema v1;
+  ruleset version is 0.3.0. Include correct/broken packaged form examples.
+- CI completeness enforcement and full 0.1 acceptance remain pending. No publication.
+
 ## 0.1.0-alpha.2 — source candidate
 
 - Add `assertTabsJourney` and `TabsContract`: horizontal/vertical navigation, automatic

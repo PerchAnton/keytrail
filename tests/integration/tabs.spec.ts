@@ -38,7 +38,7 @@ for (const [name, options] of correct) test(`tabs pass ${name}`, async ({ page }
   expect(result.steps.filter(s => s.key === 'Home' || s.key === 'End')).toHaveLength(options.homeEnd ? 2 : 0);
   expect(result.steps.filter(s => s.key === 'Tab')).toHaveLength(2);
   if (options.activation === 'manual') {
-    const moves = result.steps.filter(s => s.key.startsWith('Arrow') || s.key === 'Home' || s.key === 'End');
+    const moves = result.steps.filter(s => s.key?.startsWith('Arrow') || s.key === 'Home' || s.key === 'End');
     expect(moves.every(s => s.observationWindowMs >= result.config.observationWindowMs)).toBe(true);
     expect(result.steps.filter(s => s.key === (options.activationKey ?? 'Enter'))).toHaveLength(moves.length);
     expect(result.checks.some(c => c.checkId.endsWith('.unchanged') && c.expected.selected !== result.steps.find(s => s.stepId === c.stepId)?.afterFocus)).toBe(true);

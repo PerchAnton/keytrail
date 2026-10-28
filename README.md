@@ -1,15 +1,15 @@
 # KeyTrail
 
-**Check dialog and tabs keyboard journeys in your existing Playwright tests.** Declare the
+**Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
+[Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [Rules and errors](docs/rules.md) · [Limits](docs/limits.md) · [Roadmap](docs/roadmap.md)
 
-**Status: dialog and tabs prototype, `0.1.0-alpha.2` source/package candidate.** No npm
-publication or GitHub release yet. This milestone implements custom ARIA dialogs and fixed tab lists.
-Forms and a CI completeness reporter are planned for later milestones.
+**Status: dialogs, tabs and form errors, `0.1.0-alpha.3` source/package candidate.** No npm
+publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
+declared form-error recovery. A CI completeness reporter remains a later milestone.
 
 ```text
 Tab to trigger → Enter → initial focus → Tab cycle → Shift+Tab cycle → Escape
@@ -43,13 +43,13 @@ pnpm test:package
 On Linux, install Chromium's system dependencies with
 `pnpm exec playwright install --with-deps chromium` when needed.
 The package check packs the actual archive, installs it into a fresh offline consumer,
-checks ESM/CJS imports and types, then runs the working and broken dialog/tabs browser examples.
-It leaves `artifacts/keytrail-0.1.0-alpha.2.tgz` and a verification record.
+checks ESM/CJS imports and types, then runs the working and broken dialog, tabs and form browser examples.
+It leaves `artifacts/keytrail-0.1.0-alpha.3.tgz` and a verification record.
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.2.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.3.tgz @playwright/test@1.64.1
 ```
 
 ## Write a contract
@@ -87,6 +87,20 @@ checks that focus moves while selection stays unchanged until Enter or Space.
 See the [Tabs API and flow diagram](docs/tabs.md) and the
 [runnable manual-tabs example](examples/vanilla/tabs.journey.spec.ts).
 
+## Test form error recovery
+
+`assertFormErrorsJourney` checks the invalid submit, error text and field relationships,
+the declared focus policy, summary links and keyboard correction. It confirms that all
+declared errors clear, without including typed values or message text in its own JSON.
+
+```text
+Invalid submit → messages + IDREF → focus → optional summary links
+                                         → keyboard correction → errors cleared
+```
+
+See the [Form errors API and flow diagram](docs/form-errors.md) and the
+[working/broken email example](examples/vanilla/form-errors.journey.spec.ts).
+
 ## What the result means
 
 | Status | Meaning |
@@ -103,7 +117,7 @@ observations, not broad accessibility rules. [JSON schema](schema/journey-result
 
 ## When to use it
 
-Evaluate KeyTrail when several dialogs need the same declared focus-cycle checks and
+Evaluate KeyTrail when several dialogs, tab lists or forms need the same declared keyboard checks and
 consistent diagnostics. Keep ordinary Playwright assertions when a small native test
 is clearer or your component needs behavior outside the supported contract.
 

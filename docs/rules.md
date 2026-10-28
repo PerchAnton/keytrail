@@ -1,4 +1,4 @@
-# Dialog rules and message codes
+# Rules and message codes
 
 | Rule | Observation |
 | --- | --- |
@@ -36,3 +36,11 @@ limits and reporting are KeyTrail's test contract. A failed rule is not automati
 a specific WCAG violation. Roles and accessible names use Playwright's public
 [`getByRole`](https://playwright.dev/docs/locators#locate-by-role) implementation;
 KeyTrail does not implement a separate accessible-name algorithm.
+
+## Other journeys
+
+[Tabs rules T01–T08](tabs.md) cover navigation, selection and manual activation.
+[Form rules F01–F06](form-errors.md) cover messages, field relationships, focus and correction.
+Form-specific codes are `UNSUPPORTED_FORM`, `TEXT_MISMATCH`, `INVALID_STATE_MISMATCH`,
+`NOT_EDITABLE`, `VALUE_MISMATCH` and `ERROR_NOT_CLEARED`; they also use the shared
+`IDREF_MISMATCH`, `STRUCTURE_MISMATCH`, focus, context and budget codes.
