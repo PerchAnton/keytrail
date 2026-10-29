@@ -9,13 +9,13 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 34 passed |
-| Browser suite | 163 passed with four workers; new sequential series in progress |
+| Browser suite | 163 passed with four workers; 12 complete local sequential rounds before interruption |
 | Worker isolation | Final comparison pending after 100 sequential rounds; three engine-only tests per round |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | All three fixed workloads below the 20% median overhead target; [protocol and raw samples](performance.md) |
-| Repeatability | Fresh 100-round series in progress; old alpha.5 evidence is not reused |
+| Repeatability | Separate hosted 100-round series pending; 12 local alpha.6 rounds are retained separately |
 | Package consumers | Pending refresh for alpha.6: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control |
 
 ## Performance
@@ -34,7 +34,8 @@ advantage or replace checks in a consumer application.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
-snapshots. The current series targets 100 complete rounds on alpha.6.
+snapshots. The hosted series targets 100 complete rounds on alpha.6. Twelve completed local
+rounds are retained separately after interruption and are not added to hosted totals.
 The historical alpha.5 record accepted 45 rounds and excluded its interrupted 46th
 round; it remains history rather than evidence for the changed runtime.
 

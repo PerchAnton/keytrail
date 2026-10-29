@@ -2,9 +2,22 @@
 
 ## Alpha.6 verification in progress
 
-The final alpha.6 source is undergoing a fresh 100-round run of all 163 integration
-tests, followed by a four-worker isolation run. No completed 100-round result is
-claimed until the verifier produces its final source-bound proof.
+The local alpha.6 series completed **12 rounds of 163 tests** (1,956 executions)
+without retries or semantic differences before the session was interrupted. The
+incomplete 13th round is retained and excluded. This is not 100-round acceptance.
+
+A separate [hosted workflow](../.github/workflows/reliability.yml) runs all 100 rounds
+on one Linux runner, then the four-worker comparison. It continues independently
+of a developer laptop. Local and hosted rounds have different environment identities
+and are never combined. Until the hosted verifier produces its final source-bound
+proof, the release gate remains pending.
+
+The workflow has read-only repository permission, does not publish or modify the
+repository, and retains raw reports plus the final proof for 14 days. Download the
+artifact before it expires. Its bootstrap push trigger is restricted to this
+preparation branch and workflow path; once on the default branch, future runs can
+be started explicitly with `workflow_dispatch`. Ordinary documentation pushes do
+not start another multi-hour run.
 
 The historical alpha.5 checkpoint contained 45 complete rounds of 153 tests
 (6,885 executions), followed by a matching four-worker run. Its interrupted 46th
