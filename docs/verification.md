@@ -16,7 +16,7 @@ component is accessible.
 | CI guard | 48 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | All three fixed workloads below the 20% median overhead target; [protocol and raw samples](performance.md) |
 | Repeatability | 45 full sequential rounds: 6,885 passed without retries or semantic differences; original 100-round target not completed |
-| Package consumers | Clean offline ESM/CJS and declaration checks; six browser examples plus three guarded journeys |
+| Package consumers | Two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control |
 
 ## Performance
 
@@ -68,12 +68,21 @@ pnpm verify:reliability
 On macOS, prefix the long browser commands with `caffeinate -is` to prevent host
 sleep. Run performance measurements without concurrent verification jobs. After
 recording the resulting evidence in `docs/evidence/`, `pnpm test:package` checks
-source hashes, packs the archive, installs it into a clean offline consumer, checks
-ESM/CJS imports and declarations, and runs six browser examples plus three guarded
-journeys. Archive size/hash are written outside the package to avoid a
+source hashes, packs the archive, installs it into two clean offline consumers,
+checks ESM/CJS imports and declarations, and runs the vanilla and React examples.
+React lockfile preparation fetches registry metadata before the separate frozen offline install.
+Install the separate React lockfile first as described in the [release checklist](release-checklist.md).
+Archive size/hash are written outside the package to avoid a
 self-referential archive checksum.
 
 [DEV08 history](verification-dev08.md) retains the earlier focused-repeat evidence,
 including the diagnosed host-sleep timeouts and hosted outer-timeout correction.
-DEV10's React consumer and full release checklist remain separate work. No npm
-package or GitHub release has been published.
+DEV10 adds a React portal in development StrictMode, closes/remounts the dialog,
+and verifies wrong initial and return focus. Its separate negative process does
+not catch the assertion: exit 1, HTML, JUnit and the original incomplete attachment
+are checked. Playwright classifies `JourneyAssertionError` as a JUnit `error`, so
+both error and failure counts are considered; neither is treated as success.
+The [report guide](reports.md) explains the saved artifacts. Existing DEV09 evidence
+remains tied to its unchanged runtime/test inputs; these consumer checks are
+additional evidence, not extra rounds in that series. No npm package or GitHub
+release has been published; see the [release checklist](release-checklist.md).

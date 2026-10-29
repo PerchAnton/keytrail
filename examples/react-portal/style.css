@@ -1,0 +1,21 @@
+:root { font-family: system-ui, sans-serif; color: #173d39; background: #f3f6ef; line-height: 1.6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 850px; margin: 0 auto; padding: 64px 24px; }
+.eyebrow { color: #47665b; font-size: .8rem; text-transform: uppercase; letter-spacing: .15em; font-weight: 700; }
+h1 { font-size: clamp(2.3rem, 6vw, 3.8rem); line-height: 1.1; letter-spacing: -.04em; margin: 24px 0; }
+h2 { line-height: 1.2; }
+.intro { max-width: 600px; font-size: 1.15rem; }
+.card { padding: 32px; border: 1px solid #b9c9b5; border-radius: 20px; background: white; margin: 32px 0; }
+.badge { display: inline-block; padding: 4px 12px; border-radius: 20px; background: #dbebce; font-size: .85rem; font-weight: 700; }
+.broken { background: #ffe0bf; color: #783711; }
+button { border: 0; background: #205c4c; color: white; border-radius: 8px; padding: 12px 20px; font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid #bc4300; outline-offset: 4px; }
+.journey { display: flex; flex-wrap: wrap; gap: 12px 32px; padding-left: 24px; margin-bottom: 0; font-size: .9rem; }
+nav { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+a { color: #205c4c; text-underline-offset: 4px; }
+.note { font-size: .85rem; color: #47665b; margin-top: 28px; }
+.backdrop { position: fixed; inset: 0; display: grid; place-items: center; background: #102d29b3; padding: 24px; }
+[role=dialog] { width: min(100%, 480px); max-height: 100%; overflow: auto; border-radius: 20px; padding: 32px; background: white; }
+label { display: block; font-weight: 600; margin-top: 24px; }
+input { width: 100%; font: inherit; padding: 10px; margin: 8px 0 24px; border: 1px solid #6c8579; border-radius: 6px; }

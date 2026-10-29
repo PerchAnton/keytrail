@@ -7,7 +7,9 @@ shell **156.0.8078.4**, Playwright browser revision **1248**. Development uses p
 The Playwright peer range is the exact tested version. Future Playwright versions,
 Node majors, Firefox, WebKit and Windows are not claimed. Linux CI and macOS run the
 dialog, tabs and form tests and clean ESM/CJS consumers. GitHub Actions reports the actual outcome;
-see [verification](verification.md) for recorded results.
+see [verification](verification.md) for recorded results. The isolated React portal
+example pins React/React DOM **19.3.1**, type declarations **19.3.0**, and runs in
+development StrictMode. This is an example environment, not a React peer requirement.
 
 The only installed runtime dependency is the Playwright peer. Node built-ins and a
 standalone JSON Schema validator are used at runtime. Ajv compiles the validator during
