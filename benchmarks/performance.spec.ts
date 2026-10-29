@@ -56,7 +56,13 @@ for (const scenario of cases) test.describe(scenario.kind, () => {
     }
     const order = pair % 2 === 0 ? ['keytrail', 'native'] as const : ['native', 'keytrail'] as const;
     const first = await execute(order[0]), second = await execute(order[1]);
-    expect(first.result.outcome).toBe('passed'); expect(second.result.outcome).toBe('passed');
+    for (const [arm, measurement] of [[order[0], first], [order[1], second]] as const) {
+      if (measurement.result.outcome !== 'passed') await testInfo.attach('benchmark-failure.json', {
+        body: JSON.stringify({ arm, kind: scenario.kind, pair, result: measurement.result }), contentType: 'application/json',
+      });
+      const issue = measurement.result.checks.find(c => c.status === 'fail' || c.status === 'blocked');
+      expect(measurement.result.outcome, `${arm}: ${issue?.checkId} ${issue?.messageCode}`).toBe('passed');
+    }
     expect(signature(first.result)).toEqual(signature(second.result));
     const keytrail = order[0] === 'keytrail' ? first : second, native = order[0] === 'native' ? first : second;
     const record = { kind: scenario.kind, pair, warmup: pair < 0, order: [...order], keytrailMs: keytrail.durationMs, nativeMs: native.durationMs,

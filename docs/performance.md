@@ -1,5 +1,9 @@
 # Equivalent-work benchmark
 
+**Refresh pending:** the records below predate the final polling-cadence and
+benchmark-diagnostics changes. The local verification job reruns measurements after
+the 100-round series. These historical numbers do not clear the current release gate.
+
 This benchmark measures three synthetic Chromium journeys: an ordinary custom ARIA
 dialog, a horizontal manual-activation tab list, and a two-field form with live error
 clearing using `inputMode: "insertText"`. The opt-in per-character `type` mode is

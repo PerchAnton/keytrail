@@ -9,13 +9,13 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 35 passed |
-| Browser suite | Earlier alpha.6 revision: 163 passed with four workers; current sampling-schedule revision awaits hosted full-suite verification |
+| Browser suite | 163 cases; final local revision verification in progress; prior attempts are recorded in the repeatability protocol |
 | Worker isolation | Final comparison pending after 100 sequential rounds; three engine-only tests per round |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
-| Performance | All three fixed workloads below the 20% median overhead target; [protocol and raw samples](performance.md) |
-| Repeatability | Separate hosted 100-round series pending; 12 local alpha.6 rounds are retained separately |
+| Performance | Fresh source-bound measurements pending after the local series; [protocol and historical samples](performance.md) |
+| Repeatability | Fresh local 100-round series pending; 12 earlier alpha.6 rounds are retained separately |
 | Package consumers | Pending refresh for alpha.6: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control |
 
 ## Performance
@@ -34,8 +34,9 @@ advantage or replace checks in a consumer application.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
-snapshots. The hosted series targets 100 complete rounds on alpha.6. Twelve completed local
-rounds are retained separately after interruption and are not added to hosted totals.
+snapshots. The local series targets 100 complete rounds on the final alpha.6 revision.
+Twelve completed earlier local rounds and the hosted attempts are retained separately
+and are not added to the new total.
 The historical alpha.5 record accepted 45 rounds and excluded its interrupted 46th
 round; it remains history rather than evidence for the changed runtime.
 

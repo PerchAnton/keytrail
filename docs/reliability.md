@@ -2,16 +2,17 @@
 
 ## Alpha.6 verification in progress
 
-The local alpha.6 series completed **12 rounds of 163 tests** (1,956 executions)
+Release verification now runs locally: **100 full rounds with one worker**, followed
+by the four-worker comparison. The dedicated hosted reliability workflow has been
+removed and disabled. A fresh source-bound proof is still required before release.
+
+An earlier local alpha.6 series completed **12 rounds of 163 tests** (1,956 executions)
 without retries or semantic differences before the session was interrupted. The
 incomplete 13th round is retained and excluded. This is not 100-round acceptance.
 
-A separate [hosted workflow](../.github/workflows/reliability.yml) runs all 100 rounds
-on one Linux runner, with two workers within each round and separate one/four-worker
-comparisons. It continues independently
-of a developer laptop. Local and hosted rounds have different environment identities
-and are never combined. Until the hosted verifier produces its final source-bound
-proof, the release gate remains pending.
+Those rounds predate the final fixture and polling corrections. They are not added
+to the new local series. Local and hosted reports also have different environment
+identities and are never combined.
 
 The [first hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40912436254)
 stopped after round 2: all 163 tests passed in both
@@ -25,8 +26,7 @@ After this fixture correction, a local smoke run passed all 163 cases with two
 and one workers, with matching signatures. Its four-worker run correctly blocked
 a manual-tabs journey after a measured 241.6 ms observation gap (162 tests passed,
 one failed). This failed smoke run is retained and is not acceptance evidence.
-The hosted workflow must pass its own 2/1/4-worker smoke comparison before starting
-the complete series. The 100 ms bound is unchanged.
+The 100 ms bound is unchanged.
 
 The [second hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40916563288)
 stopped in the two-worker smoke run: 161 cases passed and two manual-tabs cases
@@ -36,12 +36,11 @@ read, targeting a 50 ms cadence instead of always adding another 20 ms to a slow
 read. Actual browser-clock gaps still determine whether a result is blocked;
 changing the scheduler cannot turn a gap above 100 ms into a pass.
 
-The workflow has read-only repository permission, does not publish or modify the
-repository, and retains raw reports plus the final proof for 14 days. Download the
-artifact before it expires. Its bootstrap push trigger is restricted to this
-preparation branch and workflow path; once on the default branch, future runs can
-be started explicitly with `workflow_dispatch`. Ordinary documentation pushes do
-not start another multi-hour run.
+The [third hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40918646493)
+passed all 163 cases on two and one workers, with matching signatures. Four workers
+produced four blocked journeys with measured gaps of 100.5–104.6 ms (159 tests
+passed). The full series did not start. Its raw reports were downloaded before
+retiring the workflow; none of these attempts is counted as acceptance evidence.
 
 The historical alpha.5 checkpoint contained 45 complete rounds of 153 tests
 (6,885 executions), followed by a matching four-worker run. Its interrupted 46th
@@ -55,23 +54,23 @@ The verifier runs the entire integration suite 100 times **one complete round af
 another**, then checks worker isolation. By default each round uses one worker,
 followed by a four-worker run. `--workers=2` runs tests on two workers within each
 round and additionally requires a matching one-worker run before the four-worker
-run. The hosted workflow uses this mode to fit the job time limit; the original
-one-worker attempt took about 4.5 minutes per round. No rounds overlap, and all
-cases execute in every round on the same pinned runner. There are no retries, filters or expected
+run. This optional mode is separate from the current one-worker release protocol.
+No rounds overlap, and all cases execute in every round on the same recorded
+environment. There are no retries, filters or expected
 runner failures. Intentionally defective components must still produce their
 specified failed or blocked journey results inside passing regression tests.
 
 ```sh
 pnpm build
 pnpm verify:reliability
-# Hosted protocol: the same 100 full rounds plus 1/4-worker comparisons
-pnpm verify:reliability --workers=2
 # macOS: caffeinate -is pnpm verify:reliability
 ```
 
 Run only one verifier at a time in a working copy; checkpoints and report paths
 are shared within that copy. Allow several hours on a laptop. Keep the machine awake and avoid other browser or
 CPU-heavy work. Node, Playwright, Chromium, OS, architecture and CPU are recorded.
+On macOS, `caffeinate` prevents idle sleep for the command; closing the lid can
+still suspend the machine. An interrupted round is not considered complete.
 The per-round worker count is part of the series identity. Source, tests, schema,
 lockfile, package/configuration and verifier inputs are hashed
 before the run and checked again around every round. Changing an input prevents
@@ -99,8 +98,7 @@ revalidates completed reports before resuming. A failed series is retained and
 cannot be resumed as though the failed round never happened. Diagnose the failure;
 use `--new-series` to start a new complete series. `--smoke` runs only one complete
 round plus the configured worker comparisons and is explicitly **not** acceptance
-evidence. The hosted workflow first runs this smoke check, then starts a separate
-100-round series; the smoke round is not added to the 100-round count.
+evidence. Smoke rounds are not added to the 100-round count.
 
 The final machine-readable proof is `artifacts/reliability-verification.json`.
 A full run produces the original 100-round acceptance proof. The package gate must

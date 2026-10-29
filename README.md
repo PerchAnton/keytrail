@@ -177,8 +177,8 @@ The [verification record](docs/verification.md) separates completed checks from 
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
 repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md)
-and is undergoing a separate hosted 100-round run of the 163-test suite. The local
-series stopped after 12 complete rounds; it is not combined with hosted evidence. The historical
+and is undergoing a fresh local 100-round run of the 163-test suite. An earlier local
+revision stopped after 12 complete rounds; those rounds are not added to this series. The historical
 45 rounds belong to alpha.5; they are not counted as evidence for this changed
 runtime. Real-world adoption has not been established.
 
