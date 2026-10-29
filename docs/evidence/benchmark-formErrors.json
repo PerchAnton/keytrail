@@ -13,7 +13,7 @@
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
     "scripts/build.mjs": "2f61bcc6ed997dd8160609d0339a01602b68a05a2317630d85d96c2a6edf5add",
-    "scripts/verify-reliability.mjs": "44792a9a24159e8e886f5ce8db9be9a360a00d66be7164449c8ea2fc17b8f75b",
+    "scripts/verify-reliability.mjs": "65be5e0a9fbea099924f95e02b8b6fc19df28b4fc9ae0c7c3ce185857eecd27e",
     "src/browser/driver.ts": "2a3f6e7cd5142b57dc219010ce5321acdad49a19eed20715c8f4d4aef458983d",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
@@ -45,18 +45,18 @@
     "tests/integration/dialog.spec.ts": "28a7fd3d86d3712f978861bf270835ecc6d15be199272501584832e9d9c3854c",
     "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
     "tests/integration/observations.spec.ts": "d71859a9b0a20c0cc4a04107b0032a771143be641e79164e9af88a1216018a06",
-    "tests/integration/tabs.spec.ts": "0b01e8187cb126900e3f816b7f097a552848f3133ffa6af74d0c88b90b8ed684",
+    "tests/integration/tabs.spec.ts": "69871a06c0a7fcccf107ea5f294c39470fbbed3821d52de1dc438cbad3d075c3",
     "tests/unit/contracts.test.mjs": "1ce78e70acbce14e55c712c33e38a0fb26781e463dc2d655abf9d49e655233b9",
     "tests/unit/form-errors.test.mjs": "e382c4ff52bffbaea6485570d8147644e3bbff9786d53c5fc839f0e443700237",
     "tests/unit/observation-window.test.mjs": "2b05ba0363fc840ea51341aaf090331d845724bd8a7ba703e034b0faf0a48254",
-    "tests/unit/reliability.test.mjs": "95bffda9efb6da90a050de7d9813acc4756eab80b3772e7ed30284a51bff1dca",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
     "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
     "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
     "verification/signatures.mjs": "aea81b63495cb2bef620b590b923b21fe345639a4dcc186a6d77146704ad3970"
   },
-  "startedAt": "2026-10-29T06:14:03.385Z",
-  "measuredAt": "2026-10-29T06:17:38.579Z",
+  "startedAt": "2026-10-29T16:57:02.332Z",
+  "measuredAt": "2026-10-29T17:00:47.217Z",
   "pilot": false,
   "kind": "formErrors",
   "warmupsPerArm": 5,
@@ -82,15 +82,15 @@
   },
   "summary": {
     "keytrail": {
-      "medianMs": 303.36962500000664,
-      "p95Ms": 316.7491250000021
+      "medianMs": 317.36808299999393,
+      "p95Ms": 339.6722090000112
     },
     "native": {
-      "medianMs": 290.0017919999955,
-      "p95Ms": 316.198166999995
+      "medianMs": 304.5244789999997,
+      "p95Ms": 319.78033300000243
     },
-    "pairedMedianOverheadPercent": 4.381857552378953,
-    "ratioOfMediansOverheadPercent": 4.609569102252786,
+    "pairedMedianOverheadPercent": 4.533168925315745,
+    "ratioOfMediansOverheadPercent": 4.2175932923915305,
     "targetMet": true
   },
   "pairs": [
@@ -102,8 +102,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 304.51933399998234,
-      "nativeMs": 294.2188329999917,
+      "keytrailMs": 318.0645829999994,
+      "nativeMs": 305.0692090000084,
       "chromium": "156.0.8078.4"
     },
     {
@@ -114,8 +114,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 299.41387499999837,
-      "nativeMs": 285.9658749999944,
+      "keytrailMs": 317.2649580000143,
+      "nativeMs": 296.05945800000336,
       "chromium": "156.0.8078.4"
     },
     {
@@ -126,8 +126,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 304.225792000012,
-      "nativeMs": 316.198166999995,
+      "keytrailMs": 315.0209170000162,
+      "nativeMs": 303.54595800000243,
       "chromium": "156.0.8078.4"
     },
     {
@@ -138,8 +138,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 323.6558340000047,
-      "nativeMs": 312.95437500000116,
+      "keytrailMs": 321.6888329999929,
+      "nativeMs": 302.3751249999914,
       "chromium": "156.0.8078.4"
     },
     {
@@ -150,8 +150,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 302.4011669999745,
-      "nativeMs": 295.92787500002305,
+      "keytrailMs": 323.69029200001387,
+      "nativeMs": 308.16620900001726,
       "chromium": "156.0.8078.4"
     },
     {
@@ -162,8 +162,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 308.3435419999878,
-      "nativeMs": 346.4284579999803,
+      "keytrailMs": 399.5292500000214,
+      "nativeMs": 310.7860829999845,
       "chromium": "156.0.8078.4"
     },
     {
@@ -174,8 +174,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 307.18379099998856,
-      "nativeMs": 294.3414589999884,
+      "keytrailMs": 316.3807910000032,
+      "nativeMs": 311.3261249999923,
       "chromium": "156.0.8078.4"
     },
     {
@@ -186,8 +186,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 303.868959000014,
-      "nativeMs": 286.87395800001104,
+      "keytrailMs": 315.35329199998523,
+      "nativeMs": 303.5364589999954,
       "chromium": "156.0.8078.4"
     },
     {
@@ -198,8 +198,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 305.1015419999894,
-      "nativeMs": 290.01866699999664,
+      "keytrailMs": 314.8514159999904,
+      "nativeMs": 301.78383300002315,
       "chromium": "156.0.8078.4"
     },
     {
@@ -210,8 +210,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 302.87029099999927,
-      "nativeMs": 293.0578749999986,
+      "keytrailMs": 311.1839580000087,
+      "nativeMs": 298.2053329999908,
       "chromium": "156.0.8078.4"
     },
     {
@@ -222,8 +222,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 299.5039579999866,
-      "nativeMs": 311.3952500000014,
+      "keytrailMs": 317.8425419999985,
+      "nativeMs": 308.5947079999896,
       "chromium": "156.0.8078.4"
     },
     {
@@ -234,8 +234,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 306.9714999999851,
-      "nativeMs": 282.05883399999584,
+      "keytrailMs": 320.14762500001234,
+      "nativeMs": 298.2844580000092,
       "chromium": "156.0.8078.4"
     },
     {
@@ -246,8 +246,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 305.2329169999866,
-      "nativeMs": 293.83345799997915,
+      "keytrailMs": 314.1480829999782,
+      "nativeMs": 302.6958330000052,
       "chromium": "156.0.8078.4"
     },
     {
@@ -258,8 +258,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 301.68700000000536,
-      "nativeMs": 282.5520409999881,
+      "keytrailMs": 314.1277500000142,
+      "nativeMs": 308.88791699998546,
       "chromium": "156.0.8078.4"
     },
     {
@@ -270,8 +270,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 296.73375000001397,
-      "nativeMs": 289.9849169999943,
+      "keytrailMs": 314.60008299999754,
+      "nativeMs": 306.0555840000161,
       "chromium": "156.0.8078.4"
     },
     {
@@ -282,8 +282,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 297.8162080000038,
-      "nativeMs": 283.04233400002704,
+      "keytrailMs": 314.6344579999859,
+      "nativeMs": 295.9029159999918,
       "chromium": "156.0.8078.4"
     },
     {
@@ -294,8 +294,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 299.8375839999935,
-      "nativeMs": 290.3257919999887,
+      "keytrailMs": 317.2980830000015,
+      "nativeMs": 305.69283400001586,
       "chromium": "156.0.8078.4"
     },
     {
@@ -306,8 +306,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 307.0917500000214,
-      "nativeMs": 301.9866659999825,
+      "keytrailMs": 317.43808299998636,
+      "nativeMs": 298.73225000000093,
       "chromium": "156.0.8078.4"
     },
     {
@@ -318,8 +318,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 316.7491250000021,
-      "nativeMs": 295.82345799999894,
+      "keytrailMs": 339.6722090000112,
+      "nativeMs": 316.60366600001,
       "chromium": "156.0.8078.4"
     },
     {
@@ -330,8 +330,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 302.51591700001154,
-      "nativeMs": 284.8021659999795,
+      "keytrailMs": 319.16016699999454,
+      "nativeMs": 304.11933300000965,
       "chromium": "156.0.8078.4"
     },
     {
@@ -342,8 +342,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 299.2151249999879,
-      "nativeMs": 288.10487499999,
+      "keytrailMs": 334.88108299998567,
+      "nativeMs": 308.7631250000268,
       "chromium": "156.0.8078.4"
     },
     {
@@ -354,8 +354,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 301.1101670000062,
-      "nativeMs": 284.3430830000143,
+      "keytrailMs": 319.9014170000155,
+      "nativeMs": 296.415834000014,
       "chromium": "156.0.8078.4"
     },
     {
@@ -366,8 +366,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 300.1702090000035,
-      "nativeMs": 289.57420800000546,
+      "keytrailMs": 318.6160840000084,
+      "nativeMs": 319.78033300000243,
       "chromium": "156.0.8078.4"
     },
     {
@@ -378,8 +378,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 310.0972919999913,
-      "nativeMs": 288.25104199998896,
+      "keytrailMs": 314.2946660000016,
+      "nativeMs": 298.4357500000042,
       "chromium": "156.0.8078.4"
     },
     {
@@ -390,8 +390,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 306.47295799999847,
-      "nativeMs": 293.5546670000185,
+      "keytrailMs": 337.22325000001,
+      "nativeMs": 306.0215420000022,
       "chromium": "156.0.8078.4"
     },
     {
@@ -402,8 +402,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 298.5994580000115,
-      "nativeMs": 283.9612920000218,
+      "keytrailMs": 319.429999999993,
+      "nativeMs": 298.5908749999944,
       "chromium": "156.0.8078.4"
     },
     {
@@ -414,8 +414,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 298.3917090000177,
-      "nativeMs": 287.2441659999895,
+      "keytrailMs": 318.18337499999325,
+      "nativeMs": 304.92962499998976,
       "chromium": "156.0.8078.4"
     },
     {
@@ -426,8 +426,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 300.7508749999979,
-      "nativeMs": 284.42316700000083,
+      "keytrailMs": 316.35833399998955,
+      "nativeMs": 339.27337499998976,
       "chromium": "156.0.8078.4"
     },
     {
@@ -438,8 +438,8 @@
         "keytrail",
         "native"
       ],
-      "keytrailMs": 308.3692909999809,
-      "nativeMs": 291.96133300001384,
+      "keytrailMs": 315.58116699999664,
+      "nativeMs": 318.5971669999999,
       "chromium": "156.0.8078.4"
     },
     {
@@ -450,8 +450,8 @@
         "native",
         "keytrail"
       ],
-      "keytrailMs": 308.41908299998613,
-      "nativeMs": 282.32795799997984,
+      "keytrailMs": 317.18016700001317,
+      "nativeMs": 302.90112500000396,
       "chromium": "156.0.8078.4"
     }
   ]

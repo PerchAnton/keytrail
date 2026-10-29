@@ -12,14 +12,16 @@ It does not measure real-world adoption, WCAG conformance or screen-reader behav
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |
-| Dialog | 281.5 / 292.2 | 302.6 / 319.2 | 8.1% | 7.5% |
-| Manual tabs | 2236.8 / 2299.8 | 2228.6 / 2268.4 | 0.1% | -0.4% |
-| Form errors (insertText) | 290.0 / 316.2 | 303.4 / 316.7 | 4.4% | 4.6% |
+| Dialog | 294.9 / 305.0 | 315.9 / 332.6 | 8.4% | 7.1% |
+| Manual tabs | 2369.2 / 2446.7 | 2328.9 / 2386.4 | 0.0% | -1.7% |
+| Form errors (insertText) | 304.5 / 319.8 | 317.4 / 339.7 | 4.5% | 4.2% |
 
 All three pass the 20% target under both calculations. Apple M3 (8 logical CPUs),
 macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4.
 Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
 [tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
+Values are rounded to one decimal place; the tabs paired median is -0.011% before
+rounding. This near-zero difference does not establish a speed advantage.
 The chart can be regenerated with `python scripts/render-performance.py` in a
 Python environment containing Matplotlib; it is an optional documentation tool.
 

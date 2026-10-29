@@ -12,6 +12,8 @@ comparisons. It continues independently
 of a developer laptop. Local and hosted rounds have different environment identities
 and are never combined. Until the hosted verifier produces its final source-bound
 proof, the release gate remains pending.
+The [current hosted run](https://github.com/PerchAnton/keytrail/actions/runs/40916563288)
+includes the smoke check and, if it passes, the full series.
 
 The [first hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40912436254)
 stopped after round 2: all 163 tests passed in both
