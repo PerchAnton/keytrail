@@ -32,6 +32,11 @@ matching package version for the assertions, schema and CI guard. The default
 form mode remains `insertText` for existing contracts; new keyboard-oriented
 examples select `type` explicitly.
 
+The [machine-readable regression record](evidence/release-audit.json) extracts all
+ten added browser cases from the successful four-worker run and binds them to the
+source hashes. The injected-delay cases measured gaps of approximately 200 ms and
+both stopped as blocked. These are diagnostic samples, not performance claims.
+
 Verification and source-bound evidence are listed in [Verification](verification.md).
 The updated [benchmark](performance.md) uses an independent native implementation
 with the same negative-window requirements. Its form timings cover `insertText`.
