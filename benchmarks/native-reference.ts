@@ -23,7 +23,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   const checks: CheckResult[] = manifest.checks.map(check => ({ ...structuredClone(check),
     stepId: null, status: 'not_run', messageCode: 'NOT_RUN', observed: {} }));
   const result: JourneyResult = {
-    schemaVersion: '1', rulesetVersion: '0.3.0', packageVersion: pkg.version,
+    schemaVersion: '1', rulesetVersion: '0.4.0', packageVersion: pkg.version,
     run: { runId: randomUUID(), testRef: createHash('sha256').update(info.testId).digest('hex'), attempt: info.retry,
       startedAt: new Date().toISOString(), durationMs: 0, nodeVersion: process.versions.node,
       playwrightVersion: '1.64.1', browserVersion: page.context().browser()!.version() },
@@ -78,6 +78,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       const nodes = reads.map(r => (r as PromiseFulfilledResult<{ id: string; node: ElementHandle | null }>).value);
       guard();
       const state = await page.evaluate(({ nodes, rootId, roles, kind }) => {
+        const observedAt = performance.now();
         const elements = nodes.map(t => ({ id: t.id, node: t.node instanceof Element ? t.node : null }));
         const byId = new Map(elements.map(t => [t.id, t.node]));
         const root = byId.get(rootId), active = document.activeElement;
@@ -113,7 +114,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
             invalidCleared: invalid === null || invalid === 'false',
           };
         });
-        return { code, focus, inside: !!root && !!active && root.contains(active), rootVisible: visible(root),
+        return { observedAt, code, focus, inside: !!root && !!active && root.contains(active), rootVisible: visible(root),
           dialogRole: !!root && roles.dialog!.includes(root), modal: root?.getAttribute('aria-modal') === 'true',
           selected, panels, selectionValid: tabNodes.every(el => ['true', 'false'].includes(el?.getAttribute('aria-selected') ?? '')),
           roving: tabNodes.includes(active) && tabNodes.every(el => el instanceof HTMLElement && el.tabIndex === (el === active ? 0 : -1)),
@@ -189,6 +190,9 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
         if (current.checkId.endsWith('.entry') && action.key === 'Tab' && ++entryTabs > config.maxTabs) throw new NativeFailure('ENTRY_LIMIT');
         if (result.steps.length >= 500) throw new NativeFailure('ACTION_LIMIT');
         const before = await capture(); guard();
+        if (manifest.kind === 'dialog' && action.key === 'Enter' && before.focus !== action.targetId) {
+          mark(current, { ok: false, observed: { focus: before.focus }, code: 'FOCUS_MISMATCH' });
+        }
         if (action.stepId === 'step-001') result.coverage.entryEvidence = 'tab';
         if (manifest.kind === 'dialog' && action.stepId !== 'step-001' && action.key !== 'Enter' && !before.inside) throw new NativeFailure('FOCUS_OUTSIDE_DIALOG');
         if (manifest.kind === 'tabs' && action.stepId !== 'step-001' && !before.inside) throw new NativeFailure('FOCUS_MISMATCH');
@@ -212,22 +216,30 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       const group = current.checkId.startsWith('F02.message.') || current.checkId.startsWith('F06.clear.') ? checks.slice(index, index + 2) : [current];
       const negative = current.checkId.endsWith('.unchanged');
       const begin = performance.now(), deadline = begin + (negative ? config.observationWindowMs : remaining());
+      let firstObserved: number | undefined, lastObserved: number | undefined, maxGap = 0;
+      const intervals: number[] = [];
       while (true) {
         const state = await capture();
         const readings = await Promise.all(group.map(c => read(c, state))); guard();
-        const mismatch = readings.findIndex(r => !r.ok), expired = performance.now() >= deadline;
+        if (negative) {
+          if (lastObserved !== undefined) { intervals.push(state.observedAt - lastObserved); maxGap = Math.max(maxGap, intervals.at(-1)!); }
+          firstObserved ??= state.observedAt; lastObserved = state.observedAt;
+          Object.assign(readings[0]!.observed, { observationWindowMs: state.observedAt - firstObserved,
+            observationCount: intervals.length + 1, observationIntervalsMs: [...intervals], maxObservationGapMs: maxGap });
+          current.observed = readings[0]!.observed;
+          result.steps.at(-1)!.observationWindowMs = state.observedAt - firstObserved;
+        }
+        const mismatch = readings.findIndex(r => !r.ok), expired = negative ?
+          intervals.length > 0 && state.observedAt - firstObserved! >= config.observationWindowMs : performance.now() >= deadline;
         if (negative && mismatch !== -1) mark(current, readings[mismatch]!);
+        if (negative && maxGap > 100) throw new NativeFailure('OBSERVATION_GAP');
         if (negative ? expired : mismatch === -1 || expired) {
-          if (negative) {
-            readings[0]!.observed.observationWindowMs = performance.now() - begin;
-            result.steps.at(-1)!.observationWindowMs = performance.now() - begin;
-          }
           if (mismatch !== -1) mark(group[mismatch]!, readings[mismatch]!);
           if (!negative && expired) mark(current, { ok: false, observed: readings[0]!.observed, code: 'EXPECTATION_TIMEOUT' });
           for (let n = 0; n < group.length; n++) mark(group[n]!, readings[n]!);
           break;
         }
-        await delay(Math.max(1, Math.min(20, deadline - performance.now(), remaining())));
+        await delay(Math.max(1, Math.min(20, negative ? config.observationWindowMs - (state.observedAt - firstObserved!) : deadline - performance.now(), remaining())));
       }
       index += group.length - 1;
     }

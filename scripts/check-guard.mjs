@@ -8,6 +8,7 @@ import { createHash } from 'node:crypto';
 const require = createRequire(import.meta.url);
 const cli = require.resolve('@playwright/test/cli');
 const cases = [
+  ['window-pass', 0], ['observation-gap', 1, 'JOURNEY_INCOMPLETE'], ['gap-pass', 1, 'REPORT_INVALID'], ['missing-window', 1, 'REPORT_INVALID'],
   ['body', 0], ['path', 0], ['limit-body', 0], ['limit-path', 0], ['workers-repeat', 0], ['dependency-pass', 0],
   ['missing', 1, 'ATTACHMENT_COUNT'], ['duplicate', 1, 'ATTACHMENT_COUNT'], ['mime', 1, 'ATTACHMENT_TYPE'],
   ['both-sources', 1, 'ATTACHMENT_SOURCE'], ['read-failure', 1, 'ATTACHMENT_READ'], ['directory', 1, 'ATTACHMENT_READ'],

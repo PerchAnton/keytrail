@@ -6,6 +6,7 @@ import { DEFAULTS } from '../contracts/common.js';
 import { validateTabs } from '../contracts/tabs.js';
 import type { CheckResult, JourneyResult, MessageCode, SafeObservation, TabsContract } from '../contracts/types.js';
 import { planTabs } from '../engine/tabs-plan.js';
+import { ObservationWindow } from '../engine/observation-window.js';
 import { Blocked, BoundaryExit, Driver, type Snapshot } from '../browser/driver.js';
 import { coverage, outcome, JourneyAssertionError } from '../reporting/result.js';
 import { serializeJourneyResult } from '../reporting/serialize.js';
@@ -145,18 +146,25 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
         await observe(`T06.${transition.suffix}.roving`, 'ROVING_MISMATCH', s => ({ ok: s.tabs!.roving, observed: { roving: s.tabs!.roving } }), inspectFocused);
         if (contract.activation === 'manual') {
           select(unchanged);
-          const windowStarted = performance.now();
-          const deadline = windowStarted + config.observationWindowMs;
+          const window = new ObservationWindow();
           const step = d.steps.at(-1)!;
           try {
             while (true) {
-              state = await d.snapshot(); ready(state); d.guard();
-              if (performance.now() >= deadline) break;
-              await delay(Math.max(1, Math.min(20, deadline - performance.now(), d.remaining())));
+              state = await d.snapshot();
+              window.add(state.observedAt);
+              current.observed = { ...selection(state, selected).observed, focus: state.focus,
+                roving: state.tabs!.roving, ...window.observed() };
+              // Preserve an observed component failure even if sampling was also too slow.
+              ready(state); d.guard();
+              if (window.gap) throw new Blocked('OBSERVATION_GAP');
+              if (window.complete(config.observationWindowMs)) break;
+              await delay(Math.max(1, Math.min(20, config.observationWindowMs - window.elapsed, d.remaining())));
             }
-            finish(unchanged, { ...selection(state, selected), observed: { ...selection(state, selected).observed,
-              focus: state.focus, roving: state.tabs!.roving, observationWindowMs: performance.now() - windowStarted } }, 'PREMATURE_ACTIVATION');
-          } finally { step.observationWindowMs = performance.now() - windowStarted; }
+            finish(unchanged, { ok: true, observed: current.observed }, 'PREMATURE_ACTIVATION');
+          } finally {
+            current.observed = { ...current.observed, ...window.observed() };
+            step.observationWindowMs = window.elapsed;
+          }
           select(`T05.${transition.suffix}.activated`);
           try { state = await d.press(contract.activationKey, transition.target, true, ready); }
           catch (error) {

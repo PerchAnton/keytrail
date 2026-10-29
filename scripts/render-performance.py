@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'svg.fonttype': 'none', 'svg.hashsalt': 'keytrail-performance'})
 
 root = Path(__file__).resolve().parents[1]
-kinds = [('dialog', 'Dialog'), ('tabs', 'Manual tabs'), ('formErrors', 'Form errors')]
+kinds = [('dialog', 'Dialog'), ('tabs', 'Manual tabs'), ('formErrors', 'Form errors (insertText)')]
 records = [json.loads((root / f'docs/evidence/benchmark-{key}.json').read_text()) for key, _ in kinds]
 fig = plt.figure(figsize=(10, 6.4), facecolor='#f7f9fc', layout='constrained')
 gs = fig.add_gridspec(3, 1, height_ratios=[3, 1.2, .6])
@@ -19,13 +19,13 @@ ax.axvline(20, color='#9b4d00', linestyle='--', linewidth=1.4)
 ax.text(20.3, -.33, '20% target', color='#9b4d00', fontsize=10)
 ax.bar_label(bars, labels=[f'{value:.1f}%' for value in values], padding=7, fontsize=13, fontweight='bold')
 ax.set_xlabel('Median paired overhead versus equivalent native Playwright checks (%)', fontsize=10)
-ax.set_title('KeyTrail: measured overhead', loc='left', fontsize=20, fontweight='bold', pad=24)
+ax.set_title(f"KeyTrail {records[0]['version']}: measured overhead", loc='left', fontsize=20, fontweight='bold', pad=24)
 ax.spines[['top', 'right', 'left']].set_visible(False); ax.grid(axis='x', alpha=.12); ax.set_axisbelow(True)
 ax.tick_params(axis='y', length=0, labelsize=12)
 ax2 = fig.add_subplot(gs[1]); ax2.axis('off')
 rows = []
 for (_, label), r in zip(kinds, records):
-    s = r['summary']; rows.append([label, f"{s['native']['medianMs']:.1f}", f"{s['keytrail']['medianMs']:.1f}", f"{s['native']['p95Ms']:.1f}", f"{s['keytrail']['p95Ms']:.1f}"])
+    s = r['summary']; rows.append([label.replace(' (insertText)', '\n(insertText)'), f"{s['native']['medianMs']:.1f}", f"{s['keytrail']['medianMs']:.1f}", f"{s['native']['p95Ms']:.1f}", f"{s['keytrail']['p95Ms']:.1f}"])
 table = ax2.table(cellText=rows, colLabels=['Milliseconds', 'Native median', 'KeyTrail median', 'Native p95', 'KeyTrail p95'], loc='center', cellLoc='center')
 table.auto_set_font_size(False); table.set_fontsize(10); table.scale(1, 1.7)
 for (row, col), cell in table.get_celld().items():

@@ -30,5 +30,5 @@ for (const format of ['esm', 'cjs']) {
   await build({ entryPoints: ['src/index.ts', 'src/ci-guard.ts'], outdir: 'dist', outExtension: { '.js': format === 'esm' ? '.js' : '.cjs' },
     ...options, format });
 }
-await build({ entryPoints: { serialize: 'src/reporting/serialize.ts', validate: 'src/reporting/validate.ts', formValidation: 'src/contracts/form-errors.ts', formPlan: 'src/engine/form-errors-plan.ts', validation: 'src/contracts/dialog.ts', tabsValidation: 'src/contracts/tabs.ts', tabsPlan: 'src/engine/tabs-plan.ts', plan: 'src/engine/plan.ts', result: 'src/reporting/result.ts' },
+await build({ entryPoints: { observationWindow: 'src/engine/observation-window.ts', serialize: 'src/reporting/serialize.ts', validate: 'src/reporting/validate.ts', formValidation: 'src/contracts/form-errors.ts', formPlan: 'src/engine/form-errors-plan.ts', validation: 'src/contracts/dialog.ts', tabsValidation: 'src/contracts/tabs.ts', tabsPlan: 'src/engine/tabs-plan.ts', plan: 'src/engine/plan.ts', result: 'src/reporting/result.ts' },
   outdir: 'artifacts/unit', ...options, format: 'esm' });

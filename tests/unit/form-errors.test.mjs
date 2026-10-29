@@ -61,3 +61,13 @@ test('forms allow multiple unique summary links per field within the common targ
   c.summaryLinks = Array.from({ length: 100 }, (_, i) => ({ link: target(`link-${i}`), field: c.errors[0].field }));
   assert.equal(validateFormErrors(c), null);
 });
+
+test('forms validate keyboard mode before any action and preserve the insertion default', () => {
+  assert.equal(validateFormErrors(base()).config.inputMode, 'insertText');
+  const c = base(); c.inputMode = 'type'; c.correction[0].value = 'Az09 +!?~';
+  assert.equal(validateFormErrors(c).config.inputMode, 'type');
+  for (const unsupported of ['café', '🧭', 'line\nbreak', '\t', '\x7f']) {
+    c.correction[0].value = unsupported; assert.equal(validateFormErrors(c), null);
+  }
+  c.inputMode = 'paste'; assert.equal(validateFormErrors(c), null);
+});

@@ -7,7 +7,7 @@ showing the first mismatch and the observations that could not run.
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
 [Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Read reports](docs/reports.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Release checklist](docs/release-checklist.md)
 
-**Status: dialogs, tabs and form errors, `0.1.0-alpha.5` source/package candidate.** No npm
+**Status: dialogs, tabs and form errors, `0.1.0-alpha.6` source/package candidate.** No npm
 publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
 declared form-error recovery, plus a CI reporter that requires complete results for every discovered journey test and attempt.
 
@@ -51,12 +51,12 @@ its HTML/JUnit reports and incomplete attachment. Dependency installation and th
 React lockfile preparation use the registry. The actual consumer installation then
 uses `--offline --frozen-lockfile` in a separate empty directory; browser tests need
 only the local fixture server.
-It leaves `artifacts/keytrail-0.1.0-alpha.5.tgz`, a verification record and `SHA256SUMS`.
+It leaves `artifacts/keytrail-0.1.0-alpha.6.tgz`, a verification record and `SHA256SUMS`.
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.5.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.6.tgz @playwright/test@1.64.1
 ```
 
 ## Try the React portal
@@ -103,6 +103,8 @@ The [standalone example](examples/vanilla) provides the actual HTML and configur
 `assertTabsJourney` checks horizontal/vertical arrow navigation, wraparound, automatic
 or manual activation, optional Home/End and the final Tab exit. Manual activation
 checks that focus moves while selection stays unchanged until Enter or Space.
+It records actual sampling intervals; a gap over 100 ms blocks the check with
+`OBSERVATION_GAP` instead of claiming a pass.
 
 See the [Tabs API and flow diagram](docs/tabs.md) and the
 [runnable manual-tabs example](examples/vanilla/tabs.journey.spec.ts).
@@ -112,6 +114,8 @@ See the [Tabs API and flow diagram](docs/tabs.md) and the
 `assertFormErrorsJourney` checks the invalid submit, error text and field relationships,
 the declared focus policy, summary links and keyboard correction. It confirms that all
 declared errors clear, without including typed values or message text in its own JSON.
+Choose `inputMode: 'type'` to exercise character key handlers for printable ASCII.
+The default `insertText` mode supports Unicode input; the report identifies the mode.
 
 ```text
 Invalid submit → messages + IDREF → focus → optional summary links
@@ -172,10 +176,10 @@ unsupported contexts, bounded entry, scenario deadlines and safe own reports.
 The [verification record](docs/verification.md) separates completed checks from the
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
-repeatability and attachment isolation. This checkpoint has 45 full sequential rounds
-(6,885 executions), accepted by the maintainer, plus a matching 153-test four-worker
-run. The original 100-round target was not completed. Real-world adoption has not
-been established.
+repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md)
+and is undergoing a fresh 100-round run of the 163-test suite. The historical
+45 rounds belong to alpha.5; they are not counted as evidence for this changed
+runtime. Real-world adoption has not been established.
 
 ### Measured overhead
 

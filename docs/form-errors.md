@@ -11,7 +11,7 @@ flowchart TD
   B --> C[Visible matching messages and field IDREF]
   C --> D[Declared focus policy]
   D --> E[Optional summary links: Tab and Enter]
-  E --> F[Tab to field, select all, insert synthetic value]
+  E --> F[Tab to field, select all, type or insert synthetic value]
   F --> G{Validation mode}
   G -->|live| H[Tab after each correction]
   G -->|resubmit| I[Reach submit and activate once more]
@@ -42,6 +42,7 @@ await assertFormErrorsJourney(page, testInfo, {
   }],
   focusAfterInvalid: { policy: 'firstInvalid', target: email },
   correction: [{ field: email, value: 'reader@example.test' }],
+  inputMode: 'type',
   validateCorrection: 'live',
 });
 ```
@@ -60,6 +61,7 @@ the identity and snapshot rules in the [common API](api.md).
 | `focusAfterInvalid` | `firstInvalid` targeting the first `errors.field`; `stay` targeting `submit`; or `summary` targeting the application's summary |
 | `summaryLinks` | Optional `{ link, field }` pairs; each field belongs to `errors`, and link Targets do not repeat |
 | `correction` | Every erroneous field exactly once, in the desired correction order, with a synthetic string of at most 256 Unicode code points |
+| `inputMode` | `insertText` (default, Unicode input) or `type` (per-character keyboard events, printable ASCII only) |
 | `validateCorrection` | `live` blurs each corrected field with Tab; `resubmit` activates submit again after all corrections |
 
 These focus policies are application choices. They are not a universal requirement
@@ -76,14 +78,29 @@ are allowed; references to a different declared error and duplicate DOM IDs fail
 
 Each reach operation starts from current focus and uses at most `entry.maxTabs` Tabs.
 No click, `fill`, forced focus or DOM repair is used. Before correction, focus and
-editability are checked again. KeyTrail presses `ControlOrMeta+A`, then uses
-[`keyboard.insertText`](https://playwright.dev/docs/api/class-keyboard#keyboard-insert-text)
-for Unicode text, or Backspace for an empty replacement. It verifies the exact value
-without recording it. `insertText` emits input rather than per-character key events;
-IME, keyboard layouts and input behavior that depends on each keydown are outside scope.
+editability are checked again. KeyTrail presses `ControlOrMeta+A`, then uses the
+selected `inputMode`. Empty values use Backspace in either mode.
 
-The limit of 500 actions applies to the whole journey. A very long Tab route can hit
-it even with fewer than 20 fields. Common time budgets also apply. Native validation,
+| Mode | What is exercised | Supported values |
+| --- | --- | --- |
+| `insertText` (default) | [`keyboard.insertText`](https://playwright.dev/docs/api/class-keyboard#keyboard-insert-text); an input event without character key events | Up to 256 Unicode code points |
+| `type` | [`keyboard.type`](https://playwright.dev/docs/api/class-keyboard#keyboard-type), one character at a time, including keydown/keypress/input/keyup as permitted by the component | Up to 256 printable ASCII characters, U+0020–U+007E |
+
+Use `type` when a keyboard handler could prevent text entry. For example, a form
+that cancels character `keydown` events can accept `insertText` yet fail `type`
+with `VALUE_MISMATCH`. Other characters, control characters and line breaks in
+`type` mode block the contract with `CONFIG_INVALID` before submission; there is
+no silent fallback to insertion. IME and physical keyboard layouts remain outside
+scope. The insertion default preserves existing contracts.
+
+Focus and editability are checked before every character. A focus change stops
+further typing. Each character consumes one of the journey's 500 actions, so long
+values across many fields may hit `ACTION_LIMIT`. `config.inputMode` records the
+selected mode even when the journey stops early. A character step has
+`actionKind: "type"` and `key: null`; neither character nor value is recorded.
+The final value is compared exactly in both modes, without including it in JSON.
+
+Common time budgets also apply. Native validation,
 select/date/contenteditable controls, foreign documents and observed ShadowRoot
 targets are unsupported. [All limits and data handling](limits.md).
 

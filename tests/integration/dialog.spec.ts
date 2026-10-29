@@ -263,3 +263,26 @@ test('an unrelated hidden shadow dialog does not block the main-document journey
   verifyResult(result, info);
   expect(result.outcome).toBe('passed');
 });
+
+for (const openKey of ['Enter', 'Space'] as const) test(`dialog rejects focus drift before ${openKey} activation`, async ({ page }, info) => {
+  await page.setContent(dialogHtml());
+  await page.evaluate(() => document.getElementById('outside')!.addEventListener('click', () => document.getElementById('open')!.click()));
+  await page.keyboard.press('Tab');
+  const contract = { ...dialogContract(page), openKey };
+  const original = contract.trigger.locator.elementHandles.bind(contract.trigger.locator);
+  let observations = 0;
+  contract.trigger.locator.elementHandles = async () => {
+    const handles = await original();
+    // First read establishes entry; the next is the action's own preflight snapshot.
+    if (++observations === 2) await page.locator('#outside').focus();
+    return handles;
+  };
+  const error = await failure(page, info, contract);
+  expect(observations).toBe(2);
+  expect(error.code).toBe('FOCUS_MISMATCH'); expect(error.result.outcome).toBe('failed');
+  expect(error.result.checks[0]).toMatchObject({ status: 'fail', observed: { focus: 'unknown' } });
+  expect(error.result.steps).toHaveLength(0);
+  expect(error.result.checks.slice(1).every(c => c.status === 'not_run' && c.blockedBy === 'D01.entry')).toBe(true);
+  expect(await page.evaluate(() => (window as any).keytrailKeys)).toEqual(['Tab']);
+  await expect(page.locator('#dialog')).not.toBeVisible();
+});

@@ -1,6 +1,6 @@
 # First alpha release checklist
 
-Candidate: **0.1.0-alpha.5**, ruleset **0.3.0**, schema **1**. The earlier alpha
+Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
@@ -27,9 +27,9 @@ or external service is needed to run their browser tests.
 | Gate | Evidence / command |
 | --- | --- |
 | Public API, types, limits and errors agree | [Dialog](api.md), [tabs](tabs.md), [form errors](form-errors.md), [rules/codes](rules.md), [limits](limits.md); strict TypeScript checks |
-| Correct and defective fixtures | 153 browser regression tests; all three scenario families |
-| Failures cannot silently pass CI | 48 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
-| Source-bound reliability | 45 completed sequential rounds and matching four-worker results; [accepted reduced scope](reliability.md) |
+| Correct and defective fixtures | 163 browser regression tests; all three scenario families |
+| Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
+| Source-bound reliability | 100-round run in progress on alpha.6; [protocol and status](reliability.md) |
 | Equivalent native measurements | Three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
 | Vanilla tarball consumer | ESM/CJS imports and declarations; 6 browser tests and 3 guarded journeys |
 | React portal tarball consumer | StrictMode, real portal/remount, 3 browser tests, 1 guarded journey, separate failing process |
@@ -41,8 +41,9 @@ or external service is needed to run their browser tests.
 
 `pnpm check` runs the checks and consumers once. It validates the existing
 source-bound reliability and benchmark evidence; it does not rerun 45 or 100 rounds.
-The original 100-round criterion remains **unmet**. The maintainer accepted 45
-for this alpha checkpoint; do not advertise full 0.1.0 acceptance.
+Alpha.6 requires fresh 100-round evidence. The historical 45 rounds belong to
+alpha.5 and are not reused after the core changes. Do not publish while this gate
+is pending.
 
 ## Review the output
 
@@ -66,4 +67,4 @@ platform and consumer results. Checksums are integrity checks, not signatures.
   README/changelog. Announce tested scope and limitations, not stable compatibility.
 
 No credential, publish token, npm publication or GitHub release is created by the
-preparation commands. Draft notes are in [first-alpha notes](releases/0.1.0-alpha.5.md).
+preparation commands. Draft notes are in [first-alpha notes](releases/0.1.0-alpha.6.md).

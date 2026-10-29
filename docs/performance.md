@@ -2,18 +2,19 @@
 
 This benchmark measures three synthetic Chromium journeys: an ordinary custom ARIA
 dialog, a horizontal manual-activation tab list, and a two-field form with live error
-clearing. It measures overhead against a fixture-specific native Playwright reference.
+clearing using `inputMode: "insertText"`. The opt-in per-character `type` mode is
+not measured by these samples. It measures overhead against a fixture-specific native Playwright reference.
 It does not measure real-world adoption, WCAG conformance or screen-reader behavior.
 
-## Recorded results — 28 October 2026
+## Recorded results — 29 October 2026
 
 ![Measured overhead and timings](assets/performance.svg)
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |
-| Dialog | 280.3 / 298.3 | 304.8 / 317.9 | 8.7% | 8.7% |
-| Manual tabs | 2226.3 / 2266.7 | 2229.7 / 2269.3 | 0.8% | 0.2% |
-| Form errors | 290.2 / 333.6 | 305.3 / 313.0 | 4.8% | 5.2% |
+| Dialog | 281.5 / 292.2 | 302.6 / 319.2 | 8.1% | 7.5% |
+| Manual tabs | 2236.8 / 2299.8 | 2228.6 / 2268.4 | 0.1% | -0.4% |
+| Form errors (insertText) | 290.0 / 316.2 | 303.4 / 316.7 | 4.4% | 4.6% |
 
 All three pass the 20% target under both calculations. Apple M3 (8 logical CPUs),
 macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4.
@@ -26,7 +27,8 @@ Python environment containing Matplotlib; it is an optional documentation tool.
 
 Both arms use the same page, keyboard action sequence, target resolution, focus and
 role observations, time/action budgets, manual-activation observation windows, and
-JSON result attachment. Setup and page teardown are outside the measured interval.
+JSON result attachment. Both manual-tabs implementations require initial/final
+snapshots and enforce the 100 ms gap threshold using browser timestamps. Setup and page teardown are outside the measured interval.
 The reference calls Playwright directly; it does not call KeyTrail's assertions,
 driver, planner or serializer. Both arms validate the common report schema.
 

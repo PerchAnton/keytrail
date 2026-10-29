@@ -200,3 +200,51 @@ test('forms still block a real reload during a summary link', async ({ page }, i
   expect(error.result.checks.find(c => c.status === 'blocked')?.checkId).toBe('F05.link.001.focus');
   expect(error.result.steps.some(s => s.actionKind === 'insertText')).toBe(false);
 });
+
+for (const inputMode of ['type', 'insertText'] as const) test(`forms report ${inputMode} semantics when character keydown is prevented`, async ({ page }, info) => {
+  await page.setContent(formHtml());
+  await page.evaluate(() => document.querySelector('form')!.addEventListener('keydown', event => {
+    if (!event.ctrlKey && !event.metaKey && !event.altKey && event.key.length === 1) event.preventDefault();
+  }));
+  const contract = { ...formContract(page), inputMode };
+  if (inputMode === 'type') {
+    const error = await failure(page, info, contract);
+    expect(error.code).toBe('VALUE_MISMATCH');
+    expect(error.result.config.inputMode).toBe('type');
+    expect(error.result.steps.filter(s => s.actionKind === 'type')).toHaveLength(10);
+    expect(await page.locator('#field-0').inputValue()).toBe('invalid');
+  } else {
+    const result = await assertFormErrorsJourney(page, info, contract); verify(result, info);
+    expect(result.config.inputMode).toBe('insertText');
+    expect(result.steps.some(s => s.actionKind === 'type')).toBe(false);
+  }
+});
+
+test('forms type printable characters with keyboard events and keep values private', async ({ page }, info) => {
+  const options = { values: ['CANARY_Ab9 +!?~', 'sample-two'] as [string, string] };
+  await page.setContent(formHtml(options));
+  const result = await assertFormErrorsJourney(page, info, { ...formContract(page, options), inputMode: 'type' });
+  verify(result, info);
+  const typed = result.steps.filter(s => s.actionKind === 'type');
+  expect(typed).toHaveLength(options.values.join('').length);
+  expect(typed.every(s => s.key === null && s.beforeFocus === s.targetId)).toBe(true);
+  expect(JSON.stringify(result)).not.toContain('CANARY');
+  expect(await page.evaluate(() => (window as any).keytrailKeys)).toContain('C');
+});
+
+test('forms stop typing after focus moves during a character event', async ({ page }, info) => {
+  await page.setContent(formHtml());
+  await page.locator('#field-0').evaluate(field => field.addEventListener('input', () => document.getElementById('submit')!.focus(), { once: true }));
+  const error = await failure(page, info, { ...formContract(page), inputMode: 'type' });
+  expect(error.code).toBe('FOCUS_MISMATCH');
+  expect(error.result.steps.filter(s => s.actionKind === 'type')).toHaveLength(1);
+  expect(await page.locator('#field-0').inputValue()).toBe('s');
+});
+
+test('forms reject unsupported keyboard characters before submitting', async ({ page }, info) => {
+  const options = { values: ['CANARY_café', 'sample-two'] as [string, string] };
+  await page.setContent(formHtml(options));
+  const error = await failure(page, info, { ...formContract(page, options), inputMode: 'type' });
+  expect(error.code).toBe('CONFIG_INVALID'); expect(error.result.steps).toHaveLength(0);
+  expect(JSON.stringify(error.result)).not.toContain('CANARY');
+});

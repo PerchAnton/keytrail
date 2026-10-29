@@ -1,21 +1,16 @@
 # Full-suite repeatability protocol
 
-## Recorded checkpoint — 28 October 2026
+## Alpha.6 verification in progress
 
-The maintainer accepted **45 complete rounds**, each containing 153 tests, and
-requested moving on. All **6,885 sequential executions** passed without retries or
-semantic differences. A final 4-worker run passed another 153 tests with identical
-observations; 6,900 journey UUIDs were unique across these 46 complete runs.
+The final alpha.6 source is undergoing a fresh 100-round run of all 163 integration
+tests, followed by a four-worker isolation run. No completed 100-round result is
+claimed until the verifier produces its final source-bound proof.
 
-The started 46th sequential round was interrupted on request and excluded from the
-completed-round count. Its 92 passed tests are not included in the 6,885 figure.
-There were no unexpected failures before interruption. Raw interrupted evidence is
-retained locally and its hash/summary is recorded with the accepted evidence.
-
-The original target remains 100 rounds and is **not met** by this record. The
-[version-bound policy](evidence/acceptance-policy.json) accepts the reduced scope
-for this source candidate; [the result](evidence/reliability.json) explicitly says
-`verified-partial` and `acceptance: false`. This does not waive failing tests.
+The historical alpha.5 checkpoint contained 45 complete rounds of 153 tests
+(6,885 executions), followed by a matching four-worker run. Its interrupted 46th
+round was excluded. That accepted reduced scope does not verify the changed
+alpha.6 runtime and is not combined with the new series. The old record remains
+in Git history and the retained local raw artifacts.
 
 ## Default protocol
 
@@ -44,7 +39,8 @@ the one-journey-attachment rule; they exercise driver state and handle disposal.
 
 The verifier compares scenario/configuration, each check's expected and observed
 values, status, message code, dependencies, outcome and coverage. UUIDs, elapsed
-time and measured observation-window lengths are excluded. Action counts and step
+time, measured observation-window lengths, sample counts and interval arrays are
+excluded. Their consistency and gap bounds are checked in every individual report. Action counts and step
 references are retained in raw reports but excluded from the stable signature:
 cooperative budget boundaries can stop after different numbers of valid actions.
 Dedicated regression assertions check those budgets and no-action-after-return
@@ -60,19 +56,11 @@ use `--new-series` to start a new complete series. `--smoke` runs only one seque
 round plus the worker comparison and is explicitly **not** acceptance evidence.
 
 The final machine-readable proof is `artifacts/reliability-verification.json`.
-A full run produces the original 100-round acceptance proof. The current checkpoint
-instead uses the explicitly reviewed 45-round policy. To reproduce its evidence
-from the retained raw files after a requested SIGINT stop and a final 4-worker run:
-
-```sh
-node scripts/finalize-reliability.mjs artifacts/reliability/<series> artifacts/dev09-final-workers4.json
-```
-
-The finalizer revalidates every complete report, rejects actual failures/retries,
-checks the interruption and final isolation run, and records their hashes. It does
-not overwrite the interrupted checkpoint. It requires the exact series identity
-approved in the policy; a different run needs a reviewed policy update. Historical
-focused runs remain separate and are not added to the full-suite count.
+A full run produces the original 100-round acceptance proof. The package gate must
+match the version, series identity, all source hashes, per-round signatures and
+final four-worker result. A failure is never converted into passing evidence by
+editing its metadata. The historical partial-series finalizer remains available
+for reproducing the earlier checkpoint; it does not waive the new release gate.
 
 This is repeatability evidence for synthetic fixtures in one environment, not a
 claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI checks

@@ -134,3 +134,36 @@ test('tabs attachment failure preserves the detected defect', async ({ page }, i
   expect(error.result.checks.find(c => c.status === 'fail')?.messageCode).toBe('IDREF_MISMATCH');
   expect(error.message).not.toContain('CANARY');
 });
+
+for (const latency of ['before', 'after'] as const) test(`manual tabs block a browser observation gap ${latency} evaluation`, async ({ page }, info) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const original = page.evaluate.bind(page);
+  page.evaluate = (async (...args: Parameters<typeof original>) => {
+    if (latency === 'before') await new Promise(resolve => setTimeout(resolve, 150));
+    const value = await original(...args);
+    if (latency === 'after') await new Promise(resolve => setTimeout(resolve, 150));
+    return value;
+  }) as typeof page.evaluate;
+  const error = await failure(page, info, { ...tabsContract(page, { activation: 'manual' }), observationWindowMs: 50 });
+  expect(error.code).toBe('OBSERVATION_GAP'); expect(error.result.outcome).toBe('blocked');
+  const check = error.result.checks.find(c => c.status === 'blocked')!;
+  expect(check.checkId).toBe('T05.forward.001.unchanged');
+  expect(check.observed.observationCount).toBe(2);
+  expect(check.observed.observationIntervalsMs).toHaveLength(1);
+  expect(check.observed.maxObservationGapMs).toBeGreaterThan(100);
+  expect(error.result.steps.some(s => s.key === 'Enter' || s.key === 'Space')).toBe(false);
+  expect(error.result.checks.filter(c => c.status === 'not_run').every(c => c.blockedBy === check.checkId)).toBe(true);
+});
+
+test('manual tabs record initial and final observations even for a short window', async ({ page }, info) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const result = await assertTabsJourney(page, info, { ...tabsContract(page, { activation: 'manual' }), observationWindowMs: 50 });
+  verify(result, info);
+  for (const check of result.checks.filter(c => c.checkId.endsWith('.unchanged'))) {
+    const observed = check.observed;
+    expect(observed.observationCount).toBeGreaterThanOrEqual(2);
+    expect(observed.observationIntervalsMs!.length).toBe(observed.observationCount! - 1);
+    expect(observed.observationWindowMs).toBeGreaterThanOrEqual(50);
+    expect(observed.maxObservationGapMs).toBeLessThanOrEqual(100);
+  }
+});

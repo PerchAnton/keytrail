@@ -2,7 +2,7 @@
 
 | Rule | Observation |
 | --- | --- |
-| D01 | Trigger reached by Tab or already focused; open key sent once |
+| D01 | Trigger reached by Tab or already focused, confirmed in the pre-action snapshot; open key sent once |
 | D02 | Visible custom dialog, dialog role, nonempty accessible name, aria-modal=true |
 | D03 | Initial focus equals the declared Target |
 | D04 | Complete forward and reverse Tab cycles, including wrapping |
@@ -23,6 +23,7 @@ one extra forward Tab enters its first element, followed by a full cycle.
 | UNSUPPORTED_DIALOG | Native, visible multiple/nested dialog, alertdialog or browser modal |
 | PAGE_CLOSED / NAVIGATION / POPUP | Page lifecycle interruption |
 | ENTRY_LIMIT / ACTION_LIMIT | Keyboard limit reached |
+| OBSERVATION_GAP | Manual-tabs sampling gap exceeds 100 ms; the negative check is blocked |
 | SCENARIO_TIMEOUT | Total cooperative time budget expired |
 | EXPECTATION_TIMEOUT | Required visibility/closed state not observed in time |
 | FOCUS_MISMATCH / FOCUS_OUTSIDE_DIALOG | Wrong expected focus / failed observed containment |

@@ -16,7 +16,7 @@ export type FormState = {
     editable: boolean; valueMatches: boolean; invalidCleared: boolean; cleared: boolean }[];
   links: boolean[];
 };
-export type Snapshot = { focus: Focus; focused: Set<string>; present: Set<string>; inside: boolean; tabs?: TabsState; form?: FormState };
+export type Snapshot = { observedAt: number; focus: Focus; focused: Set<string>; present: Set<string>; inside: boolean; tabs?: TabsState; form?: FormState };
 export class BoundaryExit extends Error {}
 /** Browser calls are awaited; there is no background action chain or Promise.race. */
 export class Driver {
@@ -128,7 +128,7 @@ export class Driver {
           const linkRoles = form?.links.length ? roles[2]! : [];
           this.guard();
           const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts, tabRoles, tabs, form, linkRoles }) => {
-            const result = { code: '' as MessageCode | '', detached: false,
+            const result = { observedAt: performance.now(), code: '' as MessageCode | '', detached: false,
               focus: 'unknown', focused: [] as string[], present: [] as string[], inside: false,
               tabs: null as TabsState | null, form: null as FormState | null };
             const nodes = [...targets.flatMap(t => t.node ? [t.node] : []), ...dialogs, ...alerts,
@@ -238,7 +238,7 @@ export class Driver {
           }, { targets, dialogId: this.dialog.id, dialogs, alerts, tabRoles, tabs, form, linkRoles });
           this.guard();
           if (state.code) throw new Blocked(state.code);
-          if (!state.detached) return { focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,
+          if (!state.detached) return { observedAt: state.observedAt, focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,
             ...(state.tabs ? { tabs: state.tabs } : {}), ...(state.form ? { form: state.form } : {}) };
         } finally {
           // Page closure can destroy a handle before disposal; preserve the primary result.
@@ -256,6 +256,10 @@ export class Driver {
   }
   async insertText(value: string, target: Target, inspectBefore: (state: Snapshot) => void): Promise<Snapshot> {
     return this.keyboardAction('insertText', null, target, () => this.page.keyboard.insertText(value), false, inspectBefore);
+  }
+  async typeCharacter(character: string, target: Target, inspectBefore: (state: Snapshot) => void): Promise<Snapshot> {
+    // Validation restricts this mode to printable ASCII. Keep characters out of the report.
+    return this.keyboardAction('type', null, target, () => this.page.keyboard.type(character), false, inspectBefore);
   }
   async followSummaryLink(target: Target, inspectBefore: (state: Snapshot) => void): Promise<Snapshot> {
     return this.keyboardAction('press', 'Enter', target, () => this.page.keyboard.press('Enter'), false, inspectBefore, true);

@@ -20,6 +20,7 @@ export type DialogContract = CommonContract & Readonly<{
 }>;
 export type AppliedConfig = {
   maxTabs: number; timeoutMs: number; scenarioTimeoutMs: number; observationWindowMs: number;
+  inputMode?: 'type' | 'insertText';
 };
 export type TabsContract = CommonContract & Readonly<{
   tablist: Target;
@@ -39,6 +40,7 @@ export type FormErrorsContract = CommonContract & Readonly<{
   focusAfterInvalid: Readonly<{ policy: 'firstInvalid' | 'summary' | 'stay'; target: Target }>;
   summaryLinks?: readonly Readonly<{ link: Target; field: Target }>[];
   correction: readonly Readonly<{ field: Target; value: string }>[];
+  inputMode?: 'type' | 'insertText';
   validateCorrection: 'live' | 'resubmit';
 }>;
 export type CheckStatus = 'pass' | 'fail' | 'blocked' | 'not_run';
@@ -51,13 +53,14 @@ export type MessageCode = 'OK' | 'NOT_RUN' | 'CONFIG_INVALID' | 'TARGET_AMBIGUOU
   | 'UNSUPPORTED_TABS' | 'STRUCTURE_MISMATCH' | 'IDREF_MISMATCH' | 'ORIENTATION_MISMATCH'
   | 'SELECTION_MISMATCH' | 'ROVING_MISMATCH' | 'PREMATURE_ACTIVATION'
   | 'UNSUPPORTED_FORM' | 'TEXT_MISMATCH' | 'INVALID_STATE_MISMATCH' | 'NOT_EDITABLE'
-  | 'VALUE_MISMATCH' | 'ERROR_NOT_CLEARED';
+  | 'VALUE_MISMATCH' | 'ERROR_NOT_CLEARED' | 'OBSERVATION_GAP';
 /** Only technical identifiers and measured facts belong in this allowlist. */
 export type SafeObservation = {
   focus?: Focus; visible?: boolean; role?: 'dialog' | 'tablist' | 'tab' | 'tabpanel'; hasAccessibleName?: boolean;
   modal?: boolean; inside?: boolean; count?: number; maxTabs?: number; matched?: boolean;
   selected?: string; selectedCount?: number; visibleCount?: number; roving?: boolean;
   orientation?: 'horizontal' | 'vertical'; observationWindowMs?: number;
+  observationCount?: number; observationIntervalsMs?: number[]; maxObservationGapMs?: number;
   invalid?: boolean; editable?: boolean;
 };
 export type CheckResult = {
@@ -68,7 +71,7 @@ export type CheckResult = {
 export type PressKey = 'Tab' | 'Shift+Tab' | 'Enter' | 'Space' | 'Escape'
   | 'ArrowRight' | 'ArrowLeft' | 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'ControlOrMeta+A' | 'Backspace';
 export type StepResult = {
-  stepId: string; actionKind: 'press' | 'insertText'; key: PressKey | null;
+  stepId: string; actionKind: 'press' | 'insertText' | 'type'; key: PressKey | null;
   targetId: string | null; beforeFocus: Focus; afterFocus: Focus; elapsedMs: number;
   observationWindowMs: number;
 };

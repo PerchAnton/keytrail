@@ -44,7 +44,7 @@ export function inspectReport(report, workers, seenRunIds = new Set(), environme
       }
       assert(!seenRunIds.has(journey.run.runId), 'REUSED_RUN_ID'); seenRunIds.add(journey.run.runId);
       const checks = journey.checks.map(check => {
-        const observed = { ...check.observed }; delete observed.observationWindowMs;
+        const observed = { ...check.observed }; delete observed.observationWindowMs; delete observed.observationCount; delete observed.observationIntervalsMs; delete observed.maxObservationGapMs;
         return { ...check, observed };
       });
       // Entry loops and budget boundaries can stop after a different number of valid

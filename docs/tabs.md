@@ -88,11 +88,34 @@ sequenceDiagram
   Runner->>Tabs: Continue only after checks pass
 ```
 
-The window is a series of observations, not continuous monitoring. Changes entirely
-between reads or after the recorded window are outside the result. Its measured
-duration is recorded in `StepResult.observationWindowMs`; `timeoutMs` bounds positive
-waits and `scenarioTimeoutMs` bounds the journey cooperatively. Focus reads do not
-repair the component. A failed transition stops later keyboard input.
+The negative window begins with a real snapshot after focus and roving checks,
+and requires a final snapshot at least `observationWindowMs` later. Browser-side
+monotonic timestamps measure the intervals between snapshots, including browser
+round-trip and scheduling delays. Polling sleeps at most 20 ms between reads;
+the target sampling interval is at most 50 ms. Any measured gap **greater than
+100 ms** produces `blocked / OBSERVATION_GAP`, stops before activation, and leaves
+dependent checks `not_run`. A component mismatch observed in the same snapshot
+retains its specific failure instead of being hidden by the timing problem.
+
+Each negative check records `observationIntervalsMs`, `observationCount`,
+`maxObservationGapMs` and `observationWindowMs`. The associated step also records
+the window's measured span. The CI guard checks these relationships and rejects
+a passing report whose samples do not cover the required window or exceed 100 ms.
+Keep the browser clock running normally during a journey.
+
+```mermaid
+flowchart LR
+  A[Initial snapshot] --> B[Read actual browser state]
+  B --> C{Measured gap exceeds 100 ms?}
+  C -->|yes| D[Blocked: OBSERVATION_GAP]
+  C -->|no| E{Final reading covers the full window?}
+  E -->|no| B
+  E -->|yes| F[Check pre-activation focus and send Enter or Space]
+```
+
+Sampling does not detect changes entirely between reads or after the recorded
+window. `timeoutMs` bounds positive waits and `scenarioTimeoutMs` bounds the journey
+cooperatively. Focus reads do not repair the component.
 
 ## Rules and diagnostics
 
@@ -102,7 +125,7 @@ repair the component. A failed transition stops later keyboard input.
 | T02 | Structure, roles, name, orientation, pairwise IDREF | `STRUCTURE_MISMATCH`, `ROLE_MISMATCH`, `NAME_MISSING`, `ORIENTATION_MISMATCH`, `IDREF_MISMATCH` |
 | T03 | Arrow focus movement and wrap | `FOCUS_MISMATCH` |
 | T04 | Automatic activation | `SELECTION_MISMATCH` |
-| T05 | Manual negative window and activation | `PREMATURE_ACTIVATION`, `SELECTION_MISMATCH`, `FOCUS_MISMATCH` |
+| T05 | Manual negative window and activation | `PREMATURE_ACTIVATION`, `SELECTION_MISMATCH`, `FOCUS_MISMATCH`, `OBSERVATION_GAP` |
 | T06 | Selection, visibility and roving focus | `SELECTION_MISMATCH`, `ROVING_MISMATCH` |
 | T07 | Exit from the restored initial selection | `FOCUS_MISMATCH` |
 | T08 | Optional Home/End focus movement | `FOCUS_MISMATCH` |
@@ -112,4 +135,4 @@ Check IDs distinguish each pair, direction and transition, such as
 `not_run` with `blockedBy`. Known unsupported modes produce `UNSUPPORTED_TABS`.
 Results use the shared [schema](../schema/journey-result.v1.json), safe messages and
 attachment behavior. Passing does not establish screen-reader behavior or accessibility
-conformance. Forms and CI completeness enforcement remain separate future milestones.
+conformance. Forms and CI completeness enforcement use their own contracts and reporter.

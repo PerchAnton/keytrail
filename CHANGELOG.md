@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-alpha.6 — source candidate
+
+- Recheck dialog-trigger focus in the activation preflight. Stop with
+  `FOCUS_MISMATCH` before Enter/Space and report the actual observed focus.
+- Require initial/final manual-tabs observations spanning the declared window.
+  Record browser-clock intervals and block gaps above 100 ms with `OBSERVATION_GAP`.
+  Validate sampling evidence in the serializer and CI guard.
+- Add opt-in `inputMode: 'type'` for printable ASCII keyboard events. Recheck
+  focus/editability before each character, retain the Unicode `insertText` default,
+  and report the selected mode without recording values or typed characters.
+- Extend alpha schema v1 and advance the behavioral ruleset to 0.4.0. Pair the
+  assertions with the schema/guard from the same package version.
+- Add regressions for focus drift, slow browser transport, blocked character input,
+  interrupted typing, unsupported characters and invalid observation reports.
+- Refresh source-bound verification before publication. No release published.
+
 ## 0.1.0-alpha.5 — source candidate
 
 - Add a separate React 19.3.1 portal example with StrictMode, remounting, two

@@ -73,3 +73,25 @@ test('output errors cannot erase the guard verdict', async () => {
   guard.onTestEnd(fakeTest(), run());
   assert.deepEqual(await guard.onEnd(full('passed')), { status: 'failed' });
 });
+
+test('reports preserve observation evidence and reject unsupported passing windows', () => {
+  const value = report(); value.rulesetVersion = '0.4.0'; value.scenario.kind = 'tabs';
+  value.checks[0] = { ...value.checks[0], ruleId: 'T05', checkId: 'T05.forward.001.unchanged',
+    observed: { observationWindowMs: 200, observationCount: 3, observationIntervalsMs: [100, 100], maxObservationGapMs: 100 } };
+  assert(validJourneyResult(value));
+  value.checks[0].observed.observationIntervalsMs.toJSON = () => { throw Error('CANARY'); };
+  assert.doesNotThrow(() => serializeJourneyResult(value));
+  for (const mutate of [
+    o => o.observationIntervalsMs = [90, 110], o => o.maxObservationGapMs = 0,
+    o => o.observationCount = 2, o => o.observationWindowMs = 400,
+    o => { delete o.observationIntervalsMs; },
+  ]) {
+    const changed = JSON.parse(serializeJourneyResult(value)); mutate(changed.checks[0].observed);
+    assert.equal(validJourneyResult(changed), false);
+  }
+  value.checks[0].observed = { observationWindowMs: 110, observationCount: 2, observationIntervalsMs: [110], maxObservationGapMs: 110 };
+  value.checks[0].status = 'blocked'; value.checks[0].messageCode = 'OBSERVATION_GAP';
+  value.outcome = 'blocked'; value.coverage = { ...value.coverage, passed: 0, blocked: 1, complete: false };
+  assert(validJourneyResult(value));
+  value.checks[0].observed.maxObservationGapMs = 100; assert.equal(validJourneyResult(value), false);
+});

@@ -19,7 +19,7 @@ const cases = [
 function signature(result: JourneyResult) {
   return {
     outcome: result.outcome, coverage: result.coverage,
-    checks: result.checks.map(c => { const observed = { ...c.observed }; delete observed.observationWindowMs; return { ...c, observed }; }),
+    checks: result.checks.map(c => { const observed = { ...c.observed }; delete observed.observationWindowMs; delete observed.observationCount; delete observed.observationIntervalsMs; delete observed.maxObservationGapMs; return { ...c, observed }; }),
     steps: result.steps.map(({ elapsedMs, observationWindowMs, ...step }) => step),
   };
 }
