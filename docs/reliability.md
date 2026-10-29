@@ -7,10 +7,26 @@ without retries or semantic differences before the session was interrupted. The
 incomplete 13th round is retained and excluded. This is not 100-round acceptance.
 
 A separate [hosted workflow](../.github/workflows/reliability.yml) runs all 100 rounds
-on one Linux runner, then the four-worker comparison. It continues independently
+on one Linux runner, with two workers within each round and separate one/four-worker
+comparisons. It continues independently
 of a developer laptop. Local and hosted rounds have different environment identities
 and are never combined. Until the hosted verifier produces its final source-bound
 proof, the release gate remains pending.
+
+The [first hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40912436254)
+stopped after round 2: all 163 tests passed in both
+rounds, but the budget-expiry fixture sometimes timed out before its first manual
+observation. Its raw reports are retained. The fixture now leaves more setup time
+and explicitly requires a recorded observation before the expected timeout. The
+failed series does not count toward the fresh run. The comparison still includes
+observed state; it does not discard the discrepancy.
+
+After this fixture correction, a local smoke run passed all 163 cases with two
+and one workers, with matching signatures. Its four-worker run correctly blocked
+a manual-tabs journey after a measured 241.6 ms observation gap (162 tests passed,
+one failed). This failed smoke run is retained and is not acceptance evidence.
+The hosted workflow must pass its own 2/1/4-worker smoke comparison before starting
+the complete series. The 100 ms bound is unchanged.
 
 The workflow has read-only repository permission, does not publish or modify the
 repository, and retains raw reports plus the final proof for 14 days. Download the
@@ -27,21 +43,29 @@ in Git history and the retained local raw artifacts.
 
 ## Default protocol
 
-The verifier runs the entire integration suite 100 times **sequentially with one
-worker**, then once with four workers. There are no retries, filters or expected
+The verifier runs the entire integration suite 100 times **one complete round after
+another**, then checks worker isolation. By default each round uses one worker,
+followed by a four-worker run. `--workers=2` runs tests on two workers within each
+round and additionally requires a matching one-worker run before the four-worker
+run. The hosted workflow uses this mode to fit the job time limit; the original
+one-worker attempt took about 4.5 minutes per round. No rounds overlap, and all
+cases execute in every round on the same pinned runner. There are no retries, filters or expected
 runner failures. Intentionally defective components must still produce their
 specified failed or blocked journey results inside passing regression tests.
 
 ```sh
 pnpm build
 pnpm verify:reliability
+# Hosted protocol: the same 100 full rounds plus 1/4-worker comparisons
+pnpm verify:reliability --workers=2
 # macOS: caffeinate -is pnpm verify:reliability
 ```
 
 Run only one verifier at a time in a working copy; checkpoints and report paths
 are shared within that copy. Allow several hours on a laptop. Keep the machine awake and avoid other browser or
 CPU-heavy work. Node, Playwright, Chromium, OS, architecture and CPU are recorded.
-Source, tests, schema, lockfile, package/configuration and verifier inputs are hashed
+The per-round worker count is part of the series identity. Source, tests, schema,
+lockfile, package/configuration and verifier inputs are hashed
 before the run and checked again around every round. Changing an input prevents
 combining old and new rounds into one acceptance result.
 
@@ -65,8 +89,10 @@ Raw runner reports, logs, a baseline and atomic checkpoints remain in
 `artifacts/reliability/<series>/`. A restart with the same inputs/environment
 revalidates completed reports before resuming. A failed series is retained and
 cannot be resumed as though the failed round never happened. Diagnose the failure;
-use `--new-series` to start a new complete series. `--smoke` runs only one sequential
-round plus the worker comparison and is explicitly **not** acceptance evidence.
+use `--new-series` to start a new complete series. `--smoke` runs only one complete
+round plus the configured worker comparisons and is explicitly **not** acceptance
+evidence. The hosted workflow first runs this smoke check, then starts a separate
+100-round series; the smoke round is not added to the 100-round count.
 
 The final machine-readable proof is `artifacts/reliability-verification.json`.
 A full run produces the original 100-round acceptance proof. The package gate must

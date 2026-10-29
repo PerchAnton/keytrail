@@ -105,8 +105,16 @@ test('tabs report omits DOM IDs, labels, page text and URL', async ({ page }, in
 test('tabs manual observation cannot outlive the scenario budget', async ({ page }, info) => {
   const options = { activation: 'manual' as const };
   await page.setContent(tabsHtml(options));
-  const error = await failure(page, info, { ...tabsContract(page, options), observationWindowMs: 1500, scenarioTimeoutMs: 1000 });
+  // Leave room for entry and semantic checks on hosted runners, while making a
+  // complete negative window impossible within the overall scenario budget.
+  const error = await failure(page, info, { ...tabsContract(page, options), observationWindowMs: 2000, scenarioTimeoutMs: 2000 });
   expect(error.code).toBe('SCENARIO_TIMEOUT'); expect(error.result.steps.some(s => s.key === 'Enter')).toBe(false);
+  const blocked = error.result.checks.find(c => c.status === 'blocked')!;
+  expect(blocked.checkId).toBe('T05.forward.001.unchanged');
+  expect(blocked.observed.focus).toBe('tab-2');
+  expect(blocked.observed.selected).toBe('tab-1');
+  expect(blocked.observed.observationCount).toBeGreaterThanOrEqual(1);
+  expect(blocked.observed.observationWindowMs).toBeLessThan(2000);
 });
 test('tabs target aliases are blocked before keyboard input', async ({ page }, info) => {
   await page.setContent(tabsHtml());

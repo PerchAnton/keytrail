@@ -11,6 +11,7 @@ function fixture() {
 test('reliability evidence rejects attachment mixing, retries, missing cases and repeated run identities', () => {
   const value = fixture(), seen = new Set();
   assert.equal(inspectReport(value, 1, seen).length, 1);
+  assert.throws(() => inspectReport(value, 2), /WORKER_COUNT/);
   assert.throws(() => inspectReport(value, 1, seen), /REUSED_RUN_ID/);
   const wrong = fixture(); wrong.suites[0].specs[0].id = 'different';
   assert.throws(() => inspectReport(wrong, 1), /MIXED_TEST_ATTACHMENT/);

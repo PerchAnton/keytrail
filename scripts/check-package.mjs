@@ -31,12 +31,17 @@ for (const record of ['reliability', 'benchmark-dialog', 'benchmark-tabs', 'benc
       assert.equal(evidence.excluded.exitCode, 130); assert.equal(evidence.excluded.round, completed + 1);
       assert.equal(evidence.excluded.stats.unexpected + evidence.excluded.stats.flaky, 0);
     }
-    assert.equal(evidence.workers, 1); assert.equal(evidence.parallel.workers, 4);
+    assert([1, 2].includes(evidence.workers)); assert.equal(evidence.parallel.workers, 4);
     assert.equal(evidence.retries, 0); assert.equal(evidence.totalSequentialExecutions, evidence.caseCount * completed);
     assert(evidence.caseCount > 0); assert.equal(evidence.cases.length, evidence.caseCount);
     const signature = createHash('sha256').update(JSON.stringify(evidence.cases)).digest('hex');
     assert.equal(signature, evidence.parallel.signature);
     assert.equal(evidence.parallel.passed, evidence.caseCount);
+    if (evidence.workers === 2) {
+      assert.equal(evidence.singleWorker.workers, 1);
+      assert.equal(evidence.singleWorker.passed, evidence.caseCount);
+      assert.equal(evidence.singleWorker.signature, signature);
+    }
     assert(evidence.rounds.every((r, i) => r.round === i + 1 && r.tests === evidence.caseCount && r.passed === evidence.caseCount && r.signature === evidence.parallel.signature));
   } else if (record.startsWith('benchmark-')) {
     assert.equal(evidence.pilot, false); assert.equal(evidence.samplesPerArm, 30);
