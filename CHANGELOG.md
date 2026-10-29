@@ -6,6 +6,7 @@
   `FOCUS_MISMATCH` before Enter/Space and report the actual observed focus.
 - Require initial/final manual-tabs observations spanning the declared window.
   Record browser-clock intervals and block gaps above 100 ms with `OBSERVATION_GAP`.
+  Account for browser-read duration when scheduling the next observation.
   Validate sampling evidence in the serializer and CI guard.
 - Add opt-in `inputMode: 'type'` for printable ASCII keyboard events. Recheck
   focus/editability before each character, retain the Unicode `insertText` default,

@@ -8,8 +8,8 @@ component is accessible.
 | Check | Recorded result |
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
-| Unit tests | 34 passed |
-| Browser suite | 163 passed with four workers; 12 complete local sequential rounds before interruption |
+| Unit tests | 35 passed |
+| Browser suite | Earlier alpha.6 revision: 163 passed with four workers; current sampling-schedule revision awaits hosted full-suite verification |
 | Worker isolation | Final comparison pending after 100 sequential rounds; three engine-only tests per round |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |

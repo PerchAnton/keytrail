@@ -35,12 +35,17 @@ jobs:
           pnpm build
           pnpm test:types
           pnpm test:unit
+      - name: Compare the full suite on 2, 1 and 4 workers
+        timeout-minutes: 20
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm verify:reliability --smoke --workers=2 2>&1 | tee artifacts/reliability-smoke.log
       - name: Run 100 full rounds without retries
         timeout-minutes: 340
         shell: bash
         run: |
           set -o pipefail
-          pnpm verify:reliability --smoke --workers=2 2>&1 | tee artifacts/reliability-smoke.log
           pnpm verify:reliability --workers=2 2>&1 | tee artifacts/reliability-console.log
       - name: Retain raw rounds and final proof
         if: always()

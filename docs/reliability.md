@@ -12,8 +12,6 @@ comparisons. It continues independently
 of a developer laptop. Local and hosted rounds have different environment identities
 and are never combined. Until the hosted verifier produces its final source-bound
 proof, the release gate remains pending.
-The [current hosted run](https://github.com/PerchAnton/keytrail/actions/runs/40916563288)
-includes the smoke check and, if it passes, the full series.
 
 The [first hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40912436254)
 stopped after round 2: all 163 tests passed in both
@@ -29,6 +27,14 @@ a manual-tabs journey after a measured 241.6 ms observation gap (162 tests passe
 one failed). This failed smoke run is retained and is not acceptance evidence.
 The hosted workflow must pass its own 2/1/4-worker smoke comparison before starting
 the complete series. The 100 ms bound is unchanged.
+
+The [second hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40916563288)
+stopped in the two-worker smoke run: 161 cases passed and two manual-tabs cases
+blocked on measured gaps of 105.3 and 112.9 ms. No full-series round started.
+The negative-window loop now budgets its pause against the duration of the browser
+read, targeting a 50 ms cadence instead of always adding another 20 ms to a slow
+read. Actual browser-clock gaps still determine whether a result is blocked;
+changing the scheduler cannot turn a gap above 100 ms into a pass.
 
 The workflow has read-only repository permission, does not publish or modify the
 repository, and retains raw reports plus the final proof for 14 days. Download the

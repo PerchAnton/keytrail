@@ -1,6 +1,10 @@
 import type { SafeObservation } from '../contracts/types.js';
 
 export const MAX_OBSERVATION_GAP_MS = 100;
+/** Account for browser round-trip work instead of adding a fixed delay to it. */
+export function observationPauseMs(readDurationMs: number): number {
+  return Math.max(1, Math.min(20, 50 - readDurationMs));
+}
 /** Timestamps come from the same browser clock at the start of each DOM snapshot. */
 export class ObservationWindow {
   private first: number | undefined;
