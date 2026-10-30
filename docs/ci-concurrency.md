@@ -32,7 +32,8 @@ failure, and dialog focus drift before Enter/Space. Injected browser delays stil
 must report `OBSERVATION_GAP` and stop activation. The native benchmark reference
 independently performs the same transport work; its short pilot checks semantic
 equivalence, not release performance. The reader-caching results below separate successful ARM/Linux validation from
-the remaining Intel failure. The new local four-round record is pending.
+the remaining Intel failure. The [local four-round record](evidence/development-cached-reader.json)
+passed 676 sequential and 169 four-worker checks with matching semantics and no retries.
 
 ## Hosted measurements
 
@@ -127,6 +128,24 @@ Two local rounds passed 169 cases each; the third was interrupted to refine the
 implementation and is excluded. No completed four-round proof is claimed for it.
 The next change compiles the state reader once per journey to avoid retransmitting
 its full function body at every observation. Earlier failures remain retained.
+
+## Required Linux and ARM CI
+
+The [selected configuration](https://github.com/PerchAnton/keytrail/actions/runs/41087943425)
+at `63f9edf` passed every stage on **Linux and macOS ARM**: all 169 browser cases,
+39 unit tests, 52 guard subprocess cases and both real tarball consumers per platform.
+The runtime/test/verifier hashes match the independently checked four-round record.
+No core tests were removed; Intel is checked separately only when requested.
+
+| Runner | Browser tests | Snapshot median / p95 (ms) | Interval p95 / max (ms) |
+| --- | --- | --- | --- |
+| Linux | 169/169 | 9.8 / 11.6 | 21.7 / 22.4 |
+| macOS ARM | 169/169 | 6.4 / 8.7 | 24.4 / 39.5 |
+
+Timing columns cover the correct manual-tabs fixtures. Raw reports, all guard cases,
+source hashes and archive checksums were independently validated; [CI evidence](evidence/ci-arm-development.json).
+These are observations from the recorded environments, not a universal latency bound.
+The prior Intel failure below remains unresolved and is not included as a pass.
 
 ## Cached-reader results
 

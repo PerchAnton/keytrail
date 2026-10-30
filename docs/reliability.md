@@ -9,6 +9,14 @@ isolation run. Keep one worker per round, retries disabled and the 100 ms observ
 gap limit. The [policy](evidence/development-policy.json) defers final acceptance;
 it does not lower its 100-round requirement.
 
+At `4abf74c`, the private store and cached reader passed **four full rounds × 169 = 676**
+sequential executions and **169 four-worker checks**, without retries, skips or
+semantic differences. Independent validation reread all five raw reports, compared
+current source hashes and confirmed **800 distinct journey IDs**. Nine engine-only
+cases per run have no journey attachment. [Cached-reader development proof](evidence/development-cached-reader.json)
+explicitly records `finalAcceptance: false`. It does not certify the failed hosted
+Intel environment; [platform results](ci-concurrency.md#cached-reader-results) remain separate.
+
 The series on commit `46515dd` was stopped at the maintainer's request after **six
 complete rounds × 165 tests = 990 executions**, all successful without retries.
 All six raw reports were independently revalidated against that recorded commit;
@@ -24,7 +32,7 @@ A separate validation reread all five raw reports, verified current source hashe
 and confirmed **800 distinct journey IDs**. Seven engine-only tests per run have
 no journey attachment. [Retained development record](evidence/development-window-reads.json)
 is explicitly `finalAcceptance: false`; it does not replace the historical proof.
-The later private-store runtime change needs a separate four-round record;
+The later cached-reader runtime has its own four-round record above;
 the 167-case series is not evidence for that change.
 
 ## Historical alpha.6 verification at `0300552`

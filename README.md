@@ -189,8 +189,15 @@ this historical total. Six subsequent full rounds at `46515dd` are retained as
 development evidence. At `6a9cc6a`, after narrowing manual-window reads, **4 × 167 = 668**
 sequential checks and **167 four-worker checks** passed without retries or semantic
 differences; [retained development record](docs/evidence/development-window-reads.json).
-The new private observation store changes the runtime; its short verification is
-pending and the earlier counts do not certify it.
+The private observation store and cached reader change the runtime; the earlier
+counts do not certify them. At `4abf74c`, Linux and macOS ARM passed the complete
+169-case suite and package consumers. Intel retained one genuine 370 ms gap, so
+that exploratory matrix failed. The selected **Linux + macOS ARM CI now passes**
+at `63f9edf`, including all 169 tests and package consumers on each platform;
+[validated CI record](docs/evidence/ci-arm-development.json). Intel remains a separate
+capacity investigation, with its failure retained. The cached reader completed **4 × 169 = 676**
+local sequential tests and **169 four-worker checks**, without retries or semantic
+differences; [independently validated development record](docs/evidence/development-cached-reader.json).
 [The CI investigation](docs/ci-concurrency.md) records the earlier gaps and the
 subsequent passing browser suites, including a separate package-harness failure. Final acceptance and fresh release benchmarks
 are deferred until the candidate is frozen. Real-world adoption has not been established.

@@ -11,15 +11,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Historical `6a9cc6a`: 167/167 in each of four local rounds; hosted results are separated below; no retries |
-| Worker isolation | Historical `6a9cc6a`: 167/167 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
+| Browser suite | 169/169 in each of four local rounds at `4abf74c`; hosted results separated below; no retries |
+| Worker isolation | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
-| CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
+| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard-cached-reader.json) |
 | Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
-| Repeatability | Historical runtime at `6a9cc6a`: 4 × 167 = 668, plus 167 four-worker checks; [development proof](evidence/development-window-reads.json). Final 100-round acceptance is deferred; historical `0300552`: 100/100; [source-bound proof](evidence/reliability.json) |
-| Package consumers | Development package checks run independently of final evidence. Historical `0300552`: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
-| Hosted platforms | Prior ARM and Intel macOS runs have real gaps; private-store validation on both images is pending. Linux passed all stages at `8ce3b66`. [Comparison](ci-concurrency.md) |
+| Repeatability | `4abf74c`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-cached-reader.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
+| Package consumers | Current `4abf74c`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-cached-reader.json); final acceptance remains false |
+| Hosted platforms | Selected Linux + macOS ARM CI at `63f9edf`: all stages passed, 169 browser cases each and clean package consumers. [Validated record](evidence/ci-arm-development.json). Earlier Intel 370 ms gap retained separately. |
 
 ## Historical performance (`0300552`)
 
@@ -59,7 +59,8 @@ The source now resolves locators into a private browser map on every observation
 reads focus and containment together, and clears stored nodes before returning.
 It waits for sibling reads even on failure and disposes the map at journey end.
 No target binding is cached; [mechanism and regressions](ci-concurrency.md).
-The earlier repeatability evidence is historical for this changed runtime.
+The cached-reader four-round proof independently validates this runtime. Earlier
+repeatability records remain historical for their own source hashes.
 
 ## Reproduction
 
@@ -89,6 +90,6 @@ and verifies wrong initial and return focus. Its separate negative process does
 not catch the assertion: exit 1, HTML, JUnit and the original incomplete attachment
 are checked. Playwright classifies `JourneyAssertionError` as a JUnit `error`, so
 both error and failure counts are considered; neither is treated as success.
-The [report guide](reports.md) explains the saved artifacts. The changed observation transport requires its own short development evidence. Consumer checks remain additional
+The [report guide](reports.md) explains the saved artifacts. The changed observation transport has its own four-round development evidence. Consumer checks remain additional
 evidence, not extra sequential rounds.
 No npm package or GitHub release has been published; see the [release checklist](release-checklist.md).
