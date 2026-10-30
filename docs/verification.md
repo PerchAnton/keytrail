@@ -74,10 +74,11 @@ pnpm verify:reliability
 ```
 
 On macOS, prefix the long browser commands with `caffeinate -is` to prevent host
-sleep. Run performance measurements without concurrent verification jobs. After
-recording the resulting evidence in `docs/evidence/`, `pnpm test:package` checks
-source hashes, packs the archive, installs it into two clean offline consumers,
+sleep. Run performance measurements without concurrent verification jobs. The default `pnpm test:package` packs the archive and installs it into two clean offline consumers; it
 checks ESM/CJS imports and declarations, and runs the vanilla and React examples.
+Only `node scripts/check-package.mjs --release` also requires fresh final evidence
+and matching source hashes. Use the read-only readiness command in the
+[release checklist](release-checklist.md) to inspect those gates without running them.
 React lockfile preparation fetches registry metadata before the separate frozen offline install.
 Install the separate React lockfile first as described in the [release checklist](release-checklist.md).
 Archive size/hash are written outside the package to avoid a

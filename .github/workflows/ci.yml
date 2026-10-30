@@ -45,6 +45,7 @@ jobs:
           pnpm build
           pnpm test:types
           pnpm test:unit
+          node --test scripts/tests/*.test.mjs
           pnpm test:guard
       - name: Browser regression suite (one worker)
         env:
@@ -94,6 +95,7 @@ jobs:
           pnpm build
           pnpm test:types
           pnpm test:unit
+          node --test scripts/tests/*.test.mjs
           pnpm test:guard
       - name: Browser regression suite (three rounds, one worker)
         env:

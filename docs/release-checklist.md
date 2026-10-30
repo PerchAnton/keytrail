@@ -9,7 +9,7 @@ the first publication; it does not assert that a release exists.
 ## Current preparation snapshot
 
 The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
-bind the review archive to merged commit `8f119df`. Main CI passed Linux 169/169
+bind the review archive to merged commit `ca0a02b`. Main CI passed Linux 169/169
 and macOS ARM 507/507, including actual package consumers. The exact tested tarball
 is preserved with its verification record and checksum; it was not rebuilt for
 handoff. The browser examples and saved HTML failure report were inspected through
@@ -19,6 +19,27 @@ This is **development-review-ready**, with `releaseReady: false` and
 `finalAcceptance: false`. Final 100-round evidence, full benchmark measurements,
 the release package gate and publication remain deferred. Do not repeat already
 sufficient development runs merely to update these documents.
+
+## Inspect remaining evidence without running tests
+
+From the repository root:
+
+```sh
+node scripts/check-release-readiness.mjs
+node scripts/check-release-readiness.mjs --json
+```
+
+This read-only command checks the saved acceptance policy, final repeatability,
+three benchmark records and CI-guard evidence against the current inputs. It lists
+all blocked records in one run. It does not build, run browser tests, start the
+100-round series, delete existing artifacts or publish anything. Exit 0 means the
+saved evidence passed validation; exit 1 means evidence is pending or invalid;
+exit 2 means the command could not inspect the checkout or its options.
+
+An evidence result alone is not release approval: the exact archive still needs
+the real `--release` consumer gate, independent raw-report validation, owner review
+and publication authorization. The release gate uses the same evidence validator.
+Historical results and development package records cannot satisfy final acceptance.
 
 ## Development checks
 
@@ -47,6 +68,7 @@ or external service is needed to run their browser tests.
 | Public API, types, limits and errors agree | [Dialog](api.md), [tabs](tabs.md), [form errors](form-errors.md), [rules/codes](rules.md), [limits](limits.md); strict TypeScript checks |
 | Correct and defective fixtures | 169 browser regression tests; all three scenario families |
 | Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
+| Release evidence fails closed | `node --test scripts/tests/*.test.mjs`; stale hashes, short series, retries, invalid benchmarks and contradictory guard exits are rejected |
 | Source-bound reliability | Pending for changed source; prior 100 × 163 proof is historical; [proof and protocol](reliability.md) |
 | Equivalent native measurements | Fresh measurements pending: three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
 | Vanilla tarball consumer | ESM/CJS imports and declarations; 6 browser tests and 3 guarded journeys |
@@ -54,7 +76,7 @@ or external service is needed to run their browser tests.
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |
 | Package inventory | License, notices, schema and exports; no test results, node_modules or local configuration |
 | Archive identity | `artifacts/package-verification.json` and `artifacts/SHA256SUMS` from the exact tested `.tgz` |
-| Hosted platform checks | Main `8f119df`: Linux 169 and ARM 507 passed with package consumers; the commit ultimately selected for release needs matching checks |
+| Hosted platform checks | Main `ca0a02b`: Linux 169 and ARM 507 passed with package consumers; the commit ultimately selected for release needs matching checks |
 | Human review | Inspect HTML failure report and try the example with a keyboard; passing automation is not a conformance assessment |
 
 `pnpm check` runs build, types, unit, guard, one browser suite and actual package
