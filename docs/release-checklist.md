@@ -6,6 +6,20 @@ Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
+## Current preparation snapshot
+
+The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
+bind the review archive to merged commit `8f119df`. Main CI passed Linux 169/169
+and macOS ARM 507/507, including actual package consumers. The exact tested tarball
+is preserved with its verification record and checksum; it was not rebuilt for
+handoff. The browser examples and saved HTML failure report were inspected through
+their interface. Owner sign-off remains separate.
+
+This is **development-review-ready**, with `releaseReady: false` and
+`finalAcceptance: false`. Final 100-round evidence, full benchmark measurements,
+the release package gate and publication remain deferred. Do not repeat already
+sufficient development runs merely to update these documents.
+
 ## Development checks
 
 Use the pinned environment in [compatibility](compatibility.md), a clean checkout
@@ -40,7 +54,7 @@ or external service is needed to run their browser tests.
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |
 | Package inventory | License, notices, schema and exports; no test results, node_modules or local configuration |
 | Archive identity | `artifacts/package-verification.json` and `artifacts/SHA256SUMS` from the exact tested `.tgz` |
-| Hosted platform checks | Pending for the final alpha.6 candidate; Linux and macOS CI must refer to the commit selected for release |
+| Hosted platform checks | Main `8f119df`: Linux 169 and ARM 507 passed with package consumers; the commit ultimately selected for release needs matching checks |
 | Human review | Inspect HTML failure report and try the example with a keyboard; passing automation is not a conformance assessment |
 
 `pnpm check` runs build, types, unit, guard, one browser suite and actual package

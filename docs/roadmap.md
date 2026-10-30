@@ -15,7 +15,7 @@ These checkpoints are not full 0.1.0 acceptance.
 | DEV07 | Form errors, IDREF relationships, focus policies and declarative correction | Implemented; see [form errors contract](form-errors.md) |
 | DEV08 | CI completeness guard and subprocess failure tests | Implemented; see [CI guard](ci-guard.md) |
 | DEV09 | Repeatability, worker comparison, canaries, equivalent native benchmark | Historical `0300552`: 100 rounds, four-worker comparison and 108 benchmark cases passed; changed source uses four development rounds until final acceptance; [scope and evidence](reliability.md) |
-| DEV10 | Full API docs, vanilla + React portal consumers, release checklist | Implemented for the alpha checkpoint; [release checklist](release-checklist.md); publication pending |
+| DEV10 | Full API docs, vanilla + React portal consumers, release checklist | Implemented for the alpha checkpoint; [release checklist](release-checklist.md); [review snapshot prepared](release-handoff.md); final acceptance and publication pending |
 
 No performance, superiority or adoption claim follows from passing the teaching fixtures.
 The [benchmark](performance.md) uses equivalent actions, observations, limits and

@@ -2,6 +2,8 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
+**Release preparation:** the [review snapshot and exact tested archive](docs/release-handoff.md) are recorded for merged `8f119df`. Main CI passed Linux 169/169 and macOS ARM 507/507. Publication and final acceptance remain pending.
+
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.
