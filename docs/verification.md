@@ -1,5 +1,7 @@
 # Verification
 
+**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
 may deliberately observe a failed or blocked journey; it does not mean that its

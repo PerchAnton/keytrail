@@ -1,5 +1,7 @@
 # Equivalent-work benchmark
 
+**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+
 These source-bound measurements were recorded after the final 100-round local
 reliability series. All 108 benchmark tests passed without retries; raw sample
 attachments, derived statistics, environment and source hashes were independently

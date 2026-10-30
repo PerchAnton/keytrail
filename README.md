@@ -1,5 +1,7 @@
 # KeyTrail
 
+**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.

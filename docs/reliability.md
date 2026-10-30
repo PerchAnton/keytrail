@@ -1,5 +1,7 @@
 # Full-suite repeatability protocol
 
+**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+
 ## Alpha.6 local verification completed
 
 Release verification now runs locally: **100 full rounds with one worker**, followed
