@@ -1,8 +1,9 @@
 # Equivalent-work benchmark
 
-**Refresh pending:** the records below predate the final polling-cadence and
-benchmark-diagnostics changes. The local verification job reruns measurements after
-the 100-round series. These historical numbers do not clear the current release gate.
+These source-bound measurements were recorded after the final 100-round local
+reliability series. All 108 benchmark tests passed without retries; raw sample
+attachments, derived statistics, environment and source hashes were independently
+checked before updating these records.
 
 This benchmark measures three synthetic Chromium journeys: an ordinary custom ARIA
 dialog, a horizontal manual-activation tab list, and a two-field form with live error
@@ -10,22 +11,23 @@ clearing using `inputMode: "insertText"`. The opt-in per-character `type` mode i
 not measured by these samples. It measures overhead against a fixture-specific native Playwright reference.
 It does not measure real-world adoption, WCAG conformance or screen-reader behavior.
 
-## Recorded results — 29 October 2026
+## Recorded results — 29 October 2026 UTC
 
 ![Measured overhead and timings](assets/performance.svg)
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |
-| Dialog | 294.9 / 305.0 | 315.9 / 332.6 | 8.4% | 7.1% |
-| Manual tabs | 2369.2 / 2446.7 | 2328.9 / 2386.4 | 0.0% | -1.7% |
-| Form errors (insertText) | 304.5 / 319.8 | 317.4 / 339.7 | 4.5% | 4.2% |
+| Dialog | 274.9 / 281.1 | 297.1 / 307.8 | 8.4% | 8.1% |
+| Manual tabs | 2219.4 / 2288.3 | 2236.1 / 2251.2 | 0.8% | 0.8% |
+| Form errors (insertText) | 282.5 / 292.7 | 295.1 / 297.5 | 4.6% | 4.5% |
 
 All three pass the 20% target under both calculations. Apple M3 (8 logical CPUs),
 macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4.
 Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
 [tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
-Values are rounded to one decimal place; the tabs paired median is -0.011% before
-rounding. This near-zero difference does not establish a speed advantage.
+Values are rounded to one decimal place. The run finished at 22:34 UTC
+(00:34 on 30 October in Kyiv). These overhead measurements do not establish a
+speed advantage over the native reference.
 The chart can be regenerated with `python scripts/render-performance.py` in a
 Python environment containing Matplotlib; it is an optional documentation tool.
 

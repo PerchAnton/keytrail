@@ -15,7 +15,11 @@
   assertions with the schema/guard from the same package version.
 - Add regressions for focus drift, slow browser transport, blocked character input,
   interrupted typing, unsupported characters and invalid observation reports.
-- Refresh source-bound verification before publication. No release published.
+- Complete 100 local rounds of 163 tests without retries, followed by a matching
+  four-worker run. Independently validate all raw reports and current source hashes.
+- Refresh the equivalent-work benchmark: 108 tests passed; median paired overhead
+  is 8.4% for dialogs, 0.8% for manual tabs and 4.6% for forms (`insertText`).
+- No release published. Hosted portability checks for the final candidate remain pending.
 
 ## 0.1.0-alpha.5 — source candidate
 

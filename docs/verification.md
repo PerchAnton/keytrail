@@ -9,14 +9,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 35 passed |
-| Browser suite | 163 cases; final local revision verification in progress; prior attempts are recorded in the repeatability protocol |
-| Worker isolation | Final comparison pending after 100 sequential rounds; three engine-only tests per round |
+| Browser suite | 100 complete local rounds × 163 cases = 16,300 executions, no retries |
+| Worker isolation | 163/163 on four workers after the sequential series; identical semantic signatures; 16,160 distinct journey IDs across 101 runs, with three engine-only tests per run |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
-| Performance | Fresh source-bound measurements pending after the local series; [protocol and historical samples](performance.md) |
-| Repeatability | Fresh local 100-round series pending; 12 earlier alpha.6 rounds are retained separately |
-| Package consumers | Pending refresh for alpha.6: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control |
+| Performance | 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [current samples](performance.md) |
+| Repeatability | 100/100 complete rounds, every raw report independently revalidated; [source-bound proof](evidence/reliability.json) |
+| Package consumers | Two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
+| Hosted platforms | The final alpha.6 candidate has not been checked in hosted Linux/macOS CI; earlier runs are separate evidence |
 
 ## Performance
 
@@ -24,7 +25,8 @@ component is accessible.
 
 Thirty alternating measured pairs per workload, after five warmups per arm.
 The shared runner was an Apple M3 (8 logical CPUs), macOS arm64/Darwin 27.2.0,
-Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 29 October 2026.
+Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 29 October 2026 UTC
+(30 October in Kyiv). The benchmark ran after the reliability series.
 Every pair also passed semantic equivalence checks; three known defects agreed on
 the first mismatch and dependent checks. Manual tabs include required observation
 windows, which dominate duration. These figures do not establish a universal speed
@@ -34,14 +36,18 @@ advantage or replace checks in a consumer application.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
-snapshots. The local series targets 100 complete rounds on the final alpha.6 revision.
+snapshots. The final alpha.6 local series completed all 100 rounds and its four-worker
+comparison on 29 October 2026 at 22:31 UTC. Its identity is
+`191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed`.
 Twelve completed earlier local rounds and the hosted attempts are retained separately
 and are not added to the new total.
 The historical alpha.5 record accepted 45 rounds and excluded its interrupted 46th
 round; it remains history rather than evidence for the changed runtime.
 
-The release gate remains pending until the final proof and version-bound policy
-agree on source hashes, completion count and the final isolation signature.
+The final proof and [version-bound policy](evidence/acceptance-policy.json) now agree
+on current source hashes, 100 completed rounds and the final isolation signature.
+The 101 raw reports contain 16,463 test executions, including 303 engine-only
+tests without a journey attachment. All 16,160 journey IDs are distinct.
 
 The canary tests inspect only KeyTrail's own JSON, messages and stdout/stderr.
 External Playwright artifacts are outside that guarantee. Budget, focus-loss and
@@ -80,6 +86,7 @@ and verifies wrong initial and return focus. Its separate negative process does
 not catch the assertion: exit 1, HTML, JUnit and the original incomplete attachment
 are checked. Playwright classifies `JourneyAssertionError` as a JUnit `error`, so
 both error and failure counts are considered; neither is treated as success.
-The [report guide](reports.md) explains the saved artifacts. Alpha.6 requires fresh runtime evidence because its core and regression inputs
-changed. Consumer checks remain additional evidence, not extra sequential rounds.
+The [report guide](reports.md) explains the saved artifacts. Alpha.6 has fresh runtime
+evidence for its changed core and regression inputs. Consumer checks remain additional
+evidence, not extra sequential rounds.
 No npm package or GitHub release has been published; see the [release checklist](release-checklist.md).

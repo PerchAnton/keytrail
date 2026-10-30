@@ -1,10 +1,28 @@
 # Full-suite repeatability protocol
 
-## Alpha.6 verification in progress
+## Alpha.6 local verification completed
 
 Release verification now runs locally: **100 full rounds with one worker**, followed
 by the four-worker comparison. The dedicated hosted reliability workflow has been
-removed and disabled. A fresh source-bound proof is still required before release.
+removed and disabled. The final source revision completed the full protocol:
+
+| Measurement | Result |
+| --- | --- |
+| Full sequential rounds | 100 × 163 = 16,300 passing test executions |
+| Final four-worker comparison | 163/163 passed; semantic signatures match every round |
+| Retries, skipped tests and unexpected failures | 0 |
+| Distinct journey run IDs | 16,160; three engine-only tests per full run have no journey attachment |
+| Started / finished (UTC) | 2026-10-29 17:26:55 / 22:31:11 |
+| Environment | Apple M3, Darwin 27.2.0 arm64, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4 |
+
+The [proof](evidence/reliability.json) and [acceptance policy](evidence/acceptance-policy.json)
+use series identity `191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed`.
+Independent validation reread all 101 raw reports, checked their hashes and source
+inputs, and repeated report, signature and UUID validation. The raw reports and
+their SHA-256 inventory remain in local artifacts. Benchmark measurements were run
+after this series, not concurrently.
+
+## Earlier attempts retained separately
 
 An earlier local alpha.6 series completed **12 rounds of 163 tests** (1,956 executions)
 without retries or semantic differences before the session was interrupted. The
@@ -108,8 +126,9 @@ editing its metadata. The historical partial-series finalizer remains available
 for reproducing the earlier checkpoint; it does not waive the new release gate.
 
 This is repeatability evidence for synthetic fixtures in one environment, not a
-claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI checks
-portability separately; its ordinary jobs do not repeat the suite 100 times.
+claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI can check
+portability separately; the final alpha.6 candidate has not run those jobs. Ordinary
+CI jobs do not repeat the suite 100 times.
 
 ## Own-report privacy
 

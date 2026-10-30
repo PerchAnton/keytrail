@@ -1,18 +1,8 @@
 {
   "package": "keytrail",
-  "version": "0.1.0-alpha.5",
-  "status": "verified-partial",
-  "acceptance": false,
-  "scope": "The maintainer accepted the completed 45-round scope for this checkpoint and requested moving on. The original 100-round criterion is not claimed as met.",
-  "policy": "docs/evidence/acceptance-policy.json",
-  "identity": "ca1ee2a7953154fe91f0697633bb6d2b30d88d98a6a6060c3d6db334cafb3912",
-  "startedAt": "2026-10-28T16:28:59.370Z",
-  "lastCompletedAt": "2026-10-28T18:34:16.822Z",
-  "verifiedAt": "2026-10-28T18:39:46.218Z",
-  "targetRounds": 100,
-  "completedRounds": 45,
-  "workers": 1,
-  "retries": 0,
+  "version": "0.1.0-alpha.6",
+  "startedAt": "2026-10-29T17:26:55.554Z",
+  "identity": "191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed",
   "environment": {
     "node": "24.22.1",
     "platform": "darwin",
@@ -24,443 +14,772 @@
     "chromium": "156.0.8078.4"
   },
   "sourceHashes": {
-    "package.json": "d51b370c88a09c7da9a34ca8e441ad8082c998a19146ce476a6dc2e0af2d278d",
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
     "playwright.config.ts": "ec6658fc3dde1c08e91ad05156d36402d961f8f97131f21bb2e935c8f1e45e8a",
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
-    "schema/journey-result.v1.json": "724dc6784af0058f2b12068c302775d250ca070a57030a388545470ba495ee57",
-    "scripts/build.mjs": "13e6ab25d84750b19cefe1c6166f5cf4ffb7d28e294aacc91a4ff3348fa4da5c",
-    "scripts/verify-reliability.mjs": "44792a9a24159e8e886f5ce8db9be9a360a00d66be7164449c8ea2fc17b8f75b",
-    "src/browser/driver.ts": "80cc52ce128b30f22077236a4d4613f9603141a3cac90f20c5067b0ca71bcbea",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "2f61bcc6ed997dd8160609d0339a01602b68a05a2317630d85d96c2a6edf5add",
+    "scripts/verify-reliability.mjs": "65be5e0a9fbea099924f95e02b8b6fc19df28b4fc9ae0c7c3ce185857eecd27e",
+    "src/browser/driver.ts": "2a3f6e7cd5142b57dc219010ce5321acdad49a19eed20715c8f4d4aef458983d",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
-    "src/contracts/form-errors.ts": "6c46b41d4b11e76db1ab4357b5c7ad7cfe514c6b5f0d655818b585a085b54650",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
     "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
-    "src/contracts/types.ts": "68789401507085961557a0a9b7fba17519396297e7e368cae1d25edb401b02ba",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
     "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "15d27d2d3f1b3912aa3b372758e441078af018435d13c358c34084281726c927",
     "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
     "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
     "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
     "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
-    "src/reporting/serialize.ts": "da5647dbfd9a038050d3f97093d86a9932980b476b8f3e7f20c64986e992489f",
-    "src/reporting/validate.ts": "f6a550fedd17a6b41390bb4cf8a6d25293b60d6eedb38dfa0ac424a0dc8c9e3d",
-    "src/scenarios/dialog.ts": "beddf26e5c4b7397a60778ff9ffe67e1cc7af17ef8a7a2789e45f4a0d24b3515",
-    "src/scenarios/form-errors.ts": "e240262f2d0cafc413a808e23ea86617a9bf15f982212f990621d73e5661dde1",
-    "src/scenarios/tabs.ts": "4683bc0698598748a66b21bb879a12f2ed21f2b6ca7cfbd92225c08e07062581",
-    "src/version.ts": "83275407498c9dcb669c61058c79baf9a05daedfc988e9b1253776e6942de35e",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "a5d62e94cf8281b0dfe8b4061a962faa55245a58a0242265f3ab17fb377f8194",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
     "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
-    "tests/guard/fixture.spec.mjs": "f0bf2bc61665a10118052b7c777b5db509fdb06c927c09bf26c33678a0e2146a",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
     "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
     "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
     "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
     "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
-    "tests/integration/dialog.spec.ts": "744de3397dbc346c032175677c1fb02d3fd8b0e4e8a4701edc82f53b26513701",
-    "tests/integration/form-errors.spec.ts": "a0617456b7572b47d34bca72d6106ea32e6aa582187a79a88c00cdc58da20850",
+    "tests/integration/dialog.spec.ts": "28a7fd3d86d3712f978861bf270835ecc6d15be199272501584832e9d9c3854c",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
     "tests/integration/observations.spec.ts": "d71859a9b0a20c0cc4a04107b0032a771143be641e79164e9af88a1216018a06",
-    "tests/integration/tabs.spec.ts": "868b38fe139ec971ed7f8de75fdc42dfe3ff5f6ee5af40ceeafeeedf7dcfc87a",
+    "tests/integration/tabs.spec.ts": "69871a06c0a7fcccf107ea5f294c39470fbbed3821d52de1dc438cbad3d075c3",
     "tests/unit/contracts.test.mjs": "1ce78e70acbce14e55c712c33e38a0fb26781e463dc2d655abf9d49e655233b9",
-    "tests/unit/form-errors.test.mjs": "5cf0c16d69b6950b33c55a02664691bca115ca04defec74681d8369bc255968f",
-    "tests/unit/reliability.test.mjs": "95bffda9efb6da90a050de7d9813acc4756eab80b3772e7ed30284a51bff1dca",
-    "tests/unit/reporting.test.mjs": "8b76f84fac3bbc0134f2fe50ad81900e3e20255ed483e3e34dd140bb7654ba34",
+    "tests/unit/form-errors.test.mjs": "e382c4ff52bffbaea6485570d8147644e3bbff9786d53c5fc839f0e443700237",
+    "tests/unit/observation-window.test.mjs": "9e5e85b6140a756d63bcb609be7d74b496d692237c94d22b6d22c209b738af4a",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
     "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
-    "verification/signatures.mjs": "08e754484ecd17b0094eb859ea587d744051aecf1994546a95c7bcd147bcf303"
+    "verification/signatures.mjs": "aea81b63495cb2bef620b590b923b21fe345639a4dcc186a6d77146704ad3970"
   },
-  "recordingSourceHashes": {
-    "docs/evidence/acceptance-policy.json": "3d322c408e44353b0e370cdefab65b0c1fe41c409c96a8a7973f593f989c2e30",
-    "scripts/finalize-reliability.mjs": "09616b2315ff2ae36cce0b96c832766852632948ba35bd6e2e162cab15a0e180"
-  },
-  "caseCount": 153,
-  "totalSequentialExecutions": 6885,
-  "uniqueJourneyRunIds": 6900,
+  "smoke": false,
+  "targetRounds": 100,
+  "workers": 1,
+  "retries": 0,
+  "status": "passed",
   "rounds": [
     {
       "round": 1,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166943.441,
-      "rawReportSha256": "95f9381f9feaf326fc706e13db2d62c722645e7b1b00050d19cff541b3e38307"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182713.149
     },
     {
       "round": 2,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166842.01799999998,
-      "rawReportSha256": "52a597af78adc9a43d262fb622825b057224b344da37df54cef803143aa9ece7"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182972.00300000003
     },
     {
       "round": 3,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166770.867,
-      "rawReportSha256": "66f0a4b39d59d6835811fdf82a01656d364237054d03bfca27e4ccf638521c28"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182593.897
     },
     {
       "round": 4,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166669.938,
-      "rawReportSha256": "735e03ba80b0975d2830e1406a34c16a3f0807746e263866ab1f8a2e926e90c3"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181420.52099999998
     },
     {
       "round": 5,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166627.524,
-      "rawReportSha256": "cf08f8dfe91b237c77db02ddd990c72f4b64874437a91bccb1af87fcc20a3192"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181756.949
     },
     {
       "round": 6,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166643.699,
-      "rawReportSha256": "409b0496f0b5a5da3981bb157deea9a6446cfe385791c57c89d8ea819e6c7c8a"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181224.599
     },
     {
       "round": 7,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166808.071,
-      "rawReportSha256": "afa4760ace81341dca36fab265d563c431b0f4e6ac48bb80ba206b57b0255b0a"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181590.856
     },
     {
       "round": 8,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166579.118,
-      "rawReportSha256": "01669cffff6d8611edf8b7515b7f8440c8df65e2e7a68f78243f10fcfc63623c"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182092.014
     },
     {
       "round": 9,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166760.443,
-      "rawReportSha256": "8cbfa815d02e930b3c6def0f6d8ccb9bfb3dae2ec6e08c1072a7aa84f2b643ad"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181405.561
     },
     {
       "round": 10,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166729.73299999998,
-      "rawReportSha256": "70dd96b0fd6ee473daf77f5b372049605415f82565feb4ffa3fbe9b61a2495f1"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181353.973
     },
     {
       "round": 11,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166840.063,
-      "rawReportSha256": "3a10f3a10a9b4b4530cd18fe0a6efcdcbbd4c0e9b45d3e0484b07e2113cd13d0"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181321.897
     },
     {
       "round": 12,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167098.386,
-      "rawReportSha256": "210c1f84bd5df04a2c738101ba2eaa30a72001bc0df76e05b282b4a8efff90db"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181302.69400000002
     },
     {
       "round": 13,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166596.174,
-      "rawReportSha256": "b242d1592c0f4fa9a9e069ba2520ad11a9dd6b2703f698b0fdb40400c234fbe4"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181287.12099999998
     },
     {
       "round": 14,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166981.06600000002,
-      "rawReportSha256": "72db86c9dbd63481518c81fd96fa50f714b7c2e62091044854101f4e1071c95f"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181676.44799999997
     },
     {
       "round": 15,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166831.651,
-      "rawReportSha256": "70e5178e8403c6361fb10e33efb4da077bd690ffe730d97fa024263aaf30939c"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181525.94900000002
     },
     {
       "round": 16,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166837.868,
-      "rawReportSha256": "00b4d81c4b203c13b2cb8462382a427afbdde885d41a6d3c1c62ce128930eaa9"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181504.64
     },
     {
       "round": 17,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167018.727,
-      "rawReportSha256": "896bc855aa14cc921ba7b3467c4779335954d6ec9a08187114a02b11435a8fae"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181357.861
     },
     {
       "round": 18,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166604.445,
-      "rawReportSha256": "94d5ceee6a082b9380d464fe1bd14a789b4b26dcd0184e9c0bed0b42b0b99ee1"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181783.624
     },
     {
       "round": 19,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167869.372,
-      "rawReportSha256": "1e76cea894346a74fc2b4ac02b00eca665397fd927c3c542c77439103676422c"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181486.844
     },
     {
       "round": 20,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166847.74599999998,
-      "rawReportSha256": "629bdda4c28143f63d2adebf58a4db1c5a1ab75a35b08f202763f174aabe56ed"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181348.307
     },
     {
       "round": 21,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 169779.182,
-      "rawReportSha256": "e9f51679c18841b947f30fec412f8379b1607ba9986ddaeaddc8d765a3dbf0a8"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181436.99599999998
     },
     {
       "round": 22,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167894.917,
-      "rawReportSha256": "3cae66210ab75af19531fed974001f41b52b88ce4a16c05483719a5e32fac718"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182255.88
     },
     {
       "round": 23,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167963.11500000002,
-      "rawReportSha256": "549c47c3f6c59213b87ffd7fb16fd1ea8264929b682ff47eb97473cef3a8294e"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182357.074
     },
     {
       "round": 24,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 169181.93300000002,
-      "rawReportSha256": "2c067d1fbafdcc8a27d87fcb5b7bb73ad5a95f01c27a70869c3376a850a5cb4d"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181821.057
     },
     {
       "round": 25,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167305.747,
-      "rawReportSha256": "68ab2ad814f5d9d68fd5f5f7aa5c207b777daa59a2e5afd73c9d6a2471f454ec"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181733.655
     },
     {
       "round": 26,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166118.219,
-      "rawReportSha256": "487261112f58b2d4ada0fb081d3978472eecf2b185149257fba1008f2ced66e0"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181464.90399999998
     },
     {
       "round": 27,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167479.467,
-      "rawReportSha256": "d4f4bea77c180533584629bcb5693adab7eb7288758c7c525505fccb9d1cb205"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182023.796
     },
     {
       "round": 28,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167594.16,
-      "rawReportSha256": "a15b4f46b896363f881cca143448a05fffe558b901fbd7a1bc260fd50ceec1bb"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182621.215
     },
     {
       "round": 29,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167793.153,
-      "rawReportSha256": "0ca3af173bba635bbf2695e44d716e09f19019eecaba766dd8d94071f0b2c5a9"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181799.62399999998
     },
     {
       "round": 30,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 167525.967,
-      "rawReportSha256": "bb2778391cb7b0031d5975122a024d18bd99c5310b9938172e4f1ff69af153c3"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181572.973
     },
     {
       "round": 31,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166381.657,
-      "rawReportSha256": "ff948554997d23db4e91337fd11b1ab5417b7cddebdc16275b41d40b06a25533"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182240.317
     },
     {
       "round": 32,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165882.146,
-      "rawReportSha256": "cc930671e6acf6483b1f33493935deb464b3924500e143e04d7a07ad4b3a1d55"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182129.078
     },
     {
       "round": 33,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165804.21,
-      "rawReportSha256": "d4011d3fc6b154a5aba8c41b8b2eec6737de1b0a5406e8eaa7cc8a03491aa773"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181826.718
     },
     {
       "round": 34,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165826.025,
-      "rawReportSha256": "c28742eb9c97e1705daf4c6145a662d83fcf9a33af212b1779a1828d8cf18f36"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181387.804
     },
     {
       "round": 35,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165732.98799999998,
-      "rawReportSha256": "2a4dc691decb2572a2e5a82dda1a1c0c0727f077fe0f652f99ed52cec7492ac4"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182279.861
     },
     {
       "round": 36,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165700.531,
-      "rawReportSha256": "3f2a811cbe05a81ab3678da7bd24c3cd30ad8fbabd81cc45d5a8c0e6c1dc4df8"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 183043.878
     },
     {
       "round": 37,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165623.91999999998,
-      "rawReportSha256": "60b6a973b29495369c211d60e12e1df11ad90fbf37774550e2f393e5b0d97fd8"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182625.998
     },
     {
       "round": 38,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166018.61599999998,
-      "rawReportSha256": "28b56a5298934a21a84eadbeb1a4d40bcee879cd48365fc745bf45fff0781f09"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181608.327
     },
     {
       "round": 39,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165721.323,
-      "rawReportSha256": "dc5d6a5c426a6bf51affa889bbf3c0296bf19962d5a0ac8765a347bcf37cf28c"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182048.166
     },
     {
       "round": 40,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165659.573,
-      "rawReportSha256": "ee0b40b76d3745a347aa8a329aafd5ffeea034dfb994c90b7896b94bf9b00e6a"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182361.675
     },
     {
       "round": 41,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165678.482,
-      "rawReportSha256": "a7e2b727d1e0b679959355c653b116fe6110a9af5346a71b53aa0a1cc4f1b8b0"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181732.31699999998
     },
     {
       "round": 42,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165714.21600000001,
-      "rawReportSha256": "ae9a7ad2d82b17103924c838bdcbf30326cdc4592d74d29441c22cf563d3a9ef"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181652.05599999998
     },
     {
       "round": 43,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 165889.29900000003,
-      "rawReportSha256": "559071f7b1fecb9d28b220584ef08932849fd51e42a3da0788c6fb15cc1d1e1d"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182615.197
     },
     {
       "round": 44,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166895.199,
-      "rawReportSha256": "0856609ef6533d14dc01e8ceab4e02f54ddfed411e43b9b7a3f5e00ea496a8ab"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182117.82700000002
     },
     {
       "round": 45,
-      "tests": 153,
-      "passed": 153,
-      "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-      "durationMs": 166898.031,
-      "rawReportSha256": "e68107a2cc1ee514fd6415c9460ffc97d87d984f4e3140d9c82a97d75e929c5c"
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181886.53
+    },
+    {
+      "round": 46,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182522.22799999997
+    },
+    {
+      "round": 47,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182080.777
+    },
+    {
+      "round": 48,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181943.19400000002
+    },
+    {
+      "round": 49,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182115.541
+    },
+    {
+      "round": 50,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 182745.517
+    },
+    {
+      "round": 51,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181663.287
+    },
+    {
+      "round": 52,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181177.147
+    },
+    {
+      "round": 53,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181642.868
+    },
+    {
+      "round": 54,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181829.86800000002
+    },
+    {
+      "round": 55,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181796.844
+    },
+    {
+      "round": 56,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181666.68300000002
+    },
+    {
+      "round": 57,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181567.696
+    },
+    {
+      "round": 58,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181844.38999999998
+    },
+    {
+      "round": 59,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181783.326
+    },
+    {
+      "round": 60,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181932.113
+    },
+    {
+      "round": 61,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181873.024
+    },
+    {
+      "round": 62,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181686.58
+    },
+    {
+      "round": 63,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181351.935
+    },
+    {
+      "round": 64,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181361.711
+    },
+    {
+      "round": 65,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181435.059
+    },
+    {
+      "round": 66,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181575.683
+    },
+    {
+      "round": 67,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181250.20799999998
+    },
+    {
+      "round": 68,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181467.424
+    },
+    {
+      "round": 69,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181441.9
+    },
+    {
+      "round": 70,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181538.47799999997
+    },
+    {
+      "round": 71,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181525.587
+    },
+    {
+      "round": 72,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181426.001
+    },
+    {
+      "round": 73,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181583.356
+    },
+    {
+      "round": 74,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181490.195
+    },
+    {
+      "round": 75,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181389.082
+    },
+    {
+      "round": 76,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181335.636
+    },
+    {
+      "round": 77,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181325.663
+    },
+    {
+      "round": 78,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181358.00499999998
+    },
+    {
+      "round": 79,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181125.3
+    },
+    {
+      "round": 80,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181213.416
+    },
+    {
+      "round": 81,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181291.514
+    },
+    {
+      "round": 82,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181262.982
+    },
+    {
+      "round": 83,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181516.90000000002
+    },
+    {
+      "round": 84,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181297.356
+    },
+    {
+      "round": 85,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181592.158
+    },
+    {
+      "round": 86,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181227.347
+    },
+    {
+      "round": 87,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181398.608
+    },
+    {
+      "round": 88,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181496.14800000002
+    },
+    {
+      "round": 89,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181357.12
+    },
+    {
+      "round": 90,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181225.386
+    },
+    {
+      "round": 91,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181639.316
+    },
+    {
+      "round": 92,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181283.748
+    },
+    {
+      "round": 93,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181398.45500000002
+    },
+    {
+      "round": 94,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181491.794
+    },
+    {
+      "round": 95,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181388.65000000002
+    },
+    {
+      "round": 96,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181232.813
+    },
+    {
+      "round": 97,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181224.90300000002
+    },
+    {
+      "round": 98,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181114.65699999998
+    },
+    {
+      "round": 99,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181284.579
+    },
+    {
+      "round": 100,
+      "tests": 163,
+      "passed": 163,
+      "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+      "durationMs": 181629.082
     }
   ],
+  "lastCompletedAt": "2026-10-29T22:30:11.560Z",
   "parallel": {
     "workers": 4,
-    "passed": 153,
-    "signature": "5aabcf6d0417908c1f9fb629a82f0d9ff9a66d7cc36869ea8966dfb10c5619d5",
-    "durationMs": 55883.408,
-    "rawReportSha256": "8d19bff5d388a9c2734acc4346e85dfafa30566caa5f7a25708cf08ff1df17d4"
+    "passed": 163,
+    "signature": "4e6deb90bd0f250df8ae2fb99da11329b0ef2c6b8f7105d9f21752d22799eb44",
+    "durationMs": 59393.678
   },
-  "excluded": {
-    "round": 46,
-    "reason": "maintainer-requested-stop",
-    "exitCode": 130,
-    "passedBeforeStop": 92,
-    "interruptedTests": 1,
-    "stats": {
-      "startTime": "2026-10-28T18:34:17.129Z",
-      "duration": 81391.25399999999,
-      "expected": 92,
-      "skipped": 61,
-      "unexpected": 0,
-      "flaky": 0
-    },
-    "rawReportSha256": "b8544c5d5aa49702cba7df3ef823052e612bcb049cd2e8b4c6a71a15deac8203"
-  },
+  "finishedAt": "2026-10-29T22:31:11.233Z",
+  "caseCount": 163,
+  "totalSequentialExecutions": 16300,
+  "uniqueJourneyRunIds": 16160,
+  "acceptance": true,
   "cases": [
     {
       "id": "24da8f22d9759f0a728f-7203c7a820da97bae506",
@@ -1209,7 +1528,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -1460,7 +1780,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -3845,8 +4166,8 @@
       "config": {
         "maxTabs": 25,
         "timeoutMs": 2000,
-        "scenarioTimeoutMs": 1000,
-        "observationWindowMs": 1500
+        "scenarioTimeoutMs": 2000,
+        "observationWindowMs": 2000
       },
       "outcome": "blocked",
       "coverage": {
@@ -4158,7 +4479,13 @@
             "selected": "tab-1",
             "roving": true
           },
-          "observed": {}
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
         },
         {
           "checkId": "T05.forward.001.activated",
@@ -5836,6 +6163,751 @@
           "messageCode": "NOT_RUN",
           "basis": "contract",
           "blockedBy": "T01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "panel-1",
+            "inside": false
+          },
+          "observed": {}
+        }
+      ]
+    },
+    {
+      "id": "58bda22211c26f1298af-29e4878105b78e6d2cd7",
+      "file": "tabs.spec.ts",
+      "title": "manual tabs block a browser observation gap before evaluation",
+      "kind": "tabs",
+      "scenario": {
+        "id": "account-tabs",
+        "kind": "tabs",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 50
+      },
+      "outcome": "blocked",
+      "coverage": {
+        "planned": 50,
+        "passed": 20,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 29,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "T01.entry",
+          "ruleId": "T01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {
+            "focus": "tab-1"
+          }
+        },
+        {
+          "checkId": "T02.structure",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tablist"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.name",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "hasAccessibleName": true
+          },
+          "observed": {
+            "hasAccessibleName": true
+          }
+        },
+        {
+          "checkId": "T02.orientation",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "orientation": "horizontal"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T06.initial",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.forward.001",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2"
+          },
+          "observed": {
+            "focus": "tab-2"
+          }
+        },
+        {
+          "checkId": "T06.forward.001.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.001.unchanged",
+          "ruleId": "T05",
+          "status": "blocked",
+          "messageCode": "OBSERVATION_GAP",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.001.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.001.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.forward.002",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.002.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.002.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0",
+            "selected": "tab-2",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.002.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.002.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.forward.003",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.003.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.003.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.003.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.003.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.backward.001",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.001.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.001.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0",
+            "selected": "tab-1",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.001.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.001.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.backward.002",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.002.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.002.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.002.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.002.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.backward.003",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.003.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.003.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-2",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.003.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.003.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.final",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T07.exit",
+          "ruleId": "T07",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
           "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
           "expected": {
             "focus": "panel-1",
@@ -7703,6 +8775,841 @@
           "basis": "contract",
           "expected": {},
           "observed": {}
+        }
+      ]
+    },
+    {
+      "id": "58bda22211c26f1298af-4a335e8dfcdec39bf71f",
+      "file": "tabs.spec.ts",
+      "title": "manual tabs record initial and final observations even for a short window",
+      "kind": "tabs",
+      "scenario": {
+        "id": "account-tabs",
+        "kind": "tabs",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 50
+      },
+      "outcome": "passed",
+      "coverage": {
+        "planned": 50,
+        "passed": 50,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "T01.entry",
+          "ruleId": "T01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {
+            "focus": "tab-1"
+          }
+        },
+        {
+          "checkId": "T02.structure",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tablist"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.name",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "hasAccessibleName": true
+          },
+          "observed": {
+            "hasAccessibleName": true
+          }
+        },
+        {
+          "checkId": "T02.orientation",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "orientation": "horizontal"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T06.initial",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.forward.001",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2"
+          },
+          "observed": {
+            "focus": "tab-2"
+          }
+        },
+        {
+          "checkId": "T06.forward.001.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.001.unchanged",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.001.activated",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2"
+          },
+          "observed": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1
+          }
+        },
+        {
+          "checkId": "T06.forward.001.state",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.forward.002",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0"
+          },
+          "observed": {
+            "focus": "tab-0"
+          }
+        },
+        {
+          "checkId": "T06.forward.002.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.002.unchanged",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0",
+            "selected": "tab-2",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.002.activated",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0"
+          },
+          "observed": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1
+          }
+        },
+        {
+          "checkId": "T06.forward.002.state",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.forward.003",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {
+            "focus": "tab-1"
+          }
+        },
+        {
+          "checkId": "T06.forward.003.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.003.unchanged",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.003.activated",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1"
+          },
+          "observed": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1
+          }
+        },
+        {
+          "checkId": "T06.forward.003.state",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.backward.001",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0"
+          },
+          "observed": {
+            "focus": "tab-0"
+          }
+        },
+        {
+          "checkId": "T06.backward.001.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.backward.001.unchanged",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0",
+            "selected": "tab-1",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.backward.001.activated",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0"
+          },
+          "observed": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1
+          }
+        },
+        {
+          "checkId": "T06.backward.001.state",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.backward.002",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2"
+          },
+          "observed": {
+            "focus": "tab-2"
+          }
+        },
+        {
+          "checkId": "T06.backward.002.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.backward.002.unchanged",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.backward.002.activated",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2"
+          },
+          "observed": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1
+          }
+        },
+        {
+          "checkId": "T06.backward.002.state",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.backward.003",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {
+            "focus": "tab-1"
+          }
+        },
+        {
+          "checkId": "T06.backward.003.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.backward.003.unchanged",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-2",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.backward.003.activated",
+          "ruleId": "T05",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1"
+          },
+          "observed": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1
+          }
+        },
+        {
+          "checkId": "T06.backward.003.state",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T06.final",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T07.exit",
+          "ruleId": "T07",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "panel-1",
+            "inside": false
+          },
+          "observed": {
+            "focus": "panel-1",
+            "inside": false
+          }
         }
       ]
     },
@@ -26707,6 +28614,751 @@
       ]
     },
     {
+      "id": "58bda22211c26f1298af-d33528bb6a2dc935b52b",
+      "file": "tabs.spec.ts",
+      "title": "manual tabs block a browser observation gap after evaluation",
+      "kind": "tabs",
+      "scenario": {
+        "id": "account-tabs",
+        "kind": "tabs",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 50
+      },
+      "outcome": "blocked",
+      "coverage": {
+        "planned": 50,
+        "passed": 20,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 29,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "T01.entry",
+          "ruleId": "T01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {
+            "focus": "tab-1"
+          }
+        },
+        {
+          "checkId": "T02.structure",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tablist"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.name",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "hasAccessibleName": true
+          },
+          "observed": {
+            "hasAccessibleName": true
+          }
+        },
+        {
+          "checkId": "T02.orientation",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "orientation": "horizontal"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.001.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.002.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.tab-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tab"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.panel-role",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "role": "tabpanel"
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.controls",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T02.item.003.labelledby",
+          "ruleId": "T02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "T06.initial",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T03.forward.001",
+          "ruleId": "T03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2"
+          },
+          "observed": {
+            "focus": "tab-2"
+          }
+        },
+        {
+          "checkId": "T06.forward.001.roving",
+          "ruleId": "T06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "apg_guidance",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.001.unchanged",
+          "ruleId": "T05",
+          "status": "blocked",
+          "messageCode": "OBSERVATION_GAP",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          }
+        },
+        {
+          "checkId": "T05.forward.001.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.001.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.forward.002",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.002.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.002.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0",
+            "selected": "tab-2",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.002.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.002.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.forward.003",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.003.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.003.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.forward.003.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.forward.003.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.backward.001",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.001.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.001.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-0",
+            "selected": "tab-1",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.001.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.001.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.backward.002",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.002.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.002.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.002.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.002.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T03.backward.003",
+          "ruleId": "T03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.003.roving",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.003.unchanged",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-2",
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T05.backward.003.activated",
+          "ruleId": "T05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.backward.003.state",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T06.final",
+          "ruleId": "T06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "T07.exit",
+          "ruleId": "T07",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "T05.forward.001.unchanged",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "panel-1",
+            "inside": false
+          },
+          "observed": {}
+        }
+      ]
+    },
+    {
       "id": "58bda22211c26f1298af-d558fc98bb9414a1d506",
       "file": "tabs.spec.ts",
       "title": "tabs detect no-activation",
@@ -35622,7 +38274,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -35895,7 +38548,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -36132,6 +38786,311 @@
       ]
     },
     {
+      "id": "7ad557a4598e5054b498-055c926d458a26c23039",
+      "file": "form-errors.spec.ts",
+      "title": "forms report type semantics when character keydown is prevented",
+      "kind": "formErrors",
+      "scenario": {
+        "id": "profile-errors",
+        "kind": "formErrors",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200,
+        "inputMode": "type"
+      },
+      "outcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "F01.structure",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F01.entry",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "submit"
+          },
+          "observed": {
+            "focus": "submit"
+          }
+        },
+        {
+          "checkId": "F01.submit",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.001",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.002",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F04.focus",
+          "ruleId": "F04",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.entry",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.value",
+          "ruleId": "F06",
+          "status": "fail",
+          "messageCode": "VALUE_MISMATCH",
+          "basis": "contract",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {
+            "matched": false,
+            "editable": true
+          }
+        },
+        {
+          "checkId": "F06.field.001.blur",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "matched": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.field.002.entry",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "focus": "field-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.field.002.value",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.field.002.blur",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "matched": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.clear.001",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.clear.002",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {}
+        }
+      ]
+    },
+    {
+      "id": "7ad557a4598e5054b498-0b8ebf70ed585df43bb6",
+      "file": "form-errors.spec.ts",
+      "title": "forms reject unsupported keyboard characters before submitting",
+      "kind": "formErrors",
+      "scenario": {
+        "id": "invalid-contract",
+        "kind": "formErrors",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200
+      },
+      "outcome": "blocked",
+      "coverage": {
+        "planned": 1,
+        "passed": 0,
+        "failed": 0,
+        "blocked": 1,
+        "notRun": 0,
+        "complete": false,
+        "entryEvidence": "unreached"
+      },
+      "checks": [
+        {
+          "checkId": "E_CONFIG",
+          "ruleId": "E_CONFIG",
+          "status": "blocked",
+          "messageCode": "CONFIG_INVALID",
+          "basis": "contract",
+          "expected": {},
+          "observed": {}
+        }
+      ]
+    },
+    {
       "id": "7ad557a4598e5054b498-0e81f628acf9fb70557f",
       "file": "form-errors.spec.ts",
       "title": "forms detect idref",
@@ -36145,7 +39104,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -36405,7 +39365,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -36680,7 +39641,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -36955,7 +39917,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -37230,7 +40193,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -37496,7 +40460,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -37771,7 +40736,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -38046,7 +41012,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -38321,7 +41288,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -38571,7 +41539,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -38844,7 +41813,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -39106,7 +42076,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -39381,7 +42352,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -39656,7 +42628,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -39983,7 +42956,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -40235,7 +43209,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -40485,7 +43460,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -40735,6 +43711,282 @@
       ]
     },
     {
+      "id": "7ad557a4598e5054b498-63278f4245a6a3568a47",
+      "file": "form-errors.spec.ts",
+      "title": "forms report insertText semantics when character keydown is prevented",
+      "kind": "formErrors",
+      "scenario": {
+        "id": "profile-errors",
+        "kind": "formErrors",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
+      },
+      "outcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "F01.structure",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F01.entry",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "submit"
+          },
+          "observed": {
+            "focus": "submit"
+          }
+        },
+        {
+          "checkId": "F01.submit",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.001",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.002",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F04.focus",
+          "ruleId": "F04",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.entry",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.value",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {
+            "matched": true,
+            "editable": true
+          }
+        },
+        {
+          "checkId": "F06.field.001.blur",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F06.field.002.entry",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-1"
+          },
+          "observed": {
+            "focus": "field-1"
+          }
+        },
+        {
+          "checkId": "F06.field.002.value",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {
+            "matched": true,
+            "editable": true
+          }
+        },
+        {
+          "checkId": "F06.field.002.blur",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F06.clear.001",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {
+            "visible": false,
+            "invalid": false
+          }
+        },
+        {
+          "checkId": "F06.clear.002",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {
+            "visible": false,
+            "invalid": false
+          }
+        }
+      ]
+    },
+    {
       "id": "7ad557a4598e5054b498-65ddc6f41c96b9932ae9",
       "file": "form-errors.spec.ts",
       "title": "forms detect hidden-text",
@@ -40748,7 +44000,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -41004,7 +44257,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -41267,7 +44521,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -41506,6 +44761,282 @@
       ]
     },
     {
+      "id": "7ad557a4598e5054b498-73969fa567f4b72a06f3",
+      "file": "form-errors.spec.ts",
+      "title": "forms type printable characters with keyboard events and keep values private",
+      "kind": "formErrors",
+      "scenario": {
+        "id": "profile-errors",
+        "kind": "formErrors",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200,
+        "inputMode": "type"
+      },
+      "outcome": "passed",
+      "coverage": {
+        "planned": 18,
+        "passed": 18,
+        "failed": 0,
+        "blocked": 0,
+        "notRun": 0,
+        "complete": true,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "F01.structure",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F01.entry",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "submit"
+          },
+          "observed": {
+            "focus": "submit"
+          }
+        },
+        {
+          "checkId": "F01.submit",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.001",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.002",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F04.focus",
+          "ruleId": "F04",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.entry",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.value",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {
+            "matched": true,
+            "editable": true
+          }
+        },
+        {
+          "checkId": "F06.field.001.blur",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F06.field.002.entry",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-1"
+          },
+          "observed": {
+            "focus": "field-1"
+          }
+        },
+        {
+          "checkId": "F06.field.002.value",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {
+            "matched": true,
+            "editable": true
+          }
+        },
+        {
+          "checkId": "F06.field.002.blur",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F06.clear.001",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {
+            "visible": false,
+            "invalid": false
+          }
+        },
+        {
+          "checkId": "F06.clear.002",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {
+            "visible": false,
+            "invalid": false
+          }
+        }
+      ]
+    },
+    {
       "id": "7ad557a4598e5054b498-74091f956881ab34ddaf",
       "file": "form-errors.spec.ts",
       "title": "forms block unreachable-link",
@@ -41519,7 +45050,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -41829,7 +45361,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -42085,7 +45618,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -42335,7 +45869,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -42610,7 +46145,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -42866,7 +46402,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -43116,7 +46653,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 1000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -43369,7 +46907,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -43632,7 +47171,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -43907,7 +47447,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -44172,7 +47713,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -44447,7 +47989,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -44703,7 +48246,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -44963,7 +48507,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -45238,7 +48783,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -45513,7 +49059,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -45763,7 +49310,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -46038,7 +49586,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -46297,7 +49846,8 @@
         "maxTabs": 8,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -46549,7 +50099,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -46824,7 +50375,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -47097,7 +50649,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -47359,6 +50912,272 @@
       ]
     },
     {
+      "id": "7ad557a4598e5054b498-c1d6dfff54681c72d12b",
+      "file": "form-errors.spec.ts",
+      "title": "forms stop typing after focus moves during a character event",
+      "kind": "formErrors",
+      "scenario": {
+        "id": "profile-errors",
+        "kind": "formErrors",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200,
+        "inputMode": "type"
+      },
+      "outcome": "failed",
+      "coverage": {
+        "planned": 18,
+        "passed": 11,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 6,
+        "complete": false,
+        "entryEvidence": "tab"
+      },
+      "checks": [
+        {
+          "checkId": "F01.structure",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F01.entry",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "submit"
+          },
+          "observed": {
+            "focus": "submit"
+          }
+        },
+        {
+          "checkId": "F01.submit",
+          "ruleId": "F01",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.001",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F02.message.002",
+          "ruleId": "F02",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "visible": true,
+            "matched": true
+          },
+          "observed": {
+            "visible": true,
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.001.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.invalid",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "invalid": true
+          },
+          "observed": {
+            "invalid": true
+          }
+        },
+        {
+          "checkId": "F03.field.002.idref",
+          "ruleId": "F03",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "matched": true
+          },
+          "observed": {
+            "matched": true
+          }
+        },
+        {
+          "checkId": "F04.focus",
+          "ruleId": "F04",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.entry",
+          "ruleId": "F06",
+          "status": "pass",
+          "messageCode": "OK",
+          "basis": "contract",
+          "expected": {
+            "focus": "field-0"
+          },
+          "observed": {
+            "focus": "field-0"
+          }
+        },
+        {
+          "checkId": "F06.field.001.value",
+          "ruleId": "F06",
+          "status": "fail",
+          "messageCode": "FOCUS_MISMATCH",
+          "basis": "contract",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {
+            "focus": "submit"
+          }
+        },
+        {
+          "checkId": "F06.field.001.blur",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "matched": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.field.002.entry",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "focus": "field-1"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.field.002.value",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "matched": true,
+            "editable": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.field.002.blur",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "matched": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.clear.001",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "F06.clear.002",
+          "ruleId": "F06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "F06.field.001.value",
+          "expected": {
+            "visible": false,
+            "invalid": false
+          },
+          "observed": {}
+        }
+      ]
+    },
+    {
       "id": "7ad557a4598e5054b498-c2636dbcd41865f8a62c",
       "file": "form-errors.spec.ts",
       "title": "forms still block a real reload during a summary link",
@@ -47372,7 +51191,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -47683,7 +51503,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -47946,7 +51767,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -48219,7 +52041,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -48475,7 +52298,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -48788,7 +52612,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -49044,7 +52869,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -49319,7 +53145,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -49575,7 +53402,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -49888,7 +53716,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -50163,7 +53992,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "blocked",
       "coverage": {
@@ -50413,7 +54243,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "passed",
       "coverage": {
@@ -50740,7 +54571,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -51000,7 +54832,8 @@
         "maxTabs": 25,
         "timeoutMs": 2000,
         "scenarioTimeoutMs": 30000,
-        "observationWindowMs": 200
+        "observationWindowMs": 200,
+        "inputMode": "insertText"
       },
       "outcome": "failed",
       "coverage": {
@@ -51920,7 +55753,9 @@
           "expected": {
             "focus": "open"
           },
-          "observed": {}
+          "observed": {
+            "focus": "open"
+          }
         },
         {
           "checkId": "D02.visible",
@@ -53235,7 +57070,9 @@
           "expected": {
             "focus": "open"
           },
-          "observed": {}
+          "observed": {
+            "focus": "open"
+          }
         },
         {
           "checkId": "D02.visible",
@@ -54597,7 +58434,9 @@
           "expected": {
             "focus": "open"
           },
-          "observed": {}
+          "observed": {
+            "focus": "open"
+          }
         },
         {
           "checkId": "D02.visible",
@@ -56555,7 +60394,9 @@
           "expected": {
             "focus": "open"
           },
-          "observed": {}
+          "observed": {
+            "focus": "open"
+          }
         },
         {
           "checkId": "D02.visible",
@@ -57170,6 +61011,322 @@
       ]
     },
     {
+      "id": "c88648056942dba76546-a45d0c68d08df68d7f1d",
+      "file": "dialog.spec.ts",
+      "title": "dialog rejects focus drift before Space activation",
+      "kind": "dialog",
+      "scenario": {
+        "id": "profile-dialog",
+        "kind": "dialog",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200
+      },
+      "outcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "already_focused"
+      },
+      "checks": [
+        {
+          "checkId": "D01.entry",
+          "ruleId": "D01",
+          "status": "fail",
+          "messageCode": "FOCUS_MISMATCH",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "open"
+          },
+          "observed": {
+            "focus": "unknown"
+          }
+        },
+        {
+          "checkId": "D02.visible",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "visible": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D02.role",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "role": "dialog"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D02.name",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "hasAccessibleName": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D02.modal",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "modal": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D03.initial",
+          "ruleId": "D03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "name"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.initial",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.forward.001",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "save"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.forward.001",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.forward.002",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "close"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.forward.002",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.forward.003",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "name"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.forward.003",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.backward.001",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "close"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.backward.001",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.backward.002",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "save"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.backward.002",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.backward.003",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "name"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.backward.003",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.before-close",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D06.closed",
+          "ruleId": "D06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "visible": false
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D07.returned",
+          "ruleId": "D07",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "open"
+          },
+          "observed": {}
+        }
+      ]
+    },
+    {
       "id": "c88648056942dba76546-ae86de9ac50d9e5104ac",
       "file": "dialog.spec.ts",
       "title": "visible nested dialog with role fallback tokens is unsupported",
@@ -57206,7 +61363,9 @@
           "expected": {
             "focus": "open"
           },
-          "observed": {}
+          "observed": {
+            "focus": "open"
+          }
         },
         {
           "checkId": "D02.visible",
@@ -59461,7 +63620,325 @@
           "expected": {
             "focus": "open"
           },
+          "observed": {
+            "focus": "open"
+          }
+        },
+        {
+          "checkId": "D02.visible",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "visible": true
+          },
           "observed": {}
+        },
+        {
+          "checkId": "D02.role",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "role": "dialog"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D02.name",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "hasAccessibleName": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D02.modal",
+          "ruleId": "D02",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "modal": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D03.initial",
+          "ruleId": "D03",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "name"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.initial",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.forward.001",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "save"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.forward.001",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.forward.002",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "close"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.forward.002",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.forward.003",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "name"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.forward.003",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.backward.001",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "close"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.backward.001",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.backward.002",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "save"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.backward.002",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D04.backward.003",
+          "ruleId": "D04",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "name"
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.backward.003",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D05.before-close",
+          "ruleId": "D05",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "apg_guidance",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "inside": true
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D06.closed",
+          "ruleId": "D06",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "visible": false
+          },
+          "observed": {}
+        },
+        {
+          "checkId": "D07.returned",
+          "ruleId": "D07",
+          "status": "not_run",
+          "messageCode": "NOT_RUN",
+          "basis": "contract",
+          "blockedBy": "D01.entry",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "open"
+          },
+          "observed": {}
+        }
+      ]
+    },
+    {
+      "id": "c88648056942dba76546-c9f2b3cf3cfa2d88581e",
+      "file": "dialog.spec.ts",
+      "title": "dialog rejects focus drift before Enter activation",
+      "kind": "dialog",
+      "scenario": {
+        "id": "profile-dialog",
+        "kind": "dialog",
+        "contractVersion": "1"
+      },
+      "config": {
+        "maxTabs": 25,
+        "timeoutMs": 2000,
+        "scenarioTimeoutMs": 30000,
+        "observationWindowMs": 200
+      },
+      "outcome": "failed",
+      "coverage": {
+        "planned": 22,
+        "passed": 0,
+        "failed": 1,
+        "blocked": 0,
+        "notRun": 21,
+        "complete": false,
+        "entryEvidence": "already_focused"
+      },
+      "checks": [
+        {
+          "checkId": "D01.entry",
+          "ruleId": "D01",
+          "status": "fail",
+          "messageCode": "FOCUS_MISMATCH",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+          "expected": {
+            "focus": "open"
+          },
+          "observed": {
+            "focus": "unknown"
+          }
         },
         {
           "checkId": "D02.visible",

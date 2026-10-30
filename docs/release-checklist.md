@@ -29,21 +29,21 @@ or external service is needed to run their browser tests.
 | Public API, types, limits and errors agree | [Dialog](api.md), [tabs](tabs.md), [form errors](form-errors.md), [rules/codes](rules.md), [limits](limits.md); strict TypeScript checks |
 | Correct and defective fixtures | 163 browser regression tests; all three scenario families |
 | Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
-| Source-bound reliability | 100-round run in progress on alpha.6; [protocol and status](reliability.md) |
+| Source-bound reliability | Complete: 100 × 163 executions and matching 163-case four-worker comparison, no retries; [proof and protocol](reliability.md) |
 | Equivalent native measurements | Three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
 | Vanilla tarball consumer | ESM/CJS imports and declarations; 6 browser tests and 3 guarded journeys |
 | React portal tarball consumer | StrictMode, real portal/remount, 3 browser tests, 1 guarded journey, separate failing process |
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |
 | Package inventory | License, notices, schema and exports; no test results, node_modules or local configuration |
 | Archive identity | `artifacts/package-verification.json` and `artifacts/SHA256SUMS` from the exact tested `.tgz` |
-| Hosted platform checks | Linux and macOS CI on the commit selected for release |
+| Hosted platform checks | Pending for the final alpha.6 candidate; Linux and macOS CI must refer to the commit selected for release |
 | Human review | Inspect HTML failure report and try the example with a keyboard; passing automation is not a conformance assessment |
 
 `pnpm check` runs the checks and consumers once. It validates the existing
 source-bound reliability and benchmark evidence; it does not rerun 45 or 100 rounds.
-Alpha.6 requires fresh 100-round evidence. The historical 45 rounds belong to
-alpha.5 and are not reused after the core changes. Do not publish while this gate
-is pending.
+Alpha.6 now has fresh 100-round evidence. The historical 45 rounds belong to
+alpha.5 and are not reused after the core changes. Local completion does not clear
+the remaining hosted-platform and human-review steps or publish a package.
 
 ## Review the output
 

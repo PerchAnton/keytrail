@@ -176,11 +176,13 @@ unsupported contexts, bounded entry, scenario deadlines and safe own reports.
 The [verification record](docs/verification.md) separates completed checks from the
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
-repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md)
-and is undergoing a fresh local 100-round run of the 163-test suite. An earlier local
-revision stopped after 12 complete rounds; those rounds are not added to this series. The historical
-45 rounds belong to alpha.5; they are not counted as evidence for this changed
-runtime. Real-world adoption has not been established.
+repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md).
+The final local revision completed **100 rounds × 163 tests = 16,300 executions**,
+followed by **163 passing tests on four workers**, with no retries or semantic
+differences. Every raw report and its source identity was independently checked.
+Earlier local and hosted attempts are retained separately and are not added to
+this total. This is synthetic repeatability evidence on one Mac; final-candidate
+hosted platform checks have not been run. Real-world adoption has not been established.
 
 ### Measured overhead
 

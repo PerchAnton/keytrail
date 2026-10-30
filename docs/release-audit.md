@@ -33,8 +33,9 @@ form mode remains `insertText` for existing contracts; new keyboard-oriented
 examples select `type` explicitly.
 
 The [machine-readable regression record](evidence/release-audit.json) extracts all
-ten added browser cases from the successful four-worker run and binds them to the
-source hashes. The injected-delay cases measured gaps of approximately 200 ms and
+ten added browser cases from the final four-worker comparison after the 100-round
+local series and binds them to the source hashes and raw-report checksum.
+The injected-delay cases measured gaps above 150 ms and
 both stopped as blocked. These are diagnostic samples, not performance claims.
 
 Verification and source-bound evidence are listed in [Verification](verification.md).
