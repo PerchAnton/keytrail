@@ -1,0 +1,103 @@
+# Browser worker capacity and deadline checks
+
+The default regression suite uses **one browser worker**. The four-worker isolation
+comparison remains an explicit part of the local full-suite verifier. A real gap
+above 100 ms still blocks a negative observation; retries remain disabled.
+
+## Hosted measurements
+
+The [comparison run](https://github.com/PerchAnton/keytrail/actions/runs/41011980109) executed the complete 165-case suite first
+on one worker and then on two on each platform, with no retries or skips.
+One worker passed on both platforms. Linux also passed on two; macOS with two
+workers had three actual observation-gap failures. The two-worker configuration
+is therefore excluded from the ordinary hosted CI configuration, not reported as
+passing. The job's package stage is separate: it must reject historical release
+evidence until the new source-bound verification finishes.
+
+| Runner | Workers | Tests | Full snapshot median / p95 (ms) | Evaluate median (ms) | Interval p95 / max (ms) |
+| --- | --- | --- | --- | --- | --- |
+| Linux | 1 | 165/165 | 21.5 / 23.5 | 1.8 | 26.6 / 46.6 |
+| Linux | 2 | 165/165 | 28.4 / 34.6 | 2.5 | 35.7 / 86.0 |
+| macOS | 1 | 165/165 | 20.2 / 39.5 | 2.1 | 42.0 / 68.1 |
+| macOS | 2 | 162/165 | 36.8 / 82.0 | 2.9 | 83.0 / 116.9 |
+
+The three macOS/two-worker failures were manual Enter, manual Home/End and vertical
+manual Home/End. Their full observed intervals and check IDs are retained in the
+machine-readable record. The comparison workflow itself failed; its single-worker
+browser results provide the basis for the subsequent one-worker configuration.
+
+[Machine-readable records](evidence/ci-workers.json) retain raw-report hashes,
+counts and per-fixture summaries. Timing rows include only negative windows in
+correct manual-tabs fixtures. Deliberate delays and failures still run in the full
+suite but are excluded from these timing aggregates. Host durations use hrtime;
+intervals use the browser clock. The evaluate number includes its transport cost,
+not just DOM execution. Diagnostics themselves add a small amount of work and are
+separate from the [equivalent-work benchmark](performance.md).
+
+The complete snapshot also resolves locators and roles, checks target context,
+serializes handles and disposes temporary handles. The difference from evaluate
+time points to this surrounding work and browser transport as a substantial cost.
+These measurements do not isolate each individual operation. One worker is the
+conservative default; a successful two-worker sample does not guarantee that every
+shared runner can sustain the required observation rate.
+
+The [initial four-worker CI](https://github.com/PerchAnton/keytrail/actions/runs/41007074630)
+had 154 passing and nine failing tests per platform: eight actual observation-gap
+failures plus the deadline fixture. Those failures remain recorded. An earlier
+diagnostic attempt also failed its attachment-fault regression because diagnostics
+used the deliberately failing sink; diagnostics now capture their own original
+attachment function. Its timings are not presented as a fully passing run.
+
+Reducing concurrency alone was insufficient. The
+[next comparison](https://github.com/PerchAnton/keytrail/actions/runs/41009760872)
+passed both Linux runs and macOS with two workers, but macOS with one worker
+blocked one manual-tabs fixture on a real 148.5 ms interval. No retry replaced
+that result. A subsequent local transport-only change still recorded one 100.7 ms
+gap. Both failures motivated the combined change below; they are not counted in
+the passing evidence above.
+
+## Reduce transport work and reserve sampling time
+
+The atomic DOM read already checks each resolved target's root against the main
+document. Successful reads now avoid a separate frame-ownership request for every
+target. If handle adoption or evaluation fails, public frame queries distinguish
+an unsupported foreign context from an ordinary browser error. Locators are still
+resolved for each observation, all reads settle, and temporary handles are disposed.
+Regressions cover iframe/shadow rejection, replacement, coherent focus, sibling
+cleanup, and transport failure in both the main document and an iframe.
+
+The negative-window scheduler targets 25 ms, one quarter of the 100 ms gap budget,
+with a maximum 10 ms pause and a minimum 1 ms yield. This leaves more room for a
+slower next read at the cost of more frequent sampling. The fixture-specific native
+benchmark uses the same context strategy and cadence. No scheduler can guarantee
+100 ms observations on a stalled host: actual browser timestamps still determine
+whether the journey blocks, and every excessive gap remains a failure in CI.
+
+## A deadline at a controlled point
+
+The manual-window test freezes the host budget clock during preparation, then
+advances it to exactly 2000 ms after the first real browser observation enters the
+negative window. Integer clock values avoid cancellation at a fractional uptime.
+The browser observation clock stays real. The test requires the exact blocked
+check, the actual focus/selection, one retained observation, no activation, and no
+later keyboard input. Both test hooks are restored even if the test fails.
+
+A separate unit test checks that the total scenario budget is cumulative, caps
+each operation and expires at the exact boundary. Existing real-clock dialog and
+form budget checks also remain. Production clocks and time limits are unchanged.
+
+## Reproduce
+
+Run these sequentially on an otherwise idle machine:
+
+```sh
+pnpm build
+pnpm test:browser
+KEYTRAIL_PROFILE_SNAPSHOTS=1 PLAYWRIGHT_JSON_OUTPUT_FILE=artifacts/browser-workers1.json pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
+KEYTRAIL_PROFILE_SNAPSHOTS=1 PLAYWRIGHT_JSON_OUTPUT_FILE=artifacts/browser-workers2.json pnpm exec playwright test --workers=2 --retries=0 --reporter=list,json
+pnpm verify:reliability --smoke --workers=2
+```
+
+The smoke command compares complete two-, one- and four-worker runs and does not
+count as 100-round acceptance. Snapshot timing is a test-only diagnostic mode; it
+does not change results or suppress observation-gap failures.

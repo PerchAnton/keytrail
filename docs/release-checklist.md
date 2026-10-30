@@ -1,6 +1,6 @@
 # First alpha release checklist
 
-**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
 
 Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
@@ -29,10 +29,10 @@ or external service is needed to run their browser tests.
 | Gate | Evidence / command |
 | --- | --- |
 | Public API, types, limits and errors agree | [Dialog](api.md), [tabs](tabs.md), [form errors](form-errors.md), [rules/codes](rules.md), [limits](limits.md); strict TypeScript checks |
-| Correct and defective fixtures | 163 browser regression tests; all three scenario families |
+| Correct and defective fixtures | 165 browser regression tests; all three scenario families |
 | Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
-| Source-bound reliability | Complete: 100 × 163 executions and matching 163-case four-worker comparison, no retries; [proof and protocol](reliability.md) |
-| Equivalent native measurements | Three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
+| Source-bound reliability | Pending for changed source; prior 100 × 163 proof is historical; [proof and protocol](reliability.md) |
+| Equivalent native measurements | Fresh measurements pending: three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
 | Vanilla tarball consumer | ESM/CJS imports and declarations; 6 browser tests and 3 guarded journeys |
 | React portal tarball consumer | StrictMode, real portal/remount, 3 browser tests, 1 guarded journey, separate failing process |
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |
@@ -43,8 +43,8 @@ or external service is needed to run their browser tests.
 
 `pnpm check` runs the checks and consumers once. It validates the existing
 source-bound reliability and benchmark evidence; it does not rerun 45 or 100 rounds.
-Alpha.6 now has fresh 100-round evidence. The historical 45 rounds belong to
-alpha.5 and are not reused after the core changes. Local completion does not clear
+The changed alpha.6 candidate still needs fresh 100-round evidence. The prior
+alpha.6 proof and alpha.5 rounds are not reused after source changes. Local completion does not clear
 the remaining hosted-platform and human-review steps or publish a package.
 
 ## Review the output

@@ -1,6 +1,6 @@
 # KeyTrail
 
-**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](docs/ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
 
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
@@ -179,14 +179,15 @@ The [verification record](docs/verification.md) separates completed checks from 
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
 repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md).
-The final local revision completed **100 rounds × 163 tests = 16,300 executions**,
+The earlier revision `0300552` completed **100 rounds × 163 tests = 16,300 executions**,
 followed by **163 passing tests on four workers**, with no retries or semantic
 differences. Every raw report and its source identity was independently checked.
 Earlier local and hosted attempts are retained separately and are not added to
-this total. This is synthetic repeatability evidence on one Mac; final-candidate
-hosted platform checks have not been run. Real-world adoption has not been established.
+this historical total. The changed source passed 165/165 on one and four local
+workers and on one worker on each hosted platform. Its full repeatability and
+package evidence are still pending. Real-world adoption has not been established.
 
-### Measured overhead
+### Historical measured overhead (`0300552`)
 
 ![KeyTrail overhead against equivalent native Playwright checks](docs/assets/performance.svg)
 

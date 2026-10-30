@@ -1,6 +1,6 @@
 # Verification
 
-**Verification refresh pending:** CI run 41007074630 failed on both hosted platforms with four browser workers. The default now uses one worker, and the manual-window deadline fixture uses a controlled host clock. Existing 100-round and benchmark records refer to commit `0300552`; they are retained as historical evidence and do not clear the changed candidate’s release gate. New one/two-worker CI diagnostics and source-bound local verification are required.
+**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
 
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
@@ -10,18 +10,18 @@ component is accessible.
 | Check | Recorded result |
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
-| Unit tests | 35 passed |
-| Browser suite | 100 complete local rounds × 163 cases = 16,300 executions, no retries |
-| Worker isolation | 163/163 on four workers after the sequential series; identical semantic signatures; 16,160 distinct journey IDs across 101 runs, with three engine-only tests per run |
+| Unit tests | 36 passed |
+| Browser suite | Current source: 165/165 locally and on Linux/macOS with one worker; no retries |
+| Worker isolation | Current source: 165/165 on four local workers; semantic signatures match the one-worker run; 320 distinct journey IDs across the pair, with five engine-only cases per run |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
-| Performance | 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [current samples](performance.md) |
-| Repeatability | 100/100 complete rounds, every raw report independently revalidated; [source-bound proof](evidence/reliability.json) |
-| Package consumers | Two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
-| Hosted platforms | The final alpha.6 candidate has not been checked in hosted Linux/macOS CI; earlier runs are separate evidence |
+| Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
+| Repeatability | Historical `0300552`: 100/100 complete rounds; current source requires a fresh series; [source-bound proof](evidence/reliability.json) |
+| Package consumers | Pending for changed source. Historical `0300552`: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
+| Hosted platforms | One-worker browser suites pass on both platforms; macOS/two-worker gaps remain recorded. Full job success awaits refreshed package evidence. [Comparison](ci-concurrency.md) |
 
-## Performance
+## Historical performance (`0300552`)
 
 ![Paired overhead and median/p95 timing results](assets/performance.svg)
 
@@ -38,7 +38,7 @@ advantage or replace checks in a consumer application.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
-snapshots. The final alpha.6 local series completed all 100 rounds and its four-worker
+snapshots. The earlier alpha.6 local series at `0300552` completed all 100 rounds and its four-worker
 comparison on 29 October 2026 at 22:31 UTC. Its identity is
 `191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed`.
 Twelve completed earlier local rounds and the hosted attempts are retained separately

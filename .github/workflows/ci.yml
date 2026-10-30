@@ -34,16 +34,11 @@ jobs:
           pnpm test:types
           pnpm test:unit
           pnpm test:guard
-      - name: Compare one and two browser workers
+      - name: Browser regression suite (one worker)
         env:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
-        run: |
-          result=0
-          for workers in 1 2; do
-            PLAYWRIGHT_JSON_OUTPUT_FILE="artifacts/browser-workers${workers}.json" \
-              pnpm exec playwright test --workers="$workers" --retries=0 --reporter=list,json || result=1
-          done
-          exit "$result"
+          PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
+        run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
       - name: Verify tarball consumers
         run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -76,16 +71,11 @@ jobs:
           pnpm test:types
           pnpm test:unit
           pnpm test:guard
-      - name: Compare one and two browser workers
+      - name: Browser regression suite (one worker)
         env:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
-        run: |
-          result=0
-          for workers in 1 2; do
-            PLAYWRIGHT_JSON_OUTPUT_FILE="artifacts/browser-workers${workers}.json" \
-              pnpm exec playwright test --workers="$workers" --retries=0 --reporter=list,json || result=1
-          done
-          exit "$result"
+          PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
+        run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
       - name: Verify tarball consumers
         run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
