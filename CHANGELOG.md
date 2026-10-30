@@ -26,6 +26,11 @@
 - During manual-tabs negative windows, resolve only the roles needed for live
   structure and state checks. Keep full initial semantics, per-read target resolution,
   context checks and handle cleanup; omitted metadata is never reported as observed.
+- Resolve fresh locator matches into a private browser map, read state atomically
+  and clear nodes before returning. Avoid per-element handle transport and disposal
+  while preserving dynamic targets, foreign-context checks and error cleanup.
+- Require full one-worker CI suites and package consumers on Linux and both macOS
+  ARM and Intel configurations; retain the earlier failures and the 100 ms bound.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
   benchmark as historical evidence. The changed candidate requires a fresh full
   series and benchmark; those old hashes do not satisfy its package gate.

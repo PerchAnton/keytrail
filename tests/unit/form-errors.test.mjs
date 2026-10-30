@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validateFormErrors } from '../../artifacts/unit/formValidation.js';
 import { planFormErrors } from '../../artifacts/unit/formPlan.js';
-const target = id => ({ id, locator: { page() {}, count() {}, elementHandles() {}, isVisible() {}, and() {}, getAttribute() {} } });
+const target = id => ({ id, locator: { page() {}, count() {}, evaluateAll() {}, isVisible() {}, and() {}, getAttribute() {} } });
 function base() {
   const fields = [target('field-a'), target('field-b')], submit = target('submit');
   return { id: 'form-errors', form: target('form'), submit, submitKey: 'Enter',

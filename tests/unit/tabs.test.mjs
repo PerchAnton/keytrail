@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validateTabs } from '../../artifacts/unit/tabsValidation.js';
 import { planTabs } from '../../artifacts/unit/tabsPlan.js';
-const target = id => ({ id, locator: { page() {}, count() {}, elementHandles() {}, isVisible() {}, and() {}, getAttribute() {} } });
+const target = id => ({ id, locator: { page() {}, count() {}, evaluateAll() {}, isVisible() {}, and() {}, getAttribute() {} } });
 function base() {
   const items = [0, 1, 2].map(i => ({ tab: target(`tab-${i}`), panel: target(`panel-${i}`) }));
   return { id: 'tabs', tablist: target('list'), items, initialTabId: 'tab-1', orientation: 'horizontal', activation: 'automatic', nextTabStop: items[1].panel };

@@ -4,13 +4,15 @@ import { validJourneyResult } from '../artifacts/unit/validate.js';
 
 export const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const engineCases = new Set([
-  'an early resolution error awaits and disposes slower sibling handles',
+  'an early resolution error awaits slower sibling reads before clearing stored nodes',
   'a focus observation cannot combine two different instants',
-  'replacement during observation is re-resolved and temporary handles are released',
+  'replacement during observation is re-resolved and stored nodes are cleared',
   'a rejected main observation preserves its context diagnosis and releases handles',
   'a rejected iframe observation preserves its context diagnosis and releases handles',
   'interaction observations re-resolve replaced tabs without inventing metadata',
   'interaction observations detect an added tab with fallback role tokens',
+  'live locator bindings change even when the previous element remains connected',
+  'an absent foreign target cannot reuse a main-document binding',
 ]);
 /** Normalize only UUID/time and measured windows; keep semantic observations and actions. */
 export function inspectReport(report, workers, seenRunIds = new Set(), environment) {

@@ -1,9 +1,34 @@
 # Browser worker capacity and deadline checks
 
-The default regression suite uses **one browser worker**. Hosted macOS uses the
-explicit `macos-15-intel` image; local repeatability also covers the recorded arm64 Mac. The four-worker isolation
-comparison remains an explicit part of the local full-suite verifier. A real gap
-above 100 ms still blocks a negative observation; retries remain disabled.
+The default regression suite uses **one browser worker**. CI requires the complete
+suite and package consumers on Linux, `macos-latest` and `macos-15-intel`.
+The four-worker isolation comparison remains part of the local four-round
+verifier. A real gap above 100 ms still blocks a negative observation; retries
+remain disabled. Results below identify their source revision and runner.
+
+## Private observation store
+
+Each driver owns one private browser `Map`, accessed through a public Playwright
+`JSHandle`. Every snapshot resolves each locator again with `evaluateAll` and
+stores the resulting nodes in numbered slots. Only counts and slot numbers cross
+the process boundary. One synchronous browser evaluation reads focus, structure
+and state together, then clears all stored nodes before returning. The map handle
+is disposed when the journey finishes.
+
+This removes per-element handle serialization and disposal from the hot path.
+It does not parse Playwright selectors, cache locator bindings, modify DOM
+attributes or install page globals. The error path waits for every resolver before
+clearing the map, so a slower sibling cannot repopulate it after cleanup. Replaced
+or newly matched targets are resolved afresh; unsupported contexts still block.
+An empty foreign locator remains absent and cannot reuse an earlier binding.
+
+Regressions cover coherent focus, detached replacement, a changed selector match
+while the old node stays connected, absent targets, sibling cleanup, transport
+failure, and dialog focus drift before Enter/Space. Injected browser delays still
+must report `OBSERVATION_GAP` and stop activation. The native benchmark reference
+independently performs the same transport work; its short pilot checks semantic
+equivalence, not release performance. Hosted validation and the new four-round
+record are pending for this changed mechanism.
 
 ## Hosted measurements
 
@@ -81,22 +106,20 @@ browser code on `macos-latest` passed 165/167, with real 113.5 and 203.2 ms gaps
 For the former, a snapshot took 120.7 ms including 5.5 ms in evaluate. The earlier
 passing macOS sample therefore does not establish reliable capacity on that image.
 
-Hosted macOS now selects `macos-15-intel` explicitly. GitHub lists this standard
-public-repository runner with four CPUs and 14 GB RAM, compared with three CPUs
-and 7 GB for its arm64 labels; see the [runner specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
-This is a capacity/configuration choice, not proof that architecture alone caused
-the stalls. The full suite and package checks remain mandatory, with one worker,
-zero retries and the same 100 ms bound. Each job saves its actual OS, architecture,
-CPU, memory and image version. The failed arm64 hosted runs remain evidence of
-that environment's observed limits; local arm64 results do not erase them.
+The [Intel experiment](https://github.com/PerchAnton/keytrail/actions/runs/41028417293)
+at `8ce3b66` also failed: 163/167, with four actual gaps of 122.6–160.2 ms.
+Linux passed all stages including package consumers. More runner capacity alone
+did not solve the problem. Both macOS configurations remain in CI to test the
+private-store change; neither prior failure is replaced by an unchanged retry.
+Each job saves its actual OS, architecture, CPU, memory and image version.
 
-## Reduce transport work and reserve sampling time
+## Earlier reductions and the unchanged sampling limit
 
 The atomic DOM read already checks each resolved target's root against the main
-document. Successful reads now avoid a separate frame-ownership request for every
-target. If handle adoption or evaluation fails, public frame queries distinguish
-an unsupported foreign context from an ordinary browser error. Locators are still
-resolved for each observation, all reads settle, and temporary handles are disposed.
+document. The earlier change avoided a separate frame-ownership request for every
+target. The private-store mechanism retains the atomic context check. When registration
+fails, a primitive-only public locator read distinguishes a foreign frame from
+an ordinary transport failure. All resolver calls settle before cleanup.
 Regressions cover iframe/shadow rejection, replacement, coherent focus, sibling
 cleanup, and transport failure in both the main document and an iframe.
 

@@ -22,8 +22,10 @@ At `6a9cc6a`, the narrower manual-window reads completed the new default protoco
 on four workers**, all passing without retries, skips or semantic differences.
 A separate validation reread all five raw reports, verified current source hashes
 and confirmed **800 distinct journey IDs**. Seven engine-only tests per run have
-no journey attachment. [Current development record](evidence/development-window-reads.json)
+no journey attachment. [Retained development record](evidence/development-window-reads.json)
 is explicitly `finalAcceptance: false`; it does not replace the historical proof.
+The later private-store runtime change needs a separate four-round record;
+the 167-case series is not evidence for that change.
 
 ## Historical alpha.6 verification at `0300552`
 
