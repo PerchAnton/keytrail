@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-10-30T18:31:49.339019+00:00",
+  "sourceCommit": "8f119df5a745b9971f486eb2c054f3c2c3e220ea",
+  "method": "Keyboard input and accessibility-tree inspection in a desktop browser; saved HTML report viewed through its interface.",
+  "scope": "Exploratory example and report review; not a repeated regression suite, pinned Chromium qualification, screen-reader review or human sign-off.",
+  "humanSignOff": false,
+  "examples": [
+    {
+      "example": "vanilla/profile.html",
+      "observed": [
+        "Tab reaches opener; Enter focuses Display name.",
+        "Shift+Tab wraps to Close; Tab wraps back to Display name.",
+        "Escape closes and returns focus to opener."
+      ]
+    },
+    {
+      "example": "vanilla/tabs.html",
+      "observed": [
+        "Right arrow moves focus to Privacy while General remains selected.",
+        "Enter selects Privacy; Tab leaves the tab list for its panel."
+      ]
+    },
+    {
+      "example": "vanilla/form-errors.html",
+      "observed": [
+        "Submitting the invalid sample reveals the error and focuses Email.",
+        "Entering reader@example.test and leaving the field removes the error and displays the cleared status."
+      ]
+    },
+    {
+      "example": "react-portal",
+      "observed": [
+        "Enter opens the portal with focus on Display name.",
+        "Shift+Tab/Tab wrap within the portal; Escape returns to opener.",
+        "Reopening after unmount restores initial focus and closes normally."
+      ]
+    }
+  ],
+  "report": {
+    "sourceRun": 41104556559,
+    "platform": "linux",
+    "kind": "intentional negative consumer",
+    "observedError": "D03 FOCUS_MISMATCH expected=display-name observed=close-profile",
+    "attachmentOpened": true,
+    "observedOutcome": "failed",
+    "dependentChecks": "not_run with blockedBy D03.initial",
+    "screenshot": "../assets/first-mismatch-report.jpg"
+  },
+  "exampleSourceHashes": {
+    "examples/vanilla/profile.html": "b78f6f522340db089850f826d528b9077bde00bdc851cafa3511b8e9e40ab0e3",
+    "examples/vanilla/tabs.html": "c7fe83d4b1437901669143f65e5bc48b15fcfe7f5980c0ed0682097a057e5c95",
+    "examples/vanilla/form-errors.html": "a2c23cd1fb77d77fd3529bda4694ceeba36b7cdf7d9263aaa8d7e28da5222718",
+    "examples/react-portal/app.tsx": "e90bb708a63d15a0b85467dac186eade642af7207cdf6254878033d292daf898",
+    "examples/react-portal/style.css": "353abcd2de36216f2a8993cf8b396de68082eddf890ef7fb9ca565212c175d65"
+  }
+}

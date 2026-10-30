@@ -17,6 +17,13 @@ and verified by the package check. Expand the test, inspect the KeyTrail steps,
 and open the `journey-result.json` attachment. JUnit is also saved alongside each
 HTML folder as `junit.xml` for CI systems; `results.json` is Playwright's JSON output.
 
+The screenshot below is from the intentionally failing React consumer in
+[main CI](https://github.com/PerchAnton/keytrail/actions/runs/41104556559).
+The red result is expected: this control verifies that a broken component fails
+its process. It is not a new regression in the corrected fixture.
+
+![First mismatch and the expanded JSON attachment in the standard HTML report](assets/first-mismatch-report.jpg)
+
 ## Follow the evidence
 
 For the wrong initial-focus variant:

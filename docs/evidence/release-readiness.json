@@ -1,0 +1,97 @@
+{
+  "recordedAt": "2026-10-30T18:31:49.339019+00:00",
+  "package": "keytrail",
+  "version": "0.1.0-alpha.6",
+  "sourceCommit": "8f119df5a745b9971f486eb2c054f3c2c3e220ea",
+  "sourceTree": "39183e79293448c7ebb34a722688db67295754ac",
+  "status": "development-review-ready",
+  "releaseReady": false,
+  "published": false,
+  "finalAcceptance": false,
+  "archive": {
+    "file": "keytrail-0.1.0-alpha.6.tgz",
+    "bytes": 277781,
+    "sha256": "0280a1b20eb9ed2513c6a6d0573fd43336aac8ed18ae38ddab1a6ae703d6bc13",
+    "files": 96
+  },
+  "verificationLevel": "development",
+  "mainCI": {
+    "runId": 41104556559,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41104556559",
+    "conclusion": "success",
+    "sourceHashesMatch": "development-atomic-observations.json",
+    "uniqueJourneyRunIds": 640,
+    "platforms": [
+      {
+        "platform": "linux",
+        "testsPerRound": 169,
+        "rounds": [
+          {
+            "tests": 169,
+            "sha256": "16b5c9d3c36c091bec6ffc294fc16d53963d8dcc360fc60aa10d3ac753d5a2d4",
+            "maximumPassingWindowGapMs": 32.10000000000582
+          }
+        ],
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 277781,
+          "sha256": "0280a1b20eb9ed2513c6a6d0573fd43336aac8ed18ae38ddab1a6ae703d6bc13",
+          "files": 96
+        }
+      },
+      {
+        "platform": "macos-latest",
+        "testsPerRound": 169,
+        "rounds": [
+          {
+            "tests": 169,
+            "sha256": "0966f031965f054f5c5bfc10381ab824e9faf73c2025154760c588c87d7f5e30",
+            "maximumPassingWindowGapMs": 26
+          },
+          {
+            "tests": 169,
+            "sha256": "0769a2af660cfcc1c943b8e674ea40fba127dcd0a9b299c8ada7069e79c8a215",
+            "maximumPassingWindowGapMs": 46.800000000046566
+          },
+          {
+            "tests": 169,
+            "sha256": "afc3528cdf55272dbec4d1c99fa80d9df6ffc99009ebdbd2e7f52b3cf7b4d6db",
+            "maximumPassingWindowGapMs": 31
+          }
+        ],
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 277781,
+          "sha256": "1d5f97686f653f7b73a15a3105888ecbc2fc7aeffcbc47db4c561400dabcf770",
+          "files": 96
+        }
+      }
+    ]
+  },
+  "localDevelopment": {
+    "record": "development-atomic-observations.json",
+    "identity": "8d4ca629173b3dfc93c7e517029efe5b9bdef7b0ee63ccab0162b2873e13bd98",
+    "fullRounds": 4,
+    "sequentialExecutions": 676,
+    "isolationExecutions": 169,
+    "uniqueJourneyRunIds": 800,
+    "retries": 0
+  },
+  "browserReview": "browser-review.json",
+  "registryCheck": {
+    "date": "2026-10-30",
+    "url": "https://registry.npmjs.org/keytrail",
+    "httpStatus": 404,
+    "result": "No package record found; name reservation and publication permission are not established by this response.",
+    "githubReleases": 0,
+    "githubTags": 0
+  },
+  "pending": [
+    "Select and freeze the final reviewed candidate.",
+    "Run the explicitly requested 100-round final series for that source.",
+    "Collect the full equivalent-native benchmark for that source.",
+    "Pass the package release gate with fresh final evidence.",
+    "Obtain owner review and publication authorization.",
+    "Verify registry ownership/authentication and publish the exact verified archive with the alpha tag."
+  ]
+}
