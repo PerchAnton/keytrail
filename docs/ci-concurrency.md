@@ -12,12 +12,11 @@ remain disabled. Results below identify their source revision and runner.
 
 Each driver owns one private browser `Map`, accessed through a public Playwright
 `JSHandle`. Every snapshot resolves each locator again with `evaluateAll` and
-stores the resulting nodes in numbered slots. Only counts and slot numbers cross
-the process boundary. One synchronous browser evaluation reads focus, structure
-and state together, then clears all stored nodes before returning. The map handle
-is disposed when the journey finishes. The state-reader function is compiled
-once in that private object; later calls send only the request and a small
-dispatch function rather than retransmitting the complete DOM reader.
+stores the resulting nodes in numbered slots. The final registration synchronously
+reads focus, structure and state, then clears the nodes before returning that
+snapshot. Other registrations return counts only. There is no additional host
+request between completing resolution and reading state. The reader and immutable
+contract metadata are sent once per journey; the handle is disposed on completion.
 
 This removes per-element handle serialization and disposal from the hot path.
 It does not parse Playwright selectors, cache locator bindings, modify DOM
@@ -34,6 +33,45 @@ independently performs the same transport work; its short pilot checks semantic
 equivalence, not release performance. The reader-caching results below separate successful ARM/Linux validation from
 the remaining Intel failure. The [local four-round record](evidence/development-cached-reader.json)
 passed 676 sequential and 169 four-worker checks with matching semantics and no retries.
+
+## Atomic registration follow-up
+
+The post-merge [main run](https://github.com/PerchAnton/keytrail/actions/runs/41091449659)
+passed all 169 cases on Linux but only 168 on macOS ARM. The short manual-tabs
+window blocked at `T05.forward.003.unchanged`: its actual gap was 126.7 ms.
+The corresponding host snapshot took 126.3 ms, with only 3.9 ms in the final
+`page.evaluate` call. Resolution/transport before that call dominated the delay;
+these timings do not identify a specific runner or browser scheduling cause.
+
+The follow-up removes that final request and sends immutable metadata only once.
+Fresh locator resolution, browser timestamps, cleanup, the 100 ms bound and
+zero retries remain unchanged. Opt-in diagnostics now retain the duration of
+every locator registration, as well as each complete snapshot. `evaluateMs` counts
+separate page evaluations only; zero does not mean the DOM read was instantaneous.
+macOS ARM CI runs three complete rounds, stops at the first failure and preserves
+each raw report. Linux keeps one complete round. Local verification remains four
+rounds plus the separate four-worker comparison.
+
+At `7e48291`, all three ARM rounds passed (507 tests), as did the complete Linux
+suite (169) and actual package consumers on both platforms. All raw reports,
+semantic signatures, source hashes and package checksums were independently
+checked: [CI evidence](evidence/ci-atomic-observations.json). This small sample
+supports the change; it cannot guarantee scheduling latency on a shared host.
+
+The new [local proof](evidence/development-atomic-observations.json) confirms
+four rounds (676 tests) and the separate four-worker comparison (169), with
+800 distinct journey IDs, no retries and matching semantics. Older cached-reader
+records are historical for this changed implementation.
+
+| Platform / round | Passed | Largest gap in a passing manual window |
+| --- | ---: | ---: |
+| Linux / 1 | 169/169 | 29.4 ms |
+| macOS ARM / 1 | 169/169 | 44.0 ms |
+| macOS ARM / 2 | 169/169 | 69.1 ms |
+| macOS ARM / 3 | 169/169 | 48.6 ms |
+
+These maxima include the short 50 ms fixture. Deliberately injected 150 ms gaps
+remain blocked and are excluded from passing-window maxima.
 
 ## Hosted measurements
 

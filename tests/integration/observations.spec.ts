@@ -23,7 +23,13 @@ test('a focus observation cannot combine two different instants', async ({ page 
   const a = { id: 'a', locator: page.locator('#a') }, b = { id: 'b', locator: page.locator('#b') };
   const dialog = { id: 'dialog', locator: page.locator('#dialog') };
   await a.locator.focus();
-  const move = () => b.locator.focus();
+  let release!: () => void;
+  const moved = new Promise<void>(resolve => { release = resolve; });
+  const rootRead = dialog.locator.evaluateAll;
+  dialog.locator.evaluateAll = (async (...args: Parameters<typeof rootRead>) => {
+    await moved; return rootRead.apply(dialog.locator, args);
+  }) as typeof rootRead;
+  const move = async () => { await b.locator.focus(); release(); };
   // Move focus after one locator has populated its slot, before the atomic read.
   const evaluateAll = a.locator.evaluateAll;
   a.locator.evaluateAll = (async (...args: Parameters<typeof evaluateAll>) => {
@@ -81,12 +87,17 @@ test('replacement during observation is re-resolved and stored nodes are cleared
   await page.setContent('<section id="dialog"><button id="a">A</button></section>');
   const a = { id: 'a', locator: page.locator('#a') }, dialog = { id: 'dialog', locator: page.locator('#dialog') };
   const stores = trackStores(page), evaluateAll = a.locator.evaluateAll;
-  let resolutions = 0;
+  let resolutions = 0, release!: () => void;
+  const replaced = new Promise<void>(resolve => { release = resolve; });
+  const rootRead = dialog.locator.evaluateAll;
+  dialog.locator.evaluateAll = (async (...args: Parameters<typeof rootRead>) => {
+    await replaced; return rootRead.apply(dialog.locator, args);
+  }) as typeof rootRead;
   a.locator.evaluateAll = (async (...args: Parameters<typeof evaluateAll>) => {
     const value = await evaluateAll.apply(a.locator, args);
     if (++resolutions === 1) {
       await a.locator.evaluate(el => el.replaceWith(el.cloneNode(true)));
-      await a.locator.focus();
+      await a.locator.focus(); release();
     }
     return value;
   }) as typeof evaluateAll;
@@ -125,15 +136,15 @@ for (const context of ['main', 'iframe'] as const) test(`a rejected ${context} o
   await expect(page.frameLocator('iframe').locator('button')).toBeVisible();
   const target = { id: 'target', locator: context === 'main' ? page.locator('#main') : page.frameLocator('iframe').locator('button') };
   const stores = trackStores(page);
-  // A failed atomic read stays a browser error. A foreign context is rejected
-  // during registration, before this read, without returning element handles.
-  const evaluate = page.evaluate;
-  page.evaluate = async () => { throw new Error('CANARY_transport'); };
+  // Ordinary transport failure stays a browser error. A foreign context is
+  // rejected naturally when it tries to register with the main-document store.
+  const evaluateAll = target.locator.evaluateAll;
+  if (context === 'main') target.locator.evaluateAll = async () => { throw new Error('CANARY_transport'); };
   const driver = new Driver(page, [target], target, { ...DEFAULTS }, performance.now());
   try {
     await expect(driver.snapshot()).rejects.toMatchObject({ code: context === 'iframe' ? 'UNSUPPORTED_CONTEXT' : 'BROWSER_ERROR' });
     await expectCleared(stores.issued); expect(driver.steps).toHaveLength(0);
-  } finally { page.evaluate = evaluate; await driver.dispose(); stores.restore(); }
+  } finally { target.locator.evaluateAll = evaluateAll; await driver.dispose(); stores.restore(); }
   await expectDisposed(stores.issued);
 });
 

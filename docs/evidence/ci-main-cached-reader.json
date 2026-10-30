@@ -1,0 +1,17 @@
+{
+  "sourceCommit": "6e98804ae10c55e52c802e80ff77499da68340fb",
+  "runId": 41091449659,
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41091449659",
+  "workflowConclusion": "failure",
+  "finalAcceptance": false,
+  "observationGapLimitMs": 100,
+  "linuxPassed": 169,
+  "macosArmPassed": 168,
+  "macosArmFailed": 1,
+  "checkId": "T05.forward.003.unchanged",
+  "messageCode": "OBSERVATION_GAP",
+  "maximumGapMs": 126.7,
+  "snapshotMs": 126.255583,
+  "separateEvaluateMs": 3.873583,
+  "note": "Raw reports retained locally; no unchanged rerun replaces this failure."
+}

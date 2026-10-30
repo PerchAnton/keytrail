@@ -18,12 +18,11 @@ class NativeFailure extends Error {
 }
 
 /** Independently compiled once, with the same public transport operations. */
-function createNativeStore() {
+type NativeRequest = { slots: { id: string; slot: string }[]; rootId: string;
+  roleSlots: Record<string, string>; semantics: boolean };
+function createNativeStore(requests: Record<'complete' | 'interaction', NativeRequest>) {
   const registry = new Map<string, Element[]>();
-  return Object.assign(registry, { read({ slots, rootId, roleSlots, semantics }: {
-    slots: { id: string; slot: string }[]; rootId: string;
-    roleSlots: Record<string, string>; semantics: boolean;
-  }) {
+  const read = ({ slots, rootId, roleSlots, semantics }: NativeRequest) => {
     try {
       const nodes = slots.map(t => ({ id: t.id, node: registry.get(t.slot)?.[0] ?? null }));
       const roles = Object.fromEntries(Object.entries(roleSlots).map(([name, slot]) => [name, registry.get(slot) ?? []]));
@@ -80,7 +79,15 @@ function createNativeStore() {
         formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
       };
     } finally { registry.clear(); }
-  } });
+  };
+  return Object.assign(registry, {
+    register(nodes: Element[], slot: string, scope: 'complete' | 'interaction') {
+      registry.set(slot, nodes);
+      const request = requests[scope];
+      return { count: nodes.length,
+        state: registry.size === request.slots.length + Object.keys(request.roleSlots).length ? read(request) : null };
+    },
+  });
 }
 
 /** Fixture-specific reference. No KeyTrail driver, planner, assertion or serializer is called. */
@@ -109,20 +116,40 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   };
   const remaining = () => { guard(); return Math.max(1, Math.min(config.timeoutMs, config.scenarioTimeoutMs - (performance.now() - started))); };
   const targets = manifest.targets.map(t => ({ id: t.id, locator: page.locator(t.selector) }));
+  const plan = (semantics: boolean) => {
+    const roleQueries = [
+      ['dialog', page.getByRole('dialog', { includeHidden: true })],
+      ['alert', page.getByRole('alertdialog', { includeHidden: true })],
+      ...(manifest.kind === 'tabs' ? [
+        ['tab', page.getByRole('tab', { includeHidden: true })],
+        ...(semantics ? [
+          ['tablist', page.getByRole('tablist', { includeHidden: true })],
+          ['named', page.getByRole('tablist', { name: /\S/, includeHidden: true })],
+          ['tabpanel', page.getByRole('tabpanel', { includeHidden: true })],
+        ] as const : []),
+      ] as const : []),
+    ] as const;
+    const request: NativeRequest = {
+      slots: targets.map(t => ({ id: t.id, slot: `target:${t.id}` })), rootId: manifest.root,
+      roleSlots: Object.fromEntries(roleQueries.map(([name]) => [name, `role:${name}`])), semantics,
+    };
+    return { roleQueries, request };
+  };
+  const plans = { complete: plan(true), interaction: plan(false) };
   let store: JSHandle<ReturnType<typeof createNativeStore>> | undefined;
   const capture = async (semantics = true) => {
     guard();
-    store ??= await page.evaluateHandle(createNativeStore);
+    const scope: 'complete' | 'interaction' = semantics ? 'complete' : 'interaction';
+    store ??= await page.evaluateHandle(createNativeStore, { complete: plans.complete.request, interaction: plans.interaction.request });
     const registry = store;
     let readFinished = false;
     const resolve = async (locator: typeof targets[number]['locator'], slot: string) => {
       guard();
       if (locator.page() !== page) throw new NativeFailure('UNSUPPORTED_CONTEXT');
-      let count: number;
+      let response: ReturnType<ReturnType<typeof createNativeStore>['register']>;
       try {
-        count = await locator.evaluateAll((nodes, { registry, slot }) => {
-          registry.set(slot, nodes); return nodes.length;
-        }, { registry, slot });
+        response = await locator.evaluateAll((nodes, { registry, slot, scope }) => registry.register(nodes, slot, scope),
+          { registry, slot, scope: scope as 'complete' | 'interaction' });
       } catch (error) {
         guard();
         const main = await locator.evaluateAll(() => window === window.top).catch(() => undefined);
@@ -130,41 +157,25 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
         if (main === false) throw new NativeFailure('UNSUPPORTED_CONTEXT');
         throw error;
       }
-      guard(); return count;
+      guard(); return response;
     };
     try {
       // The fixture reference independently uses a private registry, fresh
       // locator resolution and atomic cleanup, matching the measured work.
       const targetReads = Promise.allSettled(targets.map(async t => {
-        const slot = `target:${t.id}`, count = await resolve(t.locator, slot);
-        if (count > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
-        return { id: t.id, slot };
+        const slot = `target:${t.id}`, response = await resolve(t.locator, slot);
+        if (response.count > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
+        return response;
       }));
-      const roleSlots: Record<string, string> = {};
-      const roleQueries = [
-        ['dialog', page.getByRole('dialog', { includeHidden: true })],
-        ['alert', page.getByRole('alertdialog', { includeHidden: true })],
-        ...(manifest.kind === 'tabs' ? [
-          ['tab', page.getByRole('tab', { includeHidden: true })],
-          ...(semantics ? [
-            ['tablist', page.getByRole('tablist', { includeHidden: true })],
-            ['named', page.getByRole('tablist', { name: /\S/, includeHidden: true })],
-            ['tabpanel', page.getByRole('tabpanel', { includeHidden: true })],
-          ] as const : []),
-        ] as const : []),
-      ] as const;
-      const roleReads = Promise.allSettled(roleQueries.map(async ([name, locator]) => {
-        const slot = `role:${name}`; await resolve(locator, slot); roleSlots[name] = slot;
-      }));
+      const roleReads = Promise.allSettled(plans[scope].roleQueries.map(([name, locator]) => resolve(locator, `role:${name}`)));
       const [reads, rolesRead] = await Promise.all([targetReads, roleReads]);
       const rejected = reads.find(r => r.status === 'rejected');
       if (rejected?.status === 'rejected') throw rejected.reason;
       const roleFailure = rolesRead.find(r => r.status === 'rejected');
       if (roleFailure?.status === 'rejected') throw roleFailure.reason;
-      const slots = reads.map(r => (r as PromiseFulfilledResult<{ id: string; slot: string }>).value);
-      guard();
-      const state = await page.evaluate(({ registry, ...request }) => registry.read(request),
-        { registry, slots, rootId: manifest.root, roleSlots, semantics });
+      const states = [...reads, ...rolesRead].flatMap(r => r.status === 'fulfilled' && r.value.state ? [r.value.state] : []);
+      if (states.length !== 1) throw new NativeFailure('BROWSER_ERROR');
+      const state = states[0]!;
       readFinished = true;
       guard();
       if (state.code) throw new NativeFailure(state.code as MessageCode);

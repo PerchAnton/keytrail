@@ -11,15 +11,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | 169/169 in each of four local rounds at `4abf74c`; hosted results separated below; no retries |
+| Browser suite | 169/169 in each of four local rounds at `7e48291`; hosted results separated below; no retries |
 | Worker isolation | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
-| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard-cached-reader.json) |
+| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard-atomic-observations.json) |
 | Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
-| Repeatability | `4abf74c`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-cached-reader.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Current `4abf74c`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-cached-reader.json); final acceptance remains false |
-| Hosted platforms | Selected Linux + macOS ARM CI at `63f9edf`: all stages passed, 169 browser cases each and clean package consumers. [Validated record](evidence/ci-arm-development.json). Earlier Intel 370 ms gap retained separately. |
+| Repeatability | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
+| Package consumers | Current `7e48291`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-atomic-observations.json); final acceptance remains false |
+| Hosted platforms | At `7e48291`: 3 × 169 macOS ARM and 169 Linux checks; all stages and clean package consumers passed. [Validated record](evidence/ci-atomic-observations.json). Earlier main ARM 126.7 ms and Intel 370 ms failures remain recorded. |
 
 ## Historical performance (`0300552`)
 
@@ -59,7 +59,7 @@ The source now resolves locators into a private browser map on every observation
 reads focus and containment together, and clears stored nodes before returning.
 It waits for sibling reads even on failure and disposes the map at journey end.
 No target binding is cached; [mechanism and regressions](ci-concurrency.md).
-The cached-reader four-round proof independently validates this runtime. Earlier
+The atomic-registration four-round proof independently validates this runtime. Earlier
 repeatability records remain historical for their own source hashes.
 
 ## Reproduction

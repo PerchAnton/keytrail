@@ -171,14 +171,15 @@ test('tabs attachment failure preserves the detected defect', async ({ page }, i
 
 for (const latency of ['before', 'after'] as const) test(`manual tabs block a browser observation gap ${latency} evaluation`, async ({ page }, info) => {
   await page.setContent(tabsHtml({ activation: 'manual' }));
-  const original = page.evaluate.bind(page);
-  page.evaluate = (async (...args: Parameters<typeof original>) => {
+  const contract = tabsContract(page, { activation: 'manual' });
+  const locator = contract.tablist.locator, original = locator.evaluateAll.bind(locator);
+  locator.evaluateAll = (async (...args: Parameters<typeof original>) => {
     if (latency === 'before') await new Promise(resolve => setTimeout(resolve, 150));
     const value = await original(...args);
     if (latency === 'after') await new Promise(resolve => setTimeout(resolve, 150));
     return value;
-  }) as typeof page.evaluate;
-  const error = await failure(page, info, { ...tabsContract(page, { activation: 'manual' }), observationWindowMs: 50 });
+  }) as typeof locator.evaluateAll;
+  const error = await failure(page, info, { ...contract, observationWindowMs: 50 });
   expect(error.code).toBe('OBSERVATION_GAP'); expect(error.result.outcome).toBe('blocked');
   const check = error.result.checks.find(c => c.status === 'blocked')!;
   expect(check.checkId).toBe('T05.forward.001.unchanged');

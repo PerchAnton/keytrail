@@ -31,6 +31,10 @@
   while preserving dynamic targets, foreign-context checks and error cleanup.
   Compile the browser-side state reader once per journey to avoid sending its
   complete function body with each observation.
+- Read state in the final fresh locator registration, eliminating the extra host
+  request after resolution. Cache immutable request metadata per journey and retain
+  per-locator timing diagnostics. Validate macOS ARM with three complete CI rounds,
+  stopping on any failure without retries.
 - Require full one-worker CI suites and package consumers on Linux and macOS ARM.
   Retain the unsuccessful Intel capacity experiments and the unchanged 100 ms bound.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
