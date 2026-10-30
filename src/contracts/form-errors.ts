@@ -8,6 +8,8 @@ export function validateFormErrors(value: unknown): ValidatedForm | null {
       !Array.isArray(value.correction) || value.correction.length !== value.errors.length ||
       !['Enter', 'Space'].includes(value.submitKey as string) ||
       !['live', 'resubmit'].includes(value.validateCorrection as string) || !object(value.focusAfterInvalid)) return null;
+  const inputMode = value.inputMode === undefined ? 'insertText' : value.inputMode;
+  if (!['type', 'insertText'].includes(inputMode as string)) return null;
   if (value.summaryLinks !== undefined && (!Array.isArray(value.summaryLinks) || value.summaryLinks.length > 100)) return null;
   const links = (value.summaryLinks ?? []) as unknown[];
   if (![...value.errors, ...value.correction, ...links].every(object)) return null;
@@ -22,7 +24,8 @@ export function validateFormErrors(value: unknown): ValidatedForm | null {
     if (typeof text === 'string' ? !text.trim() : !(text instanceof RegExp) || text.global || text.sticky) return null;
   }
   if (new Set(correction.map(c => c.field)).size !== fields.length || correction.some(c =>
-    !fields.includes(c.field) || typeof c.value !== 'string' || [...c.value].length > 256)) return null;
+    !fields.includes(c.field) || typeof c.value !== 'string' || [...c.value].length > 256 ||
+    (inputMode === 'type' && /[^\x20-\x7e]/.test(c.value)))) return null;
   if (new Set(summaryLinks.map(l => l.link)).size !== summaryLinks.length ||
       summaryLinks.some(l => !fields.includes(l.field))) return null;
   const focus = value.focusAfterInvalid;
@@ -43,6 +46,7 @@ export function validateFormErrors(value: unknown): ValidatedForm | null {
     summaryLinks: Object.freeze(summaryLinks.map(l => Object.freeze({ link: copy(l.link), field: copy(l.field) }))),
     correction: Object.freeze(correction.map(c => Object.freeze({ field: copy(c.field), value: c.value as string }))),
     validateCorrection: value.validateCorrection as 'live' | 'resubmit',
+    inputMode: inputMode as 'type' | 'insertText',
   });
-  return { contract, config: common.config, targets: [...copies.values()] };
+  return { contract, config: { ...common.config, inputMode: contract.inputMode! }, targets: [...copies.values()] };
 }

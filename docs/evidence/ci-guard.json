@@ -1,39 +1,70 @@
 {
-  "recordedAt": "2026-10-28T16:27:56.159Z",
-  "version": "0.1.0-alpha.5",
+  "recordedAt": "2026-10-30T06:06:40.929Z",
+  "version": "0.1.0-alpha.6",
   "node": "v24.22.1",
   "platform": "darwin",
   "playwright": "1.64.1",
   "scope": "Actual Playwright subprocess exit codes using synthetic reports and fault injection; browser consumers checked separately.",
   "sourceHashes": {
-    "src/browser/driver.ts": "80cc52ce128b30f22077236a4d4613f9603141a3cac90f20c5067b0ca71bcbea",
+    "src/browser/driver.ts": "0de5265a2c7a43f35ccbead8cd5fd8271a80ba549922a4b1193732f93bf18795",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
-    "src/contracts/form-errors.ts": "6c46b41d4b11e76db1ab4357b5c7ad7cfe514c6b5f0d655818b585a085b54650",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
     "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
-    "src/contracts/types.ts": "68789401507085961557a0a9b7fba17519396297e7e368cae1d25edb401b02ba",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
     "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "4b2452fdb9b876bc3efb893b32042a961d2340fa804f30ffa5c9f3ada9e9cf97",
     "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
     "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
     "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
     "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
-    "src/reporting/serialize.ts": "da5647dbfd9a038050d3f97093d86a9932980b476b8f3e7f20c64986e992489f",
-    "src/reporting/validate.ts": "f6a550fedd17a6b41390bb4cf8a6d25293b60d6eedb38dfa0ac424a0dc8c9e3d",
-    "src/scenarios/dialog.ts": "beddf26e5c4b7397a60778ff9ffe67e1cc7af17ef8a7a2789e45f4a0d24b3515",
-    "src/scenarios/form-errors.ts": "e240262f2d0cafc413a808e23ea86617a9bf15f982212f990621d73e5661dde1",
-    "src/scenarios/tabs.ts": "4683bc0698598748a66b21bb879a12f2ed21f2b6ca7cfbd92225c08e07062581",
-    "src/version.ts": "83275407498c9dcb669c61058c79baf9a05daedfc988e9b1253776e6942de35e",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "a5d62e94cf8281b0dfe8b4061a962faa55245a58a0242265f3ab17fb377f8194",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
     "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
-    "tests/guard/fixture.spec.mjs": "f0bf2bc61665a10118052b7c777b5db509fdb06c927c09bf26c33678a0e2146a",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
     "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
     "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
     "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
-    "scripts/check-guard.mjs": "c6b21c30d5f1fc30c3cbf4b730b2a18ed786598d434e2565537e3d96920c3652",
-    "scripts/build.mjs": "13e6ab25d84750b19cefe1c6166f5cf4ffb7d28e294aacc91a4ff3348fa4da5c",
-    "schema/journey-result.v1.json": "724dc6784af0058f2b12068c302775d250ca070a57030a388545470ba495ee57"
+    "scripts/check-guard.mjs": "9e4dd65ec9aa81a4d9074dec539b749d19202337a4b4be8566209d06c07979d7",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6"
   },
   "cases": [
+    {
+      "case": "window-pass",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "codes": []
+    },
+    {
+      "case": "observation-gap",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "codes": [
+        "JOURNEY_INCOMPLETE"
+      ]
+    },
+    {
+      "case": "gap-pass",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "codes": [
+        "REPORT_INVALID"
+      ]
+    },
+    {
+      "case": "missing-window",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "codes": [
+        "REPORT_INVALID"
+      ]
+    },
     {
       "case": "body",
       "expectedExit": 0,

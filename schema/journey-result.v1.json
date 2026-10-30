@@ -119,6 +119,12 @@
           "type": "integer",
           "minimum": 50,
           "maximum": 2000
+        },
+        "inputMode": {
+          "enum": [
+            "insertText",
+            "type"
+          ]
         }
       },
       "required": [
@@ -279,7 +285,8 @@
               "INVALID_STATE_MISMATCH",
               "NOT_EDITABLE",
               "VALUE_MISMATCH",
-              "ERROR_NOT_CLEARED"
+              "ERROR_NOT_CLEARED",
+              "OBSERVATION_GAP"
             ]
           },
           "expected": {
@@ -355,6 +362,23 @@
               },
               "editable": {
                 "type": "boolean"
+              },
+              "observationCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000
+              },
+              "observationIntervalsMs": {
+                "type": "array",
+                "maxItems": 99999,
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "maxObservationGapMs": {
+                "type": "number",
+                "minimum": 0
               }
             },
             "required": []
@@ -432,6 +456,23 @@
               },
               "editable": {
                 "type": "boolean"
+              },
+              "observationCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 100000
+              },
+              "observationIntervalsMs": {
+                "type": "array",
+                "maxItems": 99999,
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "maxObservationGapMs": {
+                "type": "number",
+                "minimum": 0
               }
             },
             "required": []
@@ -481,7 +522,8 @@
           "actionKind": {
             "enum": [
               "press",
-              "insertText"
+              "insertText",
+              "type"
             ]
           },
           "key": {
@@ -545,7 +587,10 @@
             "if": {
               "properties": {
                 "actionKind": {
-                  "const": "insertText"
+                  "enum": [
+                    "insertText",
+                    "type"
+                  ]
                 }
               }
             },

@@ -28,16 +28,31 @@ jobs:
           echo "$RUNNER_TEMP/keytrail-pnpm/bin" >> "$GITHUB_PATH"
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
-      - name: Verify tarball consumers
+      - name: Record runner environment
+        run: |
+          mkdir -p artifacts
+          node --input-type=module <<'JS'
+          import { cpus, platform, arch, release, totalmem } from 'node:os';
+          import { writeFileSync } from 'node:fs';
+          writeFileSync('artifacts/runner-environment.json', JSON.stringify({
+            platform: platform(), arch: arch(), release: release(), node: process.versions.node,
+            cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(),
+            imageOS: process.env.ImageOS, imageVersion: process.env.ImageVersion,
+          }, null, 2) + '\n');
+          JS
+      - name: Build and check contracts
         run: |
           pnpm build
-          pnpm test:package
-      - name: Run regression suite
-        run: |
           pnpm test:types
           pnpm test:unit
           pnpm test:guard
-          pnpm test:browser
+      - name: Browser regression suite (one worker)
+        env:
+          KEYTRAIL_PROFILE_SNAPSHOTS: '1'
+          PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
+        run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
+      - name: Verify development tarball consumers
+        run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
@@ -49,7 +64,7 @@ jobs:
             artifacts/consumers/react-portal/
           if-no-files-found: error
   macos:
-    name: macOS / Chromium / package consumers
+    name: macOS ARM / Chromium / package consumers
     runs-on: macos-latest
     timeout-minutes: 15
     steps:
@@ -62,20 +77,35 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
       - run: pnpm exec playwright install chromium
-      - name: Verify tarball consumers
+      - name: Record runner environment
+        run: |
+          mkdir -p artifacts
+          node --input-type=module <<'JS'
+          import { cpus, platform, arch, release, totalmem } from 'node:os';
+          import { writeFileSync } from 'node:fs';
+          writeFileSync('artifacts/runner-environment.json', JSON.stringify({
+            platform: platform(), arch: arch(), release: release(), node: process.versions.node,
+            cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(),
+            imageOS: process.env.ImageOS, imageVersion: process.env.ImageVersion,
+          }, null, 2) + '\n');
+          JS
+      - name: Build and check contracts
         run: |
           pnpm build
-          pnpm test:package
-      - name: Run regression suite
-        run: |
           pnpm test:types
           pnpm test:unit
           pnpm test:guard
-          pnpm test:browser
+      - name: Browser regression suite (one worker)
+        env:
+          KEYTRAIL_PROFILE_SNAPSHOTS: '1'
+          PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
+        run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
+      - name: Verify development tarball consumers
+        run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
-          name: macos-evidence
+          name: macos-latest-evidence
           path: |
             artifacts/*.json
             artifacts/*.tgz

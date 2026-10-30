@@ -5,7 +5,7 @@ import { validateDialog } from '../../artifacts/unit/validation.js';
 import { planDialog } from '../../artifacts/unit/plan.js';
 import { coverage, outcome } from '../../artifacts/unit/result.js';
 
-const target = id => ({ id, locator: { page() {}, count() {}, elementHandles() {}, isVisible() {}, and() {}, getAttribute() {} } });
+const target = id => ({ id, locator: { page() {}, count() {}, evaluateAll() {}, isVisible() {}, and() {}, getAttribute() {} } });
 function base() {
   const trigger = target('open'), name = target('name'), save = target('save');
   return { id: 'profile', trigger, returnFocus: trigger, dialog: target('dialog'),
@@ -65,7 +65,7 @@ test('package and source version agree; published exports contain no future stub
 });
 
 test('rejects incomplete locator implementations before browser work', () => {
-  for (const method of ['count', 'page', 'elementHandles', 'isVisible', 'and', 'getAttribute']) {
+  for (const method of ['count', 'page', 'evaluateAll', 'isVisible', 'and', 'getAttribute']) {
     const contract = base();
     delete contract.trigger.locator[method];
     assert.equal(validateDialog(contract), null, method);

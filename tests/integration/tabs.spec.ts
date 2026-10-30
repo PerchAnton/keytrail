@@ -1,8 +1,15 @@
 import { test, expect, type Page, type TestInfo } from '@playwright/test';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { readFileSync } from 'node:fs';
+import { mock } from 'node:test';
 import { assertTabsJourney, JourneyAssertionError, type JourneyResult, type TabsContract } from '../../src/index.js';
+import { ObservationWindow } from '../../src/engine/observation-window.js';
 import { tabsHtml, tabsContract, type TabsOptions } from '../fixtures/tabs.js';
+import { recordSnapshotTimings } from '../support/snapshot-timings.js';
+
+let finishTimings: (() => Promise<void>) | undefined;
+test.beforeEach(async ({ page }, info) => { finishTimings = recordSnapshotTimings(page, info); });
+test.afterEach(async () => { await finishTimings?.(); finishTimings = undefined; });
 
 const schema = new Ajv2020({ strict: true }).compile(JSON.parse(readFileSync('schema/journey-result.v1.json', 'utf8')));
 function verify(result: JourneyResult, info: TestInfo) {
@@ -105,8 +112,35 @@ test('tabs report omits DOM IDs, labels, page text and URL', async ({ page }, in
 test('tabs manual observation cannot outlive the scenario budget', async ({ page }, info) => {
   const options = { activation: 'manual' as const };
   await page.setContent(tabsHtml(options));
-  const error = await failure(page, info, { ...tabsContract(page, options), observationWindowMs: 1500, scenarioTimeoutMs: 1000 });
+  // Freeze only the host budget clock during setup. Advance it to the deadline
+  // after the first real browser snapshot enters the negative window. No sleep
+  // or assumption about how quickly the preceding checks can finish is needed.
+  // Integer clock values make the exact boundary independent of floating-point
+  // cancellation when subtracting a large fractional process uptime.
+  let now = 0, enteredWindow = false;
+  const clock = mock.method(performance, 'now', () => now);
+  const originalAdd = ObservationWindow.prototype.add;
+  const add = mock.method(ObservationWindow.prototype, 'add', function (this: ObservationWindow, at: number) {
+    originalAdd.call(this, at);
+    if (!enteredWindow) { enteredWindow = true; now += 2000; }
+  });
+  let error: JourneyAssertionError;
+  try {
+    error = await failure(page, info, { ...tabsContract(page, options), observationWindowMs: 2000, scenarioTimeoutMs: 2000 });
+  } finally { add.mock.restore(); clock.mock.restore(); }
+  expect(enteredWindow).toBe(true);
   expect(error.code).toBe('SCENARIO_TIMEOUT'); expect(error.result.steps.some(s => s.key === 'Enter')).toBe(false);
+  const blocked = error.result.checks.find(c => c.status === 'blocked')!;
+  expect(blocked.checkId).toBe('T05.forward.001.unchanged');
+  expect(blocked.observed.focus).toBe('tab-2');
+  expect(blocked.observed.selected).toBe('tab-1');
+  expect(blocked.observed.observationCount).toBe(1);
+  expect(blocked.observed.observationWindowMs).toBe(0);
+  expect(error.result.run.durationMs).toBe(2000);
+  expect(error.result.checks.filter(c => c.status === 'not_run').every(c => c.blockedBy === blocked.checkId)).toBe(true);
+  const keys = await page.evaluate(() => (window as any).keytrailKeys.length);
+  await page.waitForTimeout(100);
+  expect(await page.evaluate(() => (window as any).keytrailKeys.length)).toBe(keys);
 });
 test('tabs target aliases are blocked before keyboard input', async ({ page }, info) => {
   await page.setContent(tabsHtml());
@@ -133,4 +167,37 @@ test('tabs attachment failure preserves the detected defect', async ({ page }, i
   expect(error.code).toBe('REPORT_WRITE_FAILED');
   expect(error.result.checks.find(c => c.status === 'fail')?.messageCode).toBe('IDREF_MISMATCH');
   expect(error.message).not.toContain('CANARY');
+});
+
+for (const latency of ['before', 'after'] as const) test(`manual tabs block a browser observation gap ${latency} evaluation`, async ({ page }, info) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const original = page.evaluate.bind(page);
+  page.evaluate = (async (...args: Parameters<typeof original>) => {
+    if (latency === 'before') await new Promise(resolve => setTimeout(resolve, 150));
+    const value = await original(...args);
+    if (latency === 'after') await new Promise(resolve => setTimeout(resolve, 150));
+    return value;
+  }) as typeof page.evaluate;
+  const error = await failure(page, info, { ...tabsContract(page, { activation: 'manual' }), observationWindowMs: 50 });
+  expect(error.code).toBe('OBSERVATION_GAP'); expect(error.result.outcome).toBe('blocked');
+  const check = error.result.checks.find(c => c.status === 'blocked')!;
+  expect(check.checkId).toBe('T05.forward.001.unchanged');
+  expect(check.observed.observationCount).toBe(2);
+  expect(check.observed.observationIntervalsMs).toHaveLength(1);
+  expect(check.observed.maxObservationGapMs).toBeGreaterThan(100);
+  expect(error.result.steps.some(s => s.key === 'Enter' || s.key === 'Space')).toBe(false);
+  expect(error.result.checks.filter(c => c.status === 'not_run').every(c => c.blockedBy === check.checkId)).toBe(true);
+});
+
+test('manual tabs record initial and final observations even for a short window', async ({ page }, info) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const result = await assertTabsJourney(page, info, { ...tabsContract(page, { activation: 'manual' }), observationWindowMs: 50 });
+  verify(result, info);
+  for (const check of result.checks.filter(c => c.checkId.endsWith('.unchanged'))) {
+    const observed = check.observed;
+    expect(observed.observationCount).toBeGreaterThanOrEqual(2);
+    expect(observed.observationIntervalsMs!.length).toBe(observed.observationCount! - 1);
+    expect(observed.observationWindowMs).toBeGreaterThanOrEqual(50);
+    expect(observed.maxObservationGapMs).toBeLessThanOrEqual(100);
+  }
 });

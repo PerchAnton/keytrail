@@ -28,7 +28,8 @@ export async function assertFormErrorsJourney(page: Page, info: TestInfo, input:
     config: valid?.config ?? { ...DEFAULTS }, outcome: 'blocked', coverage: coverage(plan.checks, 'unreached'),
     checks: plan.checks, steps: [], limitations: [
       'Chromium; main document; novalidate form; native text inputs and textarea; at most 20 declared fields.',
-      'Correction uses select-all and keyboard.insertText, or Backspace for an empty value; no IME or per-character key-event check.',
+      'Correction uses select-all, then the reported inputMode: insertText or per-character type for printable ASCII; empty values use Backspace.',
+      'Type mode checks browser keyboard events, not a physical keyboard layout or IME. InsertText does not check character key handlers.',
       'Fragment changes are allowed only during declared summary-link activation with verified Document identity.',
       'Only declared errors are checked. Clearing them does not prove server persistence, success announcements or WCAG conformance.',
       'Use synthetic values and mock network requests in test setup. No application state restoration.',
@@ -149,6 +150,9 @@ export async function assertFormErrorsJourney(page: Page, info: TestInfo, input:
         };
         await d.press('ControlOrMeta+A', item.field, false, editable);
         if (item.value === '') await d.press('Backspace', item.field, false, editable);
+        else if (contract.inputMode === 'type') {
+          for (const character of item.value) await d.typeCharacter(character, item.field, editable);
+        }
         else await d.insertText(item.value, item.field, editable);
         await observe(`${id}.value`, 'VALUE_MISMATCH', s => ({
           ok: s.form!.errors[errorIndex]!.valueMatches, observed: { editable: s.form!.errors[errorIndex]!.editable,

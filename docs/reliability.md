@@ -1,26 +1,115 @@
 # Full-suite repeatability protocol
 
-## Recorded checkpoint — 28 October 2026
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-The maintainer accepted **45 complete rounds**, each containing 153 tests, and
-requested moving on. All **6,885 sequential executions** passed without retries or
-semantic differences. A final 4-worker run passed another 153 tests with identical
-observations; 6,900 journey UUIDs were unique across these 46 complete runs.
+## Current development policy
 
-The started 46th sequential round was interrupted on request and excluded from the
-completed-round count. Its 92 passed tests are not included in the 6,885 figure.
-There were no unexpected failures before interruption. Raw interrupted evidence is
-retained locally and its hash/summary is recorded with the accepted evidence.
+Use four complete sequential rounds during development, plus a separate four-worker
+isolation run. Keep one worker per round, retries disabled and the 100 ms observation
+gap limit. The [policy](evidence/development-policy.json) defers final acceptance;
+it does not lower its 100-round requirement.
 
-The original target remains 100 rounds and is **not met** by this record. The
-[version-bound policy](evidence/acceptance-policy.json) accepts the reduced scope
-for this source candidate; [the result](evidence/reliability.json) explicitly says
-`verified-partial` and `acceptance: false`. This does not waive failing tests.
+At `4abf74c`, the private store and cached reader passed **four full rounds × 169 = 676**
+sequential executions and **169 four-worker checks**, without retries, skips or
+semantic differences. Independent validation reread all five raw reports, compared
+current source hashes and confirmed **800 distinct journey IDs**. Nine engine-only
+cases per run have no journey attachment. [Cached-reader development proof](evidence/development-cached-reader.json)
+explicitly records `finalAcceptance: false`. It does not certify the failed hosted
+Intel environment; [platform results](ci-concurrency.md#cached-reader-results) remain separate.
+
+The series on commit `46515dd` was stopped at the maintainer's request after **six
+complete rounds × 165 tests = 990 executions**, all successful without retries.
+All six raw reports were independently revalidated against that recorded commit;
+the earlier four-worker comparison passed 165 cases with matching semantics.
+The seventh round was interrupted and is excluded. [Retained results](evidence/development-checks.json)
+identify the exact source revision and do not claim 100-round acceptance. Changes since then separate the verification modes and narrow manual-window
+reads. The new four-round development record is separate from those six older rounds.
+
+At `6a9cc6a`, the narrower manual-window reads completed the new default protocol:
+**four full rounds × 167 = 668 sequential executions**, followed by **167 checks
+on four workers**, all passing without retries, skips or semantic differences.
+A separate validation reread all five raw reports, verified current source hashes
+and confirmed **800 distinct journey IDs**. Seven engine-only tests per run have
+no journey attachment. [Retained development record](evidence/development-window-reads.json)
+is explicitly `finalAcceptance: false`; it does not replace the historical proof.
+The later cached-reader runtime has its own four-round record above;
+the 167-case series is not evidence for that change.
+
+## Historical alpha.6 verification at `0300552`
+
+That historical final verification ran locally: **100 full rounds with one worker**, followed
+by the four-worker comparison. The dedicated hosted reliability workflow has been
+removed and disabled. The final source revision completed the full protocol:
+
+| Measurement | Result |
+| --- | --- |
+| Full sequential rounds | 100 × 163 = 16,300 passing test executions |
+| Final four-worker comparison | 163/163 passed; semantic signatures match every round |
+| Retries, skipped tests and unexpected failures | 0 |
+| Distinct journey run IDs | 16,160; three engine-only tests per full run have no journey attachment |
+| Started / finished (UTC) | 2026-10-29 17:26:55 / 22:31:11 |
+| Environment | Apple M3, Darwin 27.2.0 arm64, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4 |
+
+The [proof](evidence/reliability.json) and [acceptance policy](evidence/acceptance-policy.json)
+use series identity `191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed`.
+Independent validation reread all 101 raw reports, checked their hashes and source
+inputs, and repeated report, signature and UUID validation. The raw reports and
+their SHA-256 inventory remain in local artifacts. Benchmark measurements were run
+after this series, not concurrently.
+
+## Earlier attempts retained separately
+
+An earlier local alpha.6 series completed **12 rounds of 163 tests** (1,956 executions)
+without retries or semantic differences before the session was interrupted. The
+incomplete 13th round is retained and excluded. This is not 100-round acceptance.
+
+Those rounds predate the final fixture and polling corrections. They are not added
+to the new local series. Local and hosted reports also have different environment
+identities and are never combined.
+
+The [first hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40912436254)
+stopped after round 2: all 163 tests passed in both
+rounds, but the budget-expiry fixture sometimes timed out before its first manual
+observation. Its raw reports are retained. The fixture now leaves more setup time
+and explicitly requires a recorded observation before the expected timeout. The
+failed series does not count toward the fresh run. The comparison still includes
+observed state; it does not discard the discrepancy.
+
+After this fixture correction, a local smoke run passed all 163 cases with two
+and one workers, with matching signatures. Its four-worker run correctly blocked
+a manual-tabs journey after a measured 241.6 ms observation gap (162 tests passed,
+one failed). This failed smoke run is retained and is not acceptance evidence.
+The 100 ms bound is unchanged.
+
+The [second hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40916563288)
+stopped in the two-worker smoke run: 161 cases passed and two manual-tabs cases
+blocked on measured gaps of 105.3 and 112.9 ms. No full-series round started.
+The negative-window loop now budgets its pause against the duration of the browser
+read, targeting a 50 ms cadence instead of always adding another 20 ms to a slow
+read. Actual browser-clock gaps still determine whether a result is blocked;
+changing the scheduler cannot turn a gap above 100 ms into a pass.
+
+The [third hosted attempt](https://github.com/PerchAnton/keytrail/actions/runs/40918646493)
+passed all 163 cases on two and one workers, with matching signatures. Four workers
+produced four blocked journeys with measured gaps of 100.5–104.6 ms (159 tests
+passed). The full series did not start. Its raw reports were downloaded before
+retiring the workflow; none of these attempts is counted as acceptance evidence.
+
+The historical alpha.5 checkpoint contained 45 complete rounds of 153 tests
+(6,885 executions), followed by a matching four-worker run. Its interrupted 46th
+round was excluded. That accepted reduced scope does not verify the changed
+alpha.6 runtime and is not combined with the new series. The old record remains
+in Git history and the retained local raw artifacts.
 
 ## Default protocol
 
-The verifier runs the entire integration suite 100 times **sequentially with one
-worker**, then once with four workers. There are no retries, filters or expected
+The default verifier runs the entire integration suite four times **one complete
+round after another**, then checks worker isolation. Only `--final` selects 100 rounds. By default each round uses one worker,
+followed by a four-worker run. `--workers=2` runs tests on two workers within each
+round and additionally requires a matching one-worker run before the four-worker
+run. This optional mode is separate from the current one-worker release protocol.
+No rounds overlap, and all cases execute in every round on the same recorded
+environment. There are no retries, filters or expected
 runner failures. Intentionally defective components must still produce their
 specified failed or blocked journey results inside passing regression tests.
 
@@ -31,9 +120,13 @@ pnpm verify:reliability
 ```
 
 Run only one verifier at a time in a working copy; checkpoints and report paths
-are shared within that copy. Allow several hours on a laptop. Keep the machine awake and avoid other browser or
+are shared within that copy. The four-round check takes about 12–15 minutes on the recorded laptop; the final
+100-round check takes several hours. Keep the machine awake and avoid other browser or
 CPU-heavy work. Node, Playwright, Chromium, OS, architecture and CPU are recorded.
-Source, tests, schema, lockfile, package/configuration and verifier inputs are hashed
+On macOS, `caffeinate` prevents idle sleep for the command; closing the lid can
+still suspend the machine. An interrupted round is not considered complete.
+The per-round worker count is part of the series identity. Source, tests, schema,
+lockfile, package/configuration and verifier inputs are hashed
 before the run and checked again around every round. Changing an input prevents
 combining old and new rounds into one acceptance result.
 
@@ -44,7 +137,8 @@ the one-journey-attachment rule; they exercise driver state and handle disposal.
 
 The verifier compares scenario/configuration, each check's expected and observed
 values, status, message code, dependencies, outcome and coverage. UUIDs, elapsed
-time and measured observation-window lengths are excluded. Action counts and step
+time, measured observation-window lengths, sample counts and interval arrays are
+excluded. Their consistency and gap bounds are checked in every individual report. Action counts and step
 references are retained in raw reports but excluded from the stable signature:
 cooperative budget boundaries can stop after different numbers of valid actions.
 Dedicated regression assertions check those budgets and no-action-after-return
@@ -53,30 +147,39 @@ behavior in every round.
 ## Checkpoints and failures
 
 Raw runner reports, logs, a baseline and atomic checkpoints remain in
-`artifacts/reliability/<series>/`. A restart with the same inputs/environment
-revalidates completed reports before resuming. A failed series is retained and
+`artifacts/reliability/<series>/`. A restart with the same inputs/environment and verification mode
+revalidates completed reports before resuming. Development, smoke and final modes
+cannot resume each other’s checkpoints, even when their source hashes match. A failed series is retained and
 cannot be resumed as though the failed round never happened. Diagnose the failure;
-use `--new-series` to start a new complete series. `--smoke` runs only one sequential
-round plus the worker comparison and is explicitly **not** acceptance evidence.
+use `--new-series` to start a new complete series. `--smoke` runs only one complete
+round plus the configured worker comparisons and is explicitly **not** acceptance
+evidence. Smoke rounds are not added to the 100-round count.
 
-The final machine-readable proof is `artifacts/reliability-verification.json`.
-A full run produces the original 100-round acceptance proof. The current checkpoint
-instead uses the explicitly reviewed 45-round policy. To reproduce its evidence
-from the retained raw files after a requested SIGINT stop and a final 4-worker run:
+Development writes `artifacts/reliability-development.json`, smoke writes
+`artifacts/reliability-smoke.json`, and only `--final` writes
+`artifacts/reliability-verification.json`. Development and smoke records have
+`acceptance: false`; they never replace the final proof.
+
+Final acceptance is a separate, deferred action:
 
 ```sh
-node scripts/finalize-reliability.mjs artifacts/reliability/<series> artifacts/dev09-final-workers4.json
+pnpm verify:reliability --final
+pnpm benchmark
+# Independently validate raw reports and refresh the committed release evidence.
+node scripts/check-package.mjs --release
 ```
 
-The finalizer revalidates every complete report, rejects actual failures/retries,
-checks the interruption and final isolation run, and records their hashes. It does
-not overwrite the interrupted checkpoint. It requires the exact series identity
-approved in the policy; a different run needs a reviewed policy update. Historical
-focused runs remain separate and are not added to the full-suite count.
+The explicit release package gate requires 100 completed rounds, final mode,
+matching source hashes, full benchmark evidence and the four-worker comparison.
+The normal `pnpm test:package` still tests the exact archive, imports, types and
+both clean consumers, but marks its result `verificationLevel: development` and
+`finalAcceptance: false`. Neither command publishes anything.
 
 This is repeatability evidence for synthetic fixtures in one environment, not a
-claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI checks
-portability separately; its ordinary jobs do not repeat the suite 100 times.
+claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI can check
+portability separately. One-worker browser checks passed on Linux and macOS; the
+measured two-worker macOS limitations remain in [CI capacity notes](ci-concurrency.md).
+Ordinary CI jobs do not repeat the suite 100 times.
 
 ## Own-report privacy
 

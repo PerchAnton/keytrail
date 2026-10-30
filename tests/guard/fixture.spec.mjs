@@ -40,6 +40,19 @@ test('synthetic-private-title-canary', async ({}, info) => {
     value.coverage.blocked = mode !== 'failed-report' ? 1 : 0;
     value.coverage.complete = mode === 'failed-report';
   }
+  if (['window-pass', 'observation-gap', 'gap-pass', 'missing-window'].includes(mode)) {
+    value.rulesetVersion = '0.4.0'; value.scenario.kind = 'tabs';
+    const observed = { observationWindowMs: 200, observationCount: 3, observationIntervalsMs: [100, 100], maxObservationGapMs: 100 };
+    value.checks[0] = { ...value.checks[0], ruleId: 'T05', checkId: 'T05.forward.001.unchanged', observed };
+    if (mode === 'observation-gap' || mode === 'gap-pass') {
+      Object.assign(observed, { observationIntervalsMs: [50, 150], maxObservationGapMs: 150 });
+    }
+    if (mode === 'missing-window') value.checks[0].observed = {};
+    if (mode === 'observation-gap') {
+      value.checks[0].status = 'blocked'; value.checks[0].messageCode = 'OBSERVATION_GAP';
+      value.outcome = 'blocked'; value.coverage.passed = 0; value.coverage.blocked = 1; value.coverage.complete = false;
+    }
+  }
   let body = Buffer.from(JSON.stringify(value));
   if (mode === 'bad-json') body = Buffer.from('{synthetic-private-payload-canary');
   if (mode === 'bad-utf8') body = Buffer.concat([body, Buffer.from([0xff])]);

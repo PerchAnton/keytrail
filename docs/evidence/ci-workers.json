@@ -1,0 +1,746 @@
+{
+  "recordedAt": "2026-10-30T06:15:08.324Z",
+  "sourceCommit": "97cf47db43a2d300ea84a722572ba40a1870ab7e",
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41011980109",
+  "sourceHashes": {
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "65be5e0a9fbea099924f95e02b8b6fc19df28b4fc9ae0c7c3ce185857eecd27e",
+    "src/browser/driver.ts": "0de5265a2c7a43f35ccbead8cd5fd8271a80ba549922a4b1193732f93bf18795",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "4b2452fdb9b876bc3efb893b32042a961d2340fa804f30ffa5c9f3ada9e9cf97",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "a5d62e94cf8281b0dfe8b4061a962faa55245a58a0242265f3ab17fb377f8194",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
+    "tests/integration/dialog.spec.ts": "28a7fd3d86d3712f978861bf270835ecc6d15be199272501584832e9d9c3854c",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "0f38f8f0ffd95105d66253cd7f9c065cc63980a5f4209e8a97e02657d3c074b7",
+    "tests/integration/tabs.spec.ts": "4df457d946a780b3993636f659e3d5357fe5430a134a70e47ce50d0cacf037e1",
+    "tests/support/snapshot-timings.ts": "486ad62ace5381191163cc6fc1b88cc539657afff560ffe7c84ed21dacd4d95d",
+    "tests/unit/contracts.test.mjs": "1ce78e70acbce14e55c712c33e38a0fb26781e463dc2d655abf9d49e655233b9",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e382c4ff52bffbaea6485570d8147644e3bbff9786d53c5fc839f0e443700237",
+    "tests/unit/observation-window.test.mjs": "f0ddd67240613a75661846eb617aa03f7a1f14d64107acd36f1a2c8776cedd38",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/signatures.mjs": "9e36ab7f72e480301e062a6873d17e3ddcf0932e62862e760bc78c16de4bc86a"
+  },
+  "defaultWorkers": 1,
+  "retries": 0,
+  "observationGapLimitMs": 100,
+  "scope": "Full-suite hosted runs on one then two workers. Timing aggregates include only negative windows in tabs pass fixtures; injected delays, faulty components and the controlled host-clock fixture are excluded from timing aggregates, not from test runs.",
+  "measurement": "Host hrtime measures the complete Driver.snapshot and its page.evaluate call. Intervals use browser performance.now. Diagnostics add wrapper/attachment overhead and are not the equivalent-work benchmark.",
+  "rows": [
+    {
+      "platform": "linux",
+      "workers": 1,
+      "stats": {
+        "startTime": "2026-10-30T06:06:35.226Z",
+        "duration": 215289.22699999998,
+        "expected": 165,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "bb3be81a69f8ef6e83552a39c008a32e1bef4c7042c3a67bfdf821c81753b20c",
+      "failures": [],
+      "positiveManualTabs": {
+        "snapshot": {
+          "count": 377,
+          "medianMs": 21.509823,
+          "p95Ms": 23.515922,
+          "maxMs": 39.15374
+        },
+        "evaluate": {
+          "count": 377,
+          "medianMs": 1.803468,
+          "p95Ms": 2.071692,
+          "maxMs": 7.978266
+        },
+        "interval": {
+          "count": 339,
+          "medianMs": 24.5,
+          "p95Ms": 26.600000000034925,
+          "maxMs": 46.600000000034925
+        },
+        "gapsAbove100ms": 0
+      },
+      "fixtures": [
+        {
+          "fixture": "tabs pass manual Enter",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 60,
+            "medianMs": 21.4873815,
+            "p95Ms": 23.145965,
+            "maxMs": 23.823322
+          },
+          "evaluate": {
+            "count": 60,
+            "medianMs": 1.78902,
+            "p95Ms": 1.954595,
+            "maxMs": 2.009876
+          },
+          "interval": {
+            "count": 54,
+            "medianMs": 24.5,
+            "p95Ms": 26.29999999998836,
+            "maxMs": 26.600000000034925
+          }
+        },
+        {
+          "fixture": "tabs pass manual Space",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 60,
+            "medianMs": 21.471325,
+            "p95Ms": 23.515922,
+            "maxMs": 32.124096
+          },
+          "evaluate": {
+            "count": 60,
+            "medianMs": 1.8077725,
+            "p95Ms": 2.099617,
+            "maxMs": 3.402838
+          },
+          "interval": {
+            "count": 54,
+            "medianMs": 24.349999999976717,
+            "p95Ms": 27.400000000023283,
+            "maxMs": 27.70000000001164
+          }
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 97,
+            "medianMs": 21.684599,
+            "p95Ms": 24.678238,
+            "maxMs": 39.15374
+          },
+          "evaluate": {
+            "count": 97,
+            "medianMs": 1.81829,
+            "p95Ms": 2.288235,
+            "maxMs": 7.978266
+          },
+          "interval": {
+            "count": 87,
+            "medianMs": 24.70000000001164,
+            "p95Ms": 26.900000000023283,
+            "maxMs": 46.600000000034925
+          }
+        },
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 100,
+            "medianMs": 21.5081565,
+            "p95Ms": 23.38023,
+            "maxMs": 24.722683
+          },
+          "evaluate": {
+            "count": 100,
+            "medianMs": 1.792545,
+            "p95Ms": 2.002395,
+            "maxMs": 2.590926
+          },
+          "interval": {
+            "count": 90,
+            "medianMs": 24.5,
+            "p95Ms": 26.70000000001164,
+            "maxMs": 27.20000000001164
+          }
+        },
+        {
+          "fixture": "tabs pass delayed manual activation",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 60,
+            "medianMs": 21.520055,
+            "p95Ms": 23.010272,
+            "maxMs": 24.112628
+          },
+          "evaluate": {
+            "count": 60,
+            "medianMs": 1.8113905,
+            "p95Ms": 1.962737,
+            "maxMs": 2.071692
+          },
+          "interval": {
+            "count": 54,
+            "medianMs": 24.60000000000582,
+            "p95Ms": 26.100000000034925,
+            "maxMs": 26.900000000023283
+          }
+        }
+      ]
+    },
+    {
+      "platform": "linux",
+      "workers": 2,
+      "stats": {
+        "startTime": "2026-10-30T06:10:11.473Z",
+        "duration": 121293.446,
+        "expected": 165,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "9a3defd0b9040623ca32f3c28c4ffa528eb64d4af21b5ec7658a23cbf7ba0800",
+      "failures": [],
+      "positiveManualTabs": {
+        "snapshot": {
+          "count": 310,
+          "medianMs": 28.408386,
+          "p95Ms": 34.583064,
+          "maxMs": 68.19623
+        },
+        "evaluate": {
+          "count": 310,
+          "medianMs": 2.5164485,
+          "p95Ms": 3.900703,
+          "maxMs": 9.876417
+        },
+        "interval": {
+          "count": 272,
+          "medianMs": 29.5,
+          "p95Ms": 35.70000000001164,
+          "maxMs": 86
+        },
+        "gapsAbove100ms": 0
+      },
+      "fixtures": [
+        {
+          "fixture": "tabs pass manual Enter",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 49,
+            "medianMs": 28.578776,
+            "p95Ms": 33.334424,
+            "maxMs": 36.099087
+          },
+          "evaluate": {
+            "count": 49,
+            "medianMs": 2.583171,
+            "p95Ms": 3.694761,
+            "maxMs": 3.903532
+          },
+          "interval": {
+            "count": 43,
+            "medianMs": 29.70000000001164,
+            "p95Ms": 35.29999999998836,
+            "maxMs": 38.59999999997672
+          }
+        },
+        {
+          "fixture": "tabs pass manual Space",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 49,
+            "medianMs": 28.188668,
+            "p95Ms": 34.159217,
+            "maxMs": 38.465536
+          },
+          "evaluate": {
+            "count": 49,
+            "medianMs": 2.54435,
+            "p95Ms": 3.550068,
+            "maxMs": 4.63209
+          },
+          "interval": {
+            "count": 43,
+            "medianMs": 29.599999999976717,
+            "p95Ms": 34.5,
+            "maxMs": 39.199999999953434
+          }
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 82,
+            "medianMs": 28.0962955,
+            "p95Ms": 33.260826,
+            "maxMs": 34.625927
+          },
+          "evaluate": {
+            "count": 82,
+            "medianMs": 2.4532835,
+            "p95Ms": 3.331864,
+            "maxMs": 3.900703
+          },
+          "interval": {
+            "count": 72,
+            "medianMs": 29.29999999998836,
+            "p95Ms": 35.29999999998836,
+            "maxMs": 36.29999999998836
+          }
+        },
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 80,
+            "medianMs": 29.1858365,
+            "p95Ms": 36.346314,
+            "maxMs": 46.862062
+          },
+          "evaluate": {
+            "count": 80,
+            "medianMs": 2.6753715,
+            "p95Ms": 4.227391,
+            "maxMs": 5.742748
+          },
+          "interval": {
+            "count": 70,
+            "medianMs": 30.150000000023283,
+            "p95Ms": 40.59999999997672,
+            "maxMs": 54.5
+          }
+        },
+        {
+          "fixture": "tabs pass delayed manual activation",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 50,
+            "medianMs": 26.242649999999998,
+            "p95Ms": 36.655411,
+            "maxMs": 68.19623
+          },
+          "evaluate": {
+            "count": 50,
+            "medianMs": 2.3891725,
+            "p95Ms": 5.799892,
+            "maxMs": 9.876417
+          },
+          "interval": {
+            "count": 44,
+            "medianMs": 27.400000000023283,
+            "p95Ms": 36.70000000001164,
+            "maxMs": 86
+          }
+        }
+      ]
+    },
+    {
+      "platform": "macos",
+      "workers": 1,
+      "stats": {
+        "startTime": "2026-10-30T06:06:35.408Z",
+        "duration": 234010.82599999997,
+        "expected": 165,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "dafa275c411d1ebf956a7758c84f582f3cd62f669be9e5c549cacdbbd203284b",
+      "failures": [],
+      "positiveManualTabs": {
+        "snapshot": {
+          "count": 318,
+          "medianMs": 20.232021,
+          "p95Ms": 39.527167,
+          "maxMs": 231.072625
+        },
+        "evaluate": {
+          "count": 318,
+          "medianMs": 2.0777085,
+          "p95Ms": 4.152417,
+          "maxMs": 8.171
+        },
+        "interval": {
+          "count": 280,
+          "medianMs": 27.39999999999418,
+          "p95Ms": 42,
+          "maxMs": 68.10000000003492
+        },
+        "gapsAbove100ms": 0
+      },
+      "fixtures": [
+        {
+          "fixture": "tabs pass manual Enter",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 49,
+            "medianMs": 21.620917,
+            "p95Ms": 38.2685,
+            "maxMs": 42.193625
+          },
+          "evaluate": {
+            "count": 49,
+            "medianMs": 2.297417,
+            "p95Ms": 4.763542,
+            "maxMs": 6.344167
+          },
+          "interval": {
+            "count": 43,
+            "medianMs": 28.79999999998836,
+            "p95Ms": 38.70000000001164,
+            "maxMs": 46.40000000002328
+          }
+        },
+        {
+          "fixture": "tabs pass manual Space",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 52,
+            "medianMs": 20.508979,
+            "p95Ms": 38.086708,
+            "maxMs": 43.534958
+          },
+          "evaluate": {
+            "count": 52,
+            "medianMs": 2.2178125,
+            "p95Ms": 3.231667,
+            "maxMs": 4.380333
+          },
+          "interval": {
+            "count": 46,
+            "medianMs": 27.550000000017462,
+            "p95Ms": 40.90000000002328,
+            "maxMs": 45.70000000001164
+          }
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 84,
+            "medianMs": 19.0617705,
+            "p95Ms": 37.493042,
+            "maxMs": 48.362458
+          },
+          "evaluate": {
+            "count": 84,
+            "medianMs": 1.911896,
+            "p95Ms": 3.439791,
+            "maxMs": 3.837584
+          },
+          "interval": {
+            "count": 74,
+            "medianMs": 26.900000000023283,
+            "p95Ms": 46.29999999998836,
+            "maxMs": 52.600000000034925
+          }
+        },
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 86,
+            "medianMs": 18.271063,
+            "p95Ms": 34.10925,
+            "maxMs": 57.2345
+          },
+          "evaluate": {
+            "count": 86,
+            "medianMs": 1.9780625,
+            "p95Ms": 3.188958,
+            "maxMs": 5.829375
+          },
+          "interval": {
+            "count": 76,
+            "medianMs": 27.10000000000582,
+            "p95Ms": 37.399999999965075,
+            "maxMs": 68.10000000003492
+          }
+        },
+        {
+          "fixture": "tabs pass delayed manual activation",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 47,
+            "medianMs": 23.128834,
+            "p95Ms": 55.191625,
+            "maxMs": 231.072625
+          },
+          "evaluate": {
+            "count": 47,
+            "medianMs": 2.499416,
+            "p95Ms": 4.542708,
+            "maxMs": 8.171
+          },
+          "interval": {
+            "count": 41,
+            "medianMs": 28.699999999953434,
+            "p95Ms": 58.29999999998836,
+            "maxMs": 67.70000000001164
+          }
+        }
+      ]
+    },
+    {
+      "platform": "macos",
+      "workers": 2,
+      "stats": {
+        "startTime": "2026-10-30T06:10:30.370Z",
+        "duration": 136331.815,
+        "expected": 162,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "rawReportSha256": "e2ee35d50203a6254b2f6a548c1e859c29a7e3d089043ab2f9a1426a7803898a",
+      "failures": [
+        {
+          "fixture": "tabs pass manual Enter",
+          "status": "failed",
+          "checkId": "T05.forward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 298.29999999993015,
+            "observationCount": 6,
+            "observationIntervalsMs": [
+              35.89999999990687,
+              57.300000000046566,
+              38.300000000046566,
+              52.5,
+              114.29999999993015
+            ],
+            "maxObservationGapMs": 114.29999999993015
+          },
+          "errors": [
+            "JourneyAssertionError: T05 OBSERVATION_GAP expected=tab-2 observed=tab-2\n\n   at ../../src/scenarios/tabs.ts:212\n\n  210 |     catch { throw new JourneyAssertionError('REPORT_WRITE_FAILED', result); }\n  211 |   }\n> 212 |   if (result.outcome !== 'passed') throw new JourneyAssertionError(plan.checks.find(c => c.status === 'fail' || c.status === 'blocked')?.messageCode ?? 'BROWSER_ERROR', result);\n      |                                          ^\n  213 |   return result;\n  214 | }\n  215 |\n    at assertTabsJourney (/Users/runner/work/keytrail/keytrail/src/scenarios/tabs.ts:212:42)\n    at /Users/runner/work/keytrail/keytrail/tests/integration/tabs.spec.ts:41:18"
+          ]
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "status": "failed",
+          "checkId": "T05.forward.003.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 282.9000000000233,
+            "observationCount": 6,
+            "observationIntervalsMs": [
+              55.5,
+              28.5,
+              40.199999999953434,
+              41.800000000046566,
+              116.90000000002328
+            ],
+            "maxObservationGapMs": 116.90000000002328
+          },
+          "errors": [
+            "JourneyAssertionError: T05 OBSERVATION_GAP expected=tab-1 observed=tab-1\n\n   at ../../src/scenarios/tabs.ts:212\n\n  210 |     catch { throw new JourneyAssertionError('REPORT_WRITE_FAILED', result); }\n  211 |   }\n> 212 |   if (result.outcome !== 'passed') throw new JourneyAssertionError(plan.checks.find(c => c.status === 'fail' || c.status === 'blocked')?.messageCode ?? 'BROWSER_ERROR', result);\n      |                                          ^\n  213 |   return result;\n  214 | }\n  215 |\n    at assertTabsJourney (/Users/runner/work/keytrail/keytrail/src/scenarios/tabs.ts:212:42)\n    at /Users/runner/work/keytrail/keytrail/tests/integration/tabs.spec.ts:41:18"
+          ]
+        },
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "status": "failed",
+          "checkId": "T05.forward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 152.30000000004657,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              38.5,
+              113.80000000004657
+            ],
+            "maxObservationGapMs": 113.80000000004657
+          },
+          "errors": [
+            "JourneyAssertionError: T05 OBSERVATION_GAP expected=tab-2 observed=tab-2\n\n   at ../../src/scenarios/tabs.ts:212\n\n  210 |     catch { throw new JourneyAssertionError('REPORT_WRITE_FAILED', result); }\n  211 |   }\n> 212 |   if (result.outcome !== 'passed') throw new JourneyAssertionError(plan.checks.find(c => c.status === 'fail' || c.status === 'blocked')?.messageCode ?? 'BROWSER_ERROR', result);\n      |                                          ^\n  213 |   return result;\n  214 | }\n  215 |\n    at assertTabsJourney (/Users/runner/work/keytrail/keytrail/src/scenarios/tabs.ts:212:42)\n    at /Users/runner/work/keytrail/keytrail/tests/integration/tabs.spec.ts:41:18"
+          ]
+        }
+      ],
+      "positiveManualTabs": {
+        "snapshot": {
+          "count": 105,
+          "medianMs": 36.808208,
+          "p95Ms": 81.951166,
+          "maxMs": 114.898792
+        },
+        "evaluate": {
+          "count": 105,
+          "medianMs": 2.944125,
+          "p95Ms": 7.198209,
+          "maxMs": 23.240542
+        },
+        "interval": {
+          "count": 88,
+          "medianMs": 37.79999999998836,
+          "p95Ms": 83,
+          "maxMs": 116.90000000002328
+        },
+        "gapsAbove100ms": 3
+      },
+      "fixtures": [
+        {
+          "fixture": "tabs pass manual Enter",
+          "runnerStatus": "failed",
+          "journeyOutcome": "blocked",
+          "snapshot": {
+            "count": 6,
+            "medianMs": 53.1938125,
+            "p95Ms": 110.506166,
+            "maxMs": 110.506166
+          },
+          "evaluate": {
+            "count": 6,
+            "medianMs": 3.3170835,
+            "p95Ms": 5.614625,
+            "maxMs": 5.614625
+          },
+          "interval": {
+            "count": 5,
+            "medianMs": 52.5,
+            "p95Ms": 114.29999999993015,
+            "maxMs": 114.29999999993015
+          }
+        },
+        {
+          "fixture": "tabs pass manual Space",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 39,
+            "medianMs": 35.787875,
+            "p95Ms": 78.354416,
+            "maxMs": 81.951166
+          },
+          "evaluate": {
+            "count": 39,
+            "medianMs": 3.364209,
+            "p95Ms": 10.105875,
+            "maxMs": 12.626542
+          },
+          "interval": {
+            "count": 33,
+            "medianMs": 36.89999999990687,
+            "p95Ms": 77.90000000002328,
+            "maxMs": 87.20000000006985
+          }
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "runnerStatus": "failed",
+          "journeyOutcome": "blocked",
+          "snapshot": {
+            "count": 19,
+            "medianMs": 37.622375,
+            "p95Ms": 114.898792,
+            "maxMs": 114.898792
+          },
+          "evaluate": {
+            "count": 19,
+            "medianMs": 2.822625,
+            "p95Ms": 23.240542,
+            "maxMs": 23.240542
+          },
+          "interval": {
+            "count": 16,
+            "medianMs": 41,
+            "p95Ms": 116.90000000002328,
+            "maxMs": 116.90000000002328
+          }
+        },
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "runnerStatus": "failed",
+          "journeyOutcome": "blocked",
+          "snapshot": {
+            "count": 3,
+            "medianMs": 49.563208,
+            "p95Ms": 101.271333,
+            "maxMs": 101.271333
+          },
+          "evaluate": {
+            "count": 3,
+            "medianMs": 2.283417,
+            "p95Ms": 6.164791,
+            "maxMs": 6.164791
+          },
+          "interval": {
+            "count": 2,
+            "medianMs": 76.15000000002328,
+            "p95Ms": 113.80000000004657,
+            "maxMs": 113.80000000004657
+          }
+        },
+        {
+          "fixture": "tabs pass delayed manual activation",
+          "runnerStatus": "passed",
+          "journeyOutcome": "passed",
+          "snapshot": {
+            "count": 38,
+            "medianMs": 34.953854,
+            "p95Ms": 69.95925,
+            "maxMs": 91.219334
+          },
+          "evaluate": {
+            "count": 38,
+            "medianMs": 2.6813335,
+            "p95Ms": 6.420375,
+            "maxMs": 7.207958
+          },
+          "interval": {
+            "count": 32,
+            "medianMs": 35.70000000001164,
+            "p95Ms": 77.89999999990687,
+            "maxMs": 83
+          }
+        }
+      ]
+    }
+  ]
+}

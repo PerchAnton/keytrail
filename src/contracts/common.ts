@@ -33,7 +33,7 @@ export function snapshotTargets(values: readonly unknown[]): Map<Target, Target>
   const byId = new Map<string, Target>();
   for (const target of values) {
     if (!object(target) || typeof target.id !== 'string' || !ID.test(target.id) || !object(target.locator)) return null;
-    for (const method of ['count', 'page', 'elementHandles', 'isVisible', 'and', 'getAttribute']) {
+    for (const method of ['count', 'page', 'evaluateAll', 'isVisible', 'and', 'getAttribute']) {
       if (typeof target.locator[method] !== 'function') return null;
     }
     if (byId.has(target.id) && byId.get(target.id) !== target) return null;

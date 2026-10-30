@@ -1,0 +1,10 @@
+{
+  "decisionDate": "2026-10-30",
+  "developmentRounds": 4,
+  "finalAcceptanceRounds": 100,
+  "finalAcceptanceDeferred": true,
+  "defaultWorkers": 1,
+  "isolationWorkers": 4,
+  "retries": 0,
+  "reason": "Stabilize the development candidate with short full-suite runs. Request the 100-round protocol explicitly only after the candidate is frozen for final acceptance. Development success is not final acceptance."
+}

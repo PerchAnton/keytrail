@@ -1,6 +1,8 @@
 # Verification
 
-The current source candidate is `0.1.0-alpha.5`, ruleset 0.3.0, schema 1.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+
+The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
 may deliberately observe a failed or blocked journey; it does not mean that its
 component is accessible.
@@ -8,23 +10,25 @@ component is accessible.
 | Check | Recorded result |
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
-| Unit tests | 30 passed |
-| Browser suite | 153 passed with one worker; 153 passed with four workers |
-| Worker isolation | Final 4-worker run matches all 45 sequential rounds; 6,900 distinct journey UUIDs across these runs; three engine-only tests per run |
+| Unit tests | 39 passed, including verification-mode and resume-boundary checks |
+| Browser suite | 169/169 in each of four local rounds at `4abf74c`; hosted results separated below; no retries |
+| Worker isolation | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
-| Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
-| CI guard | 48 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
-| Performance | All three fixed workloads below the 20% median overhead target; [protocol and raw samples](performance.md) |
-| Repeatability | 45 full sequential rounds: 6,885 passed without retries or semantic differences; original 100-round target not completed |
-| Package consumers | Two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control |
+| Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
+| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard-cached-reader.json) |
+| Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
+| Repeatability | `4abf74c`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-cached-reader.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
+| Package consumers | Current `4abf74c`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-cached-reader.json); final acceptance remains false |
+| Hosted platforms | Selected Linux + macOS ARM CI at `63f9edf`: all stages passed, 169 browser cases each and clean package consumers. [Validated record](evidence/ci-arm-development.json). Earlier Intel 370 ms gap retained separately. |
 
-## Performance
+## Historical performance (`0300552`)
 
 ![Paired overhead and median/p95 timing results](assets/performance.svg)
 
 Thirty alternating measured pairs per workload, after five warmups per arm.
 The shared runner was an Apple M3 (8 logical CPUs), macOS arm64/Darwin 27.2.0,
-Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 28 October 2026.
+Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 29 October 2026 UTC
+(30 October in Kyiv). The benchmark ran after the reliability series.
 Every pair also passed semantic equivalence checks; three known defects agreed on
 the first mismatch and dependent checks. Manual tabs include required observation
 windows, which dominate duration. These figures do not establish a universal speed
@@ -34,25 +38,29 @@ advantage or replace checks in a consumer application.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
-snapshots. The maintainer accepted 45 completed rounds for this checkpoint and requested stopping.
-The partial 46th round was interrupted and excluded: 92 tests had passed before the
-stop, with no unexpected failures. It is not added to the 6,885 count. The final
-4-worker run passed all 153 tests and matched every completed round.
+snapshots. The earlier alpha.6 local series at `0300552` completed all 100 rounds and its four-worker
+comparison on 29 October 2026 at 22:31 UTC. Its identity is
+`191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed`.
+Twelve completed earlier local rounds and the hosted attempts are retained separately
+and are not added to the new total.
+The historical alpha.5 record accepted 45 rounds and excluded its interrupted 46th
+round; it remains history rather than evidence for the changed runtime.
 
-[The record](evidence/reliability.json) and [version-bound acceptance policy](evidence/acceptance-policy.json)
-preserve the original 100-round target with `acceptance: false`. The package gate
-requires at least the approved 45 complete rounds, matching source hashes and
-passing performance records. This is a reduced-scope checkpoint, not a claim that
-the original 100-round criterion was met. Historical focused runs are not added to it.
+The historical proof and [version-bound policy](evidence/acceptance-policy.json) agree
+on the source hashes at `0300552`, 100 completed rounds and the final isolation signature.
+The 101 raw reports contain 16,463 test executions, including 303 engine-only
+tests without a journey attachment. All 16,160 journey IDs are distinct.
 
 The canary tests inspect only KeyTrail's own JSON, messages and stdout/stderr.
 External Playwright artifacts are outside that guarantee. Budget, focus-loss and
 no-action-after-return regressions execute in each full round.
 
-The source optimization overlaps independent browser reads. It still resolves
-fresh handles for every observation, reads focus and containment together, waits
-for all reads even on failure, and disposes temporary handles before returning.
-The native benchmark reference also overlaps its independent reads.
+The source now resolves locators into a private browser map on every observation,
+reads focus and containment together, and clears stored nodes before returning.
+It waits for sibling reads even on failure and disposes the map at journey end.
+No target binding is cached; [mechanism and regressions](ci-concurrency.md).
+The cached-reader four-round proof independently validates this runtime. Earlier
+repeatability records remain historical for their own source hashes.
 
 ## Reproduction
 
@@ -82,7 +90,6 @@ and verifies wrong initial and return focus. Its separate negative process does
 not catch the assertion: exit 1, HTML, JUnit and the original incomplete attachment
 are checked. Playwright classifies `JourneyAssertionError` as a JUnit `error`, so
 both error and failure counts are considered; neither is treated as success.
-The [report guide](reports.md) explains the saved artifacts. Existing DEV09 evidence
-remains tied to its unchanged runtime/test inputs; these consumer checks are
-additional evidence, not extra rounds in that series. No npm package or GitHub
-release has been published; see the [release checklist](release-checklist.md).
+The [report guide](reports.md) explains the saved artifacts. The changed observation transport has its own four-round development evidence. Consumer checks remain additional
+evidence, not extra sequential rounds.
+No npm package or GitHub release has been published; see the [release checklist](release-checklist.md).

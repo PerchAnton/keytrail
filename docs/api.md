@@ -41,8 +41,19 @@ key is sent once; polling repeats only observations. If focus leaves the dialog 
 another check fails, traversal stops and remaining checks are `not_run` with `blockedBy`.
 There is no optional cleanup-Escape branch in this milestone.
 
-Result schema version is `1`; ruleset version is `0.3.0`; package version is separate.
-The schema rejects unknown properties. Consumers must also verify coverage arithmetic;
+D01 rechecks the actual focused node in the activation's pre-action snapshot.
+If it differs from `trigger`, D01 fails with `FOCUS_MISMATCH` and no Enter/Space
+is sent. Its observed focus comes from that snapshot, including `unknown` for an
+undeclared element. The snapshot and the later browser command are separate
+operations; this does not promise atomic protection against every asynchronous
+focus change between them.
+
+Result schema version is `1`; ruleset version is `0.4.0`; package version is separate.
+The schema rejects unknown properties. Alpha.6 extends schema v1 with sampling
+metrics, `OBSERVATION_GAP`, the form `inputMode` and value-free `type` steps.
+Use the schema and guard from the same package version as the assertions; older
+strict validators may reject these additions. Alpha report compatibility is not
+stable. Consumers must also verify coverage arithmetic;
 cross-field counts are calculated by the library, not expressed by JSON Schema alone.
 Focus is a declared Target ID or `body`, `unknown`, `none`, `unsupported`; comparisons
 use actual node identity, not these labels. Avoid those four labels for Target IDs

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { randomUUID, createHash } from 'node:crypto';
 import { setTimeout as delay } from 'node:timers/promises';
-import type { Page, TestInfo, ElementHandle, Frame } from '@playwright/test';
+import type { Page, TestInfo, JSHandle, Frame } from '@playwright/test';
 import type { JourneyResult, CheckResult, SafeObservation, MessageCode, StepResult } from '../src/contracts/types.js';
 import schemaValid from '../artifacts/generated/schema-validator.cjs';
 import pkg from '../package.json' with { type: 'json' };
@@ -17,13 +17,79 @@ class NativeFailure extends Error {
   constructor(readonly code: MessageCode, readonly checkId?: string) { super(code); }
 }
 
+/** Independently compiled once, with the same public transport operations. */
+function createNativeStore() {
+  const registry = new Map<string, Element[]>();
+  return Object.assign(registry, { read({ slots, rootId, roleSlots, semantics }: {
+    slots: { id: string; slot: string }[]; rootId: string;
+    roleSlots: Record<string, string>; semantics: boolean;
+  }) {
+    try {
+      const nodes = slots.map(t => ({ id: t.id, node: registry.get(t.slot)?.[0] ?? null }));
+      const roles = Object.fromEntries(Object.entries(roleSlots).map(([name, slot]) => [name, registry.get(slot) ?? []]));
+      const observedAt = performance.now();
+      const elements = nodes.map(t => ({ id: t.id, node: t.node instanceof Element ? t.node : null }));
+      const byId = new Map(elements.map(t => [t.id, t.node]));
+      const root = byId.get(rootId), active = document.activeElement;
+      const visible = (el: Node | null | undefined): el is Element => {
+        if (!(el instanceof Element)) return false;
+        const bounds = el.getBoundingClientRect(), visibility = getComputedStyle(el).visibility;
+        return bounds.width > 0 && bounds.height > 0 && visibility !== 'hidden' && visibility !== 'collapse';
+      };
+      const present = elements.filter(t => t.node);
+      let code = '';
+      if (present.some(t => t.node!.getRootNode() !== document) || active?.shadowRoot || active?.tagName === 'IFRAME') code = 'UNSUPPORTED_CONTEXT';
+      else if (present.some(t => !t.node!.isConnected)) code = 'EXPECTATION_TIMEOUT';
+      else if (new Set(present.map(t => t.node)).size !== present.length) code = 'TARGET_ALIAS';
+      const layers = new Set([...roles.dialog!, ...roles.alert!, ...document.querySelectorAll('dialog')].filter(visible));
+      if (layers.size > 1 || [...layers].some(el => el.tagName === 'DIALOG' || roles.alert!.includes(el)) || present.some(t => t.node!.closest('dialog'))) code = 'UNSUPPORTED_DIALOG';
+      const focus = present.find(t => t.node === active)?.id ?? (!active ? 'none' : active === document.body || active === document.documentElement ? 'body' : 'unknown');
+      const selected = [0, 1, 2].filter(i => byId.get(`tab-${i}`)?.getAttribute('aria-selected') === 'true');
+      const panels = [0, 1, 2].filter(i => visible(byId.get(`panel-${i}`)));
+      const unique = (el: Element | null | undefined) => !!el?.id && [...document.querySelectorAll('[id]')].filter(e => e.id === el.id).length === 1;
+      const tokens = (el: Element | null | undefined, name: string) => el?.getAttribute(name)?.trim().split(/\s+/).filter(Boolean) ?? [];
+      const tabNodes = [0, 1, 2].map(i => byId.get(`tab-${i}`));
+      const formRoot = byId.get('form'), submit = byId.get('submit');
+      const form = [0, 1].map(i => {
+        const field = byId.get(`field-${i}`), message = byId.get(`error-${i}`);
+        const refs = tokens(field, 'aria-describedby'), invalid = field?.getAttribute('aria-invalid');
+        return {
+          structure: field instanceof HTMLInputElement && field.form === formRoot && !!formRoot?.contains(field),
+          visible: visible(message), matched: (message instanceof HTMLElement ? message.innerText : '').trim().replace(/\s+/g, ' ') === `Enter a valid value ${i + 1}.`,
+          invalid: invalid === 'true', idref: unique(message) && refs.includes(message!.id) && !refs.includes(`error-${1 - i}`),
+          editable: field instanceof HTMLInputElement && visible(field) && !field.readOnly && !field.matches(':disabled') && field.getAttribute('aria-disabled') !== 'true' && !field.closest('[inert]'),
+          value: field instanceof HTMLInputElement && field.value === ['sample-one', 'sample-two'][i],
+          cleared: !!field && !visible(message) && (invalid === null || invalid === 'false'),
+          invalidCleared: invalid === null || invalid === 'false',
+        };
+      });
+      return { observedAt, code, focus, inside: !!root && !!active && root.contains(active), rootVisible: visible(root),
+        dialogRole: !!root && roles.dialog!.includes(root), modal: root?.getAttribute('aria-modal') === 'true',
+        selected, panels, selectionValid: tabNodes.every(el => ['true', 'false'].includes(el?.getAttribute('aria-selected') ?? '')),
+        roving: tabNodes.includes(active) && tabNodes.every(el => el instanceof HTMLElement && el.tabIndex === (el === active ? 0 : -1)),
+        tabStructure: !!root && tabNodes.every(el => !!el && root.contains(el)) && roles.tab?.filter(el => root.contains(el)).length === 3 && [0, 1, 2].every(i => !!byId.get(`panel-${i}`)),
+        ...(semantics ? { listRole: !!root && !!roles.tablist?.includes(root), named: !!root && !!roles.named?.includes(root),
+        orientation: root?.getAttribute('aria-orientation') === 'horizontal' || !root?.hasAttribute('aria-orientation'),
+        items: [0, 1, 2].map(i => {
+          const tab = byId.get(`tab-${i}`), panel = byId.get(`panel-${i}`);
+          return { 'tab-role': !!tab && !!roles.tab?.includes(tab), 'panel-role': !!panel && !!roles.tabpanel?.includes(panel),
+            controls: unique(panel) && tokens(tab, 'aria-controls').length === 1 && tokens(tab, 'aria-controls')[0] === panel?.id,
+            labelledby: unique(tab) && tokens(panel, 'aria-labelledby').includes(tab!.id) };
+        }),
+        } : {}),
+        formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
+      };
+    } finally { registry.clear(); }
+  } });
+}
+
 /** Fixture-specific reference. No KeyTrail driver, planner, assertion or serializer is called. */
 export async function nativeJourney(page: Page, info: TestInfo, manifest: Manifest): Promise<JourneyResult> {
   const started = performance.now(), config = manifest.config;
   const checks: CheckResult[] = manifest.checks.map(check => ({ ...structuredClone(check),
     stepId: null, status: 'not_run', messageCode: 'NOT_RUN', observed: {} }));
   const result: JourneyResult = {
-    schemaVersion: '1', rulesetVersion: '0.3.0', packageVersion: pkg.version,
+    schemaVersion: '1', rulesetVersion: '0.4.0', packageVersion: pkg.version,
     run: { runId: randomUUID(), testRef: createHash('sha256').update(info.testId).digest('hex'), attempt: info.retry,
       startedAt: new Date().toISOString(), durationMs: 0, nodeVersion: process.versions.node,
       playwrightVersion: '1.64.1', browserVersion: page.context().browser()!.version() },
@@ -43,96 +109,67 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   };
   const remaining = () => { guard(); return Math.max(1, Math.min(config.timeoutMs, config.scenarioTimeoutMs - (performance.now() - started))); };
   const targets = manifest.targets.map(t => ({ id: t.id, locator: page.locator(t.selector) }));
-  const capture = async () => {
+  let store: JSHandle<ReturnType<typeof createNativeStore>> | undefined;
+  const capture = async (semantics = true) => {
     guard();
-    const handles: ElementHandle[] = [];
-    const resolve = async (locator: typeof targets[number]['locator']) => {
+    store ??= await page.evaluateHandle(createNativeStore);
+    const registry = store;
+    let readFinished = false;
+    const resolve = async (locator: typeof targets[number]['locator'], slot: string) => {
+      guard();
       if (locator.page() !== page) throw new NativeFailure('UNSUPPORTED_CONTEXT');
-      const nodes = await locator.elementHandles(); handles.push(...nodes); return nodes;
+      let count: number;
+      try {
+        count = await locator.evaluateAll((nodes, { registry, slot }) => {
+          registry.set(slot, nodes); return nodes.length;
+        }, { registry, slot });
+      } catch (error) {
+        guard();
+        const main = await locator.evaluateAll(() => window === window.top).catch(() => undefined);
+        guard();
+        if (main === false) throw new NativeFailure('UNSUPPORTED_CONTEXT');
+        throw error;
+      }
+      guard(); return count;
     };
     try {
-      // Wait for every read before releasing handles, even when one locator fails.
+      // The fixture reference independently uses a private registry, fresh
+      // locator resolution and atomic cleanup, matching the measured work.
       const targetReads = Promise.allSettled(targets.map(async t => {
-        const nodes = await resolve(t.locator);
-        if (nodes.length > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
-        if (nodes[0] && await nodes[0].ownerFrame() !== page.mainFrame()) throw new NativeFailure('UNSUPPORTED_CONTEXT');
-        return { id: t.id, node: nodes[0] ?? null };
+        const slot = `target:${t.id}`, count = await resolve(t.locator, slot);
+        if (count > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
+        return { id: t.id, slot };
       }));
-      const roles: Record<string, ElementHandle[]> = {};
+      const roleSlots: Record<string, string> = {};
       const roleQueries = [
         ['dialog', page.getByRole('dialog', { includeHidden: true })],
         ['alert', page.getByRole('alertdialog', { includeHidden: true })],
         ...(manifest.kind === 'tabs' ? [
-          ['tablist', page.getByRole('tablist', { includeHidden: true })],
-          ['named', page.getByRole('tablist', { name: /\S/, includeHidden: true })],
           ['tab', page.getByRole('tab', { includeHidden: true })],
-          ['tabpanel', page.getByRole('tabpanel', { includeHidden: true })],
+          ...(semantics ? [
+            ['tablist', page.getByRole('tablist', { includeHidden: true })],
+            ['named', page.getByRole('tablist', { name: /\S/, includeHidden: true })],
+            ['tabpanel', page.getByRole('tabpanel', { includeHidden: true })],
+          ] as const : []),
         ] as const : []),
       ] as const;
-      const roleReads = Promise.allSettled(roleQueries.map(async ([name, locator]) => { roles[name] = await resolve(locator); }));
+      const roleReads = Promise.allSettled(roleQueries.map(async ([name, locator]) => {
+        const slot = `role:${name}`; await resolve(locator, slot); roleSlots[name] = slot;
+      }));
       const [reads, rolesRead] = await Promise.all([targetReads, roleReads]);
       const rejected = reads.find(r => r.status === 'rejected');
       if (rejected?.status === 'rejected') throw rejected.reason;
       const roleFailure = rolesRead.find(r => r.status === 'rejected');
       if (roleFailure?.status === 'rejected') throw roleFailure.reason;
-      const nodes = reads.map(r => (r as PromiseFulfilledResult<{ id: string; node: ElementHandle | null }>).value);
+      const slots = reads.map(r => (r as PromiseFulfilledResult<{ id: string; slot: string }>).value);
       guard();
-      const state = await page.evaluate(({ nodes, rootId, roles, kind }) => {
-        const elements = nodes.map(t => ({ id: t.id, node: t.node instanceof Element ? t.node : null }));
-        const byId = new Map(elements.map(t => [t.id, t.node]));
-        const root = byId.get(rootId), active = document.activeElement;
-        const visible = (el: Node | null | undefined): el is Element => {
-          if (!(el instanceof Element)) return false;
-          const bounds = el.getBoundingClientRect(), visibility = getComputedStyle(el).visibility;
-          return bounds.width > 0 && bounds.height > 0 && visibility !== 'hidden' && visibility !== 'collapse';
-        };
-        const present = elements.filter(t => t.node);
-        let code = '';
-        if (present.some(t => t.node!.getRootNode() !== document) || active?.shadowRoot || active?.tagName === 'IFRAME') code = 'UNSUPPORTED_CONTEXT';
-        else if (present.some(t => !t.node!.isConnected)) code = 'EXPECTATION_TIMEOUT';
-        else if (new Set(present.map(t => t.node)).size !== present.length) code = 'TARGET_ALIAS';
-        const layers = new Set([...roles.dialog!, ...roles.alert!, ...document.querySelectorAll('dialog')].filter(visible));
-        if (layers.size > 1 || [...layers].some(el => el.tagName === 'DIALOG' || roles.alert!.includes(el)) || present.some(t => t.node!.closest('dialog'))) code = 'UNSUPPORTED_DIALOG';
-        const focus = present.find(t => t.node === active)?.id ?? (!active ? 'none' : active === document.body || active === document.documentElement ? 'body' : 'unknown');
-        const selected = [0, 1, 2].filter(i => byId.get(`tab-${i}`)?.getAttribute('aria-selected') === 'true');
-        const panels = [0, 1, 2].filter(i => visible(byId.get(`panel-${i}`)));
-        const unique = (el: Element | null | undefined) => !!el?.id && [...document.querySelectorAll('[id]')].filter(e => e.id === el.id).length === 1;
-        const tokens = (el: Element | null | undefined, name: string) => el?.getAttribute(name)?.trim().split(/\s+/).filter(Boolean) ?? [];
-        const tabNodes = [0, 1, 2].map(i => byId.get(`tab-${i}`));
-        const formRoot = byId.get('form'), submit = byId.get('submit');
-        const form = [0, 1].map(i => {
-          const field = byId.get(`field-${i}`), message = byId.get(`error-${i}`);
-          const refs = tokens(field, 'aria-describedby'), invalid = field?.getAttribute('aria-invalid');
-          return {
-            structure: field instanceof HTMLInputElement && field.form === formRoot && !!formRoot?.contains(field),
-            visible: visible(message), matched: (message instanceof HTMLElement ? message.innerText : '').trim().replace(/\s+/g, ' ') === `Enter a valid value ${i + 1}.`,
-            invalid: invalid === 'true', idref: unique(message) && refs.includes(message!.id) && !refs.includes(`error-${1 - i}`),
-            editable: field instanceof HTMLInputElement && visible(field) && !field.readOnly && !field.matches(':disabled') && field.getAttribute('aria-disabled') !== 'true' && !field.closest('[inert]'),
-            value: field instanceof HTMLInputElement && field.value === ['sample-one', 'sample-two'][i],
-            cleared: !!field && !visible(message) && (invalid === null || invalid === 'false'),
-            invalidCleared: invalid === null || invalid === 'false',
-          };
-        });
-        return { code, focus, inside: !!root && !!active && root.contains(active), rootVisible: visible(root),
-          dialogRole: !!root && roles.dialog!.includes(root), modal: root?.getAttribute('aria-modal') === 'true',
-          selected, panels, selectionValid: tabNodes.every(el => ['true', 'false'].includes(el?.getAttribute('aria-selected') ?? '')),
-          roving: tabNodes.includes(active) && tabNodes.every(el => el instanceof HTMLElement && el.tabIndex === (el === active ? 0 : -1)),
-          tabStructure: !!root && tabNodes.every(el => !!el && root.contains(el)) && roles.tab?.filter(el => root.contains(el)).length === 3 && [0, 1, 2].every(i => !!byId.get(`panel-${i}`)),
-          listRole: !!root && !!roles.tablist?.includes(root), named: !!root && !!roles.named?.includes(root),
-          orientation: root?.getAttribute('aria-orientation') === 'horizontal' || !root?.hasAttribute('aria-orientation'),
-          items: [0, 1, 2].map(i => {
-            const tab = byId.get(`tab-${i}`), panel = byId.get(`panel-${i}`);
-            return { 'tab-role': !!tab && !!roles.tab?.includes(tab), 'panel-role': !!panel && !!roles.tabpanel?.includes(panel),
-              controls: unique(panel) && tokens(tab, 'aria-controls').length === 1 && tokens(tab, 'aria-controls')[0] === panel?.id,
-              labelledby: unique(tab) && tokens(panel, 'aria-labelledby').includes(tab!.id) };
-          }),
-          formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
-        };
-      }, { nodes, rootId: manifest.root, roles, kind: manifest.kind });
+      const state = await page.evaluate(({ registry, ...request }) => registry.read(request),
+        { registry, slots, rootId: manifest.root, roleSlots, semantics });
+      readFinished = true;
       guard();
       if (state.code) throw new NativeFailure(state.code as MessageCode);
       return state;
-    } finally { await Promise.allSettled(handles.map(handle => handle.dispose())); }
+    } finally { if (!readFinished) await registry.evaluate(value => value.clear()).catch(() => undefined); }
   };
   type State = Awaited<ReturnType<typeof capture>>;
   const selection = (s: State, expected: string): Reading => ({
@@ -141,7 +178,11 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   });
   const read = async (check: CheckResult, s: State): Promise<Reading> => {
     const id = check.checkId, focus = (expected = check.expected.focus) => ({ ok: s.focus === expected, observed: { focus: s.focus }, code: 'FOCUS_MISMATCH' as const });
-    const matched = (value: boolean, code: MessageCode) => ({ ok: value, observed: { matched: value }, code });
+    const metadata = (value: boolean | undefined): boolean => {
+      if (value === undefined) throw new NativeFailure('BROWSER_ERROR');
+      return value;
+    };
+    const matched = (value: boolean | undefined, code: MessageCode) => ({ ok: metadata(value), observed: { matched: metadata(value) }, code });
     if (id === 'D01.entry') return { ok: result.steps.at(-1)?.beforeFocus === 'open', observed: { focus: result.steps.at(-1)!.beforeFocus }, code: 'ENTRY_LIMIT' };
     if (/^D0[347]\./.test(id) || id === 'T01.entry' || /^T03\./.test(id) || id === 'F01.entry' || id === 'F04.focus' || /^F06.field.\d+.entry$/.test(id)) return focus();
     if (id === 'D02.visible' || id === 'D06.closed') return { ok: s.rootVisible === check.expected.visible, observed: { visible: s.rootVisible }, code: 'EXPECTATION_TIMEOUT' };
@@ -151,9 +192,9 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     if (id.startsWith('D05.')) return { ok: s.inside, observed: { inside: s.inside }, code: 'FOCUS_OUTSIDE_DIALOG' };
     if (id === 'T02.structure') return matched(s.tabStructure, 'STRUCTURE_MISMATCH');
     if (id === 'T02.role') return matched(s.listRole, 'ROLE_MISMATCH');
-    if (id === 'T02.name') return { ok: s.named, observed: { hasAccessibleName: s.named }, code: 'NAME_MISSING' };
+    if (id === 'T02.name') return { ok: metadata(s.named), observed: { hasAccessibleName: metadata(s.named) }, code: 'NAME_MISSING' };
     if (id === 'T02.orientation') return matched(s.orientation, 'ORIENTATION_MISMATCH');
-    if (id.startsWith('T02.item.')) { const [, , n, property] = id.split('.'); return matched(s.items[Number(n) - 1]![property as keyof State['items'][number]], property!.includes('role') ? 'ROLE_MISMATCH' : 'IDREF_MISMATCH'); }
+    if (id.startsWith('T02.item.')) { const [, , n, property] = id.split('.'); return matched(s.items?.[Number(n) - 1]?.[property as keyof NonNullable<State['items']>[number]], property!.includes('role') ? 'ROLE_MISMATCH' : 'IDREF_MISMATCH'); }
     if (id.endsWith('.roving')) return { ok: s.roving, observed: { roving: s.roving }, code: 'ROVING_MISMATCH' };
     if (/^T0[456]\./.test(id)) {
       const r = selection(s, check.expected.selected!);
@@ -189,6 +230,9 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
         if (current.checkId.endsWith('.entry') && action.key === 'Tab' && ++entryTabs > config.maxTabs) throw new NativeFailure('ENTRY_LIMIT');
         if (result.steps.length >= 500) throw new NativeFailure('ACTION_LIMIT');
         const before = await capture(); guard();
+        if (manifest.kind === 'dialog' && action.key === 'Enter' && before.focus !== action.targetId) {
+          mark(current, { ok: false, observed: { focus: before.focus }, code: 'FOCUS_MISMATCH' });
+        }
         if (action.stepId === 'step-001') result.coverage.entryEvidence = 'tab';
         if (manifest.kind === 'dialog' && action.stepId !== 'step-001' && action.key !== 'Enter' && !before.inside) throw new NativeFailure('FOCUS_OUTSIDE_DIALOG');
         if (manifest.kind === 'tabs' && action.stepId !== 'step-001' && !before.inside) throw new NativeFailure('FOCUS_MISMATCH');
@@ -212,22 +256,33 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       const group = current.checkId.startsWith('F02.message.') || current.checkId.startsWith('F06.clear.') ? checks.slice(index, index + 2) : [current];
       const negative = current.checkId.endsWith('.unchanged');
       const begin = performance.now(), deadline = begin + (negative ? config.observationWindowMs : remaining());
+      let firstObserved: number | undefined, lastObserved: number | undefined, maxGap = 0;
+      const intervals: number[] = [];
       while (true) {
-        const state = await capture();
+        const readStarted = performance.now();
+        const state = await capture(!negative);
         const readings = await Promise.all(group.map(c => read(c, state))); guard();
-        const mismatch = readings.findIndex(r => !r.ok), expired = performance.now() >= deadline;
+        if (negative) {
+          if (lastObserved !== undefined) { intervals.push(state.observedAt - lastObserved); maxGap = Math.max(maxGap, intervals.at(-1)!); }
+          firstObserved ??= state.observedAt; lastObserved = state.observedAt;
+          Object.assign(readings[0]!.observed, { observationWindowMs: state.observedAt - firstObserved,
+            observationCount: intervals.length + 1, observationIntervalsMs: [...intervals], maxObservationGapMs: maxGap });
+          current.observed = readings[0]!.observed;
+          result.steps.at(-1)!.observationWindowMs = state.observedAt - firstObserved;
+        }
+        const mismatch = readings.findIndex(r => !r.ok), expired = negative ?
+          intervals.length > 0 && state.observedAt - firstObserved! >= config.observationWindowMs : performance.now() >= deadline;
         if (negative && mismatch !== -1) mark(current, readings[mismatch]!);
+        if (negative && maxGap > 100) throw new NativeFailure('OBSERVATION_GAP');
         if (negative ? expired : mismatch === -1 || expired) {
-          if (negative) {
-            readings[0]!.observed.observationWindowMs = performance.now() - begin;
-            result.steps.at(-1)!.observationWindowMs = performance.now() - begin;
-          }
           if (mismatch !== -1) mark(group[mismatch]!, readings[mismatch]!);
           if (!negative && expired) mark(current, { ok: false, observed: readings[0]!.observed, code: 'EXPECTATION_TIMEOUT' });
           for (let n = 0; n < group.length; n++) mark(group[n]!, readings[n]!);
           break;
         }
-        await delay(Math.max(1, Math.min(20, deadline - performance.now(), remaining())));
+        // Match the same 25 ms target and 10 ms maximum pause as the journey.
+        const pause = negative ? Math.max(1, Math.min(10, 25 - (performance.now() - readStarted))) : 20;
+        await delay(Math.max(1, Math.min(pause, negative ? config.observationWindowMs - (state.observedAt - firstObserved!) : deadline - performance.now(), remaining())));
       }
       index += group.length - 1;
     }
@@ -237,6 +292,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     if (check.status === 'not_run') { check.status = 'blocked'; check.messageCode = failure.code; check.stepId = result.steps.at(-1)?.stepId ?? null; }
   } finally {
     page.off('framenavigated', navigated); page.off('popup', popup); page.off('close', closed);
+    await store?.dispose().catch(() => undefined);
   }
   const cause = checks.find(c => c.status === 'fail' || c.status === 'blocked');
   for (const c of checks) if (c.status === 'not_run') c.blockedBy = cause?.checkId ?? 'E_ABORTED';

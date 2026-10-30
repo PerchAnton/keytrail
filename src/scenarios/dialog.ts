@@ -88,9 +88,15 @@ export async function assertDialogJourney(page: Page, testInfo: TestInfo, input:
           if (!state.focused.has(contract.trigger.id)) throw new Blocked('ENTRY_LIMIT');
           result.coverage.entryEvidence = 'tab';
         }
-        await d.press(contract.openKey, contract.trigger);
+        await d.press(contract.openKey, contract.trigger, false, before => {
+          current.observed = { focus: before.focus };
+          if (!before.focused.has(contract.trigger.id)) {
+            finish(current, false, current.observed, 'FOCUS_MISMATCH');
+            throw new Stop();
+          }
+        });
         current.stepId = d.steps.at(-1)!.stepId;
-        finish(current, true, { focus: contract.trigger.id }, 'OK');
+        finish(current, true, current.observed, 'OK');
       });
       await test.step('KeyTrail D02 semantics and D03 initial focus', async () => {
         await observe('D02.visible', 'EXPECTATION_TIMEOUT', async s => {

@@ -1,6 +1,7 @@
 import type { JourneyResult } from '../contracts/types.js';
 import validateSchema from '../../artifacts/generated/schema-validator.cjs';
 import { coverage, outcome } from './result.js';
+import { MAX_OBSERVATION_GAP_MS } from '../engine/observation-window.js';
 
 /** JSON shape plus relationships that JSON Schema cannot express. */
 export function validJourneyResult(value: unknown): value is JourneyResult {
@@ -23,6 +24,19 @@ export function validJourneyResult(value: unknown): value is JourneyResult {
     if (check.ruleId === 'E_CONFIG' && (check.status !== 'blocked' || check.messageCode !== 'CONFIG_INVALID')) return false;
     if ((check.status === 'pass') !== (check.messageCode === 'OK')) return false;
     if ((check.status === 'not_run') !== (check.messageCode === 'NOT_RUN')) return false;
+    const o = check.observed;
+    if (o.observationIntervalsMs !== undefined) {
+      const intervals = o.observationIntervalsMs;
+      const duration = intervals.reduce((sum, interval) => sum + interval, 0);
+      const max = intervals.reduce((value, interval) => Math.max(value, interval), 0);
+      if (o.observationCount !== intervals.length + 1 || o.maxObservationGapMs !== max ||
+          o.observationWindowMs === undefined || Math.abs(o.observationWindowMs - duration) > 0.001) return false;
+      if (check.status === 'pass' && (intervals.length === 0 || max > MAX_OBSERVATION_GAP_MS ||
+          duration < result.config.observationWindowMs)) return false;
+      if (check.messageCode === 'OBSERVATION_GAP' && (check.status !== 'blocked' || max <= MAX_OBSERVATION_GAP_MS)) return false;
+    } else if (check.messageCode === 'OBSERVATION_GAP' || o.observationCount !== undefined || o.maxObservationGapMs !== undefined) return false;
+    if (result.rulesetVersion === '0.4.0' && check.ruleId === 'T05' && check.checkId.endsWith('.unchanged') &&
+        check.status === 'pass' && o.observationIntervalsMs === undefined) return false;
     if (check.status === 'not_run') {
       const cause = check.blockedBy && checks.get(check.blockedBy);
       if (check.blockedBy !== 'E_ABORTED' && (!cause || !['fail', 'blocked'].includes(cause.status))) return false;

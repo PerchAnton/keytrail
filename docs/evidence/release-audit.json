@@ -1,0 +1,401 @@
+{
+  "version": "0.1.0-alpha.6",
+  "rulesetVersion": "0.4.0",
+  "scope": "Ten focused regression cases extracted from the final successful 163-test four-worker comparison after 100 complete local rounds; failed and blocked journey outcomes are intentional fixture expectations.",
+  "sourceCommit": "d03fda1305c27201c952d4fc054c147d40a2f391",
+  "recordedAt": "2026-10-30T05:02:58.085Z",
+  "seriesIdentity": "191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed",
+  "rawReportSha256": "d34f40ddbcbc857e6c89aff8e1ad0055892701215d8e42ffad02c836bb06bcb5",
+  "environment": {
+    "node": "24.22.1",
+    "platform": "darwin",
+    "release": "27.2.0",
+    "arch": "arm64",
+    "cpu": "Apple M3",
+    "logicalCpus": 8,
+    "playwright": "1.64.1",
+    "chromium": "156.0.8078.4"
+  },
+  "workers": 4,
+  "sourceHashes": {
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "ec6658fc3dde1c08e91ad05156d36402d961f8f97131f21bb2e935c8f1e45e8a",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "2f61bcc6ed997dd8160609d0339a01602b68a05a2317630d85d96c2a6edf5add",
+    "scripts/verify-reliability.mjs": "65be5e0a9fbea099924f95e02b8b6fc19df28b4fc9ae0c7c3ce185857eecd27e",
+    "src/browser/driver.ts": "2a3f6e7cd5142b57dc219010ce5321acdad49a19eed20715c8f4d4aef458983d",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "15d27d2d3f1b3912aa3b372758e441078af018435d13c358c34084281726c927",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "a5d62e94cf8281b0dfe8b4061a962faa55245a58a0242265f3ab17fb377f8194",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
+    "tests/integration/dialog.spec.ts": "28a7fd3d86d3712f978861bf270835ecc6d15be199272501584832e9d9c3854c",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "d71859a9b0a20c0cc4a04107b0032a771143be641e79164e9af88a1216018a06",
+    "tests/integration/tabs.spec.ts": "69871a06c0a7fcccf107ea5f294c39470fbbed3821d52de1dc438cbad3d075c3",
+    "tests/unit/contracts.test.mjs": "1ce78e70acbce14e55c712c33e38a0fb26781e463dc2d655abf9d49e655233b9",
+    "tests/unit/form-errors.test.mjs": "e382c4ff52bffbaea6485570d8147644e3bbff9786d53c5fc839f0e443700237",
+    "tests/unit/observation-window.test.mjs": "9e5e85b6140a756d63bcb609be7d74b496d692237c94d22b6d22c209b738af4a",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/signatures.mjs": "aea81b63495cb2bef620b590b923b21fe345639a4dcc186a6d77146704ad3970"
+  },
+  "cases": [
+    {
+      "fixture": "dialog rejects focus drift before Enter activation",
+      "file": "dialog.spec.ts",
+      "outcome": "failed",
+      "inputMode": null,
+      "actions": 0,
+      "activationKeys": 0,
+      "typedCharacters": 0,
+      "firstMismatch": {
+        "checkId": "D01.entry",
+        "ruleId": "D01",
+        "stepId": null,
+        "status": "fail",
+        "messageCode": "FOCUS_MISMATCH",
+        "basis": "contract",
+        "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "expected": {
+          "focus": "open"
+        },
+        "observed": {
+          "focus": "unknown"
+        }
+      },
+      "windows": []
+    },
+    {
+      "fixture": "dialog rejects focus drift before Space activation",
+      "file": "dialog.spec.ts",
+      "outcome": "failed",
+      "inputMode": null,
+      "actions": 0,
+      "activationKeys": 0,
+      "typedCharacters": 0,
+      "firstMismatch": {
+        "checkId": "D01.entry",
+        "ruleId": "D01",
+        "stepId": null,
+        "status": "fail",
+        "messageCode": "FOCUS_MISMATCH",
+        "basis": "contract",
+        "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/",
+        "expected": {
+          "focus": "open"
+        },
+        "observed": {
+          "focus": "unknown"
+        }
+      },
+      "windows": []
+    },
+    {
+      "fixture": "forms report type semantics when character keydown is prevented",
+      "file": "form-errors.spec.ts",
+      "outcome": "failed",
+      "inputMode": "type",
+      "actions": 16,
+      "activationKeys": 1,
+      "typedCharacters": 10,
+      "firstMismatch": {
+        "checkId": "F06.field.001.value",
+        "ruleId": "F06",
+        "stepId": "step-016",
+        "status": "fail",
+        "messageCode": "VALUE_MISMATCH",
+        "basis": "contract",
+        "expected": {
+          "matched": true,
+          "editable": true
+        },
+        "observed": {
+          "matched": false,
+          "editable": true
+        }
+      },
+      "windows": []
+    },
+    {
+      "fixture": "forms report insertText semantics when character keydown is prevented",
+      "file": "form-errors.spec.ts",
+      "outcome": "passed",
+      "inputMode": "insertText",
+      "actions": 11,
+      "activationKeys": 1,
+      "typedCharacters": 0,
+      "firstMismatch": null,
+      "windows": []
+    },
+    {
+      "fixture": "forms type printable characters with keyboard events and keep values private",
+      "file": "form-errors.spec.ts",
+      "outcome": "passed",
+      "inputMode": "type",
+      "actions": 34,
+      "activationKeys": 1,
+      "typedCharacters": 25,
+      "firstMismatch": null,
+      "windows": []
+    },
+    {
+      "fixture": "forms stop typing after focus moves during a character event",
+      "file": "form-errors.spec.ts",
+      "outcome": "failed",
+      "inputMode": "type",
+      "actions": 7,
+      "activationKeys": 1,
+      "typedCharacters": 1,
+      "firstMismatch": {
+        "checkId": "F06.field.001.value",
+        "ruleId": "F06",
+        "stepId": "step-007",
+        "status": "fail",
+        "messageCode": "FOCUS_MISMATCH",
+        "basis": "contract",
+        "expected": {
+          "matched": true,
+          "editable": true
+        },
+        "observed": {
+          "focus": "submit"
+        }
+      },
+      "windows": []
+    },
+    {
+      "fixture": "forms reject unsupported keyboard characters before submitting",
+      "file": "form-errors.spec.ts",
+      "outcome": "blocked",
+      "inputMode": null,
+      "actions": 0,
+      "activationKeys": 0,
+      "typedCharacters": 0,
+      "firstMismatch": {
+        "checkId": "E_CONFIG",
+        "ruleId": "E_CONFIG",
+        "stepId": null,
+        "status": "blocked",
+        "messageCode": "CONFIG_INVALID",
+        "basis": "contract",
+        "expected": {},
+        "observed": {}
+      },
+      "windows": []
+    },
+    {
+      "fixture": "manual tabs block a browser observation gap before evaluation",
+      "file": "tabs.spec.ts",
+      "outcome": "blocked",
+      "inputMode": null,
+      "actions": 2,
+      "activationKeys": 0,
+      "typedCharacters": 0,
+      "firstMismatch": {
+        "checkId": "T05.forward.001.unchanged",
+        "ruleId": "T05",
+        "stepId": "step-002",
+        "status": "blocked",
+        "messageCode": "OBSERVATION_GAP",
+        "basis": "contract",
+        "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+        "expected": {
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "roving": true
+        },
+        "observed": {
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 189.29999999701977,
+          "observationCount": 2,
+          "observationIntervalsMs": [
+            189.29999999701977
+          ],
+          "maxObservationGapMs": 189.29999999701977
+        }
+      },
+      "windows": []
+    },
+    {
+      "fixture": "manual tabs block a browser observation gap after evaluation",
+      "file": "tabs.spec.ts",
+      "outcome": "blocked",
+      "inputMode": null,
+      "actions": 2,
+      "activationKeys": 0,
+      "typedCharacters": 0,
+      "firstMismatch": {
+        "checkId": "T05.forward.001.unchanged",
+        "ruleId": "T05",
+        "stepId": "step-002",
+        "status": "blocked",
+        "messageCode": "OBSERVATION_GAP",
+        "basis": "contract",
+        "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+        "expected": {
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "roving": true
+        },
+        "observed": {
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 184.3999999910593,
+          "observationCount": 2,
+          "observationIntervalsMs": [
+            184.3999999910593
+          ],
+          "maxObservationGapMs": 184.3999999910593
+        }
+      },
+      "windows": []
+    },
+    {
+      "fixture": "manual tabs record initial and final observations even for a short window",
+      "file": "tabs.spec.ts",
+      "outcome": "passed",
+      "inputMode": null,
+      "actions": 14,
+      "activationKeys": 6,
+      "typedCharacters": 0,
+      "firstMismatch": null,
+      "windows": [
+        {
+          "checkId": "T05.forward.001.unchanged",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 64,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              35.5,
+              28.5
+            ],
+            "maxObservationGapMs": 35.5
+          }
+        },
+        {
+          "checkId": "T05.forward.002.unchanged",
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 67.1000000089407,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              36.79999999701977,
+              30.30000001192093
+            ],
+            "maxObservationGapMs": 36.79999999701977
+          }
+        },
+        {
+          "checkId": "T05.forward.003.unchanged",
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 67.5,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              40.5,
+              27
+            ],
+            "maxObservationGapMs": 40.5
+          }
+        },
+        {
+          "checkId": "T05.backward.001.unchanged",
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 64.29999999701977,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              36.599999994039536,
+              27.700000002980232
+            ],
+            "maxObservationGapMs": 36.599999994039536
+          }
+        },
+        {
+          "checkId": "T05.backward.002.unchanged",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 65.5,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              37.19999998807907,
+              28.30000001192093
+            ],
+            "maxObservationGapMs": 37.19999998807907
+          }
+        },
+        {
+          "checkId": "T05.backward.003.unchanged",
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 64.20000000298023,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              36,
+              28.200000002980232
+            ],
+            "maxObservationGapMs": 36
+          }
+        }
+      ]
+    }
+  ]
+}

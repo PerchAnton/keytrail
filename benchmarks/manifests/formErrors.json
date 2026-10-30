@@ -37,7 +37,8 @@
     "maxTabs": 25,
     "timeoutMs": 2000,
     "scenarioTimeoutMs": 30000,
-    "observationWindowMs": 200
+    "observationWindowMs": 200,
+    "inputMode": "insertText"
   },
   "checks": [
     {

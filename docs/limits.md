@@ -40,8 +40,10 @@ Form journeys support `novalidate` forms, native text inputs/textarea, declared 
 messages and keyboard correction. See [the form contract](form-errors.md). The library
 checks only the listed errors; cleared errors do not prove a successful save or an
 announced success state. Mock application submissions in setup. Corrections use synthetic
-values, select-all and `keyboard.insertText` (Backspace for an empty string); they do not
-model per-character keydown, physical keyboards or IME behavior.
+values and select-all, followed by either `insertText` (default) or per-character
+`type` for printable ASCII; empty strings use Backspace. The reported mode matters:
+insertion bypasses character key handlers. Neither mode models physical keyboards
+or IME behavior. See [input modes and limits](form-errors.md#keyboard-actions-and-limits).
 
 A declared form-summary link may perform native same-document fragment navigation.
 The original Document must survive that action and its observations; a full reload

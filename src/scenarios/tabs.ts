@@ -6,6 +6,7 @@ import { DEFAULTS } from '../contracts/common.js';
 import { validateTabs } from '../contracts/tabs.js';
 import type { CheckResult, JourneyResult, MessageCode, SafeObservation, TabsContract } from '../contracts/types.js';
 import { planTabs } from '../engine/tabs-plan.js';
+import { ObservationWindow, observationPauseMs } from '../engine/observation-window.js';
 import { Blocked, BoundaryExit, Driver, type Snapshot } from '../browser/driver.js';
 import { coverage, outcome, JourneyAssertionError } from '../reporting/result.js';
 import { serializeJourneyResult } from '../reporting/serialize.js';
@@ -95,17 +96,21 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
         finish('T01.entry', { ok: true, observed: { focus: contract.initialTabId } }, 'OK');
       });
       await test.step('KeyTrail T02 semantics and T06 initial state', async () => {
+        const metadata = (value: boolean | undefined, key: 'matched' | 'hasAccessibleName' = 'matched'): Reading => {
+          if (value === undefined) throw new Blocked('BROWSER_ERROR');
+          return { ok: value, observed: { [key]: value } };
+        };
         await observe('T02.structure', 'STRUCTURE_MISMATCH', s => ({ ok: s.tabs!.structure, observed: { matched: s.tabs!.structure } }));
         structureEstablished = true;
-        await observe('T02.role', 'ROLE_MISMATCH', s => ({ ok: s.tabs!.role, observed: { matched: s.tabs!.role } }));
-        await observe('T02.name', 'NAME_MISSING', s => ({ ok: s.tabs!.named, observed: { hasAccessibleName: s.tabs!.named } }));
-        await observe('T02.orientation', 'ORIENTATION_MISMATCH', s => ({ ok: s.tabs!.orientation, observed: { matched: s.tabs!.orientation } }));
+        await observe('T02.role', 'ROLE_MISMATCH', s => metadata(s.tabs!.role));
+        await observe('T02.name', 'NAME_MISSING', s => metadata(s.tabs!.named, 'hasAccessibleName'));
+        await observe('T02.orientation', 'ORIENTATION_MISMATCH', s => metadata(s.tabs!.orientation));
         for (let index = 0; index < contract.items.length; index++) {
           const id = `T02.item.${String(index + 1).padStart(3, '0')}`;
           for (const [suffix, property, code] of [
             ['tab-role', 'tabRole', 'ROLE_MISMATCH'], ['panel-role', 'panelRole', 'ROLE_MISMATCH'],
             ['controls', 'controls', 'IDREF_MISMATCH'], ['labelledby', 'labelledby', 'IDREF_MISMATCH'],
-          ] as const) await observe(`${id}.${suffix}`, code, s => ({ ok: s.tabs!.items[index]![property], observed: { matched: s.tabs!.items[index]![property] } }));
+          ] as const) await observe(`${id}.${suffix}`, code, s => metadata(s.tabs!.items?.[index]?.[property]));
         }
         await observe('T06.initial', 'SELECTION_MISMATCH', s => consistent(s, initial));
       });
@@ -145,18 +150,27 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
         await observe(`T06.${transition.suffix}.roving`, 'ROVING_MISMATCH', s => ({ ok: s.tabs!.roving, observed: { roving: s.tabs!.roving } }), inspectFocused);
         if (contract.activation === 'manual') {
           select(unchanged);
-          const windowStarted = performance.now();
-          const deadline = windowStarted + config.observationWindowMs;
+          const window = new ObservationWindow();
           const step = d.steps.at(-1)!;
           try {
             while (true) {
-              state = await d.snapshot(); ready(state); d.guard();
-              if (performance.now() >= deadline) break;
-              await delay(Math.max(1, Math.min(20, deadline - performance.now(), d.remaining())));
+              const readStarted = performance.now();
+              state = await d.snapshot('interaction');
+              window.add(state.observedAt);
+              current.observed = { ...selection(state, selected).observed, focus: state.focus,
+                roving: state.tabs!.roving, ...window.observed() };
+              // Preserve an observed component failure even if sampling was also too slow.
+              ready(state); d.guard();
+              if (window.gap) throw new Blocked('OBSERVATION_GAP');
+              if (window.complete(config.observationWindowMs)) break;
+              await delay(Math.max(1, Math.min(observationPauseMs(performance.now() - readStarted),
+                config.observationWindowMs - window.elapsed, d.remaining())));
             }
-            finish(unchanged, { ...selection(state, selected), observed: { ...selection(state, selected).observed,
-              focus: state.focus, roving: state.tabs!.roving, observationWindowMs: performance.now() - windowStarted } }, 'PREMATURE_ACTIVATION');
-          } finally { step.observationWindowMs = performance.now() - windowStarted; }
+            finish(unchanged, { ok: true, observed: current.observed }, 'PREMATURE_ACTIVATION');
+          } finally {
+            current.observed = { ...current.observed, ...window.observed() };
+            step.observationWindowMs = window.elapsed;
+          }
           select(`T05.${transition.suffix}.activated`);
           try { state = await d.press(contract.activationKey, transition.target, true, ready); }
           catch (error) {

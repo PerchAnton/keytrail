@@ -1,5 +1,7 @@
 # KeyTrail
 
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.
@@ -7,7 +9,7 @@ showing the first mismatch and the observations that could not run.
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
 [Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Read reports](docs/reports.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Release checklist](docs/release-checklist.md)
 
-**Status: dialogs, tabs and form errors, `0.1.0-alpha.5` source/package candidate.** No npm
+**Status: dialogs, tabs and form errors, `0.1.0-alpha.6` source/package candidate.** No npm
 publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
 declared form-error recovery, plus a CI reporter that requires complete results for every discovered journey test and attempt.
 
@@ -51,12 +53,14 @@ its HTML/JUnit reports and incomplete attachment. Dependency installation and th
 React lockfile preparation use the registry. The actual consumer installation then
 uses `--offline --frozen-lockfile` in a separate empty directory; browser tests need
 only the local fixture server.
-It leaves `artifacts/keytrail-0.1.0-alpha.5.tgz`, a verification record and `SHA256SUMS`.
+It leaves `artifacts/keytrail-0.1.0-alpha.6.tgz`, a development verification record
+and `SHA256SUMS`. This checks package usability; final acceptance is a separate
+[explicit gate](docs/reliability.md).
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.5.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.6.tgz @playwright/test@1.64.1
 ```
 
 ## Try the React portal
@@ -103,6 +107,8 @@ The [standalone example](examples/vanilla) provides the actual HTML and configur
 `assertTabsJourney` checks horizontal/vertical arrow navigation, wraparound, automatic
 or manual activation, optional Home/End and the final Tab exit. Manual activation
 checks that focus moves while selection stays unchanged until Enter or Space.
+It records actual sampling intervals; a gap over 100 ms blocks the check with
+`OBSERVATION_GAP` instead of claiming a pass.
 
 See the [Tabs API and flow diagram](docs/tabs.md) and the
 [runnable manual-tabs example](examples/vanilla/tabs.journey.spec.ts).
@@ -112,6 +118,8 @@ See the [Tabs API and flow diagram](docs/tabs.md) and the
 `assertFormErrorsJourney` checks the invalid submit, error text and field relationships,
 the declared focus policy, summary links and keyboard correction. It confirms that all
 declared errors clear, without including typed values or message text in its own JSON.
+Choose `inputMode: 'type'` to exercise character key handlers for printable ASCII.
+The default `insertText` mode supports Unicode input; the report identifies the mode.
 
 ```text
 Invalid submit → messages + IDREF → focus → optional summary links
@@ -163,7 +171,7 @@ our separate interaction-check, edit-session or RefMint projects.
 
 ```sh
 pnpm check
-pnpm exec playwright test --workers=1
+pnpm verify:reliability # Four full rounds, then the four-worker comparison
 pnpm exec playwright show-report
 ```
 
@@ -172,12 +180,29 @@ unsupported contexts, bounded entry, scenario deadlines and safe own reports.
 The [verification record](docs/verification.md) separates completed checks from the
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
-repeatability and attachment isolation. This checkpoint has 45 full sequential rounds
-(6,885 executions), accepted by the maintainer, plus a matching 153-test four-worker
-run. The original 100-round target was not completed. Real-world adoption has not
-been established.
+repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md).
+The earlier revision `0300552` completed **100 rounds × 163 tests = 16,300 executions**,
+followed by **163 passing tests on four workers**, with no retries or semantic
+differences. Every raw report and its source identity was independently checked.
+Earlier local and hosted attempts are retained separately and are not added to
+this historical total. Six subsequent full rounds at `46515dd` are retained as
+development evidence. At `6a9cc6a`, after narrowing manual-window reads, **4 × 167 = 668**
+sequential checks and **167 four-worker checks** passed without retries or semantic
+differences; [retained development record](docs/evidence/development-window-reads.json).
+The private observation store and cached reader change the runtime; the earlier
+counts do not certify them. At `4abf74c`, Linux and macOS ARM passed the complete
+169-case suite and package consumers. Intel retained one genuine 370 ms gap, so
+that exploratory matrix failed. The selected **Linux + macOS ARM CI now passes**
+at `63f9edf`, including all 169 tests and package consumers on each platform;
+[validated CI record](docs/evidence/ci-arm-development.json). Intel remains a separate
+capacity investigation, with its failure retained. The cached reader completed **4 × 169 = 676**
+local sequential tests and **169 four-worker checks**, without retries or semantic
+differences; [independently validated development record](docs/evidence/development-cached-reader.json).
+[The CI investigation](docs/ci-concurrency.md) records the earlier gaps and the
+subsequent passing browser suites, including a separate package-harness failure. Final acceptance and fresh release benchmarks
+are deferred until the candidate is frozen. Real-world adoption has not been established.
 
-### Measured overhead
+### Historical measured overhead (`0300552`)
 
 ![KeyTrail overhead against equivalent native Playwright checks](docs/assets/performance.svg)
 

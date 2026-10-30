@@ -1,24 +1,36 @@
 # Equivalent-work benchmark
 
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+
+These historical measurements describe commit `0300552`, after its 100-round
+local reliability series. They do not measure the later snapshot/cadence changes;
+fresh release performance measurements are deferred. All 108 benchmark tests passed without retries; raw sample
+attachments, derived statistics, environment and source hashes were independently
+checked before updating these records.
+
 This benchmark measures three synthetic Chromium journeys: an ordinary custom ARIA
 dialog, a horizontal manual-activation tab list, and a two-field form with live error
-clearing. It measures overhead against a fixture-specific native Playwright reference.
+clearing using `inputMode: "insertText"`. The opt-in per-character `type` mode is
+not measured by these samples. It measures overhead against a fixture-specific native Playwright reference.
 It does not measure real-world adoption, WCAG conformance or screen-reader behavior.
 
-## Recorded results — 28 October 2026
+## Recorded results — 29 October 2026 UTC
 
 ![Measured overhead and timings](assets/performance.svg)
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |
-| Dialog | 280.3 / 298.3 | 304.8 / 317.9 | 8.7% | 8.7% |
-| Manual tabs | 2226.3 / 2266.7 | 2229.7 / 2269.3 | 0.8% | 0.2% |
-| Form errors | 290.2 / 333.6 | 305.3 / 313.0 | 4.8% | 5.2% |
+| Dialog | 274.9 / 281.1 | 297.1 / 307.8 | 8.4% | 8.1% |
+| Manual tabs | 2219.4 / 2288.3 | 2236.1 / 2251.2 | 0.8% | 0.8% |
+| Form errors (insertText) | 282.5 / 292.7 | 295.1 / 297.5 | 4.6% | 4.5% |
 
 All three pass the 20% target under both calculations. Apple M3 (8 logical CPUs),
 macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4.
 Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
 [tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
+Values are rounded to one decimal place. The run finished at 22:34 UTC
+(00:34 on 30 October in Kyiv). These overhead measurements do not establish a
+speed advantage over the native reference.
 The chart can be regenerated with `python scripts/render-performance.py` in a
 Python environment containing Matplotlib; it is an optional documentation tool.
 
@@ -26,7 +38,8 @@ Python environment containing Matplotlib; it is an optional documentation tool.
 
 Both arms use the same page, keyboard action sequence, target resolution, focus and
 role observations, time/action budgets, manual-activation observation windows, and
-JSON result attachment. Setup and page teardown are outside the measured interval.
+JSON result attachment. Both manual-tabs implementations require initial/final
+snapshots and enforce the 100 ms gap threshold using browser timestamps. Setup and page teardown are outside the measured interval.
 The reference calls Playwright directly; it does not call KeyTrail's assertions,
 driver, planner or serializer. Both arms validate the common report schema.
 

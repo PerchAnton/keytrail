@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { validateFormErrors } from '../../artifacts/unit/formValidation.js';
 import { planFormErrors } from '../../artifacts/unit/formPlan.js';
-const target = id => ({ id, locator: { page() {}, count() {}, elementHandles() {}, isVisible() {}, and() {}, getAttribute() {} } });
+const target = id => ({ id, locator: { page() {}, count() {}, evaluateAll() {}, isVisible() {}, and() {}, getAttribute() {} } });
 function base() {
   const fields = [target('field-a'), target('field-b')], submit = target('submit');
   return { id: 'form-errors', form: target('form'), submit, submitKey: 'Enter',
@@ -60,4 +60,14 @@ test('forms allow multiple unique summary links per field within the common targ
   assert.ok(validateFormErrors(c));
   c.summaryLinks = Array.from({ length: 100 }, (_, i) => ({ link: target(`link-${i}`), field: c.errors[0].field }));
   assert.equal(validateFormErrors(c), null);
+});
+
+test('forms validate keyboard mode before any action and preserve the insertion default', () => {
+  assert.equal(validateFormErrors(base()).config.inputMode, 'insertText');
+  const c = base(); c.inputMode = 'type'; c.correction[0].value = 'Az09 +!?~';
+  assert.equal(validateFormErrors(c).config.inputMode, 'type');
+  for (const unsupported of ['café', '🧭', 'line\nbreak', '\t', '\x7f']) {
+    c.correction[0].value = unsupported; assert.equal(validateFormErrors(c), null);
+  }
+  c.inputMode = 'paste'; assert.equal(validateFormErrors(c), null);
 });

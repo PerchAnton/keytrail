@@ -12,7 +12,7 @@ for (const broken of [false, true]) test(broken ? 'detects an error left visible
     errors: [{ field: email, message: { id: 'email-error', locator: page.locator('#email-error') },
       via: 'aria-describedby', expectedText: 'Enter a valid email address.' }],
     focusAfterInvalid: { policy: 'firstInvalid', target: email },
-    correction: [{ field: email, value: 'reader@example.test' }], validateCorrection: 'live',
+    correction: [{ field: email, value: 'reader@example.test' }], inputMode: 'type', validateCorrection: 'live',
   });
   if (!broken) { expect((await run()).outcome).toBe('passed'); return; }
   // Catch the expected defect only in this teaching example; let application tests fail.

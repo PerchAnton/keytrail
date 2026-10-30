@@ -31,7 +31,7 @@ Copy this directory into a new folder outside the repository. In that copy:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm add --save-dev /absolute/path/to/keytrail-0.1.0-alpha.5.tgz
+pnpm add --save-dev /absolute/path/to/keytrail-0.1.0-alpha.6.tgz
 pnpm exec playwright install chromium
 pnpm test:types
 pnpm build
