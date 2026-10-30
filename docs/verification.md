@@ -14,7 +14,7 @@ component is accessible.
 | Browser suite | Historical `6a9cc6a`: 167/167 in each of four local rounds; hosted results are separated below; no retries |
 | Worker isolation | Historical `6a9cc6a`: 167/167 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
-| Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
+| Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
 | Repeatability | Historical runtime at `6a9cc6a`: 4 × 167 = 668, plus 167 four-worker checks; [development proof](evidence/development-window-reads.json). Final 100-round acceptance is deferred; historical `0300552`: 100/100; [source-bound proof](evidence/reliability.json) |

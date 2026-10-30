@@ -31,7 +31,7 @@ or external service is needed to run their browser tests.
 | Gate | Evidence / command |
 | --- | --- |
 | Public API, types, limits and errors agree | [Dialog](api.md), [tabs](tabs.md), [form errors](form-errors.md), [rules/codes](rules.md), [limits](limits.md); strict TypeScript checks |
-| Correct and defective fixtures | 167 browser regression tests; all three scenario families |
+| Correct and defective fixtures | 169 browser regression tests; all three scenario families |
 | Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
 | Source-bound reliability | Pending for changed source; prior 100 × 163 proof is historical; [proof and protocol](reliability.md) |
 | Equivalent native measurements | Fresh measurements pending: three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |

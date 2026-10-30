@@ -1,0 +1,295 @@
+{
+  "sourceCommit": "7e36c394310fd55de3ed4d2c0ace90ff40b68f2c",
+  "runId": 41082981018,
+  "status": "failed",
+  "finalAcceptance": false,
+  "platforms": [
+    {
+      "runner": "linux",
+      "environment": {
+        "platform": "linux",
+        "arch": "x64",
+        "release": "7.0.0-1017-azure",
+        "node": "24.22.1",
+        "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+        "logicalCpus": 4,
+        "memoryBytes": 16759300096
+      },
+      "rawReportSha256": "1ae422df4686e97405c2f92f99129b79d40ddc62e745dbb7b2caf7ea1d41d155",
+      "stats": {
+        "startTime": "2026-10-30T15:42:52.243Z",
+        "duration": 192901.71899999998,
+        "expected": 169,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "workers": 1,
+      "retryAttempts": 0,
+      "healthyFixtureAggregate": {
+        "snapshot": {
+          "count": 416,
+          "medianMs": 11.171027500000001,
+          "p95Ms": 13.169707,
+          "maxMs": 28.905127
+        },
+        "evaluate": {
+          "count": 416,
+          "medianMs": 1.7874505,
+          "p95Ms": 2.081009,
+          "maxMs": 4.044726
+        },
+        "interval": {
+          "count": 378,
+          "medianMs": 21.29999999998836,
+          "p95Ms": 23.29999999998836,
+          "maxMs": 36.399999999965075
+        },
+        "gapsAbove100ms": 0
+      },
+      "failures": []
+    },
+    {
+      "runner": "macos-latest",
+      "environment": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "25.6.0",
+        "node": "24.22.1",
+        "cpu": "Apple M1 (Virtual)",
+        "logicalCpus": 3,
+        "memoryBytes": 7516192768,
+        "imageOS": "macos26",
+        "imageVersion": "20261013.0424.1"
+      },
+      "rawReportSha256": "3fcb7a65a2a3c57a7e57cbf3c68de2d9c832bbc1d501fd7b77f6640d4a5eb5cb",
+      "stats": {
+        "startTime": "2026-10-30T15:43:05.183Z",
+        "duration": 220703.488,
+        "expected": 168,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "workers": 1,
+      "retryAttempts": 0,
+      "healthyFixtureAggregate": {
+        "snapshot": {
+          "count": 297,
+          "medianMs": 10.732375,
+          "p95Ms": 31.698292,
+          "maxMs": 125.676292
+        },
+        "evaluate": {
+          "count": 297,
+          "medianMs": 1.958333,
+          "p95Ms": 4.95775,
+          "maxMs": 43.500417
+        },
+        "interval": {
+          "count": 266,
+          "medianMs": 22.099999999976717,
+          "p95Ms": 40.5,
+          "maxMs": 133.09999999997672
+        },
+        "gapsAbove100ms": 1
+      },
+      "failures": [
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "status": "failed",
+          "checkId": "T05.forward.003.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 260.79999999998836,
+            "observationCount": 4,
+            "observationIntervalsMs": [
+              54.79999999998836,
+              72.90000000002328,
+              133.09999999997672
+            ],
+            "maxObservationGapMs": 133.09999999997672
+          }
+        }
+      ]
+    },
+    {
+      "runner": "macos-15-intel",
+      "environment": {
+        "platform": "darwin",
+        "arch": "x64",
+        "release": "24.6.0",
+        "node": "24.22.1",
+        "cpu": "Intel(R) Core(TM) i7-8700B CPU @ 3.20GHz",
+        "logicalCpus": 4,
+        "memoryBytes": 15032385536,
+        "imageOS": "macos15",
+        "imageVersion": "20260824.0482.1"
+      },
+      "rawReportSha256": "743f5fd7fd361a0f102e159e6624ce017542a71415a4be885b677e94f9f913c6",
+      "stats": {
+        "startTime": "2026-10-30T15:45:32.938Z",
+        "duration": 351258.56299999997,
+        "expected": 163,
+        "skipped": 0,
+        "unexpected": 6,
+        "flaky": 0
+      },
+      "workers": 1,
+      "retryAttempts": 0,
+      "healthyFixtureAggregate": {
+        "snapshot": {
+          "count": 138,
+          "medianMs": 32.7525895,
+          "p95Ms": 118.534063,
+          "maxMs": 210.058959
+        },
+        "evaluate": {
+          "count": 138,
+          "medianMs": 5.204064499999999,
+          "p95Ms": 13.272355,
+          "maxMs": 30.154187
+        },
+        "interval": {
+          "count": 116,
+          "medianMs": 34.25,
+          "p95Ms": 83.40000000002328,
+          "maxMs": 212.20000000006985
+        },
+        "gapsAbove100ms": 4
+      },
+      "failures": [
+        {
+          "fixture": "canary isolation tabs successful input",
+          "status": "failed",
+          "checkId": "T05.forward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 156,
+            "observationCount": 2,
+            "observationIntervalsMs": [
+              156
+            ],
+            "maxObservationGapMs": 156
+          }
+        },
+        {
+          "fixture": "tabs pass manual Enter",
+          "status": "failed",
+          "checkId": "T05.forward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 136.29999999993015,
+            "observationCount": 2,
+            "observationIntervalsMs": [
+              136.29999999993015
+            ],
+            "maxObservationGapMs": 136.29999999993015
+          }
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "status": "failed",
+          "checkId": "T05.forward.002.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-2",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 153.90000000002328,
+            "observationCount": 3,
+            "observationIntervalsMs": [
+              35,
+              118.90000000002328
+            ],
+            "maxObservationGapMs": 118.90000000002328
+          }
+        },
+        {
+          "fixture": "tabs pass vertical manual Home End",
+          "status": "failed",
+          "checkId": "T05.end.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 278.4000000000233,
+            "observationCount": 4,
+            "observationIntervalsMs": [
+              31.29999999993015,
+              34.90000000002328,
+              212.20000000006985
+            ],
+            "maxObservationGapMs": 212.20000000006985
+          }
+        },
+        {
+          "fixture": "tabs pass delayed manual activation",
+          "status": "failed",
+          "checkId": "T05.backward.002.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 275.0999999999767,
+            "observationCount": 6,
+            "observationIntervalsMs": [
+              39.59999999997672,
+              36.800000000046566,
+              30.400000000023283,
+              31.79999999993015,
+              136.5
+            ],
+            "maxObservationGapMs": 136.5
+          }
+        },
+        {
+          "fixture": "tabs detect focus-drift",
+          "status": "failed",
+          "checkId": "T05.forward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 231.40000000002328,
+            "observationCount": 6,
+            "observationIntervalsMs": [
+              25.099999999976717,
+              24.300000000046566,
+              28.199999999953434,
+              28.70000000006985,
+              125.09999999997672
+            ],
+            "maxObservationGapMs": 125.09999999997672
+          }
+        }
+      ]
+    }
+  ]
+}

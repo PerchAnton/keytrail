@@ -13,7 +13,9 @@ Each driver owns one private browser `Map`, accessed through a public Playwright
 stores the resulting nodes in numbered slots. Only counts and slot numbers cross
 the process boundary. One synchronous browser evaluation reads focus, structure
 and state together, then clears all stored nodes before returning. The map handle
-is disposed when the journey finishes.
+is disposed when the journey finishes. The state-reader function is compiled
+once in that private object; later calls send only the request and a small
+dispatch function rather than retransmitting the complete DOM reader.
 
 This removes per-element handle serialization and disposal from the hot path.
 It does not parse Playwright selectors, cache locator bindings, modify DOM
@@ -28,7 +30,7 @@ failure, and dialog focus drift before Enter/Space. Injected browser delays stil
 must report `OBSERVATION_GAP` and stop activation. The native benchmark reference
 independently performs the same transport work; its short pilot checks semantic
 equivalence, not release performance. Hosted validation and the new four-round
-record are pending for this changed mechanism.
+record are pending for the reader-caching refinement below.
 
 ## Hosted measurements
 
@@ -112,6 +114,17 @@ Linux passed all stages including package consumers. More runner capacity alone
 did not solve the problem. Both macOS configurations remain in CI to test the
 private-store change; neither prior failure is replaced by an unchanged retry.
 Each job saves its actual OS, architecture, CPU, memory and image version.
+
+The [first private-store run](https://github.com/PerchAnton/keytrail/actions/runs/41082981018)
+at `7e36c39` passed Linux and its package consumers, but remained insufficient on
+macOS: ARM passed 168/169 with a 133.1 ms gap; Intel passed 163/169 with six
+observation-gap failures. Correct manual-window snapshot medians were 10.7 ms
+on ARM and 32.8 ms on Intel; the maximum intervals were 133.1 and 212.2 ms.
+These are separate hosted samples, not a controlled performance comparison.
+Two local rounds passed 169 cases each; the third was interrupted to refine the
+implementation and is excluded. No completed four-round proof is claimed for it.
+The next change compiles the state reader once per journey to avoid retransmitting
+its full function body at every observation. Earlier failures remain retained.
 
 ## Earlier reductions and the unchanged sampling limit
 

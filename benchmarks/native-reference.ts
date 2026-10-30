@@ -17,6 +17,72 @@ class NativeFailure extends Error {
   constructor(readonly code: MessageCode, readonly checkId?: string) { super(code); }
 }
 
+/** Independently compiled once, with the same public transport operations. */
+function createNativeStore() {
+  const registry = new Map<string, Element[]>();
+  return Object.assign(registry, { read({ slots, rootId, roleSlots, semantics }: {
+    slots: { id: string; slot: string }[]; rootId: string;
+    roleSlots: Record<string, string>; semantics: boolean;
+  }) {
+    try {
+      const nodes = slots.map(t => ({ id: t.id, node: registry.get(t.slot)?.[0] ?? null }));
+      const roles = Object.fromEntries(Object.entries(roleSlots).map(([name, slot]) => [name, registry.get(slot) ?? []]));
+      const observedAt = performance.now();
+      const elements = nodes.map(t => ({ id: t.id, node: t.node instanceof Element ? t.node : null }));
+      const byId = new Map(elements.map(t => [t.id, t.node]));
+      const root = byId.get(rootId), active = document.activeElement;
+      const visible = (el: Node | null | undefined): el is Element => {
+        if (!(el instanceof Element)) return false;
+        const bounds = el.getBoundingClientRect(), visibility = getComputedStyle(el).visibility;
+        return bounds.width > 0 && bounds.height > 0 && visibility !== 'hidden' && visibility !== 'collapse';
+      };
+      const present = elements.filter(t => t.node);
+      let code = '';
+      if (present.some(t => t.node!.getRootNode() !== document) || active?.shadowRoot || active?.tagName === 'IFRAME') code = 'UNSUPPORTED_CONTEXT';
+      else if (present.some(t => !t.node!.isConnected)) code = 'EXPECTATION_TIMEOUT';
+      else if (new Set(present.map(t => t.node)).size !== present.length) code = 'TARGET_ALIAS';
+      const layers = new Set([...roles.dialog!, ...roles.alert!, ...document.querySelectorAll('dialog')].filter(visible));
+      if (layers.size > 1 || [...layers].some(el => el.tagName === 'DIALOG' || roles.alert!.includes(el)) || present.some(t => t.node!.closest('dialog'))) code = 'UNSUPPORTED_DIALOG';
+      const focus = present.find(t => t.node === active)?.id ?? (!active ? 'none' : active === document.body || active === document.documentElement ? 'body' : 'unknown');
+      const selected = [0, 1, 2].filter(i => byId.get(`tab-${i}`)?.getAttribute('aria-selected') === 'true');
+      const panels = [0, 1, 2].filter(i => visible(byId.get(`panel-${i}`)));
+      const unique = (el: Element | null | undefined) => !!el?.id && [...document.querySelectorAll('[id]')].filter(e => e.id === el.id).length === 1;
+      const tokens = (el: Element | null | undefined, name: string) => el?.getAttribute(name)?.trim().split(/\s+/).filter(Boolean) ?? [];
+      const tabNodes = [0, 1, 2].map(i => byId.get(`tab-${i}`));
+      const formRoot = byId.get('form'), submit = byId.get('submit');
+      const form = [0, 1].map(i => {
+        const field = byId.get(`field-${i}`), message = byId.get(`error-${i}`);
+        const refs = tokens(field, 'aria-describedby'), invalid = field?.getAttribute('aria-invalid');
+        return {
+          structure: field instanceof HTMLInputElement && field.form === formRoot && !!formRoot?.contains(field),
+          visible: visible(message), matched: (message instanceof HTMLElement ? message.innerText : '').trim().replace(/\s+/g, ' ') === `Enter a valid value ${i + 1}.`,
+          invalid: invalid === 'true', idref: unique(message) && refs.includes(message!.id) && !refs.includes(`error-${1 - i}`),
+          editable: field instanceof HTMLInputElement && visible(field) && !field.readOnly && !field.matches(':disabled') && field.getAttribute('aria-disabled') !== 'true' && !field.closest('[inert]'),
+          value: field instanceof HTMLInputElement && field.value === ['sample-one', 'sample-two'][i],
+          cleared: !!field && !visible(message) && (invalid === null || invalid === 'false'),
+          invalidCleared: invalid === null || invalid === 'false',
+        };
+      });
+      return { observedAt, code, focus, inside: !!root && !!active && root.contains(active), rootVisible: visible(root),
+        dialogRole: !!root && roles.dialog!.includes(root), modal: root?.getAttribute('aria-modal') === 'true',
+        selected, panels, selectionValid: tabNodes.every(el => ['true', 'false'].includes(el?.getAttribute('aria-selected') ?? '')),
+        roving: tabNodes.includes(active) && tabNodes.every(el => el instanceof HTMLElement && el.tabIndex === (el === active ? 0 : -1)),
+        tabStructure: !!root && tabNodes.every(el => !!el && root.contains(el)) && roles.tab?.filter(el => root.contains(el)).length === 3 && [0, 1, 2].every(i => !!byId.get(`panel-${i}`)),
+        ...(semantics ? { listRole: !!root && !!roles.tablist?.includes(root), named: !!root && !!roles.named?.includes(root),
+        orientation: root?.getAttribute('aria-orientation') === 'horizontal' || !root?.hasAttribute('aria-orientation'),
+        items: [0, 1, 2].map(i => {
+          const tab = byId.get(`tab-${i}`), panel = byId.get(`panel-${i}`);
+          return { 'tab-role': !!tab && !!roles.tab?.includes(tab), 'panel-role': !!panel && !!roles.tabpanel?.includes(panel),
+            controls: unique(panel) && tokens(tab, 'aria-controls').length === 1 && tokens(tab, 'aria-controls')[0] === panel?.id,
+            labelledby: unique(tab) && tokens(panel, 'aria-labelledby').includes(tab!.id) };
+        }),
+        } : {}),
+        formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
+      };
+    } finally { registry.clear(); }
+  } });
+}
+
 /** Fixture-specific reference. No KeyTrail driver, planner, assertion or serializer is called. */
 export async function nativeJourney(page: Page, info: TestInfo, manifest: Manifest): Promise<JourneyResult> {
   const started = performance.now(), config = manifest.config;
@@ -43,10 +109,10 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   };
   const remaining = () => { guard(); return Math.max(1, Math.min(config.timeoutMs, config.scenarioTimeoutMs - (performance.now() - started))); };
   const targets = manifest.targets.map(t => ({ id: t.id, locator: page.locator(t.selector) }));
-  let store: JSHandle<Map<string, Element[]>> | undefined;
+  let store: JSHandle<ReturnType<typeof createNativeStore>> | undefined;
   const capture = async (semantics = true) => {
     guard();
-    store ??= await page.evaluateHandle(() => new Map<string, Element[]>());
+    store ??= await page.evaluateHandle(createNativeStore);
     const registry = store;
     let readFinished = false;
     const resolve = async (locator: typeof targets[number]['locator'], slot: string) => {
@@ -97,64 +163,8 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       if (roleFailure?.status === 'rejected') throw roleFailure.reason;
       const slots = reads.map(r => (r as PromiseFulfilledResult<{ id: string; slot: string }>).value);
       guard();
-      const state = await page.evaluate(({ registry, slots, rootId, roleSlots, semantics }) => {
-        try {
-          const nodes = slots.map(t => ({ id: t.id, node: registry.get(t.slot)?.[0] ?? null }));
-          const roles = Object.fromEntries(Object.entries(roleSlots).map(([name, slot]) => [name, registry.get(slot) ?? []]));
-          const observedAt = performance.now();
-          const elements = nodes.map(t => ({ id: t.id, node: t.node instanceof Element ? t.node : null }));
-          const byId = new Map(elements.map(t => [t.id, t.node]));
-          const root = byId.get(rootId), active = document.activeElement;
-          const visible = (el: Node | null | undefined): el is Element => {
-            if (!(el instanceof Element)) return false;
-            const bounds = el.getBoundingClientRect(), visibility = getComputedStyle(el).visibility;
-            return bounds.width > 0 && bounds.height > 0 && visibility !== 'hidden' && visibility !== 'collapse';
-          };
-          const present = elements.filter(t => t.node);
-          let code = '';
-          if (present.some(t => t.node!.getRootNode() !== document) || active?.shadowRoot || active?.tagName === 'IFRAME') code = 'UNSUPPORTED_CONTEXT';
-          else if (present.some(t => !t.node!.isConnected)) code = 'EXPECTATION_TIMEOUT';
-          else if (new Set(present.map(t => t.node)).size !== present.length) code = 'TARGET_ALIAS';
-          const layers = new Set([...roles.dialog!, ...roles.alert!, ...document.querySelectorAll('dialog')].filter(visible));
-          if (layers.size > 1 || [...layers].some(el => el.tagName === 'DIALOG' || roles.alert!.includes(el)) || present.some(t => t.node!.closest('dialog'))) code = 'UNSUPPORTED_DIALOG';
-          const focus = present.find(t => t.node === active)?.id ?? (!active ? 'none' : active === document.body || active === document.documentElement ? 'body' : 'unknown');
-          const selected = [0, 1, 2].filter(i => byId.get(`tab-${i}`)?.getAttribute('aria-selected') === 'true');
-          const panels = [0, 1, 2].filter(i => visible(byId.get(`panel-${i}`)));
-          const unique = (el: Element | null | undefined) => !!el?.id && [...document.querySelectorAll('[id]')].filter(e => e.id === el.id).length === 1;
-          const tokens = (el: Element | null | undefined, name: string) => el?.getAttribute(name)?.trim().split(/\s+/).filter(Boolean) ?? [];
-          const tabNodes = [0, 1, 2].map(i => byId.get(`tab-${i}`));
-          const formRoot = byId.get('form'), submit = byId.get('submit');
-          const form = [0, 1].map(i => {
-            const field = byId.get(`field-${i}`), message = byId.get(`error-${i}`);
-            const refs = tokens(field, 'aria-describedby'), invalid = field?.getAttribute('aria-invalid');
-            return {
-              structure: field instanceof HTMLInputElement && field.form === formRoot && !!formRoot?.contains(field),
-              visible: visible(message), matched: (message instanceof HTMLElement ? message.innerText : '').trim().replace(/\s+/g, ' ') === `Enter a valid value ${i + 1}.`,
-              invalid: invalid === 'true', idref: unique(message) && refs.includes(message!.id) && !refs.includes(`error-${1 - i}`),
-              editable: field instanceof HTMLInputElement && visible(field) && !field.readOnly && !field.matches(':disabled') && field.getAttribute('aria-disabled') !== 'true' && !field.closest('[inert]'),
-              value: field instanceof HTMLInputElement && field.value === ['sample-one', 'sample-two'][i],
-              cleared: !!field && !visible(message) && (invalid === null || invalid === 'false'),
-              invalidCleared: invalid === null || invalid === 'false',
-            };
-          });
-          return { observedAt, code, focus, inside: !!root && !!active && root.contains(active), rootVisible: visible(root),
-            dialogRole: !!root && roles.dialog!.includes(root), modal: root?.getAttribute('aria-modal') === 'true',
-            selected, panels, selectionValid: tabNodes.every(el => ['true', 'false'].includes(el?.getAttribute('aria-selected') ?? '')),
-            roving: tabNodes.includes(active) && tabNodes.every(el => el instanceof HTMLElement && el.tabIndex === (el === active ? 0 : -1)),
-            tabStructure: !!root && tabNodes.every(el => !!el && root.contains(el)) && roles.tab?.filter(el => root.contains(el)).length === 3 && [0, 1, 2].every(i => !!byId.get(`panel-${i}`)),
-            ...(semantics ? { listRole: !!root && !!roles.tablist?.includes(root), named: !!root && !!roles.named?.includes(root),
-            orientation: root?.getAttribute('aria-orientation') === 'horizontal' || !root?.hasAttribute('aria-orientation'),
-            items: [0, 1, 2].map(i => {
-              const tab = byId.get(`tab-${i}`), panel = byId.get(`panel-${i}`);
-              return { 'tab-role': !!tab && !!roles.tab?.includes(tab), 'panel-role': !!panel && !!roles.tabpanel?.includes(panel),
-                controls: unique(panel) && tokens(tab, 'aria-controls').length === 1 && tokens(tab, 'aria-controls')[0] === panel?.id,
-                labelledby: unique(tab) && tokens(panel, 'aria-labelledby').includes(tab!.id) };
-            }),
-            } : {}),
-            formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
-          };
-        } finally { registry.clear(); }
-      }, { registry, slots, rootId: manifest.root, roleSlots, semantics });
+      const state = await page.evaluate(({ registry, ...request }) => registry.read(request),
+        { registry, slots, rootId: manifest.root, roleSlots, semantics });
       readFinished = true;
       guard();
       if (state.code) throw new NativeFailure(state.code as MessageCode);

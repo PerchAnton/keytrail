@@ -29,6 +29,8 @@
 - Resolve fresh locator matches into a private browser map, read state atomically
   and clear nodes before returning. Avoid per-element handle transport and disposal
   while preserving dynamic targets, foreign-context checks and error cleanup.
+  Compile the browser-side state reader once per journey to avoid sending its
+  complete function body with each observation.
 - Require full one-worker CI suites and package consumers on Linux and both macOS
   ARM and Intel configurations; retain the earlier failures and the 100 ms bound.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
