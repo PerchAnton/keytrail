@@ -189,18 +189,22 @@ this historical total. Six subsequent full rounds at `46515dd` are retained as
 development evidence. At `6a9cc6a`, after narrowing manual-window reads, **4 × 167 = 668**
 sequential checks and **167 four-worker checks** passed without retries or semantic
 differences; [retained development record](docs/evidence/development-window-reads.json).
-The private observation store and cached reader change the runtime; the earlier
-counts do not certify them. At `4abf74c`, Linux and macOS ARM passed the complete
-169-case suite and package consumers. Intel retained one genuine 370 ms gap, so
-that exploratory matrix failed. The selected **Linux + macOS ARM CI now passes**
-at `63f9edf`, including all 169 tests and package consumers on each platform;
-[validated CI record](docs/evidence/ci-arm-development.json). Intel remains a separate
-capacity investigation, with its failure retained. The cached reader completed **4 × 169 = 676**
-local sequential tests and **169 four-worker checks**, without retries or semantic
-differences; [independently validated development record](docs/evidence/development-cached-reader.json).
-[The CI investigation](docs/ci-concurrency.md) records the earlier gaps and the
-subsequent passing browser suites, including a separate package-harness failure. Final acceptance and fresh release benchmarks
-are deferred until the candidate is frozen. Real-world adoption has not been established.
+The cached-reader revision passed its local four rounds, but the subsequent
+[main CI](https://github.com/PerchAnton/keytrail/actions/runs/41091449659) blocked
+one macOS ARM test with a 126.7 ms gap. That failure remains recorded.
+
+At `7e48291`, state is read directly in the final fresh locator registration,
+removing the separate host request after resolution. The unchanged 100 ms limit
+and zero retries apply throughout. [CI](https://github.com/PerchAnton/keytrail/actions/runs/41097726279)
+passed **three macOS ARM rounds × 169 = 507** and **169 Linux checks**, plus
+actual tarball consumers on both platforms. Local verification passed **4 × 169 = 676**
+sequential checks and **169 four-worker checks**, with matching semantics and
+800 distinct journey IDs. [Local proof](docs/evidence/development-atomic-observations.json)
+and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
+this source revision. This short development sample is not a guarantee against
+future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
+failures and measured limits. Final 100-round acceptance and fresh release
+benchmarks remain deferred. Real-world adoption has not been established.
 
 ### Historical measured overhead (`0300552`)
 

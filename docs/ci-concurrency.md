@@ -50,8 +50,28 @@ every locator registration, as well as each complete snapshot. `evaluateMs` coun
 separate page evaluations only; zero does not mean the DOM read was instantaneous.
 macOS ARM CI runs three complete rounds, stops at the first failure and preserves
 each raw report. Linux keeps one complete round. Local verification remains four
-rounds plus the separate four-worker comparison. New results are pending; the
-cached-reader evidence above is historical for this changed implementation.
+rounds plus the separate four-worker comparison.
+
+At `7e48291`, all three ARM rounds passed (507 tests), as did the complete Linux
+suite (169) and actual package consumers on both platforms. All raw reports,
+semantic signatures, source hashes and package checksums were independently
+checked: [CI evidence](evidence/ci-atomic-observations.json). This small sample
+supports the change; it cannot guarantee scheduling latency on a shared host.
+
+The new [local proof](evidence/development-atomic-observations.json) confirms
+four rounds (676 tests) and the separate four-worker comparison (169), with
+800 distinct journey IDs, no retries and matching semantics. Older cached-reader
+records are historical for this changed implementation.
+
+| Platform / round | Passed | Largest gap in a passing manual window |
+| --- | ---: | ---: |
+| Linux / 1 | 169/169 | 29.4 ms |
+| macOS ARM / 1 | 169/169 | 44.0 ms |
+| macOS ARM / 2 | 169/169 | 69.1 ms |
+| macOS ARM / 3 | 169/169 | 48.6 ms |
+
+These maxima include the short 50 ms fixture. Deliberately injected 150 ms gaps
+remain blocked and are excluded from passing-window maxima.
 
 ## Hosted measurements
 
