@@ -11,15 +11,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Current source: 165/165 locally and on Linux/macOS with one worker; no retries |
-| Worker isolation | Current source: 165/165 on four local workers; semantic signatures match the one-worker run; 320 distinct journey IDs across the pair, with five engine-only cases per run |
+| Browser suite | 19 targeted cases passed after narrowing manual-window reads; full 167-case checks pending, no retries |
+| Worker isolation | Historical `46515dd`: 165/165 on four local workers; the changed 167-case suite requires its own comparison |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
 | Repeatability | Six full development rounds at `46515dd`; future development runs default to four. Final 100-round acceptance is deferred; historical `0300552`: 100/100; [source-bound proof](evidence/reliability.json) |
 | Package consumers | Development package checks run independently of final evidence. Historical `0300552`: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
-| Hosted platforms | One-worker browser suites pass on both platforms; macOS/two-worker gaps remain recorded. Development package checks are separate from deferred final acceptance. [Comparison](ci-concurrency.md) |
+| Hosted platforms | At `0bae883`, Linux passed all 165 cases and package checks; macOS passed 164/165 with a real 111.2 ms gap. New window-read checks are pending. [Comparison](ci-concurrency.md) |
 
 ## Historical performance (`0300552`)
 
@@ -46,8 +46,8 @@ and are not added to the new total.
 The historical alpha.5 record accepted 45 rounds and excluded its interrupted 46th
 round; it remains history rather than evidence for the changed runtime.
 
-The final proof and [version-bound policy](evidence/acceptance-policy.json) now agree
-on current source hashes, 100 completed rounds and the final isolation signature.
+The historical proof and [version-bound policy](evidence/acceptance-policy.json) agree
+on the source hashes at `0300552`, 100 completed rounds and the final isolation signature.
 The 101 raw reports contain 16,463 test executions, including 303 engine-only
 tests without a journey attachment. All 16,160 journey IDs are distinct.
 

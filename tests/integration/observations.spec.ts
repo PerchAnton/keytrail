@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Driver } from '../../src/browser/driver.js';
 import { DEFAULTS } from '../../src/contracts/dialog.js';
+import { tabsHtml, tabsContract } from '../fixtures/tabs.js';
 
 test('a focus observation cannot combine two different instants', async ({ page }) => {
   await page.setContent('<section id="dialog"><button id="a">A</button><button id="b">B</button></section>');
@@ -25,6 +26,44 @@ test('a focus observation cannot combine two different instants', async ({ page 
     expect([...state.focused]).toEqual(['b']);
     expect(state.focus).toBe('b');
     expect(state.inside).toBe(true);
+    expect(driver.steps).toHaveLength(0);
+  } finally { await driver.dispose(); }
+});
+
+test('interaction observations re-resolve replaced tabs without inventing metadata', async ({ page }) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const contract = tabsContract(page, { activation: 'manual' });
+  const driver = new Driver(page, [contract.tablist, ...contract.items.flatMap(i => [i.tab, i.panel])],
+    contract.tablist, { ...DEFAULTS }, performance.now(), contract);
+  try {
+    const full = await driver.snapshot();
+    expect(full.tabs).toMatchObject({ role: true, named: true, orientation: true });
+    expect(full.tabs?.items).toHaveLength(3);
+    await page.evaluate(() => {
+      const old = document.querySelector('#tab-2')!, replacement = old.cloneNode(true) as HTMLElement;
+      old.replaceWith(replacement);
+      for (const tab of document.querySelectorAll<HTMLElement>('[role=tab]')) {
+        tab.setAttribute('aria-selected', String(tab === replacement)); tab.tabIndex = tab === replacement ? 0 : -1;
+      }
+      for (const panel of document.querySelectorAll<HTMLElement>('[role=tabpanel]')) panel.hidden = panel.id !== 'panel-2';
+      replacement.focus();
+    });
+    const state = await driver.snapshot('interaction');
+    expect(state.focus).toBe('tab-2');
+    expect(state.tabs).toEqual({ structure: true, selected: ['tab-2'], visiblePanels: ['panel-2'], selectionValid: true, roving: true });
+    expect(driver.steps).toHaveLength(0);
+  } finally { await driver.dispose(); }
+});
+
+test('interaction observations detect an added tab with fallback role tokens', async ({ page }) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const contract = tabsContract(page, { activation: 'manual' });
+  const driver = new Driver(page, [contract.tablist, ...contract.items.flatMap(i => [i.tab, i.panel])],
+    contract.tablist, { ...DEFAULTS }, performance.now(), contract);
+  try {
+    expect((await driver.snapshot('interaction')).tabs?.structure).toBe(true);
+    await page.locator('#tabs').evaluate(root => root.insertAdjacentHTML('beforeend', '<button role="invalid tab" tabindex="-1">Extra</button>'));
+    expect((await driver.snapshot('interaction')).tabs?.structure).toBe(false);
     expect(driver.steps).toHaveLength(0);
   } finally { await driver.dispose(); }
 });

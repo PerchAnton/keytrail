@@ -185,9 +185,11 @@ The earlier revision `0300552` completed **100 rounds × 163 tests = 16,300 exec
 followed by **163 passing tests on four workers**, with no retries or semantic
 differences. Every raw report and its source identity was independently checked.
 Earlier local and hosted attempts are retained separately and are not added to
-this historical total. The changed source passed 165/165 on one and four local
-workers and on one worker on each hosted platform. Six subsequent full rounds are retained as development evidence. Final acceptance
-and fresh release benchmarks are deferred until the candidate is frozen. Real-world adoption has not been established.
+this historical total. Six subsequent full rounds at `46515dd` are retained as
+development evidence. A later macOS run still detected a real observation gap;
+[the investigation](docs/ci-concurrency.md) records that failure and the narrower
+window reads now being checked. Final acceptance and fresh release benchmarks
+are deferred until the candidate is frozen. Real-world adoption has not been established.
 
 ### Historical measured overhead (`0300552`)
 

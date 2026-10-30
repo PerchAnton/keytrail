@@ -6,9 +6,9 @@ export class Blocked extends Error {
   constructor(readonly code: MessageCode) { super(code); }
 }
 export type TabsState = {
-  structure: boolean; role: boolean; named: boolean; orientation: boolean;
+  structure: boolean; role?: boolean; named?: boolean; orientation?: boolean;
   selected: string[]; visiblePanels: string[]; selectionValid: boolean; roving: boolean;
-  items: { tabRole: boolean; panelRole: boolean; controls: boolean; labelledby: boolean }[];
+  items?: { tabRole: boolean; panelRole: boolean; controls: boolean; labelledby: boolean }[];
 };
 export type FormState = {
   structure: boolean;
@@ -70,7 +70,11 @@ export class Driver {
     if (error instanceof Error && error.name === 'TimeoutError') return new Blocked('EXPECTATION_TIMEOUT');
     return new Blocked('BROWSER_ERROR');
   }
-  async snapshot(): Promise<Snapshot> {
+  async snapshot(scope: 'complete' | 'interaction' = 'complete'): Promise<Snapshot> {
+    // Initial semantics use complete reads. Negative windows consume only live
+    // focus, selection, visibility, roving state and structure; do not resolve
+    // unused name/panel-role metadata there. Omitted metadata stays unobserved.
+    const semantics = scope === 'complete';
     const deadline = performance.now() + this.remaining();
     try {
       while (true) {
@@ -105,17 +109,20 @@ export class Driver {
             resolve(this.page.getByRole('dialog', { includeHidden: true })),
             resolve(this.page.getByRole('alertdialog', { includeHidden: true })),
             ...(this.tabsContract ? [
-              resolve(this.page.getByRole('tablist', { includeHidden: true })),
-              resolve(this.page.getByRole('tablist', { name: /\S/, includeHidden: true })),
               resolve(this.page.getByRole('tab', { includeHidden: true })),
-              resolve(this.page.getByRole('tabpanel', { includeHidden: true })),
+              ...(semantics ? [
+                resolve(this.page.getByRole('tablist', { includeHidden: true })),
+                resolve(this.page.getByRole('tablist', { name: /\S/, includeHidden: true })),
+                resolve(this.page.getByRole('tabpanel', { includeHidden: true })),
+              ] : []),
             ] : []),
             ...(this.formContract?.summaryLinks?.length ? [resolve(this.page.getByRole('link', { includeHidden: true }))] : []),
           ]);
           const [targetResults, roleResults] = await Promise.all([targetReads, roleReads]);
           const targets = targetResults.map(unwrap), roles = roleResults.map(unwrap);
           const dialogs = roles[0]!, alerts = roles[1]!;
-          const tabRoles = this.tabsContract ? { lists: roles[2]!, named: roles[3]!, tabs: roles[4]!, panels: roles[5]! } : null;
+          const tabRoles = this.tabsContract ? { tabs: roles[2]!,
+            lists: roles[3] ?? [], named: roles[4] ?? [], panels: roles[5] ?? [] } : null;
           const tabs = this.tabsContract ? { orientation: this.tabsContract.orientation,
             items: this.tabsContract.items.map(item => ({ tab: item.tab.id, panel: item.panel.id })) } : null;
           const form = this.formContract ? { submit: this.formContract.submit.id,
@@ -126,7 +133,7 @@ export class Driver {
             links: this.formContract.summaryLinks?.map(l => l.link.id) ?? [] } : null;
           const linkRoles = form?.links.length ? roles[2]! : [];
           this.guard();
-          const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts, tabRoles, tabs, form, linkRoles }) => {
+          const state = await this.page.evaluate(({ targets, dialogId, dialogs, alerts, tabRoles, tabs, form, linkRoles, semantics }) => {
             const result = { observedAt: performance.now(), code: '' as MessageCode | '', detached: false,
               focus: 'unknown', focused: [] as string[], present: [] as string[], inside: false,
               tabs: null as TabsState | null, form: null as FormState | null };
@@ -170,7 +177,7 @@ export class Driver {
                 return { ...result, code: 'UNSUPPORTED_TABS' as const };
               }
               const ids = new Map<string, Element[]>();
-              for (const el of document.querySelectorAll('[id]')) ids.set(el.id, [...(ids.get(el.id) ?? []), el]);
+              if (semantics) for (const el of document.querySelectorAll('[id]')) ids.set(el.id, [...(ids.get(el.id) ?? []), el]);
               const unique = (el: Element | null) => !!el?.id && ids.get(el.id)?.length === 1 && ids.get(el.id)![0] === el;
               const tokens = (el: Element | null, attribute: string) => el?.getAttribute(attribute)?.trim().split(/\s+/).filter(Boolean) ?? [];
               const actualTabs = tabRoles.tabs.filter(el => root?.contains(el));
@@ -178,17 +185,19 @@ export class Driver {
               result.tabs = {
                 structure: !!root && members.every(item => item.tabNode && item.panelNode && root.contains(item.tabNode)) &&
                   actualTabs.length === members.length && actualTabs.every(el => members.some(item => item.tabNode === el)),
-                role: !!root && tabRoles.lists.includes(root), named: !!root && tabRoles.named.includes(root),
-                orientation: !!root && (root.getAttribute('aria-orientation') === tabs.orientation ||
-                  (tabs.orientation === 'horizontal' && !root.hasAttribute('aria-orientation'))),
                 selected, visiblePanels: members.filter(item => item.panelNode && visible(item.panelNode)).map(item => item.panel),
                 selectionValid: members.every(item => ['true', 'false'].includes(item.tabNode?.getAttribute('aria-selected') ?? '')),
                 roving: members.some(item => item.tabNode === active) && members.every(item => item.tabNode &&
                   (item.tabNode as HTMLElement).tabIndex === (item.tabNode === active ? 0 : -1)),
-                items: members.map(item => ({ tabRole: !!item.tabNode && tabRoles.tabs.includes(item.tabNode),
+                ...(semantics ? {
+                  role: !!root && tabRoles.lists.includes(root), named: !!root && tabRoles.named.includes(root),
+                  orientation: !!root && (root.getAttribute('aria-orientation') === tabs.orientation ||
+                    (tabs.orientation === 'horizontal' && !root.hasAttribute('aria-orientation'))),
+                  items: members.map(item => ({ tabRole: !!item.tabNode && tabRoles.tabs.includes(item.tabNode),
                   panelRole: !!item.panelNode && tabRoles.panels.includes(item.panelNode),
                   controls: unique(item.panelNode) && tokens(item.tabNode, 'aria-controls').length === 1 && tokens(item.tabNode, 'aria-controls')[0] === item.panelNode?.id,
                   labelledby: unique(item.tabNode) && tokens(item.panelNode, 'aria-labelledby').includes(item.tabNode!.id) })),
+                } : {}),
               };
             }
             if (form) {
@@ -234,7 +243,7 @@ export class Driver {
               };
             }
             return result;
-          }, { targets, dialogId: this.dialog.id, dialogs, alerts, tabRoles, tabs, form, linkRoles }).catch(async error => {
+          }, { targets, dialogId: this.dialog.id, dialogs, alerts, tabRoles, tabs, form, linkRoles, semantics }).catch(async error => {
             // The atomic DOM read checks every target's root against the main
             // document. Some foreign handles cannot be adopted into that read;
             // classify those failures with the public frame API. Healthy reads

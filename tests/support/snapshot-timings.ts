@@ -16,12 +16,12 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
   const snapshot = Driver.prototype.snapshot, evaluate = page.evaluate, add = ObservationWindow.prototype.add;
   let active: Reading | undefined, nextWindow = 0;
   const windows = new WeakMap<ObservationWindow, { id: number; last: number }>();
-  Driver.prototype.snapshot = async function () {
-    if (this.page !== page) return snapshot.call(this);
+  Driver.prototype.snapshot = async function (...args) {
+    if (this.page !== page) return snapshot.apply(this, args);
     const start = process.hrtime.bigint(), reading: Reading = { durationMs: 0, evaluateMs: 0 };
     active = reading;
     try {
-      const state = await snapshot.call(this);
+      const state = await snapshot.apply(this, args);
       reading.observedAt = state.observedAt;
       return state;
     } finally { reading.durationMs = elapsed(start); readings.push(reading); active = undefined; }

@@ -14,8 +14,8 @@ complete rounds × 165 tests = 990 executions**, all successful without retries.
 All six raw reports were independently revalidated against that recorded commit;
 the earlier four-worker comparison passed 165 cases with matching semantics.
 The seventh round was interrupted and is excluded. [Retained results](evidence/development-checks.json)
-identify the exact source revision and do not claim 100-round acceptance. Changes
-since then separate the verification modes; they do not change journey runtime.
+identify the exact source revision and do not claim 100-round acceptance. Changes since then separate the verification modes and narrow manual-window
+reads. That changed runtime needs its own four-round development record.
 
 ## Historical alpha.6 verification at `0300552`
 

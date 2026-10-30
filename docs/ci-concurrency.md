@@ -57,6 +57,13 @@ that result. A subsequent local transport-only change still recorded one 100.7 m
 gap. Both failures motivated the combined change below; they are not counted in
 the passing evidence above.
 
+The later [one-worker CI](https://github.com/PerchAnton/keytrail/actions/runs/41019900527)
+passed all 165 cases and package consumers on Linux. macOS passed 164/165: manual
+Home/End recorded a genuine 111.2 ms gap. The corresponding snapshot took 87.1 ms,
+including 3.1 ms in evaluate. This result is retained; one worker alone is not a
+guarantee. It motivates the narrower window reads described below. These historical
+counts precede the two new observation regressions; they do not certify the new code.
+
 ## Reduce transport work and reserve sampling time
 
 The atomic DOM read already checks each resolved target's root against the main
@@ -66,6 +73,14 @@ an unsupported foreign context from an ordinary browser error. Locators are stil
 resolved for each observation, all reads settle, and temporary handles are disposed.
 Regressions cover iframe/shadow rejection, replacement, coherent focus, sibling
 cleanup, and transport failure in both the main document and an iframe.
+
+Manual-tabs negative windows now omit initial-only name, panel-role and IDREF
+metadata work. They still resolve every target, use Playwright's tab-role matching
+for structure, and observe focus, selected state, visible panels, roving tabindex
+and unsupported contexts. Initial semantic checks use complete snapshots. Omitted
+metadata is absent, not recorded as false or reused from a stale read. Regressions
+cover replaced tabs and an added tab with fallback role tokens. The native benchmark
+uses the same scope in its negative windows; a full new benchmark is deferred.
 
 The negative-window scheduler targets 25 ms, one quarter of the 100 ms gap budget,
 with a maximum 10 ms pause and a minimum 1 ms yield. This leaves more room for a

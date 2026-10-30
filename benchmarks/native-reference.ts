@@ -43,7 +43,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   };
   const remaining = () => { guard(); return Math.max(1, Math.min(config.timeoutMs, config.scenarioTimeoutMs - (performance.now() - started))); };
   const targets = manifest.targets.map(t => ({ id: t.id, locator: page.locator(t.selector) }));
-  const capture = async () => {
+  const capture = async (semantics = true) => {
     guard();
     const handles: ElementHandle[] = [];
     const resolve = async (locator: typeof targets[number]['locator']) => {
@@ -62,10 +62,12 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
         ['dialog', page.getByRole('dialog', { includeHidden: true })],
         ['alert', page.getByRole('alertdialog', { includeHidden: true })],
         ...(manifest.kind === 'tabs' ? [
-          ['tablist', page.getByRole('tablist', { includeHidden: true })],
-          ['named', page.getByRole('tablist', { name: /\S/, includeHidden: true })],
           ['tab', page.getByRole('tab', { includeHidden: true })],
-          ['tabpanel', page.getByRole('tabpanel', { includeHidden: true })],
+          ...(semantics ? [
+            ['tablist', page.getByRole('tablist', { includeHidden: true })],
+            ['named', page.getByRole('tablist', { name: /\S/, includeHidden: true })],
+            ['tabpanel', page.getByRole('tabpanel', { includeHidden: true })],
+          ] as const : []),
         ] as const : []),
       ] as const;
       const roleReads = Promise.allSettled(roleQueries.map(async ([name, locator]) => { roles[name] = await resolve(locator); }));
@@ -76,7 +78,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       if (roleFailure?.status === 'rejected') throw roleFailure.reason;
       const nodes = reads.map(r => (r as PromiseFulfilledResult<{ id: string; node: ElementHandle | null }>).value);
       guard();
-      const state = await page.evaluate(({ nodes, rootId, roles, kind }) => {
+      const state = await page.evaluate(({ nodes, rootId, roles, kind, semantics }) => {
         const observedAt = performance.now();
         const elements = nodes.map(t => ({ id: t.id, node: t.node instanceof Element ? t.node : null }));
         const byId = new Map(elements.map(t => [t.id, t.node]));
@@ -118,7 +120,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
           selected, panels, selectionValid: tabNodes.every(el => ['true', 'false'].includes(el?.getAttribute('aria-selected') ?? '')),
           roving: tabNodes.includes(active) && tabNodes.every(el => el instanceof HTMLElement && el.tabIndex === (el === active ? 0 : -1)),
           tabStructure: !!root && tabNodes.every(el => !!el && root.contains(el)) && roles.tab?.filter(el => root.contains(el)).length === 3 && [0, 1, 2].every(i => !!byId.get(`panel-${i}`)),
-          listRole: !!root && !!roles.tablist?.includes(root), named: !!root && !!roles.named?.includes(root),
+          ...(semantics ? { listRole: !!root && !!roles.tablist?.includes(root), named: !!root && !!roles.named?.includes(root),
           orientation: root?.getAttribute('aria-orientation') === 'horizontal' || !root?.hasAttribute('aria-orientation'),
           items: [0, 1, 2].map(i => {
             const tab = byId.get(`tab-${i}`), panel = byId.get(`panel-${i}`);
@@ -126,9 +128,10 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
               controls: unique(panel) && tokens(tab, 'aria-controls').length === 1 && tokens(tab, 'aria-controls')[0] === panel?.id,
               labelledby: unique(tab) && tokens(panel, 'aria-labelledby').includes(tab!.id) };
           }),
+          } : {}),
           formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
         };
-      }, { nodes, rootId: manifest.root, roles, kind: manifest.kind }).catch(async error => {
+      }, { nodes, rootId: manifest.root, roles, kind: manifest.kind, semantics }).catch(async error => {
         // Use the same context-check strategy in both arms; do not charge the
         // reference an unnecessary frame query for every healthy target read.
         guard();
@@ -150,7 +153,11 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
   });
   const read = async (check: CheckResult, s: State): Promise<Reading> => {
     const id = check.checkId, focus = (expected = check.expected.focus) => ({ ok: s.focus === expected, observed: { focus: s.focus }, code: 'FOCUS_MISMATCH' as const });
-    const matched = (value: boolean, code: MessageCode) => ({ ok: value, observed: { matched: value }, code });
+    const metadata = (value: boolean | undefined): boolean => {
+      if (value === undefined) throw new NativeFailure('BROWSER_ERROR');
+      return value;
+    };
+    const matched = (value: boolean | undefined, code: MessageCode) => ({ ok: metadata(value), observed: { matched: metadata(value) }, code });
     if (id === 'D01.entry') return { ok: result.steps.at(-1)?.beforeFocus === 'open', observed: { focus: result.steps.at(-1)!.beforeFocus }, code: 'ENTRY_LIMIT' };
     if (/^D0[347]\./.test(id) || id === 'T01.entry' || /^T03\./.test(id) || id === 'F01.entry' || id === 'F04.focus' || /^F06.field.\d+.entry$/.test(id)) return focus();
     if (id === 'D02.visible' || id === 'D06.closed') return { ok: s.rootVisible === check.expected.visible, observed: { visible: s.rootVisible }, code: 'EXPECTATION_TIMEOUT' };
@@ -160,9 +167,9 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     if (id.startsWith('D05.')) return { ok: s.inside, observed: { inside: s.inside }, code: 'FOCUS_OUTSIDE_DIALOG' };
     if (id === 'T02.structure') return matched(s.tabStructure, 'STRUCTURE_MISMATCH');
     if (id === 'T02.role') return matched(s.listRole, 'ROLE_MISMATCH');
-    if (id === 'T02.name') return { ok: s.named, observed: { hasAccessibleName: s.named }, code: 'NAME_MISSING' };
+    if (id === 'T02.name') return { ok: metadata(s.named), observed: { hasAccessibleName: metadata(s.named) }, code: 'NAME_MISSING' };
     if (id === 'T02.orientation') return matched(s.orientation, 'ORIENTATION_MISMATCH');
-    if (id.startsWith('T02.item.')) { const [, , n, property] = id.split('.'); return matched(s.items[Number(n) - 1]![property as keyof State['items'][number]], property!.includes('role') ? 'ROLE_MISMATCH' : 'IDREF_MISMATCH'); }
+    if (id.startsWith('T02.item.')) { const [, , n, property] = id.split('.'); return matched(s.items?.[Number(n) - 1]?.[property as keyof NonNullable<State['items']>[number]], property!.includes('role') ? 'ROLE_MISMATCH' : 'IDREF_MISMATCH'); }
     if (id.endsWith('.roving')) return { ok: s.roving, observed: { roving: s.roving }, code: 'ROVING_MISMATCH' };
     if (/^T0[456]\./.test(id)) {
       const r = selection(s, check.expected.selected!);
@@ -228,7 +235,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       const intervals: number[] = [];
       while (true) {
         const readStarted = performance.now();
-        const state = await capture();
+        const state = await capture(!negative);
         const readings = await Promise.all(group.map(c => read(c, state))); guard();
         if (negative) {
           if (lastObserved !== undefined) { intervals.push(state.observedAt - lastObserved); maxGap = Math.max(maxGap, intervals.at(-1)!); }

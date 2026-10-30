@@ -23,6 +23,9 @@
 - Check target context in the atomic DOM read, using frame queries on read failure
   instead of one extra request per target on every healthy snapshot. Keep locator
   re-resolution, foreign-context blocking and complete handle cleanup.
+- During manual-tabs negative windows, resolve only the roles needed for live
+  structure and state checks. Keep full initial semantics, per-read target resolution,
+  context checks and handle cleanup; omitted metadata is never reported as observed.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
   benchmark as historical evidence. The changed candidate requires a fresh full
   series and benchmark; those old hashes do not satisfy its package gate.
