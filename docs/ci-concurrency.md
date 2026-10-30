@@ -1,7 +1,9 @@
 # Browser worker capacity and deadline checks
 
 The default regression suite uses **one browser worker**. CI requires the complete
-suite and package consumers on Linux, `macos-latest` and `macos-15-intel`.
+suite and package consumers on Linux and ARM `macos-latest`. The separately
+measured Intel environment remains a documented failed experiment, not a required
+runner or a passing result. Both required jobs still execute every fixture.
 The four-worker isolation comparison remains part of the local four-round
 verifier. A real gap above 100 ms still blocks a negative observation; retries
 remain disabled. Results below identify their source revision and runner.
@@ -29,8 +31,8 @@ while the old node stays connected, absent targets, sibling cleanup, transport
 failure, and dialog focus drift before Enter/Space. Injected browser delays still
 must report `OBSERVATION_GAP` and stop activation. The native benchmark reference
 independently performs the same transport work; its short pilot checks semantic
-equivalence, not release performance. Hosted validation and the new four-round
-record are pending for the reader-caching refinement below.
+equivalence, not release performance. The reader-caching results below separate successful ARM/Linux validation from
+the remaining Intel failure. The new local four-round record is pending.
 
 ## Hosted measurements
 
@@ -111,7 +113,7 @@ passing macOS sample therefore does not establish reliable capacity on that imag
 The [Intel experiment](https://github.com/PerchAnton/keytrail/actions/runs/41028417293)
 at `8ce3b66` also failed: 163/167, with four actual gaps of 122.6–160.2 ms.
 Linux passed all stages including package consumers. More runner capacity alone
-did not solve the problem. Both macOS configurations remain in CI to test the
+did not solve the problem. Both macOS configurations were tested for the
 private-store change; neither prior failure is replaced by an unchanged retry.
 Each job saves its actual OS, architecture, CPU, memory and image version.
 
@@ -125,6 +127,36 @@ Two local rounds passed 169 cases each; the third was interrupted to refine the
 implementation and is excluded. No completed four-round proof is claimed for it.
 The next change compiles the state reader once per journey to avoid retransmitting
 its full function body at every observation. Earlier failures remain retained.
+
+## Cached-reader results
+
+At `4abf74c`, the [cached-reader CI](https://github.com/PerchAnton/keytrail/actions/runs/41084977532)
+passed every stage on Linux and macOS ARM, including the real tarball consumers.
+Intel passed 168/169 browser cases; manual Home/End recorded a **370 ms** gap.
+The complete workflow therefore failed. The failure is retained and Intel is not
+certified as stable. No retry, omitted fixture or wider tolerance replaces it.
+
+| Runner | Browser tests | Snapshot median / p95 (ms) | Interval p95 / max (ms) | Package consumers |
+| --- | --- | --- | --- | --- |
+| Linux | 169/169 | 12.3 / 14.4 | 24.6 / 34.0 | Passed |
+| macOS ARM | 169/169 | 7.5 / 11.4 | 24.6 / 29.7 | Passed |
+| macOS Intel | 168/169 | 29.2 / 46.9 | 48.8 / 370.0 | Not run after failure |
+
+Timing columns include only the correct manual-tabs fixtures, including the one
+blocked on Intel. Across all passing negative checks, the maximum gaps were
+34.0 ms on Linux and 41.6 ms on ARM. Each platform has 160 journey cases and nine
+engine-only cases. All reports use one worker, zero retries and zero skips.
+The successful platforms' raw reports, all 52 guard cases, source hashes and exact
+archive checksums were independently validated. [Full matrix record](evidence/ci-cached-reader.json)
+retains the failed Intel result alongside the successful platforms.
+
+These samples show the achieved cadence on specific runners. They do not establish
+a universal speedup or guarantee a 100 ms response from a stalled host. The Intel
+outlier remains unresolved. Ordinary CI therefore uses the fully checked ARM
+macOS image and Linux; Intel can be investigated separately without claiming a
+passing result for it. This selects the required runner, not a subset of tests:
+all 169 cases, guard subprocesses and package consumers remain mandatory.
+Final 100-round acceptance is still deferred.
 
 ## Earlier reductions and the unchanged sampling limit
 

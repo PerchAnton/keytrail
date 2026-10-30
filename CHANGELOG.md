@@ -31,8 +31,8 @@
   while preserving dynamic targets, foreign-context checks and error cleanup.
   Compile the browser-side state reader once per journey to avoid sending its
   complete function body with each observation.
-- Require full one-worker CI suites and package consumers on Linux and both macOS
-  ARM and Intel configurations; retain the earlier failures and the 100 ms bound.
+- Require full one-worker CI suites and package consumers on Linux and macOS ARM.
+  Retain the unsuccessful Intel capacity experiments and the unchanged 100 ms bound.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
   benchmark as historical evidence. The changed candidate requires a fresh full
   series and benchmark; those old hashes do not satisfy its package gate.

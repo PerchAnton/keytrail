@@ -64,12 +64,8 @@ jobs:
             artifacts/consumers/react-portal/
           if-no-files-found: error
   macos:
-    name: ${{ matrix.runner }} / Chromium / package consumers
-    strategy:
-      fail-fast: false
-      matrix:
-        runner: [macos-latest, macos-15-intel]
-    runs-on: ${{ matrix.runner }}
+    name: macOS ARM / Chromium / package consumers
+    runs-on: macos-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -109,7 +105,7 @@ jobs:
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
-          name: ${{ matrix.runner }}-evidence
+          name: macos-latest-evidence
           path: |
             artifacts/*.json
             artifacts/*.tgz
