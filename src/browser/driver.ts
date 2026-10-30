@@ -98,7 +98,6 @@ export class Driver {
             const nodes = await resolve(target.locator);
             if (nodes.length > 1) throw new Blocked('TARGET_AMBIGUOUS');
             const node = nodes[0] ?? null;
-            if (node && await node.ownerFrame() !== this.page.mainFrame()) throw new Blocked('UNSUPPORTED_CONTEXT');
             return { id: target.id, node };
           }));
           // Use Playwright's role resolution, including fallback role tokens.
@@ -235,7 +234,18 @@ export class Driver {
               };
             }
             return result;
-          }, { targets, dialogId: this.dialog.id, dialogs, alerts, tabRoles, tabs, form, linkRoles });
+          }, { targets, dialogId: this.dialog.id, dialogs, alerts, tabRoles, tabs, form, linkRoles }).catch(async error => {
+            // The atomic DOM read checks every target's root against the main
+            // document. Some foreign handles cannot be adopted into that read;
+            // classify those failures with the public frame API. Healthy reads
+            // avoid one additional browser round trip per resolved target.
+            this.guard();
+            const frames = await Promise.allSettled(targets.map(({ node }) => node ? node.ownerFrame() : null));
+            this.guard();
+            if (frames.some((frame, index) => targets[index]!.node && frame.status === 'fulfilled' &&
+                frame.value !== this.page.mainFrame())) throw new Blocked('UNSUPPORTED_CONTEXT');
+            throw error;
+          });
           this.guard();
           if (state.code) throw new Blocked(state.code);
           if (!state.detached) return { observedAt: state.observedAt, focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,

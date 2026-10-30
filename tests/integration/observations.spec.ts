@@ -75,3 +75,24 @@ test('an early resolution error awaits and disposes slower sibling handles', asy
     expect(driver.steps).toHaveLength(0);
   } finally { await driver.dispose(); }
 });
+
+for (const context of ['main', 'iframe'] as const) test(`a rejected ${context} observation preserves its context diagnosis and releases handles`, async ({ page }) => {
+  await page.setContent('<button id="main">Main</button><iframe srcdoc="<button>Inner</button>"></iframe>');
+  await expect(page.frameLocator('iframe').locator('button')).toBeVisible();
+  const target = { id: 'target', locator: context === 'main' ? page.locator('#main') : page.frameLocator('iframe').locator('button') };
+  const elements = target.locator.elementHandles.bind(target.locator);
+  const issued: Awaited<ReturnType<typeof elements>> = [];
+  target.locator.elementHandles = async () => { const nodes = await elements(); issued.push(...nodes); return nodes; };
+  // A transport/context-adoption failure can prevent the atomic DOM read itself.
+  // It must not turn a foreign target into a generic browser error, or invent a
+  // foreign context for an ordinary browser error in the main document.
+  const evaluate = page.evaluate;
+  page.evaluate = async () => { throw new Error('CANARY_transport'); };
+  const driver = new Driver(page, [target], target, { ...DEFAULTS }, performance.now());
+  try {
+    await expect(driver.snapshot()).rejects.toMatchObject({ code: context === 'iframe' ? 'UNSUPPORTED_CONTEXT' : 'BROWSER_ERROR' });
+    expect(issued).toHaveLength(1);
+    for (const node of issued) await expect(node.evaluate(el => el.isConnected)).rejects.toThrow();
+    expect(driver.steps).toHaveLength(0);
+  } finally { page.evaluate = evaluate; await driver.dispose(); }
+});

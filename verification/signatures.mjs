@@ -7,6 +7,8 @@ const engineCases = new Set([
   'an early resolution error awaits and disposes slower sibling handles',
   'a focus observation cannot combine two different instants',
   'replacement during observation is re-resolved and temporary handles are released',
+  'a rejected main observation preserves its context diagnosis and releases handles',
+  'a rejected iframe observation preserves its context diagnosis and releases handles',
 ]);
 /** Normalize only UUID/time and measured windows; keep semantic observations and actions. */
 export function inspectReport(report, workers, seenRunIds = new Set(), environment) {

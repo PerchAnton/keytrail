@@ -23,8 +23,9 @@ test('slow browser reads do not receive an avoidable extra 20 ms gap', () => {
   const adaptive = new ObservationWindow(); adaptive.add(0);
   adaptive.add(85 + observationPauseMs(85));
   assert.equal(adaptive.gap, false);
-  assert.equal(40 + observationPauseMs(40), 50);
-  assert.equal(observationPauseMs(10), 20);
+  assert.equal(40 + observationPauseMs(40), 41);
+  assert.equal(observationPauseMs(10), 10);
+  assert.equal(20 + observationPauseMs(20), 25);
   assert.equal(observationPauseMs(150), 1);
   adaptive.add(300);
   assert.equal(adaptive.gap, true, 'Scheduling cannot excuse a real observation gap');

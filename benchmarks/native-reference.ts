@@ -55,7 +55,6 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       const targetReads = Promise.allSettled(targets.map(async t => {
         const nodes = await resolve(t.locator);
         if (nodes.length > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
-        if (nodes[0] && await nodes[0].ownerFrame() !== page.mainFrame()) throw new NativeFailure('UNSUPPORTED_CONTEXT');
         return { id: t.id, node: nodes[0] ?? null };
       }));
       const roles: Record<string, ElementHandle[]> = {};
@@ -129,7 +128,16 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
           }),
           formStructure: formRoot instanceof HTMLFormElement && formRoot.noValidate && submit instanceof HTMLButtonElement && submit.type === 'submit' && submit.form === formRoot && form.every(f => f.structure), form,
         };
-      }, { nodes, rootId: manifest.root, roles, kind: manifest.kind });
+      }, { nodes, rootId: manifest.root, roles, kind: manifest.kind }).catch(async error => {
+        // Use the same context-check strategy in both arms; do not charge the
+        // reference an unnecessary frame query for every healthy target read.
+        guard();
+        const frames = await Promise.allSettled(nodes.map(({ node }) => node ? node.ownerFrame() : null));
+        guard();
+        if (frames.some((frame, index) => nodes[index]!.node && frame.status === 'fulfilled' &&
+            frame.value !== page.mainFrame())) throw new NativeFailure('UNSUPPORTED_CONTEXT');
+        throw error;
+      });
       guard();
       if (state.code) throw new NativeFailure(state.code as MessageCode);
       return state;
@@ -240,7 +248,8 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
           for (let n = 0; n < group.length; n++) mark(group[n]!, readings[n]!);
           break;
         }
-        const pause = negative ? Math.max(1, Math.min(20, 50 - (performance.now() - readStarted))) : 20;
+        // Match the same 25 ms target and 10 ms maximum pause as the journey.
+        const pause = negative ? Math.max(1, Math.min(10, 25 - (performance.now() - readStarted))) : 20;
         await delay(Math.max(1, Math.min(pause, negative ? config.observationWindowMs - (state.observedAt - firstObserved!) : deadline - performance.now(), remaining())));
       }
       index += group.length - 1;

@@ -6,7 +6,8 @@
   `FOCUS_MISMATCH` before Enter/Space and report the actual observed focus.
 - Require initial/final manual-tabs observations spanning the declared window.
   Record browser-clock intervals and block gaps above 100 ms with `OBSERVATION_GAP`.
-  Account for browser-read duration when scheduling the next observation.
+  Account for browser-read duration when scheduling the next observation, targeting
+  25 ms with a maximum 10 ms pause to leave room for variable transport latency.
   Validate sampling evidence in the serializer and CI guard.
 - Add opt-in `inputMode: 'type'` for printable ASCII keyboard events. Recheck
   focus/editability before each character, retain the Unicode `insertText` default,
@@ -15,10 +16,16 @@
   assertions with the schema/guard from the same package version.
 - Add regressions for focus drift, slow browser transport, blocked character input,
   interrupted typing, unsupported characters and invalid observation reports.
-- Complete 100 local rounds of 163 tests without retries, followed by a matching
-  four-worker run. Independently validate all raw reports and current source hashes.
-- Refresh the equivalent-work benchmark: 108 tests passed; median paired overhead
-  is 8.4% for dialogs, 0.8% for manual tabs and 4.6% for forms (`insertText`).
+- Use one regression worker by default and retain the explicit four-worker
+  isolation comparison. Measure complete snapshots and browser intervals in CI.
+- Control the deadline regression after entering the manual observation window;
+  separately test the cumulative scenario budget and each operation's remaining time.
+- Check target context in the atomic DOM read, using frame queries on read failure
+  instead of one extra request per target on every healthy snapshot. Keep locator
+  re-resolution, foreign-context blocking and complete handle cleanup.
+- Retain the earlier candidate's independently checked 100-round proof and 108-test
+  benchmark as historical evidence. The changed candidate requires a fresh full
+  series and benchmark; those old hashes do not satisfy its package gate.
 - No release published. Hosted portability checks for the final candidate remain pending.
 
 ## 0.1.0-alpha.5 — source candidate
