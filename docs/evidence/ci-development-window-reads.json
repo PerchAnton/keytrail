@@ -82,5 +82,94 @@
         "compilerPackage": "@typescript/typescript-darwin-arm64"
       }
     }
-  ]
+  ],
+  "subsequentRun": {
+    "sourceCommit": "611c19fae040d949187d1a01dbd3b3d3f5b36362",
+    "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41027146279",
+    "overallStatus": "failed",
+    "linux": {
+      "status": "passed",
+      "browserPassed": 167,
+      "packageStage": "passed"
+    },
+    "macos": {
+      "status": "failed",
+      "stats": {
+        "startTime": "2026-10-30T08:34:22.591Z",
+        "duration": 302470.447,
+        "expected": 165,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "rawReportSha256": "a5b40cfcf82cd71d77afa84aa8720d981d110848e18c4e88c9a95ce3cbbcd755",
+      "failures": [
+        {
+          "fixture": "canary isolation tabs successful input",
+          "checkId": "T05.backward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-0",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 349.1000000000349,
+            "observationCount": 7,
+            "observationIntervalsMs": [
+              28.5,
+              29.400000000023283,
+              19.79999999998836,
+              32,
+              36.20000000001164,
+              203.20000000001164
+            ],
+            "maxObservationGapMs": 203.20000000001164
+          }
+        },
+        {
+          "fixture": "tabs pass manual Home End",
+          "checkId": "T05.forward.001.unchanged",
+          "messageCode": "OBSERVATION_GAP",
+          "observed": {
+            "focus": "tab-2",
+            "selected": "tab-1",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 225.5,
+            "observationCount": 5,
+            "observationIntervalsMs": [
+              43.79999999998836,
+              36.20000000001164,
+              32,
+              113.5
+            ],
+            "maxObservationGapMs": 113.5
+          }
+        }
+      ],
+      "manualWindowTiming": {
+        "snapshot": {
+          "count": 195,
+          "medianMs": 33.259167,
+          "p95Ms": 56.2035,
+          "maxMs": 120.664625
+        },
+        "evaluate": {
+          "count": 195,
+          "medianMs": 3.86875,
+          "p95Ms": 6.507958,
+          "maxMs": 9.091917
+        },
+        "interval": {
+          "count": 166,
+          "medianMs": 35.299999999959255,
+          "p95Ms": 59.40000000002328,
+          "maxMs": 113.5
+        },
+        "gapsAbove100ms": 1
+      }
+    }
+  }
 }

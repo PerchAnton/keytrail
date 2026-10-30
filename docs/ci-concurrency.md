@@ -1,6 +1,7 @@
 # Browser worker capacity and deadline checks
 
-The default regression suite uses **one browser worker**. The four-worker isolation
+The default regression suite uses **one browser worker**. Hosted macOS uses the
+explicit `macos-15-intel` image; local repeatability also covers the recorded arm64 Mac. The four-worker isolation
 comparison remains an explicit part of the local full-suite verifier. A real gap
 above 100 ms still blocks a negative observation; retries remain disabled.
 
@@ -73,6 +74,21 @@ retained in the [machine-readable record](evidence/ci-development-window-reads.j
 The vanilla consumer now prepares registry metadata and a frozen lockfile before
 its clean offline installation, matching the existing React-consumer approach.
 These are individual runner observations, not a guaranteed latency bound.
+
+The [next run](https://github.com/PerchAnton/keytrail/actions/runs/41027146279)
+at `611c19f` verified the package fix on Linux: all stages passed. The unchanged
+browser code on `macos-latest` passed 165/167, with real 113.5 and 203.2 ms gaps.
+For the former, a snapshot took 120.7 ms including 5.5 ms in evaluate. The earlier
+passing macOS sample therefore does not establish reliable capacity on that image.
+
+Hosted macOS now selects `macos-15-intel` explicitly. GitHub lists this standard
+public-repository runner with four CPUs and 14 GB RAM, compared with three CPUs
+and 7 GB for its arm64 labels; see the [runner specifications](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
+This is a capacity/configuration choice, not proof that architecture alone caused
+the stalls. The full suite and package checks remain mandatory, with one worker,
+zero retries and the same 100 ms bound. Each job saves its actual OS, architecture,
+CPU, memory and image version. The failed arm64 hosted runs remain evidence of
+that environment's observed limits; local arm64 results do not erase them.
 
 ## Reduce transport work and reserve sampling time
 

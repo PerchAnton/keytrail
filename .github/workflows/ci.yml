@@ -28,6 +28,18 @@ jobs:
           echo "$RUNNER_TEMP/keytrail-pnpm/bin" >> "$GITHUB_PATH"
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
+      - name: Record runner environment
+        run: |
+          mkdir -p artifacts
+          node --input-type=module <<'JS'
+          import { cpus, platform, arch, release, totalmem } from 'node:os';
+          import { writeFileSync } from 'node:fs';
+          writeFileSync('artifacts/runner-environment.json', JSON.stringify({
+            platform: platform(), arch: arch(), release: release(), node: process.versions.node,
+            cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(),
+            imageOS: process.env.ImageOS, imageVersion: process.env.ImageVersion,
+          }, null, 2) + '\n');
+          JS
       - name: Build and check contracts
         run: |
           pnpm build
@@ -52,8 +64,8 @@ jobs:
             artifacts/consumers/react-portal/
           if-no-files-found: error
   macos:
-    name: macOS / Chromium / package consumers
-    runs-on: macos-latest
+    name: macOS 15 Intel / Chromium / package consumers
+    runs-on: macos-15-intel
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -65,6 +77,18 @@ jobs:
       - run: pnpm install --frozen-lockfile --ignore-scripts
       - run: pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
       - run: pnpm exec playwright install chromium
+      - name: Record runner environment
+        run: |
+          mkdir -p artifacts
+          node --input-type=module <<'JS'
+          import { cpus, platform, arch, release, totalmem } from 'node:os';
+          import { writeFileSync } from 'node:fs';
+          writeFileSync('artifacts/runner-environment.json', JSON.stringify({
+            platform: platform(), arch: arch(), release: release(), node: process.versions.node,
+            cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(),
+            imageOS: process.env.ImageOS, imageVersion: process.env.ImageVersion,
+          }, null, 2) + '\n');
+          JS
       - name: Build and check contracts
         run: |
           pnpm build
