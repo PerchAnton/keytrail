@@ -11,15 +11,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | 19 targeted cases passed after narrowing manual-window reads; full 167-case checks pending, no retries |
-| Worker isolation | Historical `46515dd`: 165/165 on four local workers; the changed 167-case suite requires its own comparison |
+| Browser suite | 167/167 in each of four local rounds and on Linux/macOS; no retries |
+| Worker isolation | 167/167 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
-| Repeatability | Six full development rounds at `46515dd`; future development runs default to four. Final 100-round acceptance is deferred; historical `0300552`: 100/100; [source-bound proof](evidence/reliability.json) |
+| Repeatability | Current runtime at `6a9cc6a`: 4 × 167 = 668, plus 167 four-worker checks; [development proof](evidence/development-window-reads.json). Final 100-round acceptance is deferred; historical `0300552`: 100/100; [source-bound proof](evidence/reliability.json) |
 | Package consumers | Development package checks run independently of final evidence. Historical `0300552`: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
-| Hosted platforms | At `0bae883`, Linux passed all 165 cases and package checks; macOS passed 164/165 with a real 111.2 ms gap. New window-read checks are pending. [Comparison](ci-concurrency.md) |
+| Hosted platforms | At `6a9cc6a`, both browser suites passed 167/167; the workflow failed because the clean vanilla consumer lacked its native TypeScript compiler. The package harness now prepares a frozen graph; see the PR checks for the subsequent package result. [Comparison](ci-concurrency.md) |
 
 ## Historical performance (`0300552`)
 

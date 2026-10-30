@@ -15,7 +15,15 @@ All six raw reports were independently revalidated against that recorded commit;
 the earlier four-worker comparison passed 165 cases with matching semantics.
 The seventh round was interrupted and is excluded. [Retained results](evidence/development-checks.json)
 identify the exact source revision and do not claim 100-round acceptance. Changes since then separate the verification modes and narrow manual-window
-reads. That changed runtime needs its own four-round development record.
+reads. The new four-round development record is separate from those six older rounds.
+
+At `6a9cc6a`, the narrower manual-window reads completed the new default protocol:
+**four full rounds × 167 = 668 sequential executions**, followed by **167 checks
+on four workers**, all passing without retries, skips or semantic differences.
+A separate validation reread all five raw reports, verified current source hashes
+and confirmed **800 distinct journey IDs**. Seven engine-only tests per run have
+no journey attachment. [Current development record](evidence/development-window-reads.json)
+is explicitly `finalAcceptance: false`; it does not replace the historical proof.
 
 ## Historical alpha.6 verification at `0300552`
 

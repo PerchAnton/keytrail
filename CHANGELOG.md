@@ -33,6 +33,8 @@
   100-round acceptance, with separate outputs and checkpoints for each mode.
 - Test actual tarball consumers in ordinary CI; require `--release` for the extra
   final evidence gate. Package records explicitly distinguish development and final acceptance.
+- Prepare a frozen dependency graph for the clean vanilla consumer, as for React,
+  so offline checks retain the platform-specific TypeScript compiler on fresh runners.
 - Final acceptance and release benchmarking are deferred until the candidate is frozen.
   No release published.
 

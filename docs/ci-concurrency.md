@@ -64,6 +64,16 @@ including 3.1 ms in evaluate. This result is retained; one worker alone is not a
 guarantee. It motivates the narrower window reads described below. These historical
 counts precede the two new observation regressions; they do not certify the new code.
 
+The first [narrow-window run](https://github.com/PerchAnton/keytrail/actions/runs/41025533117)
+at `6a9cc6a` passed all 167 browser cases on both platforms. Maximum intervals in
+correct manual-tab windows were 29.0 ms on Linux and 61.8 ms on macOS. The overall
+workflow still failed: lockfile-free offline resolution omitted TypeScript's native
+compiler in the vanilla package consumer. That separate package-harness failure is
+retained in the [machine-readable record](evidence/ci-development-window-reads.json).
+The vanilla consumer now prepares registry metadata and a frozen lockfile before
+its clean offline installation, matching the existing React-consumer approach.
+These are individual runner observations, not a guaranteed latency bound.
+
 ## Reduce transport work and reserve sampling time
 
 The atomic DOM read already checks each resolved target's root against the main

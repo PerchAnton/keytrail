@@ -1,0 +1,86 @@
+{
+  "sourceCommit": "6a9cc6a652b72ee3875e737bf58b062d0f7596a6",
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41025533117",
+  "overallStatus": "failed",
+  "finalAcceptance": false,
+  "platforms": [
+    {
+      "platform": "linux",
+      "workers": 1,
+      "stats": {
+        "startTime": "2026-10-30T08:20:04.984Z",
+        "duration": 248921.765,
+        "expected": 167,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "333ecc6152d48ec0332f52d28e97e0dcff1e1d95f76ce51471e73f22d0ef5d37",
+      "manualWindowTiming": {
+        "snapshot": {
+          "count": 370,
+          "medianMs": 22.8792425,
+          "p95Ms": 25.144751,
+          "maxMs": 54.677313
+        },
+        "evaluate": {
+          "count": 370,
+          "medianMs": 2.3272234999999997,
+          "p95Ms": 2.76639,
+          "maxMs": 7.205722
+        },
+        "interval": {
+          "count": 332,
+          "medianMs": 24.599999999976717,
+          "p95Ms": 27.400000000023283,
+          "maxMs": 29
+        },
+        "gapsAbove100ms": 0
+      },
+      "packageStage": {
+        "status": "failed",
+        "reason": "Missing native TypeScript compiler in the lockfile-free offline vanilla consumer",
+        "compilerPackage": "@typescript/typescript-linux-x64"
+      }
+    },
+    {
+      "platform": "macos",
+      "workers": 1,
+      "stats": {
+        "startTime": "2026-10-30T08:19:37.702Z",
+        "duration": 236106.686,
+        "expected": 167,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "44823006142cca7c1476005eb66f6eddde5b8128cece49d653dc0a17e12fdf9b",
+      "manualWindowTiming": {
+        "snapshot": {
+          "count": 337,
+          "medianMs": 19.056584,
+          "p95Ms": 31.473166,
+          "maxMs": 60.202125
+        },
+        "evaluate": {
+          "count": 337,
+          "medianMs": 2.387291,
+          "p95Ms": 4.166375,
+          "maxMs": 8.393667
+        },
+        "interval": {
+          "count": 299,
+          "medianMs": 26.800000000046566,
+          "p95Ms": 35.800000000046566,
+          "maxMs": 61.800000000046566
+        },
+        "gapsAbove100ms": 0
+      },
+      "packageStage": {
+        "status": "failed",
+        "reason": "Missing native TypeScript compiler in the lockfile-free offline vanilla consumer",
+        "compilerPackage": "@typescript/typescript-darwin-arm64"
+      }
+    }
+  ]
+}

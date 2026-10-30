@@ -186,9 +186,11 @@ followed by **163 passing tests on four workers**, with no retries or semantic
 differences. Every raw report and its source identity was independently checked.
 Earlier local and hosted attempts are retained separately and are not added to
 this historical total. Six subsequent full rounds at `46515dd` are retained as
-development evidence. A later macOS run still detected a real observation gap;
-[the investigation](docs/ci-concurrency.md) records that failure and the narrower
-window reads now being checked. Final acceptance and fresh release benchmarks
+development evidence. After narrowing manual-window reads, **4 × 167 = 668**
+sequential checks and **167 four-worker checks** passed without retries or semantic
+differences; [current development record](docs/evidence/development-window-reads.json).
+[The CI investigation](docs/ci-concurrency.md) records the earlier gaps and the
+subsequent passing browser suites, including a separate package-harness failure. Final acceptance and fresh release benchmarks
 are deferred until the candidate is frozen. Real-world adoption has not been established.
 
 ### Historical measured overhead (`0300552`)

@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
+import { existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { checkReactConsumer } from './check-react-consumer.mjs';
 import { packageMode } from '../verification/modes.mjs';
@@ -75,11 +76,21 @@ assert(inventory.every(n => n.startsWith('package/') && !n.split('/').includes('
 assert(!inventory.some(n => /node_modules|tests\/|test-results|\.DS_Store|\.npmrc/.test(n)));
 assert(inventory.includes('package/LICENSE') && inventory.includes('package/schema/journey-result.v1.json'));
 const consumer = await mkdtemp(join(tmpdir(), 'keytrail-consumer-'));
+const preparation = await mkdtemp(join(tmpdir(), 'keytrail-consumer-preparation-'));
 try {
-  await writeFile(join(consumer, 'package.json'), JSON.stringify({ private: true, type: 'module',
+  await writeFile(join(preparation, 'package.json'), JSON.stringify({ private: true, type: 'module',
     dependencies: { keytrail: `file:${archive}`, '@playwright/test': pkg.peerDependencies['@playwright/test'] },
     devDependencies: { typescript: pkg.devDependencies.typescript, '@types/node': pkg.devDependencies['@types/node'] } }));
-  run('pnpm', ['install', '--offline', '--ignore-scripts', '--store-dir', storeDirectory], consumer);
+  // Prepare the dependency graph and registry metadata without installing. A
+  // lockfile-free offline resolution can silently omit TypeScript's native
+  // optional dependency on a fresh runner. The separate clean consumer must use
+  // the frozen graph, including the current platform's compiler package.
+  run('pnpm', ['install', '--lockfile-only', '--no-frozen-lockfile', '--ignore-scripts', '--store-dir', storeDirectory], preparation);
+  assert.equal(existsSync(join(preparation, 'node_modules')), false);
+  await cp(preparation, consumer, { recursive: true });
+  const lock = await readFile(join(consumer, 'pnpm-lock.yaml'), 'utf8');
+  run('pnpm', ['install', '--offline', '--frozen-lockfile', '--ignore-scripts', '--store-dir', storeDirectory], consumer);
+  assert.equal(await readFile(join(consumer, 'pnpm-lock.yaml'), 'utf8'), lock);
   const installed = JSON.parse(await readFile(join(consumer, 'node_modules/keytrail/package.json'), 'utf8'));
   assert.equal(installed.version, pkg.version);
   assert.equal(installed.license, 'Apache-2.0');
@@ -124,9 +135,9 @@ declare const form:FormErrorsContract; void assertFormErrorsJourney(page,info,fo
     node: process.version, platform: process.platform, playwright: pkg.peerDependencies['@playwright/test'],
     archive: { file: `${pkg.name}-${pkg.version}.tgz`, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), files: inventory.length },
     checks: { evidenceSourceHashes: mode === 'release', offlineConsumer: true, esm: true, cjs: true, typesEsm: true, typesCjs: true, browserExamples: 6, guardedBrowserExamples: 3, guardEsm: true, guardCjs: true },
-    consumers: { vanilla: { types: true, browserTests: 6, guardedJourneys: 3 }, reactPortal: react },
+    consumers: { vanilla: { registryMetadataPreparation: true, offlineInstall: true, frozenDependencyGraph: true, types: true, browserTests: 6, guardedJourneys: 3 }, reactPortal: react },
     published: false };
   await writeFile(join(root, 'artifacts/package-verification.json'), JSON.stringify(proof, null, 2)+'\n');
   await writeFile(join(root, 'artifacts/SHA256SUMS'), `${proof.archive.sha256}  ${proof.archive.file}\n`);
   console.log(JSON.stringify(proof, null, 2));
-} finally { await rm(consumer, { recursive: true, force: true }); }
+} finally { await Promise.all([consumer, preparation].map(path => rm(path, { recursive: true, force: true }))); }
