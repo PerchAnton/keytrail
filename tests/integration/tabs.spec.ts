@@ -115,7 +115,9 @@ test('tabs manual observation cannot outlive the scenario budget', async ({ page
   // Freeze only the host budget clock during setup. Advance it to the deadline
   // after the first real browser snapshot enters the negative window. No sleep
   // or assumption about how quickly the preceding checks can finish is needed.
-  let now = performance.now(), enteredWindow = false;
+  // Integer clock values make the exact boundary independent of floating-point
+  // cancellation when subtracting a large fractional process uptime.
+  let now = 0, enteredWindow = false;
   const clock = mock.method(performance, 'now', () => now);
   const originalAdd = ObservationWindow.prototype.add;
   const add = mock.method(ObservationWindow.prototype, 'add', function (this: ObservationWindow, at: number) {

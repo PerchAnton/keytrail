@@ -9,6 +9,9 @@ type Reading = { durationMs: number; evaluateMs: number; observedAt?: number;
 export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promise<void>) | undefined {
   if (process.env.KEYTRAIL_PROFILE_SNAPSHOTS !== '1') return;
   const readings: Reading[] = [];
+  // A regression deliberately replaces info.attach to exercise report failures.
+  // Keep the diagnostic sink independent from that injected journey failure.
+  const attach = info.attach.bind(info);
   const elapsed = (start: bigint) => Number(process.hrtime.bigint() - start) / 1e6;
   const snapshot = Driver.prototype.snapshot, evaluate = page.evaluate, add = ObservationWindow.prototype.add;
   let active: Reading | undefined, nextWindow = 0;
@@ -40,7 +43,7 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
   };
   return async () => {
     Driver.prototype.snapshot = snapshot; page.evaluate = evaluate; ObservationWindow.prototype.add = add;
-    await info.attach('snapshot-timings.json', { contentType: 'application/json', body: JSON.stringify({
+    await attach('snapshot-timings.json', { contentType: 'application/json', body: JSON.stringify({
       fixture: info.title, workerIndex: info.workerIndex, attempt: info.retry,
       clock: 'Host durations use hrtime; window intervals use browser performance.now.', readings,
     }) });
