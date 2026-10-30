@@ -1,7 +1,7 @@
 import type { MessageCode } from '../contracts/types.js';
 import type { TabsState, FormState } from './driver.js';
 
-type Request = {
+export type ObservationRequest = {
   targetSlots: { id: string; slot: number }[]; roleSlots: number[]; dialogId: string;
   tabs: { orientation: string; items: { tab: string; panel: string }[] } | null;
   form: { submit: string; errors: { field: string; message: string; via: string;
@@ -10,9 +10,9 @@ type Request = {
 };
 
 /** Serialized once per journey. Keep the reader self-contained in the browser. */
-export function createObservationStore() {
+export function createObservationStore(requests: Record<'complete' | 'interaction', ObservationRequest>) {
   const store = new Map<number, Element[]>();
-  return Object.assign(store, { read({ targetSlots, roleSlots, dialogId, tabs, form, semantics }: Request) {
+  const read = ({ targetSlots, roleSlots, dialogId, tabs, form, semantics }: ObservationRequest) => {
     try {
       const targets = targetSlots.map(({ id, slot }) => ({ id, node: store.get(slot)?.[0] ?? null }));
       const roles = roleSlots.map(slot => store.get(slot) ?? []);
@@ -129,5 +129,15 @@ export function createObservationStore() {
       }
       return result;
     } finally { store.clear(); }
-  } });
+  };
+  return Object.assign(store, {
+    register(nodes: Element[], slot: number, scope: 'complete' | 'interaction') {
+      store.set(slot, nodes);
+      const request = requests[scope];
+      // The last fresh locator resolution reads the DOM in the same browser task.
+      // Earlier registrations return only their count; no extra host request is needed.
+      return { count: nodes.length,
+        state: store.size === request.targetSlots.length + request.roleSlots.length ? read(request) : null };
+    },
+  });
 }

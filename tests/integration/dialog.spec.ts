@@ -272,10 +272,9 @@ for (const openKey of ['Enter', 'Space'] as const) test(`dialog rejects focus dr
   const locator = contract.trigger.locator, evaluateAll = locator.evaluateAll;
   let observations = 0;
   locator.evaluateAll = (async (...args: Parameters<typeof evaluateAll>) => {
-    const value = await evaluateAll.apply(locator, args);
     // First read establishes entry; the next is the action's own preflight snapshot.
     if (++observations === 2) await page.locator('#outside').focus();
-    return value;
+    return evaluateAll.apply(locator, args);
   }) as typeof evaluateAll;
   const error = await failure(page, info, contract);
   expect(observations).toBe(2);

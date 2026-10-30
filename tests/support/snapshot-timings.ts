@@ -1,8 +1,8 @@
-import type { Page, TestInfo } from '@playwright/test';
+import type { Locator, Page, TestInfo } from '@playwright/test';
 import { Driver } from '../../src/browser/driver.js';
 import { ObservationWindow } from '../../src/engine/observation-window.js';
 
-type Reading = { durationMs: number; evaluateMs: number; observedAt?: number;
+type Reading = { durationMs: number; evaluateMs: number; resolutionMs: number[]; observedAt?: number;
   window?: number; intervalMs?: number };
 
 /** Opt-in test diagnostics; never change a reading, interval, deadline or result. */
@@ -14,11 +14,13 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
   const attach = info.attach.bind(info);
   const elapsed = (start: bigint) => Number(process.hrtime.bigint() - start) / 1e6;
   const snapshot = Driver.prototype.snapshot, evaluate = page.evaluate, add = ObservationWindow.prototype.add;
+  const locatorPrototype = Object.getPrototypeOf(page.locator('body')) as Locator;
+  const evaluateAll = locatorPrototype.evaluateAll;
   let active: Reading | undefined, nextWindow = 0;
   const windows = new WeakMap<ObservationWindow, { id: number; last: number }>();
   Driver.prototype.snapshot = async function (...args) {
     if (this.page !== page) return snapshot.apply(this, args);
-    const start = process.hrtime.bigint(), reading: Reading = { durationMs: 0, evaluateMs: 0 };
+    const start = process.hrtime.bigint(), reading: Reading = { durationMs: 0, evaluateMs: 0, resolutionMs: [] };
     active = reading;
     try {
       const state = await snapshot.apply(this, args);
@@ -31,6 +33,11 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
     try { return await evaluate.apply(page, args); }
     finally { if (active) active.evaluateMs += elapsed(start); }
   }) as typeof page.evaluate;
+  locatorPrototype.evaluateAll = (async function (this: Locator, ...args: Parameters<Locator['evaluateAll']>) {
+    const reading = this.page() === page ? active : undefined, start = process.hrtime.bigint();
+    try { return await evaluateAll.apply(this, args); }
+    finally { reading?.resolutionMs.push(elapsed(start)); }
+  }) as Locator['evaluateAll'];
   ObservationWindow.prototype.add = function (at) {
     add.call(this, at);
     const previous = windows.get(this), reading = readings.at(-1);
@@ -42,10 +49,12 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
     windows.set(this, { id, last: at });
   };
   return async () => {
+    locatorPrototype.evaluateAll = evaluateAll;
     Driver.prototype.snapshot = snapshot; page.evaluate = evaluate; ObservationWindow.prototype.add = add;
     await attach('snapshot-timings.json', { contentType: 'application/json', body: JSON.stringify({
       fixture: info.title, workerIndex: info.workerIndex, attempt: info.retry,
-      clock: 'Host durations use hrtime; window intervals use browser performance.now.', readings,
+      clock: 'Host durations use hrtime; window intervals use browser performance.now.',
+      transport: 'Atomic read in final locator registration; evaluateMs counts separate page.evaluate calls only.', readings,
     }) });
   };
 }

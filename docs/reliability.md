@@ -9,6 +9,10 @@ isolation run. Keep one worker per round, retries disabled and the 100 ms observ
 gap limit. The [policy](evidence/development-policy.json) defers final acceptance;
 it does not lower its 100-round requirement.
 
+The atomic-registration follow-up changes the implementation and regression hooks.
+Its development evidence is pending; earlier source hashes remain historical.
+No final 100-round series is requested or running.
+
 At `4abf74c`, the private store and cached reader passed **four full rounds × 169 = 676**
 sequential executions and **169 four-worker checks**, without retries, skips or
 semantic differences. Independent validation reread all five raw reports, compared

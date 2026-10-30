@@ -95,11 +95,17 @@ jobs:
           pnpm test:types
           pnpm test:unit
           pnpm test:guard
-      - name: Browser regression suite (one worker)
+      - name: Browser regression suite (three rounds, one worker)
         env:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
           PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
-        run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
+        run: |
+          for round in 1 2 3; do
+            status=0
+            pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json || status=$?
+            cp artifacts/browser-results.json "artifacts/browser-round-${round}.json"
+            if [ "$status" -ne 0 ]; then exit "$status"; fi
+          done
       - name: Verify development tarball consumers
         run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

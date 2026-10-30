@@ -1,5 +1,5 @@
 import { setTimeout as delay } from 'node:timers/promises';
-import { createObservationStore } from './observation-store.js';
+import { createObservationStore, type ObservationRequest } from './observation-store.js';
 import type { Dialog, Frame, JSHandle, Locator, Page } from '@playwright/test';
 import type { AppliedConfig, Focus, FormErrorsContract, MessageCode, PressKey, StepResult, TabsContract, Target } from '../contracts/types.js';
 
@@ -74,11 +74,41 @@ export class Driver {
     if (error instanceof Error && error.name === 'TimeoutError') return new Blocked('EXPECTATION_TIMEOUT');
     return new Blocked('BROWSER_ERROR');
   }
+  private observationPlans: Record<'complete' | 'interaction', { locators: Locator[]; request: ObservationRequest }> | undefined;
+  private plans() {
+    if (this.observationPlans) return this.observationPlans;
+    const plan = (semantics: boolean) => {
+      // Locator objects remain live queries; no element binding is cached.
+      const locators = [
+        this.page.getByRole('dialog', { includeHidden: true }),
+        this.page.getByRole('alertdialog', { includeHidden: true }),
+        ...(this.tabsContract ? [this.page.getByRole('tab', { includeHidden: true }),
+          ...(semantics ? [this.page.getByRole('tablist', { includeHidden: true }),
+            this.page.getByRole('tablist', { name: /\S/, includeHidden: true }),
+            this.page.getByRole('tabpanel', { includeHidden: true })] : [])] : []),
+        ...(this.formContract?.summaryLinks?.length ? [this.page.getByRole('link', { includeHidden: true })] : []),
+      ];
+      const request: ObservationRequest = {
+        targetSlots: this.targets.map((target, slot) => ({ id: target.id, slot })),
+        roleSlots: locators.map((_, index) => this.targets.length + index), dialogId: this.dialog.id, semantics,
+        tabs: this.tabsContract ? { orientation: this.tabsContract.orientation,
+          items: this.tabsContract.items.map(item => ({ tab: item.tab.id, panel: item.panel.id })) } : null,
+        form: this.formContract ? { submit: this.formContract.submit.id,
+          errors: this.formContract.errors.map(error => ({ field: error.field.id, message: error.message.id, via: error.via,
+            text: typeof error.expectedText === 'string' ? { literal: error.expectedText } :
+              { source: error.expectedText.source, flags: error.expectedText.flags },
+            value: this.formContract!.correction.find(c => c.field === error.field)!.value })),
+          links: this.formContract.summaryLinks?.map(l => l.link.id) ?? [] } : null,
+      };
+      return { locators, request };
+    };
+    return this.observationPlans = { complete: plan(true), interaction: plan(false) };
+  }
   async snapshot(scope: 'complete' | 'interaction' = 'complete'): Promise<Snapshot> {
     // Initial semantics use complete reads. Negative windows consume only live
     // focus, selection, visibility, roving state and structure; do not resolve
     // unused name/panel-role metadata there. Omitted metadata stays unobserved.
-    const semantics = scope === 'complete';
+    const plans = this.plans();
     const deadline = performance.now() + this.remaining();
     try {
       while (true) {
@@ -87,18 +117,18 @@ export class Driver {
         // Every slot is resolved afresh for every snapshot. The atomic read clears
         // all element references before returning, without per-element protocol
         // handles/disposal requests. No selector parsing or cached target binding.
-        this.observationStore ??= await this.page.evaluateHandle(createObservationStore);
+        this.observationStore ??= await this.page.evaluateHandle(createObservationStore,
+          { complete: plans.complete.request, interaction: plans.interaction.request });
         const store = this.observationStore;
         let readFinished = false;
         try {
           const resolve = async (locator: Locator, slot: number) => {
             this.guard();
             if (locator.page() !== this.page) throw new Blocked('UNSUPPORTED_CONTEXT');
-            let count: number;
+            let result: ReturnType<ReturnType<typeof createObservationStore>['register']>;
             try {
-              count = await locator.evaluateAll((nodes, { store, slot }) => {
-                store.set(slot, nodes); return nodes.length;
-              }, { store, slot });
+              result = await locator.evaluateAll((nodes, { store, slot, scope }) => store.register(nodes, slot, scope),
+                { store, slot, scope });
             } catch (error) {
               this.guard();
               // A non-DOM handle cannot cross execution contexts. Diagnose a
@@ -110,10 +140,10 @@ export class Driver {
               throw error;
             }
             this.guard();
-            return { slot, count };
+            return result;
           };
           // Independent reads can overlap, but every read must settle before the
-          // observation or cleanup. In particular, an early failure must not leak
+          // result or cleanup. In particular, an early failure must not leak
           // nodes registered by a slower sibling. Preserve target-order errors.
           const unwrap = <T>(result: PromiseSettledResult<T>): T => {
             if (result.status === 'rejected') throw result.reason;
@@ -122,36 +152,13 @@ export class Driver {
           const targetReads = Promise.allSettled(this.targets.map(async (target, slot) => {
             const resolved = await resolve(target.locator, slot);
             if (resolved.count > 1) throw new Blocked('TARGET_AMBIGUOUS');
-            return { id: target.id, slot };
+            return resolved;
           }));
-          // Use Playwright's role resolution, including fallback role tokens.
-          const roleLocators = [
-            this.page.getByRole('dialog', { includeHidden: true }),
-            this.page.getByRole('alertdialog', { includeHidden: true }),
-            ...(this.tabsContract ? [
-              this.page.getByRole('tab', { includeHidden: true }),
-              ...(semantics ? [
-                this.page.getByRole('tablist', { includeHidden: true }),
-                this.page.getByRole('tablist', { name: /\S/, includeHidden: true }),
-                this.page.getByRole('tabpanel', { includeHidden: true }),
-              ] : []),
-            ] : []),
-            ...(this.formContract?.summaryLinks?.length ? [this.page.getByRole('link', { includeHidden: true })] : []),
-          ];
-          const roleReads = Promise.allSettled(roleLocators.map((locator, index) => resolve(locator, this.targets.length + index)));
+          const roleReads = Promise.allSettled(plans[scope].locators.map((locator, index) => resolve(locator, this.targets.length + index)));
           const [targetResults, roleResults] = await Promise.all([targetReads, roleReads]);
-          const targetSlots = targetResults.map(unwrap), roleSlots = roleResults.map(unwrap).map(r => r.slot);
-          const tabs = this.tabsContract ? { orientation: this.tabsContract.orientation,
-            items: this.tabsContract.items.map(item => ({ tab: item.tab.id, panel: item.panel.id })) } : null;
-          const form = this.formContract ? { submit: this.formContract.submit.id,
-            errors: this.formContract.errors.map(error => ({ field: error.field.id, message: error.message.id, via: error.via,
-              text: typeof error.expectedText === 'string' ? { literal: error.expectedText } :
-                { source: error.expectedText.source, flags: error.expectedText.flags },
-              value: this.formContract!.correction.find(c => c.field === error.field)!.value })),
-            links: this.formContract.summaryLinks?.map(l => l.link.id) ?? [] } : null;
-          this.guard();
-          const state = await this.page.evaluate(({ store, ...request }) => store.read(request),
-            { store, targetSlots, roleSlots, dialogId: this.dialog.id, tabs, form, semantics });
+          const states = [...targetResults.map(unwrap), ...roleResults.map(unwrap)].flatMap(result => result.state ? [result.state] : []);
+          if (states.length !== 1) throw new Blocked('BROWSER_ERROR');
+          const state = states[0]!;
           readFinished = true;
           this.guard();
           if (state.code) throw new Blocked(state.code);
