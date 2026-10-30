@@ -1,12 +1,12 @@
 # First alpha release checklist
 
-**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
-## Reproduce the candidate
+## Development checks
 
 Use the pinned environment in [compatibility](compatibility.md), a clean checkout
 and the committed lockfiles:
@@ -16,6 +16,7 @@ pnpm install --frozen-lockfile --ignore-scripts
 pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
 pnpm exec playwright install chromium
 pnpm check
+pnpm verify:reliability # Four rounds plus the separate four-worker comparison
 ```
 
 On Linux, add `--with-deps` to the Chromium install when system libraries are
@@ -41,11 +42,17 @@ or external service is needed to run their browser tests.
 | Hosted platform checks | Pending for the final alpha.6 candidate; Linux and macOS CI must refer to the commit selected for release |
 | Human review | Inspect HTML failure report and try the example with a keyboard; passing automation is not a conformance assessment |
 
-`pnpm check` runs the checks and consumers once. It validates the existing
-source-bound reliability and benchmark evidence; it does not rerun 45 or 100 rounds.
-The changed alpha.6 candidate still needs fresh 100-round evidence. The prior
-alpha.6 proof and alpha.5 rounds are not reused after source changes. Local completion does not clear
-the remaining hosted-platform and human-review steps or publish a package.
+`pnpm check` runs build, types, unit, guard, one browser suite and actual package
+consumers. `pnpm verify:reliability` is the separate four-round development check.
+Neither command claims final acceptance or requires a five-hour series.
+
+## Deferred final acceptance
+
+Once the candidate is frozen, explicitly run `pnpm verify:reliability --final`
+and `pnpm benchmark`. Independently validate their raw outputs, refresh the
+committed source-bound evidence, then run `node scripts/check-package.mjs --release`.
+That gate requires 100 rounds and complete benchmark evidence. Short runs and
+`verificationLevel: development` package records cannot satisfy it.
 
 ## Review the output
 
@@ -56,7 +63,8 @@ its bundler are example-only dependencies, not installed library dependencies.
 Read `package-verification.json` before using the archive. A failed package check
 removes stale success/checksum records; the presence of an archive alone is not
 proof of a successful gate. The record binds the archive bytes, package version,
-platform and consumer results. Checksums are integrity checks, not signatures.
+platform, verification level and consumer results. Require `finalAcceptance: true`
+for the final release gate. Checksums are integrity checks, not signatures.
 
 ## Publication remains a separate step
 

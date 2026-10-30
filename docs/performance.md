@@ -1,9 +1,10 @@
 # Equivalent-work benchmark
 
-**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-These source-bound measurements were recorded after the final 100-round local
-reliability series. All 108 benchmark tests passed without retries; raw sample
+These historical measurements describe commit `0300552`, after its 100-round
+local reliability series. They do not measure the later snapshot/cadence changes;
+fresh release performance measurements are deferred. All 108 benchmark tests passed without retries; raw sample
 attachments, derived statistics, environment and source hashes were independently
 checked before updating these records.
 

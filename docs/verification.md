@@ -1,6 +1,6 @@
 # Verification
 
-**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
@@ -10,16 +10,16 @@ component is accessible.
 | Check | Recorded result |
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
-| Unit tests | 36 passed |
+| Unit tests | 39 passed, including verification-mode and resume-boundary checks |
 | Browser suite | Current source: 165/165 locally and on Linux/macOS with one worker; no retries |
 | Worker isolation | Current source: 165/165 on four local workers; semantic signatures match the one-worker run; 320 distinct journey IDs across the pair, with five engine-only cases per run |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Handle lifetime | Coherent focus, re-resolution after replacement, late sibling cleanup after an early error |
 | CI guard | 52 actual subprocess exit-code cases; [record](evidence/ci-guard.json) |
 | Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
-| Repeatability | Historical `0300552`: 100/100 complete rounds; current source requires a fresh series; [source-bound proof](evidence/reliability.json) |
-| Package consumers | Pending for changed source. Historical `0300552`: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
-| Hosted platforms | One-worker browser suites pass on both platforms; macOS/two-worker gaps remain recorded. Full job success awaits refreshed package evidence. [Comparison](ci-concurrency.md) |
+| Repeatability | Six full development rounds at `46515dd`; future development runs default to four. Final 100-round acceptance is deferred; historical `0300552`: 100/100; [source-bound proof](evidence/reliability.json) |
+| Package consumers | Development package checks run independently of final evidence. Historical `0300552`: two clean offline installations; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. The exact archive and result are recorded by `pnpm test:package` |
+| Hosted platforms | One-worker browser suites pass on both platforms; macOS/two-worker gaps remain recorded. Development package checks are separate from deferred final acceptance. [Comparison](ci-concurrency.md) |
 
 ## Historical performance (`0300552`)
 

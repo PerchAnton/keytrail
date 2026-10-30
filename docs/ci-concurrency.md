@@ -11,8 +11,9 @@ on one worker and then on two on each platform, with no retries or skips.
 One worker passed on both platforms. Linux also passed on two; macOS with two
 workers had three actual observation-gap failures. The two-worker configuration
 is therefore excluded from the ordinary hosted CI configuration, not reported as
-passing. The job's package stage is separate: it must reject historical release
-evidence until the new source-bound verification finishes.
+passing. At that revision the package stage rejected historical release evidence.
+Development package checks are now separate from the explicit final release gate;
+see the [verification modes](reliability.md).
 
 | Runner | Workers | Tests | Full snapshot median / p95 (ms) | Evaluate median (ms) | Interval p95 / max (ms) |
 | --- | --- | --- | --- | --- | --- |

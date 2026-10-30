@@ -1,6 +1,6 @@
 # KeyTrail
 
-**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](docs/ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
@@ -53,7 +53,9 @@ its HTML/JUnit reports and incomplete attachment. Dependency installation and th
 React lockfile preparation use the registry. The actual consumer installation then
 uses `--offline --frozen-lockfile` in a separate empty directory; browser tests need
 only the local fixture server.
-It leaves `artifacts/keytrail-0.1.0-alpha.6.tgz`, a verification record and `SHA256SUMS`.
+It leaves `artifacts/keytrail-0.1.0-alpha.6.tgz`, a development verification record
+and `SHA256SUMS`. This checks package usability; final acceptance is a separate
+[explicit gate](docs/reliability.md).
 
 Install that archive into an existing Playwright project:
 
@@ -169,7 +171,7 @@ our separate interaction-check, edit-session or RefMint projects.
 
 ```sh
 pnpm check
-pnpm exec playwright test --workers=1
+pnpm verify:reliability # Four full rounds, then the four-worker comparison
 pnpm exec playwright show-report
 ```
 
@@ -184,8 +186,8 @@ followed by **163 passing tests on four workers**, with no retries or semantic
 differences. Every raw report and its source identity was independently checked.
 Earlier local and hosted attempts are retained separately and are not added to
 this historical total. The changed source passed 165/165 on one and four local
-workers and on one worker on each hosted platform. Its full repeatability and
-package evidence are still pending. Real-world adoption has not been established.
+workers and on one worker on each hosted platform. Six subsequent full rounds are retained as development evidence. Final acceptance
+and fresh release benchmarks are deferred until the candidate is frozen. Real-world adoption has not been established.
 
 ### Historical measured overhead (`0300552`)
 

@@ -1,10 +1,25 @@
 # Full-suite repeatability protocol
 
-**Verification refresh pending:** The changed 165-case suite passed on one worker on Linux and macOS. Two workers still produced three macOS observation gaps, so ordinary CI uses one worker; [measurements and limits](ci-concurrency.md). Existing 100-round and benchmark records belong to `0300552` and remain historical. A new source-bound 100-round series, benchmark and tarball check are required before the changed candidate can pass its release gate.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+
+## Current development policy
+
+Use four complete sequential rounds during development, plus a separate four-worker
+isolation run. Keep one worker per round, retries disabled and the 100 ms observation
+gap limit. The [policy](evidence/development-policy.json) defers final acceptance;
+it does not lower its 100-round requirement.
+
+The series on commit `46515dd` was stopped at the maintainer's request after **six
+complete rounds × 165 tests = 990 executions**, all successful without retries.
+All six raw reports were independently revalidated against that recorded commit;
+the earlier four-worker comparison passed 165 cases with matching semantics.
+The seventh round was interrupted and is excluded. [Retained results](evidence/development-checks.json)
+identify the exact source revision and do not claim 100-round acceptance. Changes
+since then separate the verification modes; they do not change journey runtime.
 
 ## Historical alpha.6 verification at `0300552`
 
-Release verification now runs locally: **100 full rounds with one worker**, followed
+That historical final verification ran locally: **100 full rounds with one worker**, followed
 by the four-worker comparison. The dedicated hosted reliability workflow has been
 removed and disabled. The final source revision completed the full protocol:
 
@@ -70,8 +85,8 @@ in Git history and the retained local raw artifacts.
 
 ## Default protocol
 
-The verifier runs the entire integration suite 100 times **one complete round after
-another**, then checks worker isolation. By default each round uses one worker,
+The default verifier runs the entire integration suite four times **one complete
+round after another**, then checks worker isolation. Only `--final` selects 100 rounds. By default each round uses one worker,
 followed by a four-worker run. `--workers=2` runs tests on two workers within each
 round and additionally requires a matching one-worker run before the four-worker
 run. This optional mode is separate from the current one-worker release protocol.
@@ -87,7 +102,8 @@ pnpm verify:reliability
 ```
 
 Run only one verifier at a time in a working copy; checkpoints and report paths
-are shared within that copy. Allow several hours on a laptop. Keep the machine awake and avoid other browser or
+are shared within that copy. The four-round check takes about 12–15 minutes on the recorded laptop; the final
+100-round check takes several hours. Keep the machine awake and avoid other browser or
 CPU-heavy work. Node, Playwright, Chromium, OS, architecture and CPU are recorded.
 On macOS, `caffeinate` prevents idle sleep for the command; closing the lid can
 still suspend the machine. An interrupted round is not considered complete.
@@ -113,24 +129,39 @@ behavior in every round.
 ## Checkpoints and failures
 
 Raw runner reports, logs, a baseline and atomic checkpoints remain in
-`artifacts/reliability/<series>/`. A restart with the same inputs/environment
-revalidates completed reports before resuming. A failed series is retained and
+`artifacts/reliability/<series>/`. A restart with the same inputs/environment and verification mode
+revalidates completed reports before resuming. Development, smoke and final modes
+cannot resume each other’s checkpoints, even when their source hashes match. A failed series is retained and
 cannot be resumed as though the failed round never happened. Diagnose the failure;
 use `--new-series` to start a new complete series. `--smoke` runs only one complete
 round plus the configured worker comparisons and is explicitly **not** acceptance
 evidence. Smoke rounds are not added to the 100-round count.
 
-The final machine-readable proof is `artifacts/reliability-verification.json`.
-A full run produces the original 100-round acceptance proof. The package gate must
-match the version, series identity, all source hashes, per-round signatures and
-final four-worker result. A failure is never converted into passing evidence by
-editing its metadata. The historical partial-series finalizer remains available
-for reproducing the earlier checkpoint; it does not waive the new release gate.
+Development writes `artifacts/reliability-development.json`, smoke writes
+`artifacts/reliability-smoke.json`, and only `--final` writes
+`artifacts/reliability-verification.json`. Development and smoke records have
+`acceptance: false`; they never replace the final proof.
+
+Final acceptance is a separate, deferred action:
+
+```sh
+pnpm verify:reliability --final
+pnpm benchmark
+# Independently validate raw reports and refresh the committed release evidence.
+node scripts/check-package.mjs --release
+```
+
+The explicit release package gate requires 100 completed rounds, final mode,
+matching source hashes, full benchmark evidence and the four-worker comparison.
+The normal `pnpm test:package` still tests the exact archive, imports, types and
+both clean consumers, but marks its result `verificationLevel: development` and
+`finalAcceptance: false`. Neither command publishes anything.
 
 This is repeatability evidence for synthetic fixtures in one environment, not a
 claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI can check
-portability separately; the final alpha.6 candidate has not run those jobs. Ordinary
-CI jobs do not repeat the suite 100 times.
+portability separately. One-worker browser checks passed on Linux and macOS; the
+measured two-worker macOS limitations remain in [CI capacity notes](ci-concurrency.md).
+Ordinary CI jobs do not repeat the suite 100 times.
 
 ## Own-report privacy
 

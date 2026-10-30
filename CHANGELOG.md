@@ -26,7 +26,12 @@
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
   benchmark as historical evidence. The changed candidate requires a fresh full
   series and benchmark; those old hashes do not satisfy its package gate.
-- No release published. Hosted portability checks for the final candidate remain pending.
+- Default repeatability to four development rounds; require explicit `--final` for
+  100-round acceptance, with separate outputs and checkpoints for each mode.
+- Test actual tarball consumers in ordinary CI; require `--release` for the extra
+  final evidence gate. Package records explicitly distinguish development and final acceptance.
+- Final acceptance and release benchmarking are deferred until the candidate is frozen.
+  No release published.
 
 ## 0.1.0-alpha.5 — source candidate
 

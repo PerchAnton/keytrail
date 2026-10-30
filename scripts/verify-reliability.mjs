@@ -8,11 +8,10 @@ import { chromium } from '@playwright/test';
 import { cpus, platform, arch, release } from 'node:os';
 import { inputHashes } from '../verification/inputs.mjs';
 import { digest, inspectReport, semanticSignatures } from '../verification/signatures.mjs';
+import { reliabilityMode, canResumeReliability } from '../verification/modes.mjs';
 
-const args = process.argv.slice(2);
-assert(args.every(arg => ['--smoke', '--new-series', '--workers=2'].includes(arg)), 'Unknown option');
-const rounds = args.includes('--smoke') ? 1 : 100;
-const workers = args.includes('--workers=2') ? 2 : 1;
+const selection = reliabilityMode(process.argv.slice(2));
+const { mode, rounds, workers } = selection;
 const require = createRequire(import.meta.url), cli = require.resolve('@playwright/test/cli');
 const inputs = await inputHashes();
 const browser = await chromium.launch();
@@ -25,17 +24,19 @@ await mkdir('artifacts/reliability', { recursive: true });
 const latestPath = 'artifacts/reliability/latest.json';
 let latest;
 try { latest = JSON.parse(await readFile(latestPath, 'utf8')); } catch {}
-const fresh = !latest || latest.identity !== identity || args.includes('--new-series') || latest.smoke !== (rounds === 1);
+const fresh = !canResumeReliability(latest, identity, selection);
 const folder = fresh ? `artifacts/reliability/${new Date().toISOString().replaceAll(/[:.]/g, '-')}-${identity.slice(0, 12)}` : latest.folder;
 await mkdir(folder, { recursive: true });
 async function atomic(path, data) { await writeFile(path + '.tmp', JSON.stringify(data, null, 2) + '\n'); await rename(path + '.tmp', path); }
 let checkpoint;
 if (!fresh) checkpoint = JSON.parse(await readFile(join(folder, 'checkpoint.json'), 'utf8'));
-else checkpoint = { startedAt: new Date().toISOString(), identity, environment, sourceHashes: inputs, smoke: rounds === 1,
+else checkpoint = { startedAt: new Date().toISOString(), identity, environment, sourceHashes: inputs, mode, smoke: rounds === 1,
   targetRounds: rounds, workers, retries: 0, status: 'running', rounds: [] };
+assert.equal(checkpoint.mode, mode, 'CHECKPOINT_MODE');
+assert.equal(checkpoint.targetRounds, rounds, 'CHECKPOINT_ROUNDS');
 assert.equal(checkpoint.workers, workers, 'CHECKPOINT_WORKERS');
 assert.notEqual(checkpoint.status, 'failed', 'Failed series is retained. Diagnose it, then use --new-series; failures cannot be skipped.');
-await atomic(latestPath, { identity, folder, smoke: rounds === 1 });
+await atomic(latestPath, { identity, folder, mode, targetRounds: rounds, smoke: rounds === 1 });
 const seen = new Set();
 let baseline;
 // Revalidate saved rounds instead of trusting the checkpoint counter.
@@ -87,10 +88,10 @@ try {
   checkpoint.finishedAt = new Date().toISOString(); checkpoint.status = 'passed';
   checkpoint.caseCount = baseline.length; checkpoint.totalSequentialExecutions = rounds * baseline.length;
   checkpoint.uniqueJourneyRunIds = seen.size;
-  checkpoint.acceptance = rounds === 100;
+  checkpoint.acceptance = mode === 'final' && rounds === 100;
   await atomic(join(folder, 'checkpoint.json'), checkpoint);
   const proof = { package: 'keytrail', version: JSON.parse(await readFile('package.json', 'utf8')).version, ...checkpoint, cases: baseline };
-  await atomic('artifacts/reliability-verification.json', proof);
+  await atomic(selection.output, proof);
   console.log(`Verified ${checkpoint.totalSequentialExecutions} sequential fixture executions and ${cases.length} parallel checks. Full acceptance: ${checkpoint.acceptance}.`);
 } catch (error) {
   checkpoint.status = 'failed'; checkpoint.failedAt = new Date().toISOString();

@@ -39,7 +39,7 @@ jobs:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
           PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
         run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
-      - name: Verify tarball consumers
+      - name: Verify development tarball consumers
         run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
@@ -76,7 +76,7 @@ jobs:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
           PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
         run: pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json
-      - name: Verify tarball consumers
+      - name: Verify development tarball consumers
         run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
