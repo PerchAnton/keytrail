@@ -1,70 +1,82 @@
 {
-  "recordedAt": "2026-10-31T12:13:23.776335+00:00",
+  "recordedAt": "2026-10-31T16:16:11.776778+00:00",
   "package": "keytrail",
   "version": "0.1.0-alpha.6",
-  "sourceCommit": "1b42666fddf8c6653ae3898cbe99a61c5b671980",
-  "sourceTree": "6e505becebf906e42e674ab9d9e6cc624cbd719c",
+  "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
+  "sourceTree": "28bb97b895edfc3e97099a9b49657f0bb8fa6770",
   "status": "development-review-ready",
   "releaseReady": false,
   "published": false,
   "finalAcceptance": false,
   "archive": {
     "file": "keytrail-0.1.0-alpha.6.tgz",
-    "bytes": 360802,
-    "sha256": "cc7994bc7027d4c2f9e64affece7362cbf2a365eb06e899b377cfd59191ffc85",
-    "files": 103
+    "bytes": 393179,
+    "sha256": "c159e66d6f11288479c7ef5c760579bceee8fd842273b7c157daa3d288a6e3c1",
+    "files": 113
   },
   "verificationLevel": "development",
   "mainCI": {
-    "runId": 41198529257,
-    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41198529257",
+    "runId": 41215267386,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41215267386",
     "conclusion": "success",
-    "sourceHashesMatch": "ci-main-1b42666.json",
+    "sourceHashesMatch": "ci-main-f9c492b.json",
     "uniqueJourneyRunIds": 644,
-    "totalExecutions": 680,
+    "totalExecutions": 688,
     "platforms": [
       {
-        "platform": "linux",
-        "testsPerRound": 170,
-        "rounds": [
-          {
-            "tests": 170,
-            "sha256": "26d373e1bdda559ef391b08924ce07df79b469adc6676d7d7a83a686f9881066",
-            "maximumPassingWindowGapMs": 26.300000000017462
-          }
-        ],
+        "platform": "linux-x64",
+        "allocation": 0,
+        "artifact": "linux-evidence",
+        "tests": 172,
+        "rawReportSha256": "b59da227ec480dce603a222dc3b653eff0f279fc10665835c3dd49115ecdecad",
+        "maximumPassingWindowGapMs": 32.69999999998254,
         "archive": {
           "file": "keytrail-0.1.0-alpha.6.tgz",
-          "bytes": 360802,
-          "sha256": "cc7994bc7027d4c2f9e64affece7362cbf2a365eb06e899b377cfd59191ffc85",
-          "files": 103
+          "bytes": 393179,
+          "sha256": "c159e66d6f11288479c7ef5c760579bceee8fd842273b7c157daa3d288a6e3c1",
+          "files": 113
         }
       },
       {
-        "platform": "macos-latest",
-        "testsPerRound": 170,
-        "rounds": [
-          {
-            "tests": 170,
-            "sha256": "d6784911dce32f5ac05976c2375aad9fc3e29d3560be73ad31f92ffb5ee073ff",
-            "maximumPassingWindowGapMs": 47.39999999999418
-          },
-          {
-            "tests": 170,
-            "sha256": "2c2bd68b435f41efc24101b87ae0eb57e4ff68613b66ef5a5656e06788c31723",
-            "maximumPassingWindowGapMs": 38.40000000002328
-          },
-          {
-            "tests": 170,
-            "sha256": "8f8250ffeebc3a8d1177ace27aa7686073612e277e8d26d4b4bdde2ccfd7e3e2",
-            "maximumPassingWindowGapMs": 39.5
-          }
-        ],
+        "platform": "macos-15-arm64",
+        "allocation": 1,
+        "artifact": "macos-15-arm-round-1-evidence",
+        "tests": 172,
+        "rawReportSha256": "07b625bb3cf24c96e61bdf4d081cd7467d144a2876a12205e82c542a4a69e0ab",
+        "maximumPassingWindowGapMs": 69,
         "archive": {
           "file": "keytrail-0.1.0-alpha.6.tgz",
-          "bytes": 360802,
-          "sha256": "fc02202f2cbe89921c28c600ae56f15658f08cff1ea74a36f7aa13c4730f4d31",
-          "files": 103
+          "bytes": 393179,
+          "sha256": "be82552237088e36913716eae47971e07531e4996c0e2c4a744d8e123fc570a0",
+          "files": 113
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 2,
+        "artifact": "macos-15-arm-round-2-evidence",
+        "tests": 172,
+        "rawReportSha256": "799a4f7041598f58b1171d96dc9c6630495925581427ae0727b10e920bc52f6f",
+        "maximumPassingWindowGapMs": 61,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 393179,
+          "sha256": "be82552237088e36913716eae47971e07531e4996c0e2c4a744d8e123fc570a0",
+          "files": 113
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 3,
+        "artifact": "macos-15-arm-round-3-evidence",
+        "tests": 172,
+        "rawReportSha256": "9bd24e9f92c45f1d48e5454cc7fe96be12035ae7b3e99e6ba6a93397eb3f9621",
+        "maximumPassingWindowGapMs": 42.20000000001164,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 393179,
+          "sha256": "be82552237088e36913716eae47971e07531e4996c0e2c4a744d8e123fc570a0",
+          "files": 113
         }
       }
     ]
@@ -99,19 +111,26 @@
   "browserReviewScope": "browser-review.json retains the earlier 8f119df exploratory UI review. The current scheduler was not requalified by that review; owner review of the final candidate remains separate.",
   "performance": {
     "record": "benchmark-validation.json",
-    "sourceCommit": "1b42666fddf8c6653ae3898cbe99a61c5b671980",
+    "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
     "tests": 108,
     "warmupsPerArm": 5,
     "pairsPerWorkload": 30,
     "retries": 0,
     "targetMet": true,
     "final100RoundsStarted": false,
-    "measuredAt": "2026-10-31T12:07:50.072Z",
+    "measuredAt": "2026-10-31T16:13:47.223Z",
     "pairedMedianOverheadPercent": {
-      "dialog": 4.754320918385302,
-      "tabs": -4.0247851308102875,
-      "formErrors": 2.807511270739693
+      "dialog": -9.238574834530748,
+      "tabs": -6.7974480749702355,
+      "formErrors": -12.579124668783255
     }
   },
-  "archiveScope": "Preserved Linux archive from main CI 41198529257 at 1b42666, before the benchmark documentation refresh. Any rebuilt archive needs its own verification record."
+  "archiveScope": "Preserved Linux archive from main CI 41215267386 at f9c492b, before this evidence and release-checker refresh. Rebuilt archives require their own external verification record and checksum.",
+  "preparationChecks": {
+    "scriptTests": 26,
+    "newRegressions": 4,
+    "newRuntimeRoundsStarted": 0,
+    "runtimeInputsChanged": false,
+    "final100RoundsStarted": false
+  }
 }

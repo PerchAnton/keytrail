@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, readFile, writeFile, rm, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -16,11 +16,11 @@ const json = async (root, file, value) => writeFile(join(root, file), JSON.strin
 async function fixture(t) {
   const root = await mkdtemp(join(tmpdir(), 'keytrail-release-gate-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['src', 'tests', 'verification', 'benchmarks', 'schema', 'scripts', 'docs/evidence', 'artifacts']) {
+  for (const dir of ['src', 'tests/guard', 'verification', 'benchmarks', 'schema', 'scripts', 'docs/evidence', 'artifacts']) {
     await mkdir(join(root, dir), { recursive: true });
   }
   // Synthetic metadata exercises validation only; no browser rounds are run.
-  for (const file of ['src/example.ts', 'pnpm-lock.yaml', 'playwright.config.ts', 'schema/journey-result.v1.json', 'scripts/build.mjs', 'scripts/verify-reliability.mjs']) {
+  for (const file of ['src/example.ts', 'tests/guard/fixture.mjs', 'pnpm-lock.yaml', 'playwright.config.ts', 'schema/journey-result.v1.json', 'scripts/build.mjs', 'scripts/check-guard.mjs', 'scripts/verify-reliability.mjs']) {
     await writeFile(join(root, file), 'synthetic fixture\n');
   }
   await json(root, 'package.json', { name: 'keytrail', version: '0.1.0-alpha.6' });
@@ -39,7 +39,11 @@ async function fixture(t) {
     pairs: Array.from({ length: 30 }, () => ({ keytrailMs: 100, nativeMs: 100 })),
     summary: { targetMet: true, pairedMedianOverheadPercent: 0, ratioOfMediansOverheadPercent: 0 },
   });
-  await json(root, 'docs/evidence/ci-guard.json', { version, sourceHashes,
+  const guardHashes = Object.fromEntries(Object.entries(sourceHashes).filter(([file]) =>
+    file.startsWith(`src${sep}`) || file.startsWith(join('tests', 'guard') + sep) ||
+    ['scripts/build.mjs', 'schema/journey-result.v1.json'].map(file => join(file)).includes(file)));
+  guardHashes[join('scripts', 'check-guard.mjs')] = hash('synthetic fixture\n');
+  await json(root, 'docs/evidence/ci-guard.json', { version, sourceHashes: guardHashes,
     cases: [{ case: 'pass', expectedExit: 0, actualExit: 0 }, { case: 'fail', expectedExit: 1, actualExit: 1 }] });
   for (const file of ['package-verification.json', 'SHA256SUMS', 'keytrail-0.1.0-alpha.6.tgz']) {
     await writeFile(join(root, 'artifacts', file), 'preserve this existing artifact\n');
@@ -96,6 +100,13 @@ for (const [name, record, mutate] of [
   }],
   ['guard exit mismatch', 'ci-guard', e => { e.cases[1].actualExit = 0; }],
   ['missing guard hashes', 'ci-guard', e => { delete e.sourceHashes; }],
+  ['incomplete guard source coverage', 'ci-guard', e => { delete e.sourceHashes[join('src', 'example.ts')]; }],
+  ['missing guard runner hash', 'ci-guard', e => { delete e.sourceHashes[join('scripts', 'check-guard.mjs')]; }],
+  ['recording hash masks stale guard source', 'ci-guard', e => {
+    const path = join('src', 'example.ts');
+    e.recordingSourceHashes = { [path]: e.sourceHashes[path] };
+    e.sourceHashes[path] = '0'.repeat(64);
+  }],
   ['empty guard cases', 'ci-guard', e => { e.cases = []; }],
   ['duplicate guard cases', 'ci-guard', e => { e.cases.push(e.cases[0]); }],
   ['reduced acceptance policy', 'acceptance-policy', e => { e.minimumCompletedRounds = 4; }],
@@ -103,6 +114,14 @@ for (const [name, record, mutate] of [
   const root = await fixture(t); await change(root, record, mutate);
   const result = run(root); assert.equal(result.status, 1, result.stderr);
   assert.equal(result.report.checks.find(c => c.id === record).status, 'blocked');
+});
+
+test('a newly added source cannot be omitted from guard evidence', async t => {
+  const root = await fixture(t);
+  await writeFile(join(root, 'src/new-module.ts'), 'new source\n');
+  const result = run(root);
+  assert.equal(result.status, 1);
+  assert.equal(result.report.checks.find(c => c.id === 'ci-guard').status, 'blocked');
 });
 
 test('missing and malformed evidence are reported together', async t => {
