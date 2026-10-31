@@ -55,10 +55,40 @@ a passing reliability round. Eight normal focused browser cases and four summary
 unit tests passed locally. The 100 ms bound, fresh locator resolution, zero retries
 and three-round ARM limit remain unchanged. No final 100-round series was run.
 
-The next root-cause experiment must correlate a slow request with host event-loop/
-GC activity and browser/runner scheduling before changing the scheduler again.
-Neither another unchanged green run nor a cached DOM binding closes this issue.
-Final acceptance and publication remain blocked while this investigation is open.
+A [fourth diagnostic round at `a4f97fd`](https://github.com/PerchAnton/keytrail/actions/runs/41203793281)
+added Node CPU, event-loop and GC observations. ARM passed 169/170: the timer-order
+regression blocked at `T05.forward.003.unchanged` on **549.8 ms**. The original error
+and timing attachment were retained; no later keyboard action ran, and ARM package
+consumers were skipped. Linux passed 170/170 and its package consumers. This is a
+separate diagnostic revision, not a fourth passing round of the earlier proof.
+[Independently checked failure](evidence/ci-arm-fourth-diagnostic-failure.json).
+
+| Measurement at the failed reading | Duration |
+| --- | ---: |
+| Actual browser observation gap | 549.8 ms |
+| Host snapshot | 551.834 ms |
+| Node user + system CPU | 29.722 ms |
+| Host event-loop active / idle | 551.840 / 0 ms |
+| First-to-last locator-call start | 261.405 ms |
+| Browser callback span | 30.6 ms |
+| Longest individual browser callback | 0.7 ms |
+
+No GC event overlapped this reading. The timer-order fixture clears its one queued
+flag-setting timer on the second read; this failure occurred in the third window.
+The data identifies substantial host-side elapsed time unexplained by CPU execution
+or recorded GC. It does not distinguish OS scheduling, synchronous waits or a
+specific process causing contention. Node's [event-loop utilization](https://nodejs.org/docs/latest-v24.x/api/perf_hooks.html#performanceeventlooputilizationutilization1-utilization2)
+is wall time outside the event provider, not CPU usage; [process CPU time](https://nodejs.org/docs/latest-v24.x/api/process.html#processcpuusagepreviousvalue)
+includes all process threads. Neither measure alone proves a particular scheduler
+or browser defect. The profiler adds work and is not a performance benchmark.
+
+The next comparison changes only the required ARM image from `macos-latest`
+(observed as macOS 26) to `macos-15`, keeping one worker, every test, the 100 ms bound
+and zero retries. It is limited to three rounds and stops on the first failure.
+Both labels select standard ARM hardware according to [GitHub's runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
+This comparison is pending; it is not a claim that macOS 15 resolves host latency.
+No additional rounds of the old image or final 100-round series are scheduled.
+Final acceptance and publication remain blocked while the investigation is open.
 
 ## Consecutive window reads
 

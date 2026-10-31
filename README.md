@@ -2,11 +2,12 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation: ARM stability remains under investigation.** Main `050d97c`
-failed on a **129.8 ms** observation gap. A diagnostic revision passed Linux
-**170/170** and ARM **510/510**, including package consumers, but the runtime was
-unchanged and the underlying cause is not yet established. The **100 ms** limit
-and zero retries remain unchanged. [Results and diagnosis](docs/ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+**Release preparation: ARM stability remains under investigation.** Three diagnostic
+ARM rounds passed, but a fourth recorded a **549.8 ms** gap and correctly blocked.
+Linux passed the full suite and package consumers. A separate `macos-15` ARM
+comparison is pending; this is not yet a stability fix. The **100 ms** limit,
+all 170 tests and zero retries remain unchanged.
+[Results and diagnosis](docs/ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
 The benchmark below retains its measured revision; final 100-round acceptance
 and publication remain pending.
 

@@ -1,0 +1,355 @@
+{
+  "checkedAt": "2026-10-31T13:12:02.608Z",
+  "status": "validated-failure",
+  "sourceCommit": "a4f97fd1b60a558858664c87ca50d6fcb7a0da98",
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41203793281",
+  "workflowConclusion": "failure",
+  "sourceHashes": {
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "dd2d64fd7c3b73e532f843d85d29ff480c83ad5a614cd574b4cf90f84c656f1e",
+    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "5f165904842f33e170f6f8f38fd53789c3124b39a1149335430e1ecbd1bd46b9",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
+    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "6dbc89aae8b27295caf3a127364d27ed89319bac1ccd8b31b4c2ca60eab92321",
+    "tests/integration/tabs.spec.ts": "e07df3d59efb49ac38607cdc29780a14184e7b52bc8d51400aec435e0ede8263",
+    "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "ff8211b23a9df0897a0c8731985bcab754b07a89c3e64e4c23c6e81372477173",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/modes.mjs": "433218ce8b54643eda0011977a3908c6ec773956c4913b9c64c600f0248e296a",
+    "verification/signatures.mjs": "528fd54649777629c05db13d942187d17904382039f8cd904c0d752cb027ae7c"
+  },
+  "linux": {
+    "platform": "linux",
+    "environment": {
+      "platform": "linux",
+      "arch": "x64",
+      "release": "7.0.0-1017-azure",
+      "node": "24.22.1",
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "logicalCpus": 4,
+      "memoryBytes": 16764678144
+    },
+    "workers": 1,
+    "tests": 170,
+    "journeys": 161,
+    "retries": 0,
+    "stats": {
+      "startTime": "2026-10-31T13:04:47.906Z",
+      "duration": 205047.489,
+      "expected": 170,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "rawReportSha256": "8c48ca991d55fa08a88a35ff340b664cfdc16b7739956fdc04a8ab7b34bf9a7a",
+    "checkedManualWindows": 57,
+    "maximumPassingWindowGapMs": 22.70000000001164,
+    "guardCases": 52,
+    "guardRecordSha256": "0c7261d8f5a5b93450a5de85ba391a1768a1a2e19bb375b9691960d23a1118ad",
+    "healthyFixtureAggregate": {
+      "snapshot": {
+        "count": 639,
+        "medianMs": 12.875339,
+        "p95Ms": 14.924555,
+        "maxMs": 27.737291
+      },
+      "evaluate": {
+        "count": 639,
+        "medianMs": 0,
+        "p95Ms": 0,
+        "maxMs": 0
+      },
+      "resolution": {
+        "count": 6390,
+        "medianMs": 10.016278,
+        "p95Ms": 12.231825,
+        "maxMs": 22.349632
+      },
+      "interval": {
+        "count": 601,
+        "medianMs": 12.89999999999418,
+        "p95Ms": 15,
+        "maxMs": 22.70000000001164
+      },
+      "gapsAbove100ms": 0
+    },
+    "packageRecord": {
+      "package": "keytrail",
+      "version": "0.1.0-alpha.6",
+      "checkedAt": "2026-10-31T13:08:57.635Z",
+      "verificationLevel": "development",
+      "finalAcceptance": false,
+      "node": "v24.22.1",
+      "platform": "linux",
+      "playwright": "1.64.1",
+      "archive": {
+        "file": "keytrail-0.1.0-alpha.6.tgz",
+        "bytes": 371753,
+        "sha256": "ae7590d2598eeeceb635d67f8fc0aa4283188a5414617c703bb32c6e0a994a89",
+        "files": 107
+      },
+      "checks": {
+        "evidenceSourceHashes": false,
+        "offlineConsumer": true,
+        "esm": true,
+        "cjs": true,
+        "typesEsm": true,
+        "typesCjs": true,
+        "browserExamples": 6,
+        "guardedBrowserExamples": 3,
+        "guardEsm": true,
+        "guardCjs": true
+      },
+      "consumers": {
+        "vanilla": {
+          "registryMetadataPreparation": true,
+          "offlineInstall": true,
+          "frozenDependencyGraph": true,
+          "types": true,
+          "browserTests": 6,
+          "guardedJourneys": 3
+        },
+        "reactPortal": {
+          "registryMetadataPreparation": true,
+          "offlineInstall": true,
+          "frozenDependencyGraph": true,
+          "react": "19.3.1",
+          "reactDom": "19.3.1",
+          "types": true,
+          "strictMode": true,
+          "browserTests": 3,
+          "guardedJourneys": 1,
+          "negativeExitCode": 1,
+          "html": true,
+          "junit": true,
+          "failedAttachment": true,
+          "dependencyReferences": true
+        }
+      },
+      "published": false
+    },
+    "packageRecordSha256": "44bab9d9f19521d377955e3dad8cfa54e1d35b68ea0921dc1f8286ddd5bd9b83"
+  },
+  "arm": {
+    "environment": {
+      "platform": "darwin",
+      "arch": "arm64",
+      "release": "25.6.0",
+      "node": "24.22.1",
+      "cpu": "Apple M1 (Virtual)",
+      "logicalCpus": 3,
+      "memoryBytes": 7516192768,
+      "imageOS": "macos26",
+      "imageVersion": "20261026.0455.2"
+    },
+    "roundsStarted": 1,
+    "roundsCompleted": 1,
+    "plannedRounds": 1,
+    "developmentRoundLabel": 4,
+    "passed": 169,
+    "failed": 1,
+    "retries": 0,
+    "packageConsumers": "skipped",
+    "rawReportSha256": "a98f5108a9e55cf8895249125d6150fdacd69d6c4ea7e1c7d4a88c00bb7a74e4",
+    "uniqueJourneyRunIds": 161,
+    "guardCases": 52,
+    "guardRecordSha256": "1a2b0936b36835e17fd2f5be54e728495fff926a575b8ae2957d36bdc3910f3c",
+    "failures": [
+      {
+        "fixture": "manual windows start the next browser read without a host timer pause",
+        "check": {
+          "checkId": "T05.forward.003.unchanged",
+          "ruleId": "T05",
+          "stepId": "step-006",
+          "status": "blocked",
+          "messageCode": "OBSERVATION_GAP",
+          "basis": "contract",
+          "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+          "expected": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "roving": true
+          },
+          "observed": {
+            "focus": "tab-1",
+            "selected": "tab-0",
+            "selectedCount": 1,
+            "visibleCount": 1,
+            "roving": true,
+            "observationWindowMs": 610.8999999999651,
+            "observationCount": 4,
+            "observationIntervalsMs": [
+              21.20000000001164,
+              39.899999999965075,
+              549.7999999999884
+            ],
+            "maxObservationGapMs": 549.7999999999884
+          }
+        },
+        "outcome": "blocked",
+        "coverage": {
+          "planned": 50,
+          "passed": 30,
+          "failed": 0,
+          "blocked": 1,
+          "notRun": 19,
+          "complete": false,
+          "entryEvidence": "tab"
+        },
+        "actionsStopped": true,
+        "snapshotTimingAttachment": true,
+        "timing": {
+          "startedMs": 1699.050333,
+          "finishedMs": 2250.884583,
+          "hostGapBeforeMs": 0.06083300000000236,
+          "durationMs": 551.833792,
+          "evaluateMs": 0,
+          "resolutionMs": [
+            549.306209,
+            548.184,
+            546.286917,
+            507.326084,
+            397.272083,
+            392.067708,
+            390.910834,
+            288.795958,
+            390.790875,
+            309.905542
+          ],
+          "resolutions": [
+            {
+              "startedMs": 1699.075541,
+              "finishedMs": 2248.379333,
+              "browserStartedAt": 2349.1999999999534,
+              "browserFinishedAt": 2349.1999999999534
+            },
+            {
+              "startedMs": 1700.263458,
+              "finishedMs": 2248.446083,
+              "browserStartedAt": 2349.5999999999767,
+              "browserFinishedAt": 2349.5999999999767
+            },
+            {
+              "startedMs": 1702.280541,
+              "finishedMs": 2248.566083,
+              "browserStartedAt": 2349.899999999965,
+              "browserFinishedAt": 2349.899999999965
+            },
+            {
+              "startedMs": 1741.615125,
+              "finishedMs": 2248.676166,
+              "browserStartedAt": 2350.1999999999534,
+              "browserFinishedAt": 2350.1999999999534
+            },
+            {
+              "startedMs": 1851.82725,
+              "finishedMs": 2249.09775,
+              "browserStartedAt": 2350.5,
+              "browserFinishedAt": 2350.5
+            },
+            {
+              "startedMs": 1857.082208,
+              "finishedMs": 2249.139916,
+              "browserStartedAt": 2350.7999999999884,
+              "browserFinishedAt": 2350.7999999999884
+            },
+            {
+              "startedMs": 1858.288375,
+              "finishedMs": 2249.198041,
+              "browserStartedAt": 2350.899999999965,
+              "browserFinishedAt": 2350.899999999965
+            },
+            {
+              "startedMs": 1960.480125,
+              "finishedMs": 2249.27175,
+              "browserStartedAt": 2352.5,
+              "browserFinishedAt": 2352.5
+            },
+            {
+              "startedMs": 1859.951416,
+              "finishedMs": 2250.645333,
+              "browserStartedAt": 2377.399999999965,
+              "browserFinishedAt": 2377.399999999965
+            },
+            {
+              "startedMs": 1940.938666,
+              "finishedMs": 2250.842958,
+              "browserStartedAt": 2379.0999999999767,
+              "browserFinishedAt": 2379.7999999999884
+            }
+          ],
+          "hostPerformanceStartedAt": 219201.723,
+          "hostPerformanceFinishedAt": 219753.549167,
+          "hostActiveMs": 551.8402909999713,
+          "hostIdleMs": 0,
+          "cpuUserMs": 25.479,
+          "cpuSystemMs": 4.243,
+          "observedAt": 2379.1999999999534,
+          "window": 3,
+          "intervalMs": 549.7999999999884
+        },
+        "overlappingGC": [],
+        "host": {
+          "cpuMicroseconds": {
+            "user": 1144090,
+            "system": 100289
+          },
+          "elapsedMs": 2258.945375,
+          "loadAverageBefore": [
+            7.85888671875,
+            18,
+            11.94189453125
+          ],
+          "loadAverageAfter": [
+            7.85888671875,
+            18,
+            11.94189453125
+          ],
+          "logicalCpus": 3
+        }
+      }
+    ]
+  },
+  "interpretation": "The fourth ARM diagnostic round failed on a real 549.8 ms gap. The host snapshot took 551.834 ms with 29.722 ms process CPU time, no overlapping recorded GC and 261.405 ms between first and last locator-call starts. This identifies substantial host-side elapsed time not explained by CPU execution or recorded GC; it does not distinguish OS scheduling from synchronous waits or establish the exact host cause. Browser callbacks were individually at most 0.7 ms. The journey blocked correctly, sent no later input and ARM consumers were skipped. Runtime and the 100 ms bound are unchanged. Do not report the earlier three green rounds as a stability fix.",
+  "rerunPerformed": false,
+  "final100RoundsStarted": false
+}

@@ -1,13 +1,15 @@
 # Verification
 
 **Latest status (31 October 2026): ARM stability remains under investigation.**
-Main `050d97c` failed on a 129.8 ms canary observation gap; [retained failure](evidence/ci-main-050d97c-failure.json).
-The diagnostic revision `ed74027` passed Linux 170/170 and three ARM rounds
-(510/510), plus both package consumers, with zero retries. ARM maxima were
-86.8 / 87.7 / 38.0 ms. The runtime was unchanged: a green diagnostic run does not
-close the earlier failure. [Diagnosis](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open)
-and [validated results](evidence/ci-arm-diagnostics.json).
-The [108-test benchmark](performance.md) retains its measured `1b42666` identity;
+Three diagnostic ARM rounds passed, but a fourth round at `a4f97fd` failed on a
+**549.8 ms** observation gap: 169/170 passed, with zero retries. The host read took
+551.8 ms while Node used 29.7 ms CPU; no overlapping GC event was recorded.
+Linux passed 170/170 and package consumers. [Retained fourth-round failure](evidence/ci-arm-fourth-diagnostic-failure.json).
+This does not yet distinguish host scheduling from synchronous waits. A separate
+comparison on `macos-15` ARM is pending, capped at three rounds and stopping on any
+failure. All 170 tests and the 100 ms bound remain unchanged.
+[Diagnosis](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+The [benchmark](performance.md) retains its measured `1b42666` identity;
 changed diagnostic tests are not covered by its full input hashes. Final 100-round
 acceptance and publication remain deferred.
 
