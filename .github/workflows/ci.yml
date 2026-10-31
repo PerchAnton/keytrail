@@ -3,6 +3,13 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+    inputs:
+      arm-allocation:
+        description: 'ARM allocation to run; all also runs Linux'
+        type: choice
+        default: all
+        options: [all, '1', '2', '3']
 permissions:
   contents: read
 concurrency:
@@ -10,6 +17,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   linux:
+    if: github.event_name != 'workflow_dispatch' || inputs.arm-allocation == 'all'
     name: Linux / Chromium / package consumers
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -72,10 +80,10 @@ jobs:
     name: macOS 15 ARM / allocation ${{ matrix.round }} / package consumers
     runs-on: macos-15
     strategy:
-      fail-fast: true
+      fail-fast: false
       max-parallel: 1
       matrix:
-        round: [1, 2, 3]
+        round: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.arm-allocation != 'all' && format('[{0}]', inputs.arm-allocation) || '[1,2,3]') }}
     env:
       KEYTRAIL_ALLOCATION: ${{ matrix.round }}
     timeout-minutes: 15
