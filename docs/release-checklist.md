@@ -1,12 +1,18 @@
 # First alpha release checklist
 
-**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
-(510/510), one Linux round (170/170) and both package consumers per platform, with
-zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
-maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
-The fresh [108-test benchmark](performance.md) matches this source. Earlier repeatability
-proofs remain historical; final 100-round acceptance is still deferred. This short
-sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+**Latest status (31 October 2026): the observation-dispatch update passed bounded CI.**
+At `cd3216b`, three fresh macOS 15 ARM jobs each passed **172/172**; Linux also
+passed **172/172**. Both real package consumers passed in all four jobs. ARM
+maximum passing-window gaps were **39.9 / 59.5 / 56.7 ms**, with the unchanged
+**100 ms** limit, one worker and zero retries/skips.
+[Independently checked results](evidence/ci-observation-dispatch.json).
+The change reduces stack-formatting work while retaining fresh locator resolution,
+async context, budget checks and cleanup. The earlier 130.3 ms failure is retained;
+its exact hosted cause is not fully established, and this short series does not
+guarantee shared-host latency. [Why 100 ms and what changed](observation-gaps.md).
+The [benchmark](performance.md) retains its historical `1b42666` identity and does
+not qualify the changed runtime. Fresh benchmark evidence, final 100-round
+acceptance and publication remain pending.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -14,7 +20,7 @@ Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
-## Current preparation snapshot (`1b42666`)
+## Preserved preparation snapshot (`1b42666`)
 
 The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
 bind the preserved main-CI archive to `1b42666`. Linux passed 170/170 checks and
@@ -23,9 +29,9 @@ The fresh benchmark passed 108/108 tests and both overhead calculations meet the
 20% target for every workload. The earlier exploratory browser review remains
 bound to its recorded revision; owner review of the final candidate is separate.
 
-This is **development-review-ready**, with `releaseReady: false` and
-`finalAcceptance: false`. Final 100-round evidence, the release package gate and
-publication remain deferred. Do not repeat already sufficient development runs
+That recorded snapshot was **development-review-ready**, with `releaseReady: false` and
+`finalAcceptance: false`. The later ARM failure reopens the stability investigation. Final 100-round
+evidence, the release package gate and publication remain deferred. Do not repeat already sufficient development runs
 merely to update these documents. Documentation changes alter archive bytes, so a
 new archive needs its own package-consumer record and checksum.
 
@@ -79,7 +85,7 @@ or external service is needed to run their browser tests.
 | Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
 | Release evidence fails closed | `node --test scripts/tests/*.test.mjs`; stale hashes, short series, retries, invalid benchmarks and contradictory guard exits are rejected |
 | Source-bound reliability | Pending for changed source; prior 100 × 163 proof is historical; [proof and protocol](reliability.md) |
-| Equivalent native measurements | Current `1b42666`: 108/108 tests, three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
+| Equivalent native measurements | Recorded `1b42666`: 108/108 tests, three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
 | Vanilla tarball consumer | ESM/CJS imports and declarations; 6 browser tests and 3 guarded journeys |
 | React portal tarball consumer | StrictMode, real portal/remount, 3 browser tests, 1 guarded journey, separate failing process |
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |

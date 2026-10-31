@@ -2,6 +2,25 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Start fresh locator batches from a microtask with a shorter async call stack,
+  reducing repeated stack-formatting work without a timer pause or cached DOM
+  bindings. Preserve async context, per-query budgets, target-order errors and
+  all-settled cleanup. Add context and budget-handoff cases. The bounded check at
+  `cd3216b` passed 172 tests on each of three fresh ARM VMs and Linux, including
+  package consumers; the 100 ms bound and zero retries remain unchanged.
+
+- Preserve unexpected canary failures instead of replacing their code with an
+  assertion for a deliberately injected browser error. Add missing canary timing
+  diagnostics and a read-only CI summary that retains failures without attachments.
+  Three diagnostic ARM rounds passed; a fourth recorded a 549.8 ms gap with
+  little CPU work and no overlapping recorded GC. Retain the failure and compare
+  the macOS 15 ARM image separately. Three rounds on one VM passed, but the
+  second fresh allocation reproduced a 130.3 ms gap. Preserve that failure.
+- Run ARM allocations as separate sequential jobs with one full round and package
+  consumers per job. Retain failures while allowing the remaining allocations to
+  finish; permit an explicit single-allocation dispatch without repeating other
+  results. Keep all 170 cases, the 100 ms bound and zero test retries.
+
 - Start the next manual-window browser read immediately after validating the previous
   snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.
   Retain the 100 ms limit, actual timestamps, fresh locators and zero retries.

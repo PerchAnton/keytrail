@@ -2,12 +2,14 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation:** merged main `1b42666` passed **510/510 checks on macOS ARM**
-(three rounds) and **170/170 on Linux**, plus both package consumers on each platform,
-without retries. A fresh **108/108 benchmark** matches this source; the results are
-below. The observation gap limit remains **100 ms**. [Current evidence](docs/verification.md)
-and [remaining release gates](docs/release-handoff.md). Publication and final
-100-round acceptance remain pending.
+**Release preparation:** the observation-dispatch update at `cd3216b` passed
+**3 × 172 ARM checks and 172 Linux checks**, including both package consumers in
+each job. Maximum ARM gaps were **39.9 / 59.5 / 56.7 ms** against the unchanged
+**100 ms** limit, with zero retries. [Results](docs/ci-concurrency.md#observation-dispatch-overhead)
+· [Why 100 ms](docs/observation-gaps.md). The earlier failure is retained; this
+short series does not guarantee host scheduling latency. The benchmark below is
+historical for the changed runtime; fresh benchmark evidence, final 100-round
+acceptance and publication remain pending.
 
 Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
 from the repository root. This read-only command does not start tests or publish a package.
@@ -214,8 +216,8 @@ and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
 this source revision. This short development sample is not a guarantee against
 future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
 failures and measured limits. Final 100-round acceptance remains deferred; the
-[fresh benchmark](docs/performance.md) passed all 108 tests at `1b42666`. The current
-main also passed 170 Linux and 510 ARM checks with package consumers;
+[recorded benchmark](docs/performance.md) passed all 108 tests at `1b42666`. That earlier
+main snapshot also passed 170 Linux and 510 ARM checks with package consumers;
 [source-bound CI record](docs/evidence/ci-main-1b42666.json). Real-world adoption has not been established.
 
 ### Measured overhead (`1b42666`, 31 October 2026, 12:07 UTC)

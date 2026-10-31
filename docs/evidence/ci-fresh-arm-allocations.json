@@ -1,0 +1,715 @@
+{
+  "recordedAt": "2026-10-31T14:41:51.677Z",
+  "sourceCommit": "5aa44e03995a19df161ed59a1f764ffc5305fc65",
+  "runId": "41209737766",
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41209737766",
+  "workflowConclusion": "failure",
+  "validatedSuccess": false,
+  "finalAcceptance": false,
+  "rootCauseEstablished": false,
+  "scope": "Three requested serialized GitHub-hosted macOS 15 ARM allocations, one full suite per executed allocation and package consumers when preceding checks pass. Cancelled reservations and copied job records are not executions. The never-started third allocation is completed by a bounded single-allocation dispatch with identical execution inputs. Distinct runner IDs and non-overlapping times are checked; distinct physical hosts and final acceptance are not asserted.",
+  "independentValidationPassed": true,
+  "supplementalRun": {
+    "id": "41210833469",
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41210833469",
+    "sourceCommit": "82a825432b63e2252f3a84ecf187acec00a81021",
+    "conclusion": "success"
+  },
+  "cancelledReservation": {
+    "id": 124562012347,
+    "name": "macOS 15 ARM / allocation 3 / package consumers",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "startedAt": "2026-10-31T14:21:14Z",
+    "completedAt": "2026-10-31T14:30:09Z",
+    "runnerId": 0,
+    "runnerName": "",
+    "labels": [
+      "macos-15"
+    ]
+  },
+  "controlAttempt": {
+    "attempt": 2,
+    "executedNewJobs": 0,
+    "note": "Selected-job resume of the never-started allocation was cancelled immediately; other job records copied original timestamps/results. No browser executions are counted from this control attempt."
+  },
+  "failureAnalysis": {
+    "checkId": "T05.backward.002.unchanged",
+    "gapMs": 130.30000000004657,
+    "observations": 6,
+    "windowMs": 177.59999999997672,
+    "snapshotMs": 130.144375,
+    "hostGapBeforeMs": 0.046708000000080574,
+    "nodeCpuMs": 37.757,
+    "overlappingGCMs": 7.041916000074707,
+    "dispatchSpanMs": 25.000790999999936,
+    "browserCallbackSpanMs": 83.19999999995343,
+    "longestBrowserCallbackMs": 0.19999999995343387,
+    "stoppedAfterBlockedStep": true,
+    "coverage": {
+      "planned": 50,
+      "passed": 40,
+      "failed": 0,
+      "blocked": 1,
+      "notRun": 9,
+      "complete": false,
+      "entryEvidence": "tab"
+    },
+    "interpretation": "A recorded GC overlaps the reading, but its duration does not explain the full gap. Callback bodies are short; the span between callbacks is long. These measurements do not establish a specific scheduler, transport or browser cause."
+  },
+  "workflowSha256": "a49119478c32771a078b9e048fb82e38338ac1689fa3c610a50b66d52d575dc0",
+  "sourceHashes": {
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "dd2d64fd7c3b73e532f843d85d29ff480c83ad5a614cd574b4cf90f84c656f1e",
+    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "5f165904842f33e170f6f8f38fd53789c3124b39a1149335430e1ecbd1bd46b9",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
+    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "6dbc89aae8b27295caf3a127364d27ed89319bac1ccd8b31b4c2ca60eab92321",
+    "tests/integration/tabs.spec.ts": "e07df3d59efb49ac38607cdc29780a14184e7b52bc8d51400aec435e0ede8263",
+    "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "ff8211b23a9df0897a0c8731985bcab754b07a89c3e64e4c23c6e81372477173",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/modes.mjs": "433218ce8b54643eda0011977a3908c6ec773956c4913b9c64c600f0248e296a",
+    "verification/signatures.mjs": "528fd54649777629c05db13d942187d17904382039f8cd904c0d752cb027ae7c"
+  },
+  "requestedARMAllocations": 3,
+  "executedARMAllocations": 3,
+  "serializedARMJobs": [
+    {
+      "id": 124562012432,
+      "name": "macOS 15 ARM / allocation 1 / package consumers",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-31T14:21:17Z",
+      "completedAt": "2026-10-31T14:25:47Z",
+      "runnerId": 1000003916,
+      "runnerName": "GitHub Actions 1000003916",
+      "labels": [
+        "macos-15"
+      ]
+    },
+    {
+      "id": 124562012238,
+      "name": "macOS 15 ARM / allocation 2 / package consumers",
+      "status": "completed",
+      "conclusion": "failure",
+      "startedAt": "2026-10-31T14:25:49Z",
+      "completedAt": "2026-10-31T14:30:09Z",
+      "runnerId": 1000003917,
+      "runnerName": "GitHub Actions 1000003917",
+      "labels": [
+        "macos-15"
+      ]
+    },
+    {
+      "id": 124565259947,
+      "name": "macOS 15 ARM / allocation 3 / package consumers",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-10-31T14:35:22Z",
+      "completedAt": "2026-10-31T14:41:00Z",
+      "runnerId": 1000003918,
+      "runnerName": "GitHub Actions 1000003918",
+      "labels": [
+        "macos-15"
+      ]
+    }
+  ],
+  "uncompletedAllocations": [],
+  "platforms": [
+    {
+      "allocation": 0,
+      "sourceCommit": "5aa44e03995a19df161ed59a1f764ffc5305fc65",
+      "runId": "41209737766",
+      "platform": "linux-x64",
+      "artifact": "linux-evidence",
+      "job": {
+        "id": 124562012388,
+        "name": "Linux / Chromium / package consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-31T14:21:16Z",
+        "completedAt": "2026-10-31T14:27:18Z",
+        "runnerId": 1000003915,
+        "runnerName": "GitHub Actions 1000003915",
+        "labels": [
+          "ubuntu-24.04"
+        ]
+      },
+      "environment": {
+        "platform": "linux",
+        "arch": "x64",
+        "release": "7.0.0-1017-azure",
+        "node": "24.22.1",
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "logicalCpus": 4,
+        "memoryBytes": 16760344576
+      },
+      "tests": 170,
+      "passed": 170,
+      "failed": 0,
+      "journeys": 161,
+      "workers": 1,
+      "retries": 0,
+      "stats": {
+        "startTime": "2026-10-31T14:23:02.510Z",
+        "duration": 207717.813,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "2f95beba86c75e7416da3f56dc8bd7e150e1d8cc1ca682d56ae5a409783ab703",
+      "summarySha256": "d983ae3c936b12f39446308817e830b14b1e79a3de0b1c918eed99034ae6f94f",
+      "maximumPassingWindowGapMs": 32.5,
+      "failures": [],
+      "diagnosticFailures": [],
+      "guardCases": 52,
+      "guardSha256": "5d42dfb655713f3dfe34e6d912eb186fa41b27590343688cf18615aec13b3bd4",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T14:27:14.394Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "linux",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 378216,
+          "sha256": "040484c32680fd217eb933a6e641cced17fa6c504bc63dd4fb96fd8cf482d878",
+          "files": 109
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "ca95d5d8b6d2c686b24db934debf90caef843a50edc0298e9cca1c9b3396fc19"
+    },
+    {
+      "allocation": 1,
+      "sourceCommit": "5aa44e03995a19df161ed59a1f764ffc5305fc65",
+      "runId": "41209737766",
+      "platform": "macos-15-arm64",
+      "artifact": "macos-15-arm-round-1-evidence",
+      "job": {
+        "id": 124562012432,
+        "name": "macOS 15 ARM / allocation 1 / package consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-31T14:21:17Z",
+        "completedAt": "2026-10-31T14:25:47Z",
+        "runnerId": 1000003916,
+        "runnerName": "GitHub Actions 1000003916",
+        "labels": [
+          "macos-15"
+        ]
+      },
+      "environment": {
+        "allocation": 1,
+        "runnerLabel": "macos-15",
+        "runId": "41209737766",
+        "runAttempt": "1",
+        "runnerEnvironment": "github-hosted",
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "24.6.0",
+        "node": "24.22.1",
+        "cpu": "Apple M1 (Virtual)",
+        "logicalCpus": 3,
+        "memoryBytes": 7516192768,
+        "imageOS": "macos15",
+        "imageVersion": "20261028.0489.1"
+      },
+      "tests": 170,
+      "passed": 170,
+      "failed": 0,
+      "journeys": 161,
+      "workers": 1,
+      "retries": 0,
+      "stats": {
+        "startTime": "2026-10-31T14:22:13.531Z",
+        "duration": 175803.035,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "95af1c097ecd811b3da9bc5a1e869c6c908992d7eedc991ade2740e2dab07a25",
+      "summarySha256": "cfe6a65a2bb53da6358f1c11e3d1bf8bd22c46e8201672b86184a0f2d17fd1e2",
+      "maximumPassingWindowGapMs": 74.70000000001164,
+      "failures": [],
+      "diagnosticFailures": [],
+      "guardCases": 52,
+      "guardSha256": "910cb93693111ff8fd5e5d16508124b4a88d9841fa1ff863b6285affbbc3a43b",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T14:25:41.584Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "darwin",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 378216,
+          "sha256": "eb47e25f670f3a8251b19e4e9e2705ea5b14761fa13db6e9eaf74f010fa079bd",
+          "files": 109
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "1d5af5435f6fc3c81f6b8fec393b6edd5b21b3e03baec2567b9a1ed456a112ec"
+    },
+    {
+      "allocation": 2,
+      "sourceCommit": "5aa44e03995a19df161ed59a1f764ffc5305fc65",
+      "runId": "41209737766",
+      "platform": "macos-15-arm64",
+      "artifact": "macos-15-arm-round-2-evidence",
+      "job": {
+        "id": 124562012238,
+        "name": "macOS 15 ARM / allocation 2 / package consumers",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-31T14:25:49Z",
+        "completedAt": "2026-10-31T14:30:09Z",
+        "runnerId": 1000003917,
+        "runnerName": "GitHub Actions 1000003917",
+        "labels": [
+          "macos-15"
+        ]
+      },
+      "environment": {
+        "allocation": 2,
+        "runnerLabel": "macos-15",
+        "runId": "41209737766",
+        "runAttempt": "1",
+        "runnerEnvironment": "github-hosted",
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "24.6.0",
+        "node": "24.22.1",
+        "cpu": "Apple M1 (Virtual)",
+        "logicalCpus": 3,
+        "memoryBytes": 7516192768,
+        "imageOS": "macos15",
+        "imageVersion": "20261028.0489.1"
+      },
+      "tests": 170,
+      "passed": 169,
+      "failed": 1,
+      "journeys": 161,
+      "workers": 1,
+      "retries": 0,
+      "stats": {
+        "startTime": "2026-10-31T14:26:50.544Z",
+        "duration": 194639.722,
+        "expected": 169,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "rawReportSha256": "4f86df339a200166dfe89aa2e551463f136cb8dc9546da289a4e593a1cbc1b12",
+      "summarySha256": "4d5b3db18da5b149b826cf71018a383cf168b432c65f4d227cac6078c253950d",
+      "maximumPassingWindowGapMs": 36.90000000002328,
+      "failures": [
+        {
+          "fixture": "manual tabs record initial and final observations even for a short window",
+          "outcome": "blocked",
+          "check": {
+            "checkId": "T05.backward.002.unchanged",
+            "ruleId": "T05",
+            "stepId": "step-010",
+            "status": "blocked",
+            "messageCode": "OBSERVATION_GAP",
+            "basis": "contract",
+            "guidanceUrl": "https://www.w3.org/WAI/ARIA/apg/patterns/tabs/",
+            "expected": {
+              "focus": "tab-2",
+              "selected": "tab-0",
+              "roving": true
+            },
+            "observed": {
+              "focus": "tab-2",
+              "selected": "tab-0",
+              "selectedCount": 1,
+              "visibleCount": 1,
+              "roving": true,
+              "observationWindowMs": 177.59999999997672,
+              "observationCount": 6,
+              "observationIntervalsMs": [
+                9.899999999906868,
+                9.800000000046566,
+                7.800000000046566,
+                19.79999999993015,
+                130.30000000004657
+              ],
+              "maxObservationGapMs": 130.30000000004657
+            }
+          },
+          "coverage": {
+            "planned": 50,
+            "passed": 40,
+            "failed": 0,
+            "blocked": 1,
+            "notRun": 9,
+            "complete": false,
+            "entryEvidence": "tab"
+          }
+        }
+      ],
+      "diagnosticFailures": [
+        {
+          "title": "manual tabs record initial and final observations even for a short window",
+          "status": "failed",
+          "retry": 0,
+          "outcome": "blocked",
+          "timingAttachment": true,
+          "failure": "OBSERVATION_GAP",
+          "windows": [
+            {
+              "checkId": "T05.forward.001.unchanged",
+              "status": "pass",
+              "samples": 8,
+              "durationMs": 57.5,
+              "gapMs": 10
+            },
+            {
+              "checkId": "T05.forward.002.unchanged",
+              "status": "pass",
+              "samples": 6,
+              "durationMs": 57.5,
+              "gapMs": 12.5
+            },
+            {
+              "checkId": "T05.forward.003.unchanged",
+              "status": "pass",
+              "samples": 7,
+              "durationMs": 51.09999999997672,
+              "gapMs": 10.099999999976717
+            },
+            {
+              "checkId": "T05.backward.001.unchanged",
+              "status": "pass",
+              "samples": 6,
+              "durationMs": 59.70000000006985,
+              "gapMs": 13.29999999993015
+            },
+            {
+              "checkId": "T05.backward.002.unchanged",
+              "status": "blocked",
+              "samples": 6,
+              "durationMs": 177.59999999997672,
+              "gapMs": 130.30000000004657
+            }
+          ],
+          "slowest": [
+            {
+              "window": 5,
+              "intervalMs": 130.30000000004657,
+              "snapshotMs": 130.144375,
+              "hostGapBeforeMs": 0.046708000000080574,
+              "hostActiveMs": 130.15112499997485,
+              "hostIdleMs": 0,
+              "cpuUserMs": 35.214,
+              "cpuSystemMs": 2.543,
+              "overlappingGC": [
+                {
+                  "startedAt": 190145.692542,
+                  "durationMs": 7.041916000074707,
+                  "kind": 1
+                }
+              ],
+              "dispatchSpanMs": 25.000790999999936,
+              "longestResolutionMs": 125.914875,
+              "browserCallbackSpanMs": 83.19999999995343,
+              "longestBrowserCallbackMs": 0.19999999995343387
+            },
+            {
+              "window": 5,
+              "intervalMs": 19.79999999993015,
+              "snapshotMs": 21.505583,
+              "hostGapBeforeMs": 0.03470799999990959,
+              "hostActiveMs": 20.4627499999915,
+              "hostIdleMs": 1.0487920000014128,
+              "cpuUserMs": 16.177,
+              "cpuSystemMs": 0.883,
+              "overlappingGC": [],
+              "dispatchSpanMs": 4.477165999999897,
+              "longestResolutionMs": 18.061708,
+              "browserCallbackSpanMs": 6.199999999953434,
+              "longestBrowserCallbackMs": 0.40000000002328306
+            },
+            {
+              "window": 4,
+              "intervalMs": 13.29999999993015,
+              "snapshotMs": 13.625292,
+              "hostGapBeforeMs": 0.12020800000004783,
+              "hostActiveMs": 13.62258299998939,
+              "hostIdleMs": 0,
+              "cpuUserMs": 10.068,
+              "cpuSystemMs": 1.372,
+              "overlappingGC": [],
+              "dispatchSpanMs": 2.634166999999934,
+              "longestResolutionMs": 11.382083,
+              "browserCallbackSpanMs": 5,
+              "longestBrowserCallbackMs": 0.30000000004656613
+            }
+          ],
+          "host": {
+            "cpuMicroseconds": {
+              "user": 982510,
+              "system": 71823
+            },
+            "elapsedMs": 1225.711916,
+            "loadAverageBefore": [
+              2.20947265625,
+              4.83642578125,
+              6.6279296875
+            ],
+            "loadAverageAfter": [
+              2.20947265625,
+              4.83642578125,
+              6.6279296875
+            ],
+            "logicalCpus": 3
+          }
+        }
+      ],
+      "guardCases": 52,
+      "guardSha256": "b5e7498b8c77dd0f826de565c0487937179531da761e94712dffd0273b214480",
+      "packageRecord": null,
+      "packageRecordSha256": null
+    },
+    {
+      "allocation": 3,
+      "sourceCommit": "82a825432b63e2252f3a84ecf187acec00a81021",
+      "runId": "41210833469",
+      "platform": "macos-15-arm64",
+      "artifact": "macos-15-arm-round-3-evidence",
+      "job": {
+        "id": 124565259947,
+        "name": "macOS 15 ARM / allocation 3 / package consumers",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-31T14:35:22Z",
+        "completedAt": "2026-10-31T14:41:00Z",
+        "runnerId": 1000003918,
+        "runnerName": "GitHub Actions 1000003918",
+        "labels": [
+          "macos-15"
+        ]
+      },
+      "environment": {
+        "allocation": 3,
+        "runnerLabel": "macos-15",
+        "runId": "41210833469",
+        "runAttempt": "1",
+        "runnerEnvironment": "github-hosted",
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "24.6.0",
+        "node": "24.22.1",
+        "cpu": "Apple M1 (Virtual)",
+        "logicalCpus": 3,
+        "memoryBytes": 7516192768,
+        "imageOS": "macos15",
+        "imageVersion": "20261028.0489.1"
+      },
+      "tests": 170,
+      "passed": 170,
+      "failed": 0,
+      "journeys": 161,
+      "workers": 1,
+      "retries": 0,
+      "stats": {
+        "startTime": "2026-10-31T14:36:51.449Z",
+        "duration": 203031.048,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "rawReportSha256": "953ec55e11dc5d16580861e3024230b4bb0987a00e62dea7fc639359570f79f4",
+      "summarySha256": "60efb9144d4408e714bb06d204292b67c70649158388338772932c0045e9ad6c",
+      "maximumPassingWindowGapMs": 50.40000000002328,
+      "failures": [],
+      "diagnosticFailures": [],
+      "guardCases": 52,
+      "guardSha256": "8d6514732cc59ec5875338399906ec6d543fc79a335d70fcf4a39fe6bff290c0",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T14:40:53.530Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "darwin",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 378216,
+          "sha256": "eb47e25f670f3a8251b19e4e9e2705ea5b14761fa13db6e9eaf74f010fa079bd",
+          "files": 109
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "80aff6180f32eb3c193404d3a979b23d0a2087962d7f56c1537525446fbf0b1e"
+    }
+  ],
+  "totalExecutions": 680,
+  "uniqueJourneyRunIds": 644
+}

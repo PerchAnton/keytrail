@@ -1,6 +1,6 @@
 # Equivalent-work benchmark
 
-The current measurements apply to merged main `1b42666`, recorded on **31 October
+The recorded measurements apply to merged main `1b42666`, recorded on **31 October
 2026 at 12:07 UTC** (14:07 in Kyiv). All **108 benchmark tests passed**, without
 retries. Independent validation checked the complete raw report, all warmup and
 measured pairs, semantic equivalence, negative controls, environment and source
@@ -18,6 +18,13 @@ horizontal manual-activation tab list, and a two-field form with live error clea
 using `inputMode: "insertText"`. The opt-in per-character `type` mode is not measured.
 The reference is fixture-specific native Playwright. These samples do not measure
 real-world adoption, WCAG conformance or screen-reader behavior.
+
+The later observation-dispatch follow-up changes production runtime as well as
+tests. These measurements therefore remain historical and do not qualify that
+candidate. Its focused CPU profiles identify stack-processing overhead; they are
+not a replacement for this equivalent-work benchmark. A fresh benchmark remains
+pending after the candidate is settled. [Dispatch investigation](observation-gaps.md)
+and [hosted checks](ci-concurrency.md) retain their separate scope and source identities.
 
 ## Recorded results — 31 October 2026, 12:07 UTC (`1b42666`)
 

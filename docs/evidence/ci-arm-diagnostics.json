@@ -1,0 +1,640 @@
+{
+  "recordedAt": "2026-10-31T12:50:27.003Z",
+  "sourceCommit": "ed740272e6a6152a901364c1b41fafafe5cc5c4e",
+  "runId": "41201812981",
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41201812981",
+  "scope": "Independently checked complete CI run: three consecutive ARM rounds, one Linux round and both actual tarball consumers. No retries or final acceptance; this is not a host-latency guarantee.",
+  "finalAcceptance": false,
+  "sourceHashes": {
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "dd2d64fd7c3b73e532f843d85d29ff480c83ad5a614cd574b4cf90f84c656f1e",
+    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "5f165904842f33e170f6f8f38fd53789c3124b39a1149335430e1ecbd1bd46b9",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
+    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "6dbc89aae8b27295caf3a127364d27ed89319bac1ccd8b31b4c2ca60eab92321",
+    "tests/integration/tabs.spec.ts": "e07df3d59efb49ac38607cdc29780a14184e7b52bc8d51400aec435e0ede8263",
+    "tests/support/snapshot-timings.ts": "b3f5f90cf05d054dd4ddf3a194676467f7cdcf6843e71a906f724f151f5ab737",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "ff8211b23a9df0897a0c8731985bcab754b07a89c3e64e4c23c6e81372477173",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/modes.mjs": "433218ce8b54643eda0011977a3908c6ec773956c4913b9c64c600f0248e296a",
+    "verification/signatures.mjs": "528fd54649777629c05db13d942187d17904382039f8cd904c0d752cb027ae7c"
+  },
+  "platforms": [
+    {
+      "platform": "linux",
+      "environment": {
+        "platform": "linux",
+        "arch": "x64",
+        "release": "7.0.0-1017-azure",
+        "node": "24.22.1",
+        "cpu": "AMD EPYC 7763 64-Core Processor",
+        "logicalCpus": 4,
+        "memoryBytes": 16760344576
+      },
+      "workers": 1,
+      "retries": 0,
+      "checkedManualWindows": 57,
+      "maximumPassingWindowGapMs": 26.79999999998836,
+      "guardCases": 52,
+      "guardRecordSha256": "27fbd758345b8caccb62acd70118b6096146eee17702528c488a143108ded505",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T12:41:49.547Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "linux",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 365011,
+          "sha256": "272cb141e2146fa8d933f19afb8c2653f8cc0ae2ffbf497b5aa00331caecc049",
+          "files": 105
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "1b243a9c6eb4678b444850bb26c1abde35c8dba97c8844de93e2af683c739606",
+      "rounds": [
+        {
+          "filename": "browser-results.json",
+          "sha256": "078352ed16bc65693fcaf3fa6c5b7f53500ebc83b163e050ed0e33335a975319",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T12:37:38.449Z",
+            "duration": 207019.18099999998,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 628,
+              "medianMs": 13.0982335,
+              "p95Ms": 15.106163,
+              "maxMs": 31.315129
+            },
+            "evaluate": {
+              "count": 628,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 6280,
+              "medianMs": 10.2218005,
+              "p95Ms": 12.31204,
+              "maxMs": 25.861084
+            },
+            "interval": {
+              "count": 590,
+              "medianMs": 13.10000000000582,
+              "p95Ms": 15.100000000034925,
+              "maxMs": 26.79999999998836
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 26.79999999998836,
+          "slowestPassingWindow": {
+            "fixture": "tabs pass delayed manual activation",
+            "checkId": "T05.backward.003.unchanged",
+            "maxObservationGapMs": 26.79999999998836
+          }
+        }
+      ],
+      "totalExecutions": 170,
+      "testsPerRound": 170,
+      "journeysPerRound": 161,
+      "lastRoundStats": {
+        "startTime": "2026-10-31T12:37:38.449Z",
+        "duration": 207019.18099999998,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "lastRoundRawReportSha256": "078352ed16bc65693fcaf3fa6c5b7f53500ebc83b163e050ed0e33335a975319",
+      "lastRoundHealthyFixtureAggregate": {
+        "snapshot": {
+          "count": 628,
+          "medianMs": 13.0982335,
+          "p95Ms": 15.106163,
+          "maxMs": 31.315129
+        },
+        "evaluate": {
+          "count": 628,
+          "medianMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0
+        },
+        "resolution": {
+          "count": 6280,
+          "medianMs": 10.2218005,
+          "p95Ms": 12.31204,
+          "maxMs": 25.861084
+        },
+        "interval": {
+          "count": 590,
+          "medianMs": 13.10000000000582,
+          "p95Ms": 15.100000000034925,
+          "maxMs": 26.79999999998836
+        },
+        "gapsAbove100ms": 0
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "environment": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "25.6.0",
+        "node": "24.22.1",
+        "cpu": "Apple M1 (Virtual)",
+        "logicalCpus": 3,
+        "memoryBytes": 7516192768,
+        "imageOS": "macos26",
+        "imageVersion": "20261026.0455.2"
+      },
+      "workers": 1,
+      "retries": 0,
+      "checkedManualWindows": 171,
+      "maximumPassingWindowGapMs": 87.70000000006985,
+      "guardCases": 52,
+      "guardRecordSha256": "f8b66c85f588623c15df627a8fffda565d5365b9997104f38fca78a55fe18dd2",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T12:48:14.748Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "darwin",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 365011,
+          "sha256": "8a7ba292c66736c9e7100ae3f19d646d151445b625da7b9a4bda5eae62bb606d",
+          "files": 105
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "8e1f1f79a2a030bfc43cfd393870a5e5a29bd2edabf777b2f96dd93ec0eab36c",
+      "rounds": [
+        {
+          "filename": "browser-round-1.json",
+          "sha256": "dd09e1b5c95db21ba2529f72f6544d8d9f554d4a6a5efcb250303765eb98c5ce",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T12:37:24.698Z",
+            "duration": 216551.183,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 860,
+              "medianMs": 8.466666499999999,
+              "p95Ms": 16.16425,
+              "maxMs": 35.450584
+            },
+            "evaluate": {
+              "count": 860,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 8600,
+              "medianMs": 6.180958,
+              "p95Ms": 12.785,
+              "maxMs": 34.3395
+            },
+            "interval": {
+              "count": 822,
+              "medianMs": 8.400000000023283,
+              "p95Ms": 16.20000000001164,
+              "maxMs": 36.79999999998836
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 86.79999999998836,
+          "slowestPassingWindow": {
+            "fixture": "canary isolation tabs successful input",
+            "checkId": "T05.forward.001.unchanged",
+            "maxObservationGapMs": 86.79999999998836
+          }
+        },
+        {
+          "filename": "browser-round-2.json",
+          "sha256": "624ce373b0c6cdfae98e8e72e0a6ec125da09ce337a02ed80f92112165714409",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T12:41:02.429Z",
+            "duration": 203923.41100000002,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 683,
+              "medianMs": 11.223875,
+              "p95Ms": 21.069292,
+              "maxMs": 37.375458
+            },
+            "evaluate": {
+              "count": 683,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 6830,
+              "medianMs": 8.1216045,
+              "p95Ms": 16.787375,
+              "maxMs": 33.474917
+            },
+            "interval": {
+              "count": 645,
+              "medianMs": 11.099999999976717,
+              "p95Ms": 20.699999999953434,
+              "maxMs": 36.40000000002328
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 87.70000000006985,
+          "slowestPassingWindow": {
+            "fixture": "manual tabs record initial and final observations even for a short window",
+            "checkId": "T05.backward.003.unchanged",
+            "maxObservationGapMs": 87.70000000006985
+          }
+        },
+        {
+          "filename": "browser-round-3.json",
+          "sha256": "63dea2731485b076e58df3bda4b77fba1ede5e5eb962d40e8bcbaa15ff1d7171",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T12:44:27.712Z",
+            "duration": 187599.36,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 1074,
+              "medianMs": 6.888604,
+              "p95Ms": 11.546792,
+              "maxMs": 34.591375
+            },
+            "evaluate": {
+              "count": 1074,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 10740,
+              "medianMs": 5.144396,
+              "p95Ms": 9.14025,
+              "maxMs": 32.865
+            },
+            "interval": {
+              "count": 1036,
+              "medianMs": 6.900000000023283,
+              "p95Ms": 11.599999999976717,
+              "maxMs": 34.300000000046566
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 38,
+          "slowestPassingWindow": {
+            "fixture": "manual windows start the next browser read without a host timer pause",
+            "checkId": "T05.backward.001.unchanged",
+            "maxObservationGapMs": 38
+          }
+        }
+      ],
+      "totalExecutions": 510,
+      "testsPerRound": 170,
+      "journeysPerRound": 161,
+      "lastRoundStats": {
+        "startTime": "2026-10-31T12:44:27.712Z",
+        "duration": 187599.36,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "lastRoundRawReportSha256": "63dea2731485b076e58df3bda4b77fba1ede5e5eb962d40e8bcbaa15ff1d7171",
+      "lastRoundHealthyFixtureAggregate": {
+        "snapshot": {
+          "count": 1074,
+          "medianMs": 6.888604,
+          "p95Ms": 11.546792,
+          "maxMs": 34.591375
+        },
+        "evaluate": {
+          "count": 1074,
+          "medianMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0
+        },
+        "resolution": {
+          "count": 10740,
+          "medianMs": 5.144396,
+          "p95Ms": 9.14025,
+          "maxMs": 32.865
+        },
+        "interval": {
+          "count": 1036,
+          "medianMs": 6.900000000023283,
+          "p95Ms": 11.599999999976717,
+          "maxMs": 34.300000000046566
+        },
+        "gapsAbove100ms": 0
+      }
+    }
+  ],
+  "workflowConclusion": "success",
+  "uniqueJourneyRunIds": 644,
+  "totalExecutions": 680,
+  "rootCauseEstablished": false,
+  "runtimeChanged": false,
+  "previousFailure": "https://github.com/PerchAnton/keytrail/actions/runs/41200576177",
+  "diagnostics": [
+    {
+      "platform": "linux",
+      "summaryFile": "browser-observations.json",
+      "sha256": "aa5767ddfad24cbc237b1f0dc2de7777cb29a67f26769fb6153c2188db13a788",
+      "slowestPassingReading": {
+        "timing": {
+          "window": 6,
+          "intervalMs": 26.79999999998836,
+          "snapshotMs": 31.315129,
+          "hostGapBeforeMs": 0.023232999999891035,
+          "dispatchSpanMs": 6.751962000000276,
+          "longestResolutionMs": 25.861084,
+          "browserCallbackSpanMs": 9.900000000023283,
+          "longestBrowserCallbackMs": 0.1000000000349246
+        },
+        "fixture": "tabs pass delayed manual activation",
+        "host": {
+          "cpuMicroseconds": {
+            "user": 2834279,
+            "system": 122741
+          },
+          "elapsedMs": 2910.414158,
+          "loadAverageBefore": [
+            2.6,
+            1.33,
+            0.55
+          ],
+          "loadAverageAfter": [
+            2.55,
+            1.34,
+            0.55
+          ],
+          "logicalCpus": 4
+        }
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "summaryFile": "browser-observations-1.json",
+      "sha256": "4848e69e934f69272c1d14e033f4300da2cfc2460efdc0fe1d93e283c7e1f800",
+      "slowestPassingReading": {
+        "timing": {
+          "window": 1,
+          "intervalMs": 86.79999999998836,
+          "snapshotMs": 90.008625,
+          "hostGapBeforeMs": 0.7662499999999,
+          "dispatchSpanMs": 25.472291999999925,
+          "longestResolutionMs": 84.770125,
+          "browserCallbackSpanMs": 30.70000000001164,
+          "longestBrowserCallbackMs": 0.29999999998835847
+        },
+        "fixture": "canary isolation tabs successful input",
+        "host": {
+          "cpuMicroseconds": {
+            "user": 3533712,
+            "system": 259555
+          },
+          "elapsedMs": 4457.869167,
+          "loadAverageBefore": [
+            7.77783203125,
+            24.69580078125,
+            15.16943359375
+          ],
+          "loadAverageAfter": [
+            8.59619140625,
+            24.58447265625,
+            15.185546875
+          ],
+          "logicalCpus": 3
+        }
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "summaryFile": "browser-observations-2.json",
+      "sha256": "d8d964053ccfb039eeb141a6ad117d78e2ea9cea93849f1fda773c760a207faa",
+      "slowestPassingReading": {
+        "timing": {
+          "window": 6,
+          "intervalMs": 87.70000000006985,
+          "snapshotMs": 100.00375,
+          "hostGapBeforeMs": 0.024707999999918684,
+          "dispatchSpanMs": 3.699374999999918,
+          "longestResolutionMs": 97.840167,
+          "browserCallbackSpanMs": 47.800000000046566,
+          "longestBrowserCallbackMs": 0.09999999997671694
+        },
+        "fixture": "manual tabs record initial and final observations even for a short window",
+        "host": {
+          "cpuMicroseconds": {
+            "user": 1360565,
+            "system": 98836
+          },
+          "elapsedMs": 1619.59525,
+          "loadAverageBefore": [
+            2.177734375,
+            8.5546875,
+            10.69091796875
+          ],
+          "loadAverageAfter": [
+            2.177734375,
+            8.5546875,
+            10.69091796875
+          ],
+          "logicalCpus": 3
+        }
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "summaryFile": "browser-observations-3.json",
+      "sha256": "b3c7bb023f4445ae45f9a3ed00e00c21cfa93fa047508f2acc7c467f3713b81a",
+      "slowestPassingReading": {
+        "timing": {
+          "window": 4,
+          "intervalMs": 38,
+          "snapshotMs": 44.064292,
+          "hostGapBeforeMs": 0.014666999999917607,
+          "dispatchSpanMs": 1.8551250000000437,
+          "longestResolutionMs": 42.413458,
+          "browserCallbackSpanMs": 15.400000000023283,
+          "longestBrowserCallbackMs": 0
+        },
+        "fixture": "manual windows start the next browser read without a host timer pause",
+        "host": {
+          "cpuMicroseconds": {
+            "user": 1923440,
+            "system": 132384
+          },
+          "elapsedMs": 2012.924708,
+          "loadAverageBefore": [
+            2.0546875,
+            5.6884765625,
+            9.06005859375
+          ],
+          "loadAverageAfter": [
+            2.13037109375,
+            5.6435546875,
+            9.0244140625
+          ],
+          "logicalCpus": 3
+        }
+      }
+    }
+  ],
+  "interpretation": "The diagnostic run passed. The runtime is unchanged, so this does not establish that recurring ARM gaps are fixed. Short browser callbacks and longer end-to-end reads locate substantial latency outside callback execution; selector resolution, transport and process scheduling are not separately isolated. Diagnostics add work and are not performance measurements."
+}

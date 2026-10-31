@@ -99,6 +99,11 @@ on a stalled host. Any measured gap **greater than 100 ms** produces `blocked / 
 dependent checks `not_run`. A component mismatch observed in the same snapshot
 retains its specific failure instead of being hidden by the timing problem.
 
+The 100 ms bound is twice the execution contract's 50 ms target interval. It is a
+sampling policy, not a WCAG or human-perception threshold. See
+[observation gaps](observation-gaps.md) for the rationale, retained failure and
+dispatch-overhead investigation.
+
 Each negative check records `observationIntervalsMs`, `observationCount`,
 `maxObservationGapMs` and `observationWindowMs`. The associated step also records
 the window's measured span. The CI guard checks these relationships and rejects

@@ -1,12 +1,12 @@
 {
-  "recordedAt": "2026-10-31T11:16:46.055Z",
+  "recordedAt": "2026-10-31T15:03:46.764Z",
   "version": "0.1.0-alpha.6",
   "node": "v24.22.1",
   "platform": "linux",
   "playwright": "1.64.1",
   "scope": "Actual Playwright subprocess exit codes using synthetic reports and fault injection; browser consumers checked separately.",
   "sourceHashes": {
-    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/driver.ts": "ad9df369539c4a7f007ccaef1f662e1fb2abbdd34b0e51367d9f4c6c6a68bcfb",
     "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",

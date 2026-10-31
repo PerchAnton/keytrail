@@ -1,12 +1,18 @@
 # Verification
 
-**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
-(510/510), one Linux round (170/170) and both package consumers per platform, with
-zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
-maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
-The fresh [108-test benchmark](performance.md) matches this source. Earlier repeatability
-proofs remain historical; final 100-round acceptance is still deferred. This short
-sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+**Latest status (31 October 2026): the observation-dispatch update passed bounded CI.**
+At `cd3216b`, three fresh macOS 15 ARM jobs each passed **172/172**; Linux also
+passed **172/172**. Both real package consumers passed in all four jobs. ARM
+maximum passing-window gaps were **39.9 / 59.5 / 56.7 ms**, with the unchanged
+**100 ms** limit, one worker and zero retries/skips.
+[Independently checked results](evidence/ci-observation-dispatch.json).
+The change reduces stack-formatting work while retaining fresh locator resolution,
+async context, budget checks and cleanup. The earlier 130.3 ms failure is retained;
+its exact hosted cause is not fully established, and this short series does not
+guarantee shared-host latency. [Why 100 ms and what changed](observation-gaps.md).
+The [benchmark](performance.md) retains its historical `1b42666` identity and does
+not qualify the changed runtime. Fresh benchmark evidence, final 100-round
+acceptance and publication remain pending.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -19,17 +25,17 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Main `1b42666`: Linux 170/170 and ARM 3 × 170 = 510; no retries or skips |
+| Browser suite | `cd3216b`: three ARM allocations 172/172 each; Linux 172/172. No retries/skips. Two added cases cover async context and budget expiry at dispatch; the earlier 130.3 ms failure is retained |
 | Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
-| Performance | Current `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
+| Performance | Recorded `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
 | Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Main `1b42666`: two clean offline installations verified on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-main-1b42666.json); final acceptance remains false |
-| Hosted platforms | Main `1b42666`: 3 × 170 ARM and 170 Linux, plus actual package consumers; [validated record](evidence/ci-main-1b42666.json). Earlier failures remain recorded. |
+| Package consumers | `cd3216b`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-observation-dispatch.json); final acceptance remains false |
+| Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `cd3216b`; Linux passed too. [Combined record](evidence/ci-observation-dispatch.json). This is a bounded development check, not a guaranteed latency bound |
 
-## Current performance (`1b42666`)
+## Recorded performance (`1b42666`)
 
 ![Paired overhead and median/p95 timing results](assets/performance.svg)
 
