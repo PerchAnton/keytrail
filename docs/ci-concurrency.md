@@ -28,9 +28,11 @@ keep their bounded pauses.
 This trades additional observations during each bounded window for more timing
 headroom. It cannot make an arbitrary browser or shared host meet a hard deadline:
 every actual gap above **100 ms** still blocks, and retries remain zero. The native
-benchmark reference uses the same consecutive-read policy; its old numbers are
-historical until remeasured. Timing records identify the slow read, not the exact
-cause of a runner delay.
+benchmark reference uses the same consecutive-read policy. The fresh
+[benchmark at merged main `1b42666`](performance.md) passed 108/108 tests and both
+overhead targets for all three workloads. Earlier timings retain their original
+source identities. Timing records identify the slow read, not the exact cause
+of a runner delay.
 
 A new regression queues a host timer after the first real window snapshot and
 requires the next read to start before it runs. Restoring the old pause must fail
@@ -57,6 +59,14 @@ block. These short results support the change in the recorded environments; they
 do not guarantee future shared-host latency. No final 100-round series or new local
 four-worker comparison was run. A six-case native-reference pilot passed semantic
 equivalence and negative controls, but supplies no performance claim.
+
+After merge, [main CI at `1b42666`](https://github.com/PerchAnton/keytrail/actions/runs/41198529257)
+also passed Linux 170/170 and ARM 510/510 with both package consumers on each
+platform. Maximum passing-window gaps were 26.3 ms on Linux and
+47.4 / 38.4 / 39.5 ms across the ARM rounds. The independently checked
+[main record](evidence/ci-main-1b42666.json) retains all four raw-report hashes,
+644 distinct journey IDs and exact archive checksums. This does not replace final
+repeatability or a new local four-worker comparison.
 
 ## Private observation store
 
@@ -281,12 +291,13 @@ for structure, and observe focus, selected state, visible panels, roving tabinde
 and unsupported contexts. Initial semantic checks use complete snapshots. Omitted
 metadata is absent, not recorded as false or reused from a stale read. Regressions
 cover replaced tabs and an added tab with fallback role tokens. The native benchmark
-uses the same scope in its negative windows; a full new benchmark is deferred.
+uses the same scope in its negative windows; current measurements are recorded
+in the [performance report](performance.md).
 
-The negative-window scheduler targets 25 ms, one quarter of the 100 ms gap budget,
-with a maximum 10 ms pause and a minimum 1 ms yield. This leaves more room for a
-slower next read at the cost of more frequent sampling. The fixture-specific native
-benchmark uses the same context strategy and cadence. No scheduler can guarantee
+The earlier scheduler targeted 25 ms, one quarter of the 100 ms gap budget,
+with a maximum 10 ms pause and a minimum 1 ms yield. It was superseded by the
+consecutive reads described above, in both KeyTrail and the fixture-specific
+native reference. No scheduler can guarantee
 100 ms observations on a stalled host: actual browser timestamps still determine
 whether the journey blocks, and every excessive gap remains a failure in CI.
 

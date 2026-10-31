@@ -1,6 +1,12 @@
 # Full-suite repeatability protocol
 
-**Observation follow-up (31 October 2026):** main `02ee0953` failed macOS ARM with a 109.8 ms gap. The candidate now starts consecutive browser reads without a host timer inside manual windows. Earlier repeatability and benchmark records remain historical for their recorded sources; they do not certify this scheduler change. CI at `7a60938` passed three ARM rounds (510/510), one Linux round (170/170), and both package consumers per platform, with zero retries. Maximum ARM gaps were 35.8 / 45.2 / 31.0 ms. Final 100-round acceptance remains deferred. [Diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
+(510/510), one Linux round (170/170) and both package consumers per platform, with
+zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
+maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
+The fresh [108-test benchmark](performance.md) matches this source. Earlier repeatability
+proofs remain historical; final 100-round acceptance is still deferred. This short
+sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -15,13 +21,14 @@ The atomic-registration follow-up changes the implementation and regression hook
 At `7e48291`, four rounds and the four-worker comparison passed: **676 + 169**
 executions, 800 distinct journey IDs, matching signatures and zero retries.
 [Independent validation](evidence/development-atomic-observations.json) reread all
-five raw reports and checked current source hashes. Earlier hashes remain historical.
+five raw reports and checked the recorded source hashes. This proof predates the
+consecutive-read scheduler and is historical for current main.
 No final 100-round series is requested or running.
 
 At `4abf74c`, the private store and cached reader passed **four full rounds × 169 = 676**
 sequential executions and **169 four-worker checks**, without retries, skips or
 semantic differences. Independent validation reread all five raw reports, compared
-current source hashes and confirmed **800 distinct journey IDs**. Nine engine-only
+the recorded source hashes and confirmed **800 distinct journey IDs**. Nine engine-only
 cases per run have no journey attachment. [Cached-reader development proof](evidence/development-cached-reader.json)
 explicitly records `finalAcceptance: false`. It does not certify the failed hosted
 Intel environment; [platform results](ci-concurrency.md#cached-reader-results) remain separate.
@@ -37,7 +44,7 @@ reads. The new four-round development record is separate from those six older ro
 At `6a9cc6a`, the narrower manual-window reads completed the new default protocol:
 **four full rounds × 167 = 668 sequential executions**, followed by **167 checks
 on four workers**, all passing without retries, skips or semantic differences.
-A separate validation reread all five raw reports, verified current source hashes
+A separate validation reread all five raw reports, verified the recorded source hashes
 and confirmed **800 distinct journey IDs**. Seven engine-only tests per run have
 no journey attachment. [Retained development record](evidence/development-window-reads.json)
 is explicitly `finalAcceptance: false`; it does not replace the historical proof.

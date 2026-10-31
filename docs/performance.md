@@ -1,43 +1,43 @@
 # Equivalent-work benchmark
 
-**Historical measurements:** the table and graph below apply to `da7e663`. The consecutive-read candidate changes both the journey scheduler and the native reference. These timings are preserved unchanged and are not performance evidence for that candidate. A fresh equivalent-work benchmark is pending; it is separate from the requested short CI validation.
+The current measurements apply to merged main `1b42666`, recorded on **31 October
+2026 at 12:07 UTC** (14:07 in Kyiv). All **108 benchmark tests passed**, without
+retries. Independent validation checked the complete raw report, all warmup and
+measured pairs, semantic equivalence, negative controls, environment and source
+hashes, then recomputed both overhead calculations; [validation record](evidence/benchmark-validation.json).
+No samples were discarded or selected from another run.
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+This benchmark is separate from final 100-round reliability acceptance, which was
+not run and remains deferred. The earlier [October 31 measurements at `da7e663`](history/performance-da7e663-2026-10-31.md)
+and [October 29 measurements](history/performance-2026-10-29.md) keep their original
+source identities. Both KeyTrail and the native reference changed since those runs;
+they do not form a controlled before/after speedup comparison.
 
-These measurements describe the historical main snapshot `da7e663`, recorded on 31 October 2026.
-All 108 benchmark tests passed without retries. The raw report, all warmup and
-measured pairs, environment, source hashes and derived statistics were independently
-validated; [validation record](evidence/benchmark-validation.json).
-The benchmark is independent of final 100-round reliability acceptance, which
-was not run and remains pending. [The earlier measurements](history/performance-2026-10-29.md)
-retain their original source identity and results.
+The workloads are three synthetic Chromium journeys: a custom ARIA dialog, a
+horizontal manual-activation tab list, and a two-field form with live error clearing
+using `inputMode: "insertText"`. The opt-in per-character `type` mode is not measured.
+The reference is fixture-specific native Playwright. These samples do not measure
+real-world adoption, WCAG conformance or screen-reader behavior.
 
-This benchmark measures three synthetic Chromium journeys: an ordinary custom ARIA
-dialog, a horizontal manual-activation tab list, and a two-field form with live error
-clearing using `inputMode: "insertText"`. The opt-in per-character `type` mode is
-not measured by these samples. It measures overhead against a fixture-specific native Playwright reference.
-It does not measure real-world adoption, WCAG conformance or screen-reader behavior.
-
-## Recorded results — 31 October 2026 UTC (`da7e663`)
+## Recorded results — 31 October 2026, 12:07 UTC (`1b42666`)
 
 ![Measured overhead and timings](assets/performance.svg)
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |
-| Dialog | 139.6 / 147.4 | 145.7 / 150.3 | 4.1% | 4.4% |
-| Manual tabs | 1673.8 / 1709.0 | 1659.4 / 1678.8 | -0.8% | -0.9% |
-| Form errors (insertText) | 139.8 / 152.2 | 143.7 / 151.7 | 2.5% | 2.8% |
+| Dialog | 140.1 / 145.1 | 147.0 / 154.4 | 4.8% | 5.0% |
+| Manual tabs | 1703.2 / 1715.7 | 1630.0 / 1645.5 | -4.0% | -4.3% |
+| Form errors (insertText) | 140.5 / 144.2 | 144.5 / 154.6 | 2.8% | 2.8% |
 
-All three pass the 20% target under both calculations. Apple M3 (8 logical CPUs),
-macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4.
+All three meet the 20% target under both calculations. The runner was an Apple M3
+(8 logical CPUs), macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1,
+Chromium 156.0.8078.4; one worker, no concurrent test process observed at start.
 Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
 [tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
-Values are rounded to one decimal place. The run finished at 10:41 UTC
-(12:41 in Kyiv) on 31 October. The -0.8% tabs value is a small measured difference
-in this run, not evidence of a general speed advantage. No confidence interval or
-cross-machine claim is established by this sample. Both implementations changed
-since the historical snapshot, so the old and new timings are not a controlled
-before/after speedup comparison.
+Values are rounded to one decimal place. The negative tabs value describes this
+sample only; it does not establish a general speed advantage, confidence interval
+or cross-machine result. Required negative observation windows dominate its duration.
+
 The chart can be regenerated with `python scripts/render-performance.py` in a
 Python environment containing Matplotlib; it is an optional documentation tool.
 
@@ -46,7 +46,9 @@ Python environment containing Matplotlib; it is an optional documentation tool.
 Both arms use the same page, keyboard action sequence, target resolution, focus and
 role observations, time/action budgets, manual-activation observation windows, and
 JSON result attachment. Both manual-tabs implementations require initial/final
-snapshots and enforce the 100 ms gap threshold using browser timestamps. Setup and page teardown are outside the measured interval.
+snapshots and enforce the 100 ms gap threshold using browser timestamps. They start
+consecutive asynchronous reads without an added host timer between snapshots.
+Setup and page teardown are outside the measured interval.
 The reference calls Playwright directly; it does not call KeyTrail's assertions,
 driver, planner or serializer. Both arms validate the common report schema.
 

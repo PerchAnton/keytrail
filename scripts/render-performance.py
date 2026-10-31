@@ -36,8 +36,8 @@ for (row, col), cell in table.get_celld().items():
     cell.set_edgecolor('#dae1ec'); cell.set_facecolor('#e8eef7' if row == 0 else '#f7f9fc')
     if row == 0: cell.set_text_props(weight='bold')
 ax3 = fig.add_subplot(gs[2]); ax3.axis('off')
-e = records[0]['environment']; date = records[0]['measuredAt'][:10]
-ax3.text(0, .9, f"{date} UTC · {e['cpu']} · {e['platform']} {e['arch']} · Node {e['node']} · Playwright {e['playwright']} · Chromium {e['chromium']}", fontsize=8.5, va='top')
+e = records[0]['environment']; date = records[0]['measuredAt'][:16].replace('T', ' ')
+ax3.text(0, .9, f"{date} UTC · {e['cpu']} · {e['platform']} {e['arch']} · Node {e['node']} · Playwright {e['playwright']} · Chromium {e['chromium']}", fontsize=8, va='top')
 ax3.text(0, .4, '5 warmups + 30 alternating pairs per workload. Synthetic fixtures; setup excluded.\nManual tabs include required observation windows. This is not a general speed or accessibility claim.', fontsize=9, va='top', color='#394960')
 (root / 'docs/assets').mkdir(exist_ok=True)
 fig.savefig(root / 'docs/assets/performance.svg', metadata={'Date': date, 'Description': 'Measured paired overhead and median/p95 timings; source records in docs/evidence.'})

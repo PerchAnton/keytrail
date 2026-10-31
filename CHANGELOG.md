@@ -6,7 +6,7 @@
   snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.
   Retain the 100 ms limit, actual timestamps, fresh locators and zero retries.
   Add a timer-order regression and match the native benchmark scheduler;
-  prior measurements remain historical until refreshed.
+  the refreshed measurements are recorded below.
 
 - Add a read-only release-evidence check that lists all pending records without
   running tests or changing artifacts. Share its validation with the final package
@@ -15,8 +15,8 @@
   `FOCUS_MISMATCH` before Enter/Space and report the actual observed focus.
 - Require initial/final manual-tabs observations spanning the declared window.
   Record browser-clock intervals and block gaps above 100 ms with `OBSERVATION_GAP`.
-  Account for browser-read duration when scheduling the next observation, targeting
-  25 ms with a maximum 10 ms pause to leave room for variable transport latency.
+  Start consecutive asynchronous browser reads without a deliberate host pause;
+  validate actual gaps rather than assuming a fixed polling cadence.
   Validate sampling evidence in the serializer and CI guard.
 - Add opt-in `inputMode: 'type'` for printable ASCII keyboard events. Recheck
   focus/editability before each character, retain the Unicode `insertText` default,
@@ -55,8 +55,8 @@
   final evidence gate. Package records explicitly distinguish development and final acceptance.
 - Prepare a frozen dependency graph for the clean vanilla consumer, as for React,
   so offline checks retain the platform-specific TypeScript compiler on fresh runners.
-- Record the fresh `da7e663` benchmark: 108/108 tests, median paired overhead
-  4.1% / -0.8% / 2.5% for dialogs, manual tabs and form errors (`insertText`).
+- Record the fresh `1b42666` benchmark: 108/108 tests, median paired overhead
+  4.8% / -4.0% / 2.8% for dialogs, manual tabs and form errors (`insertText`).
   Both calculations meet the 20% target; preserve the older records as history.
 - Final 100-round acceptance remains deferred until explicitly requested.
   No release published.
