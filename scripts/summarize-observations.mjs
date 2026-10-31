@@ -20,8 +20,12 @@ export function summarizeObservations(report) {
         const readings = (timings?.readings ?? []).filter(r => r.window !== undefined && r.intervalMs !== undefined);
         const slowest = [...readings].sort((a, b) => b.intervalMs - a.intervalMs).slice(0, 3).map(r => {
           const callbacks = (r.resolutions ?? []).filter(s => s.browserStartedAt !== undefined && s.browserFinishedAt !== undefined);
+          const overlappingGC = (timings?.gc ?? []).filter(g =>
+            g.startedAt < r.hostPerformanceFinishedAt && g.startedAt + g.durationMs > r.hostPerformanceStartedAt);
           return { window: r.window, intervalMs: r.intervalMs, snapshotMs: r.durationMs,
             hostGapBeforeMs: r.hostGapBeforeMs,
+            ...(r.hostActiveMs !== undefined ? { hostActiveMs: r.hostActiveMs, hostIdleMs: r.hostIdleMs,
+              cpuUserMs: r.cpuUserMs, cpuSystemMs: r.cpuSystemMs, overlappingGC } : {}),
             dispatchSpanMs: r.resolutions?.length ? Math.max(...r.resolutions.map(s => s.startedMs)) - Math.min(...r.resolutions.map(s => s.startedMs)) : null,
             longestResolutionMs: r.resolutionMs.length ? Math.max(...r.resolutionMs) : null,
             browserCallbackSpanMs: callbacks.length ? Math.max(...callbacks.map(s => s.browserFinishedAt)) - Math.min(...callbacks.map(s => s.browserStartedAt)) : null,

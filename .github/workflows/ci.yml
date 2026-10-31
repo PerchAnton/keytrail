@@ -101,12 +101,14 @@ jobs:
           pnpm test:unit
           node --test scripts/tests/*.test.mjs
           pnpm test:guard
-      - name: Browser regression suite (three rounds, one worker)
+      - name: Browser regression suite (fourth diagnostic round, one worker)
         env:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
           PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
         run: |
-          for round in 1 2 3; do
+          # Temporary diagnostic continuation after the three retained ARM rounds.
+          # Restore the ordinary three-round policy after this single experiment.
+          for round in 4; do
             status=0
             pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json || status=$?
             cp artifacts/browser-results.json "artifacts/browser-round-${round}.json"

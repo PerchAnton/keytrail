@@ -41,3 +41,17 @@ test('diagnostic durations do not subtract host and browser clock origins', () =
   assert.deepEqual(r.tests[0].slowest[0], { window: 1, intervalMs: 129.8, snapshotMs: 128, hostGapBeforeMs: 1.8,
     dispatchSpanMs: 2, longestResolutionMs: 127, browserCallbackSpanMs: 4, longestBrowserCallbackMs: 2 });
 });
+
+test('GC overlap uses the Node performance clock, not browser timestamps', () => {
+  const inside = { startedAt: 8010, durationMs: 12, kind: 1 };
+  const timings = { gc: [inside, { startedAt: 23, durationMs: 200 }], readings: [{
+    window: 1, intervalMs: 129.8, durationMs: 128, hostGapBeforeMs: 1.8,
+    hostPerformanceStartedAt: 8000, hostPerformanceFinishedAt: 8128,
+    hostActiveMs: 100, hostIdleMs: 28, cpuUserMs: 90, cpuSystemMs: 2,
+    resolutionMs: [], resolutions: [],
+  }] };
+  const r = summarizeObservations(report('passed', [attachment('snapshot-timings.json', timings)]));
+  assert.deepEqual(r.tests[0].slowest[0].overlappingGC, [inside]);
+  assert.equal(r.tests[0].slowest[0].hostActiveMs, 100);
+  assert.equal(r.tests[0].slowest[0].cpuUserMs, 90);
+});

@@ -1,12 +1,14 @@
 import type { Locator, Page, TestInfo } from '@playwright/test';
 import { cpus, loadavg } from 'node:os';
+import { performance as hostPerformance, PerformanceObserver, type PerformanceEntry } from 'node:perf_hooks';
 import { Driver } from '../../src/browser/driver.js';
 import { ObservationWindow } from '../../src/engine/observation-window.js';
 
 type Resolution = { startedMs: number; finishedMs: number; browserStartedAt?: number; browserFinishedAt?: number };
 type Reading = { startedMs: number; finishedMs: number; hostGapBeforeMs: number; durationMs: number;
   evaluateMs: number; resolutionMs: number[]; resolutions: Resolution[]; observedAt?: number;
-  window?: number; intervalMs?: number };
+  window?: number; intervalMs?: number; hostPerformanceStartedAt: number; hostPerformanceFinishedAt: number;
+  hostActiveMs: number; hostIdleMs: number; cpuUserMs: number; cpuSystemMs: number };
 
 /** Opt-in test diagnostics; never change a reading, interval, deadline or result. */
 export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promise<void>) | undefined {
@@ -16,6 +18,13 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
   // A regression deliberately replaces info.attach to exercise report failures.
   // Keep the diagnostic sink independent from that injected journey failure.
   const attach = info.attach.bind(info);
+  const gc: { startedAt: number; durationMs: number; kind: number | undefined }[] = [];
+  const recordGC = (entries: PerformanceEntry[]) => {
+    for (const entry of entries) gc.push({ startedAt: entry.startTime, durationMs: entry.duration,
+      kind: (entry as PerformanceEntry & { detail?: { kind?: number } }).detail?.kind });
+  };
+  const observer = new PerformanceObserver(list => recordGC(list.getEntries()));
+  observer.observe({ entryTypes: ['gc'] });
   const elapsed = (start: bigint) => Number(process.hrtime.bigint() - start) / 1e6;
   const hostNow = () => elapsed(origin);
   const snapshot = Driver.prototype.snapshot, evaluate = page.evaluate, add = ObservationWindow.prototype.add;
@@ -27,9 +36,12 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
   Driver.prototype.snapshot = async function (...args) {
     if (this.page !== page) return snapshot.apply(this, args);
     const start = process.hrtime.bigint(), startedMs = hostNow();
+    const utilization = hostPerformance.eventLoopUtilization(), cpu = process.cpuUsage();
     const reading: Reading = { startedMs, finishedMs: 0,
       hostGapBeforeMs: readings.length ? startedMs - readings.at(-1)!.finishedMs : 0,
-      durationMs: 0, evaluateMs: 0, resolutionMs: [], resolutions: [] };
+      durationMs: 0, evaluateMs: 0, resolutionMs: [], resolutions: [],
+      hostPerformanceStartedAt: hostPerformance.now(), hostPerformanceFinishedAt: 0,
+      hostActiveMs: 0, hostIdleMs: 0, cpuUserMs: 0, cpuSystemMs: 0 };
     active = reading;
     try {
       const state = await snapshot.apply(this, args);
@@ -37,6 +49,10 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
       return state;
     } finally {
       reading.durationMs = elapsed(start); reading.finishedMs = hostNow();
+      reading.hostPerformanceFinishedAt = hostPerformance.now();
+      const loop = hostPerformance.eventLoopUtilization(utilization), used = process.cpuUsage(cpu);
+      reading.hostActiveMs = loop.active; reading.hostIdleMs = loop.idle;
+      reading.cpuUserMs = used.user / 1000; reading.cpuSystemMs = used.system / 1000;
       readings.push(reading); active = undefined;
     }
   };
@@ -85,12 +101,14 @@ export function recordSnapshotTimings(page: Page, info: TestInfo): (() => Promis
   return async () => {
     locatorPrototype.evaluateAll = evaluateAll;
     Driver.prototype.snapshot = snapshot; page.evaluate = evaluate; ObservationWindow.prototype.add = add;
+    recordGC(observer.takeRecords()); observer.disconnect();
     await attach('snapshot-timings.json', { contentType: 'application/json', body: JSON.stringify({
       fixture: info.title, workerIndex: info.workerIndex, attempt: info.retry,
       clock: 'Host durations use hrtime; window intervals use browser performance.now.',
       transport: 'Atomic read in final locator registration; evaluateMs counts separate page.evaluate calls only.', readings,
       host: { cpuMicroseconds: process.cpuUsage(cpuBefore), elapsedMs: hostNow(),
         loadAverageBefore: loadBefore, loadAverageAfter: loadavg(), logicalCpus: cpus().length },
+      gc, gcClock: 'GC and hostPerformance timestamps use Node performance.now, never the browser clock.',
     }) });
   };
 }
