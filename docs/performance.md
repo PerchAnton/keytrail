@@ -1,12 +1,14 @@
 # Equivalent-work benchmark
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-These historical measurements describe commit `0300552`, after its 100-round
-local reliability series. They do not measure the later snapshot/cadence changes;
-fresh release performance measurements are deferred. All 108 benchmark tests passed without retries; raw sample
-attachments, derived statistics, environment and source hashes were independently
-checked before updating these records.
+These measurements describe current main `da7e663`, recorded on 31 October 2026.
+All 108 benchmark tests passed without retries. The raw report, all warmup and
+measured pairs, environment, source hashes and derived statistics were independently
+validated; [validation record](evidence/benchmark-validation.json).
+The benchmark is independent of final 100-round reliability acceptance, which
+was not run and remains pending. [The earlier measurements](history/performance-2026-10-29.md)
+retain their original source identity and results.
 
 This benchmark measures three synthetic Chromium journeys: an ordinary custom ARIA
 dialog, a horizontal manual-activation tab list, and a two-field form with live error
@@ -14,23 +16,26 @@ clearing using `inputMode: "insertText"`. The opt-in per-character `type` mode i
 not measured by these samples. It measures overhead against a fixture-specific native Playwright reference.
 It does not measure real-world adoption, WCAG conformance or screen-reader behavior.
 
-## Recorded results — 29 October 2026 UTC
+## Recorded results — 31 October 2026 UTC (`da7e663`)
 
 ![Measured overhead and timings](assets/performance.svg)
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |
-| Dialog | 274.9 / 281.1 | 297.1 / 307.8 | 8.4% | 8.1% |
-| Manual tabs | 2219.4 / 2288.3 | 2236.1 / 2251.2 | 0.8% | 0.8% |
-| Form errors (insertText) | 282.5 / 292.7 | 295.1 / 297.5 | 4.6% | 4.5% |
+| Dialog | 139.6 / 147.4 | 145.7 / 150.3 | 4.1% | 4.4% |
+| Manual tabs | 1673.8 / 1709.0 | 1659.4 / 1678.8 | -0.8% | -0.9% |
+| Form errors (insertText) | 139.8 / 152.2 | 143.7 / 151.7 | 2.5% | 2.8% |
 
 All three pass the 20% target under both calculations. Apple M3 (8 logical CPUs),
 macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4.
 Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
 [tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
-Values are rounded to one decimal place. The run finished at 22:34 UTC
-(00:34 on 30 October in Kyiv). These overhead measurements do not establish a
-speed advantage over the native reference.
+Values are rounded to one decimal place. The run finished at 10:41 UTC
+(12:41 in Kyiv) on 31 October. The -0.8% tabs value is a small measured difference
+in this run, not evidence of a general speed advantage. No confidence interval or
+cross-machine claim is established by this sample. Both implementations changed
+since the historical snapshot, so the old and new timings are not a controlled
+before/after speedup comparison.
 The chart can be regenerated with `python scripts/render-performance.py` in a
 Python environment containing Matplotlib; it is an optional documentation tool.
 

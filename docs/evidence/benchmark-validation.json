@@ -1,0 +1,138 @@
+{
+  "checkedAt": "2026-10-31T10:42:45.305Z",
+  "status": "passed",
+  "sourceCommit": "da7e66378619816cd9c7e065df95f0e2a6e67661",
+  "sourceTree": "5d7ac57b48340cafaa2d53be07cdfb424875abab",
+  "scope": "Independent recomputation of the full benchmark only. Final 100-round reliability acceptance was not run.",
+  "tests": 108,
+  "warmupsPerArm": 5,
+  "pairsPerWorkload": 30,
+  "retries": 0,
+  "final100RoundsStarted": false,
+  "reportSha256": "26038d338d97c41637d1a4e473e6f5a0f5de2ccf548a2fcae69314b20d4538b7",
+  "sourceHashes": {
+    "benchmarks/manifests/dialog.json": "f82e636c87291fde4a4f45a42c0b717e68be28e8123e091702d746906eb59436",
+    "benchmarks/manifests/formErrors.json": "71c4810c36c04b09e2d86f3c72a28d743157594d010e63dc27a9db9e3aa25354",
+    "benchmarks/manifests/tabs.json": "bdac6daffce4ccbf1c030f0f1d1af959dda72dfe7acfb34bd89876ca2ea7b240",
+    "benchmarks/native-reference.ts": "57a9e9f28b11bdc425380ff7b234540bb0d56b467511b5d9d841534f27c20be1",
+    "benchmarks/performance.spec.ts": "f9a373f65b358daf16c4165a21ae2c15d3bbd2c823fd3102220c05fb639b2f68",
+    "benchmarks/playwright.config.ts": "d0b33dcbf7f603dbaa0848c433929cdc59123cbbb17fcde1adbdd4d24f0532f7",
+    "benchmarks/reporter.mjs": "d4584a0c9426eebb9d911e8f06ab6cd113a57065e17880b2255c060b404d9b2a",
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "dd2d64fd7c3b73e532f843d85d29ff480c83ad5a614cd574b4cf90f84c656f1e",
+    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "4b2452fdb9b876bc3efb893b32042a961d2340fa804f30ffa5c9f3ada9e9cf97",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "345bbbba97c1b51a156a895066af75de4e58a61f81c0fa11541d5c40893661ac",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
+    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "6dbc89aae8b27295caf3a127364d27ed89319bac1ccd8b31b4c2ca60eab92321",
+    "tests/integration/tabs.spec.ts": "75417a262206dac0142637d4358791e4553ebabf87caced4f2df5d2cc4d1dcf1",
+    "tests/support/snapshot-timings.ts": "c35da8727cca4bb6e54f4f897bed42c479dbe8cf46603f8c9c8c2e426417903f",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "f0ddd67240613a75661846eb617aa03f7a1f14d64107acd36f1a2c8776cedd38",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "ff8211b23a9df0897a0c8731985bcab754b07a89c3e64e4c23c6e81372477173",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/modes.mjs": "433218ce8b54643eda0011977a3908c6ec773956c4913b9c64c600f0248e296a",
+    "verification/signatures.mjs": "528fd54649777629c05db13d942187d17904382039f8cd904c0d752cb027ae7c"
+  },
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "darwin",
+    "release": "27.2.0",
+    "arch": "arm64",
+    "cpu": "Apple M3",
+    "logicalCpus": 8,
+    "playwright": "1.64.1",
+    "chromium": "156.0.8078.4",
+    "workers": 1
+  },
+  "records": {
+    "dialog": {
+      "summary": {
+        "keytrail": {
+          "medianMs": 145.66993749999983,
+          "p95Ms": 150.30895899999996
+        },
+        "native": {
+          "medianMs": 139.57781199999954,
+          "p95Ms": 147.37266699999964
+        },
+        "pairedMedianOverheadPercent": 4.077487767075427,
+        "ratioOfMediansOverheadPercent": 4.36468046941465,
+        "targetMet": true
+      },
+      "measuredAt": "2026-10-31T10:41:55.760Z",
+      "negativeControl": "D03.initial"
+    },
+    "tabs": {
+      "summary": {
+        "keytrail": {
+          "medianMs": 1659.3913744999954,
+          "p95Ms": 1678.8199590000004
+        },
+        "native": {
+          "medianMs": 1673.8050204999927,
+          "p95Ms": 1708.9831659999982
+        },
+        "pairedMedianOverheadPercent": -0.8004550920417575,
+        "ratioOfMediansOverheadPercent": -0.8611305273592551,
+        "targetMet": true
+      },
+      "measuredAt": "2026-10-31T10:41:55.761Z",
+      "negativeControl": "T05.forward.001.unchanged"
+    },
+    "formErrors": {
+      "summary": {
+        "keytrail": {
+          "medianMs": 143.67229149998457,
+          "p95Ms": 151.71208299999125
+        },
+        "native": {
+          "medianMs": 139.7544584999996,
+          "p95Ms": 152.16399999998976
+        },
+        "pairedMedianOverheadPercent": 2.4716651381717414,
+        "ratioOfMediansOverheadPercent": 2.8033688814192548,
+        "targetMet": true
+      },
+      "measuredAt": "2026-10-31T10:41:55.761Z",
+      "negativeControl": "F04.focus"
+    }
+  },
+  "targetMet": true
+}

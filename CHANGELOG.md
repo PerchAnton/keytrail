@@ -41,15 +41,18 @@
 - Require full one-worker CI suites and package consumers on Linux and macOS ARM.
   Retain the unsuccessful Intel capacity experiments and the unchanged 100 ms bound.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
-  benchmark as historical evidence. The changed candidate requires a fresh full
-  series and benchmark; those old hashes do not satisfy its package gate.
+  benchmark as historical evidence. The changed candidate still requires a fresh full
+  reliability series; those historical hashes do not satisfy its package gate.
 - Default repeatability to four development rounds; require explicit `--final` for
   100-round acceptance, with separate outputs and checkpoints for each mode.
 - Test actual tarball consumers in ordinary CI; require `--release` for the extra
   final evidence gate. Package records explicitly distinguish development and final acceptance.
 - Prepare a frozen dependency graph for the clean vanilla consumer, as for React,
   so offline checks retain the platform-specific TypeScript compiler on fresh runners.
-- Final acceptance and release benchmarking are deferred until the candidate is frozen.
+- Record the fresh `da7e663` benchmark: 108/108 tests, median paired overhead
+  4.1% / -0.8% / 2.5% for dialogs, manual tabs and form errors (`insertText`).
+  Both calculations meet the 20% target; preserve the older records as history.
+- Final 100-round acceptance remains deferred until explicitly requested.
   No release published.
 
 ## 0.1.0-alpha.5 — source candidate
