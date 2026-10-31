@@ -1,5 +1,7 @@
 # Milestones
 
+**Observation follow-up (31 October 2026):** main `02ee0953` failed macOS ARM with a 109.8 ms gap. The candidate now starts consecutive browser reads without a host timer inside manual windows. Earlier repeatability and benchmark records remain historical for their recorded sources; they do not certify this scheduler change. CI at `7a60938` passed three ARM rounds (510/510), one Linux round (170/170), and both package consumers per platform, with zero retries. Maximum ARM gaps were 35.8 / 45.2 / 31.0 ms. Final 100-round acceptance remains deferred. [Diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated
 `0.1.0-alpha.1`. The current `0.1.0-alpha.6` source candidate includes DEV09 verification
@@ -14,7 +16,7 @@ These checkpoints are not full 0.1.0 acceptance.
 | DEV06 | Horizontal/vertical tabs, automatic/manual activation, Home/End and exit | Implemented; see [tabs contract](tabs.md) |
 | DEV07 | Form errors, IDREF relationships, focus policies and declarative correction | Implemented; see [form errors contract](form-errors.md) |
 | DEV08 | CI completeness guard and subprocess failure tests | Implemented; see [CI guard](ci-guard.md) |
-| DEV09 | Repeatability, worker comparison, canaries, equivalent native benchmark | Historical `0300552`: 100 rounds, four-worker comparison and 108 benchmark cases passed; current `da7e663` benchmark: 108/108 passed; changed source uses four development rounds until final acceptance; [scope and evidence](reliability.md) |
+| DEV09 | Repeatability, worker comparison, canaries, equivalent native benchmark | Historical `0300552`: 100 rounds, four-worker comparison and 108 benchmark cases passed; historical `da7e663` benchmark: 108/108 passed; changed source uses four development rounds until final acceptance; [scope and evidence](reliability.md) |
 | DEV10 | Full API docs, vanilla + React portal consumers, release checklist | Implemented for the alpha checkpoint; [release checklist](release-checklist.md); [review snapshot prepared](release-handoff.md); final acceptance and publication pending |
 
 No performance, superiority or adoption claim follows from passing the teaching fixtures.

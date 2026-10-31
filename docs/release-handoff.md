@@ -1,11 +1,13 @@
 # Review the first release candidate
 
-The reviewed development snapshot is `da7e66378619816cd9c7e065df95f0e2a6e67661`
+**Observation follow-up (31 October 2026):** main `02ee0953` failed macOS ARM with a 109.8 ms gap. The candidate now starts consecutive browser reads without a host timer inside manual windows. Earlier repeatability and benchmark records remain historical for their recorded sources; they do not certify this scheduler change. CI at `7a60938` passed three ARM rounds (510/510), one Linux round (170/170), and both package consumers per platform, with zero retries. Maximum ARM gaps were 35.8 / 45.2 / 31.0 ms. Final 100-round acceptance remains deferred. [Diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+
+The historical reviewed development snapshot is `da7e66378619816cd9c7e065df95f0e2a6e67661`
 for **KeyTrail 0.1.0-alpha.6**. It is not a published release or final acceptance.
 The [readiness record](evidence/release-readiness.json) identifies completed checks,
 the exact package archive and the work still deferred.
 
-## What is already verified
+## What was verified for the preserved snapshot
 
 [Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41172735137) passed
 one Linux round (169 tests) and three macOS ARM rounds (507 tests). ARM passing-window
@@ -15,7 +17,7 @@ checks in separate vanilla and React consumers.
 
 The [local development record](evidence/development-atomic-observations.json)
 contains four rounds (676 tests), a four-worker comparison (169 tests) and 800
-unique journey IDs. Its input hashes match the merged source. Main CI has its own
+unique journey IDs. Its input hashes match the historical merged source. Main CI has its own
 640 unique journey IDs; these verification sets are not a final 100-round series.
 
 The earlier `8f119df` [browser review](evidence/browser-review.json) exercised the standalone dialog,
@@ -58,7 +60,7 @@ saved evidence checks, not publication readiness; see the [checklist](release-ch
 
 1. Select and freeze the final reviewed source.
 2. When explicitly requested, collect its 100-round final repeatability evidence.
-   The full [current-source benchmark](performance.md) now passes;
+   The full [historical benchmark](performance.md) passed for `da7e663`;
    remeasure if its input hashes change. The earlier `0300552` reliability evidence
    remains historical and cannot satisfy final acceptance.
 3. Pass `node scripts/check-package.mjs --release` against fresh final evidence.

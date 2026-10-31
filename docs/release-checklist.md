@@ -1,12 +1,14 @@
 # First alpha release checklist
 
+**Observation follow-up (31 October 2026):** main `02ee0953` failed macOS ARM with a 109.8 ms gap. The candidate now starts consecutive browser reads without a host timer inside manual windows. Earlier repeatability and benchmark records remain historical for their recorded sources; they do not certify this scheduler change. CI at `7a60938` passed three ARM rounds (510/510), one Linux round (170/170), and both package consumers per platform, with zero retries. Maximum ARM gaps were 35.8 / 45.2 / 31.0 ms. Final 100-round acceptance remains deferred. [Diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
-## Current preparation snapshot
+## Historical preparation snapshot (`da7e663`)
 
 The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
 bind the review archive to merged commit `da7e663`. Main CI passed Linux 169/169
@@ -16,7 +18,7 @@ handoff. The browser examples and saved HTML failure report were inspected throu
 their interface. Owner sign-off remains separate.
 
 This is **development-review-ready**, with `releaseReady: false` and
-`finalAcceptance: false`. The full current-source benchmark has passed; final 100-round evidence,
+`finalAcceptance: false`. The benchmark for that recorded source passed; the consecutive-read candidate needs a refresh of its benchmark and repeatability evidence. final 100-round evidence,
 the release package gate and publication remain deferred. Do not repeat already
 sufficient development runs merely to update these documents.
 
@@ -86,7 +88,7 @@ Neither command claims final acceptance or requires a five-hour series.
 ## Deferred final acceptance
 
 Once final acceptance is explicitly requested for the frozen candidate, run
-`pnpm verify:reliability --final`. The current-source benchmark is already recorded;
+`pnpm verify:reliability --final`. The earlier benchmark is preserved;
 repeat `pnpm benchmark` if its input hashes change. Independently validate the raw
 outputs, refresh source-bound evidence, then run `node scripts/check-package.mjs --release`.
 That gate requires 100 rounds and complete benchmark evidence. Short runs and

@@ -270,7 +270,6 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
       let firstObserved: number | undefined, lastObserved: number | undefined, maxGap = 0;
       const intervals: number[] = [];
       while (true) {
-        const readStarted = performance.now();
         const state = await capture(!negative);
         const readings = await Promise.all(group.map(c => read(c, state))); guard();
         if (negative) {
@@ -291,9 +290,9 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
           for (let n = 0; n < group.length; n++) mark(group[n]!, readings[n]!);
           break;
         }
-        // Match the same 25 ms target and 10 ms maximum pause as the journey.
-        const pause = negative ? Math.max(1, Math.min(10, 25 - (performance.now() - readStarted))) : 20;
-        await delay(Math.max(1, Math.min(pause, negative ? config.observationWindowMs - (state.observedAt - firstObserved!) : deadline - performance.now(), remaining())));
+        // Match the journey's consecutive asynchronous reads in negative windows.
+        // Positive waits retain their bounded pause.
+        if (!negative) await delay(Math.max(1, Math.min(20, deadline - performance.now(), remaining())));
       }
       index += group.length - 1;
     }

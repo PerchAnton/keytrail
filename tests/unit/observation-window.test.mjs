@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ObservationWindow, observationPauseMs } from '../../artifacts/unit/observationWindow.js';
+import { ObservationWindow } from '../../artifacts/unit/observationWindow.js';
 
 test('negative observations require two readings spanning the window', () => {
   const window = new ObservationWindow(); window.add(800);
@@ -17,16 +17,12 @@ test('100 ms gaps are allowed but larger gaps remain blocked after later samples
   assert.equal(window.complete(200), false);
   assert.deepEqual(window.observed().observationIntervalsMs, [100, 100.125, 0.875]);
 });
-test('slow browser reads do not receive an avoidable extra 20 ms gap', () => {
-  const fixed = new ObservationWindow(); fixed.add(0); fixed.add(85 + 20);
-  assert.equal(fixed.gap, true);
-  const adaptive = new ObservationWindow(); adaptive.add(0);
-  adaptive.add(85 + observationPauseMs(85));
-  assert.equal(adaptive.gap, false);
-  assert.equal(40 + observationPauseMs(40), 41);
-  assert.equal(observationPauseMs(10), 10);
-  assert.equal(20 + observationPauseMs(20), 25);
-  assert.equal(observationPauseMs(150), 1);
-  adaptive.add(300);
-  assert.equal(adaptive.gap, true, 'Scheduling cannot excuse a real observation gap');
+test('alternating fast and slow readings retain every actual interval', () => {
+  const window = new ObservationWindow();
+  for (const at of [0, 12, 110.5, 120, 219.5]) window.add(at);
+  assert.equal(window.complete(200), true);
+  assert.deepEqual(window.observed().observationIntervalsMs, [12, 98.5, 9.5, 99.5]);
+  window.add(320);
+  assert.equal(window.gap, true, 'An actual slow reading still blocks');
+  assert.equal(window.complete(200), false);
 });

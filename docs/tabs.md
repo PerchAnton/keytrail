@@ -91,10 +91,11 @@ sequenceDiagram
 The negative window begins with a real snapshot after focus and roving checks,
 and requires a final snapshot at least `observationWindowMs` later. Browser-side
 monotonic timestamps measure the intervals between snapshots, including browser
-round-trip and scheduling delays. Polling sleeps at most 20 ms between reads and
-shortens that pause to account for the time spent reading the browser; the target
-sampling interval is at most 50 ms. Any measured gap **greater than
-100 ms** produces `blocked / OBSERVATION_GAP`, stops before activation, and leaves
+round-trip and scheduling delays. Each next read starts immediately after the
+previous snapshot is checked, without an added host timer. Awaiting the browser
+read yields to asynchronous I/O; snapshots remain sequential. This uses more
+observations during the bounded window and cannot guarantee scheduling latency
+on a stalled host. Any measured gap **greater than 100 ms** produces `blocked / OBSERVATION_GAP`, stops before activation, and leaves
 dependent checks `not_run`. A component mismatch observed in the same snapshot
 retains its specific failure instead of being hidden by the timing problem.
 

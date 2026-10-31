@@ -1,5 +1,7 @@
 # Verification
 
+**Observation follow-up (31 October 2026):** main `02ee0953` failed macOS ARM with a 109.8 ms gap. The candidate now starts consecutive browser reads without a host timer inside manual windows. Earlier repeatability and benchmark records remain historical for their recorded sources; they do not certify this scheduler change. CI at `7a60938` passed three ARM rounds (510/510), one Linux round (170/170), and both package consumers per platform, with zero retries. Maximum ARM gaps were 35.8 / 45.2 / 31.0 ms. Final 100-round acceptance remains deferred. [Diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
@@ -11,17 +13,17 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | 169/169 in each of four local rounds at `7e48291`; hosted results separated below; no retries |
+| Browser suite | Current `7a60938`: Linux 170/170 and ARM 3 × 170 = 510; no retries or skips |
 | Worker isolation | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
-| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard-atomic-observations.json) |
-| Performance | Current `da7e663`: 108/108 tests; median paired overhead: dialog 4.1%, manual tabs -0.8%, forms (`insertText`) 2.5%; [samples and validation](performance.md) |
+| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
+| Performance | Historical `da7e663`: 108/108 tests; median paired overhead: dialog 4.1%, manual tabs -0.8%, forms (`insertText`) 2.5%; [samples and validation](performance.md) |
 | Repeatability | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Current `7e48291`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-atomic-observations.json); final acceptance remains false |
-| Hosted platforms | At `7e48291`: 3 × 169 macOS ARM and 169 Linux checks; all stages and clean package consumers passed. [Validated record](evidence/ci-atomic-observations.json). Earlier main ARM 126.7 ms and Intel 370 ms failures remain recorded. |
+| Package consumers | Historical `7e48291`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-atomic-observations.json); final acceptance remains false |
+| Hosted platforms | Current `7a60938`: 3 × 170 ARM and 170 Linux, plus actual package consumers; [validated record](evidence/ci-consecutive-observations.json). Earlier failures remain recorded. |
 
-## Current performance (`da7e663`)
+## Historical performance (`da7e663`)
 
 ![Paired overhead and median/p95 timing results](assets/performance.svg)
 
@@ -60,8 +62,8 @@ The source now resolves locators into a private browser map on every observation
 reads focus and containment together, and clears stored nodes before returning.
 It waits for sibling reads even on failure and disposes the map at journey end.
 No target binding is cached; [mechanism and regressions](ci-concurrency.md).
-The atomic-registration four-round proof independently validates this runtime. Earlier
-repeatability records remain historical for their own source hashes.
+The atomic-registration four-round proof validates its recorded runtime, before the
+consecutive-read change. Repeatability records remain tied to their own source hashes.
 
 ## Reproduction
 

@@ -1,0 +1,554 @@
+{
+  "recordedAt": "2026-10-31T11:27:31.088Z",
+  "sourceCommit": "7a60938057a322e3088fcbd3ab5e70149f2f9173",
+  "runId": "41196060997",
+  "runUrl": "https://github.com/PerchAnton/keytrail/actions/runs/41196060997",
+  "scope": "Independently checked complete CI run: three consecutive ARM rounds, one Linux round and both actual tarball consumers. No retries or final acceptance; this is not a host-latency guarantee.",
+  "finalAcceptance": false,
+  "sourceHashes": {
+    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "dd2d64fd7c3b73e532f843d85d29ff480c83ad5a614cd574b4cf90f84c656f1e",
+    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "5f165904842f33e170f6f8f38fd53789c3124b39a1149335430e1ecbd1bd46b9",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
+    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
+    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "6dbc89aae8b27295caf3a127364d27ed89319bac1ccd8b31b4c2ca60eab92321",
+    "tests/integration/tabs.spec.ts": "e07df3d59efb49ac38607cdc29780a14184e7b52bc8d51400aec435e0ede8263",
+    "tests/support/snapshot-timings.ts": "c35da8727cca4bb6e54f4f897bed42c479dbe8cf46603f8c9c8c2e426417903f",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
+    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "ff8211b23a9df0897a0c8731985bcab754b07a89c3e64e4c23c6e81372477173",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/modes.mjs": "433218ce8b54643eda0011977a3908c6ec773956c4913b9c64c600f0248e296a",
+    "verification/signatures.mjs": "528fd54649777629c05db13d942187d17904382039f8cd904c0d752cb027ae7c"
+  },
+  "platforms": [
+    {
+      "platform": "linux",
+      "environment": {
+        "platform": "linux",
+        "arch": "x64",
+        "release": "7.0.0-1017-azure",
+        "node": "24.22.1",
+        "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+        "logicalCpus": 4,
+        "memoryBytes": 16759304192
+      },
+      "workers": 1,
+      "retries": 0,
+      "checkedManualWindows": 57,
+      "maximumPassingWindowGapMs": 32.19999999999709,
+      "guardCases": 52,
+      "guardRecordSha256": "96c05ea8ce3ab32dcf3f033dcca3e9482f26862055ef2003c221b5a097ad14aa",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T11:21:05.553Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "linux",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 357344,
+          "sha256": "e00b35a94df4bc2d29d96f0fef82396d388be783ce8b053e619209e998be8652",
+          "files": 102
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "d2c5d17ec5b6f806d72d47589b33bfab2df35233a4611f7f5246f41c1ae9afe0",
+      "rounds": [
+        {
+          "filename": "browser-results.json",
+          "sha256": "1e09dcd7c2f0ebea57d225f4d2ee43c377d51687262b90494c34f855fc37d13c",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T11:16:47.397Z",
+            "duration": 214019.74300000002,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 596,
+              "medianMs": 13.628291,
+              "p95Ms": 16.748701,
+              "maxMs": 24.040109
+            },
+            "evaluate": {
+              "count": 596,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 5960,
+              "medianMs": 10.39003,
+              "p95Ms": 13.385339,
+              "maxMs": 20.126359
+            },
+            "interval": {
+              "count": 558,
+              "medianMs": 13.699999999982538,
+              "p95Ms": 16.60000000000582,
+              "maxMs": 26.79999999998836
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 32.19999999999709,
+          "slowestPassingWindow": {
+            "fixture": "canary isolation tabs successful input",
+            "checkId": "T05.forward.003.unchanged",
+            "maxObservationGapMs": 32.19999999999709
+          }
+        }
+      ],
+      "totalExecutions": 170,
+      "testsPerRound": 170,
+      "journeysPerRound": 161,
+      "lastRoundStats": {
+        "startTime": "2026-10-31T11:16:47.397Z",
+        "duration": 214019.74300000002,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "lastRoundRawReportSha256": "1e09dcd7c2f0ebea57d225f4d2ee43c377d51687262b90494c34f855fc37d13c",
+      "lastRoundHealthyFixtureAggregate": {
+        "snapshot": {
+          "count": 596,
+          "medianMs": 13.628291,
+          "p95Ms": 16.748701,
+          "maxMs": 24.040109
+        },
+        "evaluate": {
+          "count": 596,
+          "medianMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0
+        },
+        "resolution": {
+          "count": 5960,
+          "medianMs": 10.39003,
+          "p95Ms": 13.385339,
+          "maxMs": 20.126359
+        },
+        "interval": {
+          "count": 558,
+          "medianMs": 13.699999999982538,
+          "p95Ms": 16.60000000000582,
+          "maxMs": 26.79999999998836
+        },
+        "gapsAbove100ms": 0
+      }
+    },
+    {
+      "platform": "macos-latest",
+      "environment": {
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "25.6.0",
+        "node": "24.22.1",
+        "cpu": "Apple M1 (Virtual)",
+        "logicalCpus": 3,
+        "memoryBytes": 7516192768,
+        "imageOS": "macos26",
+        "imageVersion": "20261021.0445.8"
+      },
+      "workers": 1,
+      "retries": 0,
+      "checkedManualWindows": 171,
+      "maximumPassingWindowGapMs": 45.20000000006985,
+      "guardCases": 52,
+      "guardRecordSha256": "88b5dbf703e46f7cadf39fbfcfd7c2f0d00a44944373a3682a589274d583e571",
+      "packageRecord": {
+        "package": "keytrail",
+        "version": "0.1.0-alpha.6",
+        "checkedAt": "2026-10-31T11:26:21.685Z",
+        "verificationLevel": "development",
+        "finalAcceptance": false,
+        "node": "v24.22.1",
+        "platform": "darwin",
+        "playwright": "1.64.1",
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 357344,
+          "sha256": "609bae2b134f6ba8c995c38f50cbc73f614d7bd27effac856fc1cbabe66ab206",
+          "files": 102
+        },
+        "checks": {
+          "evidenceSourceHashes": false,
+          "offlineConsumer": true,
+          "esm": true,
+          "cjs": true,
+          "typesEsm": true,
+          "typesCjs": true,
+          "browserExamples": 6,
+          "guardedBrowserExamples": 3,
+          "guardEsm": true,
+          "guardCjs": true
+        },
+        "consumers": {
+          "vanilla": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "types": true,
+            "browserTests": 6,
+            "guardedJourneys": 3
+          },
+          "reactPortal": {
+            "registryMetadataPreparation": true,
+            "offlineInstall": true,
+            "frozenDependencyGraph": true,
+            "react": "19.3.1",
+            "reactDom": "19.3.1",
+            "types": true,
+            "strictMode": true,
+            "browserTests": 3,
+            "guardedJourneys": 1,
+            "negativeExitCode": 1,
+            "html": true,
+            "junit": true,
+            "failedAttachment": true,
+            "dependencyReferences": true
+          }
+        },
+        "published": false
+      },
+      "packageRecordSha256": "a464fecea6b9e3489f9f717b5c5f98237da7097a2fdb62ba19dd9631281d9945",
+      "rounds": [
+        {
+          "filename": "browser-round-1.json",
+          "sha256": "d529e98f7e5c419f6e72e68dd1f67093f556497675ad3eb7426e9cb83cc4da9e",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T11:16:23.709Z",
+            "duration": 195811.93,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 1120,
+              "medianMs": 6.4811875,
+              "p95Ms": 10.68725,
+              "maxMs": 39.343958
+            },
+            "evaluate": {
+              "count": 1120,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 11200,
+              "medianMs": 4.804562499999999,
+              "p95Ms": 8.335583,
+              "maxMs": 37.469416
+            },
+            "interval": {
+              "count": 1082,
+              "medianMs": 6.5,
+              "p95Ms": 10.5,
+              "maxMs": 35.600000000034925
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 35.79999999998836,
+          "slowestPassingWindow": {
+            "fixture": "canary isolation tabs successful input",
+            "checkId": "T05.forward.002.unchanged",
+            "maxObservationGapMs": 35.79999999998836
+          }
+        },
+        {
+          "filename": "browser-round-2.json",
+          "sha256": "c028177b580c590dfb24617eb28b5412d21164839c11fb4591b2d36778cd6dcd",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T11:19:40.707Z",
+            "duration": 190669.499,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 1018,
+              "medianMs": 7.2221455,
+              "p95Ms": 13.408834,
+              "maxMs": 45.088916
+            },
+            "evaluate": {
+              "count": 1018,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 10180,
+              "medianMs": 5.342646,
+              "p95Ms": 10.340583,
+              "maxMs": 43.064708
+            },
+            "interval": {
+              "count": 980,
+              "medianMs": 7.299999999930151,
+              "p95Ms": 13,
+              "maxMs": 45.20000000006985
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 45.20000000006985,
+          "slowestPassingWindow": {
+            "fixture": "tabs pass manual Enter",
+            "checkId": "T05.forward.002.unchanged",
+            "maxObservationGapMs": 45.20000000006985
+          }
+        },
+        {
+          "filename": "browser-round-3.json",
+          "sha256": "279a42d02b2a128617a915f850411c11675495d0026c7e413aad97e37279f703",
+          "workers": 1,
+          "tests": 170,
+          "stats": {
+            "startTime": "2026-10-31T11:22:52.395Z",
+            "duration": 177047.023,
+            "expected": 170,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "checkedManualWindows": 57,
+          "healthyFixtureAggregate": {
+            "snapshot": {
+              "count": 1324,
+              "medianMs": 5.617729000000001,
+              "p95Ms": 7.963583,
+              "maxMs": 31.052792
+            },
+            "evaluate": {
+              "count": 1324,
+              "medianMs": 0,
+              "p95Ms": 0,
+              "maxMs": 0
+            },
+            "resolution": {
+              "count": 13240,
+              "medianMs": 4.2112289999999994,
+              "p95Ms": 6.374709,
+              "maxMs": 29.834708
+            },
+            "interval": {
+              "count": 1286,
+              "medianMs": 5.599999999976717,
+              "p95Ms": 8,
+              "maxMs": 31
+            },
+            "gapsAbove100ms": 0
+          },
+          "maximumPassingWindowGapMs": 31,
+          "slowestPassingWindow": {
+            "fixture": "tabs pass vertical manual Home End",
+            "checkId": "T05.backward.003.unchanged",
+            "maxObservationGapMs": 31
+          }
+        }
+      ],
+      "totalExecutions": 510,
+      "testsPerRound": 170,
+      "journeysPerRound": 161,
+      "lastRoundStats": {
+        "startTime": "2026-10-31T11:22:52.395Z",
+        "duration": 177047.023,
+        "expected": 170,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "lastRoundRawReportSha256": "279a42d02b2a128617a915f850411c11675495d0026c7e413aad97e37279f703",
+      "lastRoundHealthyFixtureAggregate": {
+        "snapshot": {
+          "count": 1324,
+          "medianMs": 5.617729000000001,
+          "p95Ms": 7.963583,
+          "maxMs": 31.052792
+        },
+        "evaluate": {
+          "count": 1324,
+          "medianMs": 0,
+          "p95Ms": 0,
+          "maxMs": 0
+        },
+        "resolution": {
+          "count": 13240,
+          "medianMs": 4.2112289999999994,
+          "p95Ms": 6.374709,
+          "maxMs": 29.834708
+        },
+        "interval": {
+          "count": 1286,
+          "medianMs": 5.599999999976717,
+          "p95Ms": 8,
+          "maxMs": 31
+        },
+        "gapsAbove100ms": 0
+      }
+    }
+  ],
+  "workflowConclusion": "success",
+  "uniqueJourneyRunIds": 644,
+  "totalExecutions": 680,
+  "localChecks": {
+    "checkedAt": "2026-10-31T11:16:55.538904+00:00",
+    "sourceCommit": "7a60938057a322e3088fcbd3ab5e70149f2f9173",
+    "focused": {
+      "file": "continuous-focused.json",
+      "sha256": "40ba069d024f91e34415303ab5e4baa4d381285c753f8b7311e5af4ba7f10cc6",
+      "stats": {
+        "startTime": "2026-10-31T11:12:33.672Z",
+        "duration": 15052.51,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "mutationControl": {
+      "file": "continuous-mutation.json",
+      "sha256": "705df7733020f598630a16653533c8802692871021d313e754f7b46925980be5",
+      "stats": {
+        "startTime": "2026-10-31T11:13:14.243Z",
+        "duration": 2296.554,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    "mutationExpected": "Restored 10 ms pause fails nextReadWasImmediate assertion; original source restored in finally.",
+    "benchmarkPilot": {
+      "file": "continuous-benchmark-pilot.json",
+      "sha256": "0ea01ccdf3390dc616b9601b3e019947b5bfb1a9944a06ca19b7332be63c10b0",
+      "stats": {
+        "startTime": "2026-10-31T11:15:51.466Z",
+        "duration": 13749.175,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "benchmarkMeasurements": false,
+    "finalAcceptance": false,
+    "final100RoundsStarted": false
+  },
+  "priorFailure": {
+    "sourceCommit": "02ee0953b79ad706746f66019b257aeb3908f075",
+    "runId": 41194618651,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41194618651",
+    "linuxPassed": 169,
+    "armPassed": 168,
+    "armFailed": 1,
+    "armRoundsCompleted": 1,
+    "armPlannedRounds": 3,
+    "fixture": "tabs pass manual Home End",
+    "checkId": "T05.backward.003.unchanged",
+    "messageCode": "OBSERVATION_GAP",
+    "gapMs": 109.8,
+    "snapshotMs": 98.514,
+    "rawReportSha256": "488dc6f53383f76ec4880f4e2f3c8b7f6b11a7464a822be26baa9c94d297b249",
+    "rerun": false
+  },
+  "final100RoundsStarted": false,
+  "newLocalIsolationRun": false,
+  "validationMethod": "Re-read four raw reports; validate report schema and relationships, zero retries/skips, unique test and journey identities, environments, semantic signatures, observation intervals and 100 ms bound. Verify current source hashes, all 52 guard subprocess exit codes per platform, actual tarball bytes/checksums and both clean consumers."
+}
