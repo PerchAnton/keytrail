@@ -2,6 +2,13 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Start the next manual-window browser read immediately after validating the previous
+  snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.
+  Retain the 100 ms limit, actual timestamps, fresh locators and zero retries.
+  Add a timer-order regression and match the native benchmark scheduler;
+  prior measurements remain historical until refreshed.
+
+
 - Add a read-only release-evidence check that lists all pending records without
   running tests or changing artifacts. Share its validation with the final package
   gate and reject contradictory CI-guard exit codes, missing hashes and empty cases.

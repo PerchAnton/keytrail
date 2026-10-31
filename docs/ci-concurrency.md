@@ -8,6 +8,37 @@ The four-worker isolation comparison remains part of the local four-round
 verifier. A real gap above 100 ms still blocks a negative observation; retries
 remain disabled. Results below identify their source revision and runner.
 
+## Consecutive window reads
+
+The [post-merge main run](https://github.com/PerchAnton/keytrail/actions/runs/41194618651)
+at `02ee0953` passed Linux 169/169 and its package consumers. ARM passed 168/169
+in the first of three planned rounds. `tabs pass manual Home End` stopped at
+`T05.backward.003.unchanged` with a **109.8 ms** gap; its snapshot took **98.514 ms**.
+The remaining ARM rounds and package checks did not run. The full raw failure and
+snapshot profile are retained; no retry replaces this result.
+
+The previous reader took 12.342 ms, so the old scheduler then slept up to 10 ms.
+A short previous read cannot predict the latency of the next one. The follow-up
+removes that deliberate pause within negative windows. After checking one complete
+snapshot, the driver immediately starts the next asynchronous browser read. There
+is no overlapping snapshot or background action chain. Fresh locator resolution,
+atomic state reads, cleanup and scenario budgets are unchanged. Positive waits
+keep their bounded pauses.
+
+This trades additional observations during each bounded window for more timing
+headroom. It cannot make an arbitrary browser or shared host meet a hard deadline:
+every actual gap above **100 ms** still blocks, and retries remain zero. The native
+benchmark reference uses the same consecutive-read policy; its old numbers are
+historical until remeasured. Timing records identify the slow read, not the exact
+cause of a runner delay.
+
+A new regression queues a host timer after the first real window snapshot and
+requires the next read to start before it runs. Restoring the old pause must fail
+that regression. Existing before/after transport-delay tests, short-window coverage,
+scenario deadlines, transient component failures and handle cleanup remain required.
+Validation is limited to three ARM rounds and one Linux round in ordinary CI;
+final 100-round acceptance is not requested.
+
 ## Private observation store
 
 Each driver owns one private browser `Map`, accessed through a public Playwright

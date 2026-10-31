@@ -6,7 +6,7 @@ import { DEFAULTS } from '../contracts/common.js';
 import { validateTabs } from '../contracts/tabs.js';
 import type { CheckResult, JourneyResult, MessageCode, SafeObservation, TabsContract } from '../contracts/types.js';
 import { planTabs } from '../engine/tabs-plan.js';
-import { ObservationWindow, observationPauseMs } from '../engine/observation-window.js';
+import { ObservationWindow } from '../engine/observation-window.js';
 import { Blocked, BoundaryExit, Driver, type Snapshot } from '../browser/driver.js';
 import { coverage, outcome, JourneyAssertionError } from '../reporting/result.js';
 import { serializeJourneyResult } from '../reporting/serialize.js';
@@ -154,7 +154,6 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
           const step = d.steps.at(-1)!;
           try {
             while (true) {
-              const readStarted = performance.now();
               state = await d.snapshot('interaction');
               window.add(state.observedAt);
               current.observed = { ...selection(state, selected).observed, focus: state.focus,
@@ -163,8 +162,9 @@ export async function assertTabsJourney(page: Page, info: TestInfo, input: TabsC
               ready(state); d.guard();
               if (window.gap) throw new Blocked('OBSERVATION_GAP');
               if (window.complete(config.observationWindowMs)) break;
-              await delay(Math.max(1, Math.min(observationPauseMs(performance.now() - readStarted),
-                config.observationWindowMs - window.elapsed, d.remaining())));
+              // Each awaited snapshot yields to browser I/O. Start the next read
+              // immediately: a fast previous read cannot predict the next one's
+              // latency, so a host timer would spend part of its 100 ms budget.
             }
             finish(unchanged, { ok: true, observed: current.observed }, 'PREMATURE_ACTIVATION');
           } finally {

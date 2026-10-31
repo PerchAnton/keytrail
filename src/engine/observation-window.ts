@@ -1,10 +1,6 @@
 import type { SafeObservation } from '../contracts/types.js';
 
 export const MAX_OBSERVATION_GAP_MS = 100;
-/** Target a quarter of the gap budget; leave room for variable browser transport. */
-export function observationPauseMs(readDurationMs: number): number {
-  return Math.max(1, Math.min(10, MAX_OBSERVATION_GAP_MS / 4 - readDurationMs));
-}
 /** Timestamps come from the same browser clock at the start of each DOM snapshot. */
 export class ObservationWindow {
   private first: number | undefined;

@@ -1,5 +1,7 @@
 # Equivalent-work benchmark
 
+**Historical measurements:** the table and graph below apply to `da7e663`. The consecutive-read candidate changes both the journey scheduler and the native reference. These timings are preserved unchanged and are not performance evidence for that candidate. A fresh equivalent-work benchmark is pending; it is separate from the requested short CI validation.
+
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 These measurements describe current main `da7e663`, recorded on 31 October 2026.

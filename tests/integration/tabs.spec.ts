@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { mock } from 'node:test';
 import { assertTabsJourney, JourneyAssertionError, type JourneyResult, type TabsContract } from '../../src/index.js';
 import { ObservationWindow } from '../../src/engine/observation-window.js';
+import { Driver } from '../../src/browser/driver.js';
 import { tabsHtml, tabsContract, type TabsOptions } from '../fixtures/tabs.js';
 import { recordSnapshotTimings } from '../support/snapshot-timings.js';
 
@@ -201,4 +202,27 @@ test('manual tabs record initial and final observations even for a short window'
     expect(observed.observationWindowMs).toBeGreaterThanOrEqual(50);
     expect(observed.maxObservationGapMs).toBeLessThanOrEqual(100);
   }
+});
+
+test('manual windows start the next browser read without a host timer pause', async ({ page }, info) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const snapshot = Driver.prototype.snapshot;
+  let reads = 0, timerRan = false, nextReadWasImmediate = false;
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  Driver.prototype.snapshot = async function (...args) {
+    if (this.page !== page || args[0] !== 'interaction') return snapshot.apply(this, args);
+    if (++reads === 2) {
+      nextReadWasImmediate = !timerRan;
+      clearTimeout(timer);
+    }
+    const state = await snapshot.apply(this, args);
+    if (reads === 1) timer = setTimeout(() => { timerRan = true; }, 0);
+    return state;
+  };
+  try {
+    const result = await assertTabsJourney(page, info, tabsContract(page, { activation: 'manual' }));
+    verify(result, info);
+    expect(reads).toBeGreaterThan(2);
+    expect(nextReadWasImmediate).toBe(true);
+  } finally { clearTimeout(timer); Driver.prototype.snapshot = snapshot; }
 });

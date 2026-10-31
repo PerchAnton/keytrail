@@ -1,5 +1,7 @@
 # Review the first release candidate
 
+**Observation follow-up (31 October 2026):** main `02ee0953` failed macOS ARM with a 109.8 ms gap. The candidate now starts consecutive browser reads without a host timer inside manual windows. Earlier repeatability and benchmark records remain historical for their recorded sources; they do not certify this scheduler change. Short CI validation is pending. Final 100-round acceptance remains deferred. [Diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+
 The reviewed development snapshot is `da7e66378619816cd9c7e065df95f0e2a6e67661`
 for **KeyTrail 0.1.0-alpha.6**. It is not a published release or final acceptance.
 The [readiness record](evidence/release-readiness.json) identifies completed checks,
