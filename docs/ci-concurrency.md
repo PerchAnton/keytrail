@@ -1,12 +1,122 @@
 # Browser worker capacity and deadline checks
 
 The default regression suite uses **one browser worker**. CI requires the complete
-suite and package consumers on Linux and ARM `macos-latest`. The separately
+suite and package consumers on Linux and ARM; the candidate pins `macos-15`. The separately
 measured Intel environment remains a documented failed experiment, not a required
 runner or a passing result. Both required jobs still execute every fixture.
 The four-worker isolation comparison remains part of the local four-round
 verifier. A real gap above 100 ms still blocks a negative observation; retries
 remain disabled. Results below identify their source revision and runner.
+
+## Recurring ARM gaps: diagnosis remains open
+
+The [main run at `050d97c`](https://github.com/PerchAnton/keytrail/actions/runs/41200576177)
+passed Linux 170/170 and its package consumers, but ARM passed only 169/170 in
+round one. The successful-input tabs canary blocked on an actual **129.8 ms** gap.
+Later rounds and ARM package consumers did not run. The original journey retained
+the correct `OBSERVATION_GAP` and stopped further actions. However, the canary's
+catch block expected an injected `BROWSER_ERROR` even on the successful-input path,
+masking the original error in the test output. That branch now rethrows the original
+failure. [Retained main failure](evidence/ci-main-050d97c-failure.json).
+
+The failed canary had no snapshot-timing attachment. Diagnostics now cover all
+canaries and retain host snapshot/locator durations, time between snapshots,
+browser callback durations and spans, CPU usage and load averages. Browser and
+host clocks remain separate. The read-only summary retains failures even when no
+attachment exists. It neither changes the runner result nor treats an expected
+blocked regression as an unexpected failure.
+
+The [diagnostic run at `ed74027`](https://github.com/PerchAnton/keytrail/actions/runs/41201812981)
+passed all checks and real package consumers on both platforms. Independent checks
+validated four raw reports, **680 executions**, **644 unique journey IDs**, semantic
+signatures, source hashes, guard exits and archive checksums.
+
+| Platform / round | Passed | Maximum passing-window gap |
+| --- | ---: | ---: |
+| Linux / 1 | 170/170 | 26.8 ms |
+| macOS ARM / 1 | 170/170 | 86.8 ms |
+| macOS ARM / 2 | 170/170 | 87.7 ms |
+| macOS ARM / 3 | 170/170 | 38.0 ms |
+
+**This is a diagnostic result, not a runtime fix or proof of stable ARM capacity.**
+The runtime was unchanged. The slowest second-round window had a 100.004 ms host
+snapshot, 0.025 ms between host snapshots, a 97.840 ms locator call, and browser
+callbacks individually no longer than 0.1 ms. Those callbacks were spread over
+47.8 ms. Substantial latency therefore occurred outside the callbacks themselves;
+this does not distinguish selector resolution, transport, garbage collection or
+process scheduling. The first-round canary also recorded high system load, but
+load averages alone cannot identify the cause. The profiler itself adds work.
+[Source-bound results and timing records](evidence/ci-arm-diagnostics.json).
+
+A local negative control injected one 150 ms delay into a copy of the successful
+canary. Its raw report failed with the original `OBSERVATION_GAP` (160.1 ms), retained
+the timing attachment and contained none of the canary values. This control is not
+a passing reliability round. Eight normal focused browser cases and four summary
+unit tests passed locally. The 100 ms bound, fresh locator resolution, zero retries
+and three-round ARM limit remain unchanged. No final 100-round series was run.
+
+A [fourth diagnostic round at `a4f97fd`](https://github.com/PerchAnton/keytrail/actions/runs/41203793281)
+added Node CPU, event-loop and GC observations. ARM passed 169/170: the timer-order
+regression blocked at `T05.forward.003.unchanged` on **549.8 ms**. The original error
+and timing attachment were retained; no later keyboard action ran, and ARM package
+consumers were skipped. Linux passed 170/170 and its package consumers. This is a
+separate diagnostic revision, not a fourth passing round of the earlier proof.
+[Independently checked failure](evidence/ci-arm-fourth-diagnostic-failure.json).
+
+| Measurement at the failed reading | Duration |
+| --- | ---: |
+| Actual browser observation gap | 549.8 ms |
+| Host snapshot | 551.834 ms |
+| Node user + system CPU | 29.722 ms |
+| Host event-loop active / idle | 551.840 / 0 ms |
+| First-to-last locator-call start | 261.405 ms |
+| Browser callback span | 30.6 ms |
+| Longest individual browser callback | 0.7 ms |
+
+No GC event overlapped this reading. The timer-order fixture clears its one queued
+flag-setting timer on the second read; this failure occurred in the third window.
+The data identifies substantial host-side elapsed time unexplained by CPU execution
+or recorded GC. It does not distinguish OS scheduling, synchronous waits or a
+specific process causing contention. Node's [event-loop utilization](https://nodejs.org/docs/latest-v24.x/api/perf_hooks.html#performanceeventlooputilizationutilization1-utilization2)
+is wall time outside the event provider, not CPU usage; [process CPU time](https://nodejs.org/docs/latest-v24.x/api/process.html#processcpuusagepreviousvalue)
+includes all process threads. Neither measure alone proves a particular scheduler
+or browser defect. The profiler adds work and is not a performance benchmark.
+
+The comparison changed only the required ARM image from `macos-latest`
+(observed as macOS 26) to `macos-15`, keeping one worker, every test, the 100 ms bound
+and zero retries. It is limited to three rounds and stops on the first failure.
+Both labels select standard ARM hardware according to [GitHub's runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
+The comparison at `cc95784` passed; it is not proof that macOS 15 eliminates host latency.
+No additional rounds of the old image or final 100-round series are scheduled.
+Final acceptance and publication remain blocked while the investigation is open.
+
+The [macOS 15 run](https://github.com/PerchAnton/keytrail/actions/runs/41204627899)
+passed all three ARM rounds and Linux, including build/types, 39 unit tests,
+22 script tests, 52 guard subprocess cases and both real package consumers per
+platform. Independent validation checked all four raw reports, 680 executions,
+644 unique journey IDs, semantic signatures, input hashes and archive checksums.
+The execution input hashes exactly match the failed fourth-round revision.
+
+| Platform / round | Passed | Maximum passing-window gap |
+| --- | ---: | ---: |
+| Linux / 1 | 170/170 | 22.1 ms |
+| macOS 15 ARM / 1 | 170/170 | 50.3 ms |
+| macOS 15 ARM / 2 | 170/170 | 61.1 ms |
+| macOS 15 ARM / 3 | 170/170 | 29.9 ms |
+
+The actual ARM environment was Apple M1 (Virtual), three logical CPUs, 7 GiB RAM,
+Darwin 24.6.0, image `macos15` / `20261028.0489.1`, Node 24.22.1 and Chromium
+156.0.8078.4. The historical artifact name `macos-latest-evidence` is retained;
+the recorded environment and workflow label identify the actual macOS 15 runner.
+[Complete source-bound record](evidence/ci-macos15-comparison.json).
+
+All three ARM rounds ran on **one allocated VM**. A subsequent CI invocation gets
+a new allocation, so sequential repeats cannot establish repeatability between
+allocations. Before presenting this candidate as a stability fix, use three
+separate ARM jobs (one full round and package consumers per allocation), with one
+worker and no retries. That matrix has not been run. The image comparison is not
+a controlled proof that the OS version caused the earlier stalls.
+
 
 ## Consecutive window reads
 

@@ -1,12 +1,16 @@
 # Milestones
 
-**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
-(510/510), one Linux round (170/170) and both package consumers per platform, with
-zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
-maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
-The fresh [108-test benchmark](performance.md) matches this source. Earlier repeatability
-proofs remain historical; final 100-round acceptance is still deferred. This short
-sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+**Latest status (31 October 2026): the macOS 15 ARM comparison passed.**
+At `cc95784`, ARM passed **3 × 170 = 510** tests and Linux passed **170/170**,
+with zero retries/skips and both real package consumers on each platform. Maximum
+ARM gaps were **50.3 / 61.1 / 29.9 ms**, below the unchanged 100 ms bound.
+[Independently checked comparison](evidence/ci-macos15-comparison.json).
+The earlier macOS 26 diagnostic run failed at 549.8 ms; its evidence is retained.
+Production runtime is unchanged. Three rounds on one VM do not establish stability
+across new runner allocations; that validation remains pending before treating the
+configuration as a stability fix. [Diagnosis and scope](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+The [benchmark](performance.md) retains its measured `1b42666` identity.
+Final 100-round acceptance and publication remain deferred.
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated

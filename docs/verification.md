@@ -1,12 +1,16 @@
 # Verification
 
-**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
-(510/510), one Linux round (170/170) and both package consumers per platform, with
-zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
-maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
-The fresh [108-test benchmark](performance.md) matches this source. Earlier repeatability
-proofs remain historical; final 100-round acceptance is still deferred. This short
-sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+**Latest status (31 October 2026): the macOS 15 ARM comparison passed.**
+At `cc95784`, ARM passed **3 × 170 = 510** tests and Linux passed **170/170**,
+with zero retries/skips and both real package consumers on each platform. Maximum
+ARM gaps were **50.3 / 61.1 / 29.9 ms**, below the unchanged 100 ms bound.
+[Independently checked comparison](evidence/ci-macos15-comparison.json).
+The earlier macOS 26 diagnostic run failed at 549.8 ms; its evidence is retained.
+Production runtime is unchanged. Three rounds on one VM do not establish stability
+across new runner allocations; that validation remains pending before treating the
+configuration as a stability fix. [Diagnosis and scope](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+The [benchmark](performance.md) retains its measured `1b42666` identity.
+Final 100-round acceptance and publication remain deferred.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -19,17 +23,17 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Main `1b42666`: Linux 170/170 and ARM 3 × 170 = 510; no retries or skips |
+| Browser suite | Comparison `cc95784`: Linux 170/170 and macOS 15 ARM 510/510; no retries/skips. Fresh-allocation validation remains pending |
 | Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
-| Performance | Current `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
+| Performance | Recorded `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
 | Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Main `1b42666`: two clean offline installations verified on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-main-1b42666.json); final acceptance remains false |
-| Hosted platforms | Main `1b42666`: 3 × 170 ARM and 170 Linux, plus actual package consumers; [validated record](evidence/ci-main-1b42666.json). Earlier failures remain recorded. |
+| Package consumers | Comparison `cc95784`: two clean offline installations verified on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-macos15-comparison.json); final acceptance remains false |
+| Hosted platforms | Comparison `cc95784` passed all required checks; [validated record](evidence/ci-macos15-comparison.json). Recurring ARM gaps remain an open issue, not a resolved failure |
 
-## Current performance (`1b42666`)
+## Recorded performance (`1b42666`)
 
 ![Paired overhead and median/p95 timing results](assets/performance.svg)
 

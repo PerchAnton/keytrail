@@ -2,6 +2,14 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Preserve unexpected canary failures instead of replacing their code with an
+  assertion for a deliberately injected browser error. Add missing canary timing
+  diagnostics and a read-only CI summary that retains failures without attachments.
+  Three diagnostic ARM rounds passed; a fourth recorded a 549.8 ms gap with
+  little CPU work and no overlapping recorded GC. Retain the failure and compare
+  the macOS 15 ARM image separately: three rounds and both package consumers
+  passed. These rounds share one VM; fresh-allocation validation remains pending.
+
 - Start the next manual-window browser read immediately after validating the previous
   snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.
   Retain the 100 ms limit, actual timestamps, fresh locators and zero retries.
