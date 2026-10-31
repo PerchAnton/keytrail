@@ -69,8 +69,15 @@ jobs:
             artifacts/consumers/react-portal/
           if-no-files-found: error
   macos:
-    name: macOS ARM / Chromium / package consumers
+    name: macOS 15 ARM / allocation ${{ matrix.round }} / package consumers
     runs-on: macos-15
+    strategy:
+      fail-fast: true
+      max-parallel: 1
+      matrix:
+        round: [1, 2, 3]
+    env:
+      KEYTRAIL_ALLOCATION: ${{ matrix.round }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -89,6 +96,9 @@ jobs:
           import { cpus, platform, arch, release, totalmem } from 'node:os';
           import { writeFileSync } from 'node:fs';
           writeFileSync('artifacts/runner-environment.json', JSON.stringify({
+            allocation: Number(process.env.KEYTRAIL_ALLOCATION), runnerLabel: 'macos-15',
+            runId: process.env.GITHUB_RUN_ID, runAttempt: process.env.GITHUB_RUN_ATTEMPT,
+            runnerEnvironment: process.env.RUNNER_ENVIRONMENT,
             platform: platform(), arch: arch(), release: release(), node: process.versions.node,
             cpu: cpus()[0]?.model, logicalCpus: cpus().length, memoryBytes: totalmem(),
             imageOS: process.env.ImageOS, imageVersion: process.env.ImageVersion,
@@ -101,24 +111,22 @@ jobs:
           pnpm test:unit
           node --test scripts/tests/*.test.mjs
           pnpm test:guard
-      - name: Browser regression suite (three rounds, one worker)
+      - name: Browser regression suite (one round per fresh allocation)
         env:
           KEYTRAIL_PROFILE_SNAPSHOTS: '1'
           PLAYWRIGHT_JSON_OUTPUT_FILE: artifacts/browser-results.json
         run: |
-          for round in 1 2 3; do
-            status=0
-            pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json || status=$?
-            cp artifacts/browser-results.json "artifacts/browser-round-${round}.json"
-            node scripts/summarize-observations.mjs artifacts/browser-results.json > "artifacts/browser-observations-${round}.json"
-            if [ "$status" -ne 0 ]; then exit "$status"; fi
-          done
+          keytrail_browser_exit=0
+          pnpm exec playwright test --workers=1 --retries=0 --reporter=list,json || keytrail_browser_exit=$?
+          cp artifacts/browser-results.json "artifacts/browser-round-${KEYTRAIL_ALLOCATION}.json"
+          node scripts/summarize-observations.mjs artifacts/browser-results.json > "artifacts/browser-observations-${KEYTRAIL_ALLOCATION}.json"
+          exit "$keytrail_browser_exit"
       - name: Verify development tarball consumers
         run: pnpm test:package
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
-          name: macos-latest-evidence
+          name: macos-15-arm-round-${{ matrix.round }}-evidence
           path: |
             artifacts/*.json
             artifacts/*.tgz

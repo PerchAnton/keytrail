@@ -112,10 +112,13 @@ the recorded environment and workflow label identify the actual macOS 15 runner.
 
 All three ARM rounds ran on **one allocated VM**. A subsequent CI invocation gets
 a new allocation, so sequential repeats cannot establish repeatability between
-allocations. Before presenting this candidate as a stability fix, use three
-separate ARM jobs (one full round and package consumers per allocation), with one
-worker and no retries. That matrix has not been run. The image comparison is not
-a controlled proof that the OS version caused the earlier stalls.
+allocations. CI now defines three separate ARM jobs, with `max-parallel: 1` and
+`fail-fast: true`. Each fresh allocation runs one complete browser round and its
+own package consumers, with one worker and no retries. Each job saves a separate
+artifact with its allocation number, workflow run/attempt and actual environment.
+The independent-allocation result is pending; unstarted jobs after a failure must
+not count as passes. The image comparison above is not a controlled proof that the
+OS version caused the earlier stalls.
 
 
 ## Consecutive window reads
