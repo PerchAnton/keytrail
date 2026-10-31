@@ -3,6 +3,11 @@ import { assertDialogJourney, assertTabsJourney, assertFormErrorsJourney, Journe
 import { dialogHtml, dialogContract } from '../fixtures/dialog.js';
 import { tabsHtml, tabsContract } from '../fixtures/tabs.js';
 import { formHtml, formContract } from '../fixtures/form-errors.js';
+import { recordSnapshotTimings } from '../support/snapshot-timings.js';
+
+let finishTimings: (() => Promise<void>) | undefined;
+test.beforeEach(async ({ page }, info) => { finishTimings = recordSnapshotTimings(page, info); });
+test.afterEach(async () => { await finishTimings?.(); finishTimings = undefined; });
 
 const canaries = {
   input: 'kt-input-8e02f4', message: 'kt-message-a594bd', name: 'kt-name-cba965',
@@ -47,6 +52,9 @@ for (const kind of ['dialog', 'tabs', 'formErrors'] as const) for (const rawErro
           errors: form.errors.map((e, i) => i ? e : { ...e, expectedText: canaries.message }) });
       }
     } catch (error) {
+      // Preserve unexpected failures from the successful-input branch. Only the
+      // raw-error branch deliberately injects a browser error.
+      if (!rawError) throw error;
       expect(error).toBeInstanceOf(JourneyAssertionError);
       const failure = error as JourneyAssertionError; result = failure.result; message = failure.message;
       expect(failure.code).toBe('BROWSER_ERROR');
