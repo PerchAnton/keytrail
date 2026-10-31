@@ -2,14 +2,12 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation:** the `macos-15` ARM comparison passed **510/510** tests
-(three rounds); Linux passed **170/170**, with real package consumers on both.
-Maximum ARM gaps were **50.3 / 61.1 / 29.9 ms** against the unchanged **100 ms**
-limit, with zero retries. The earlier macOS 26 failure remains documented.
-These rounds used one ARM VM; validation across fresh runner allocations is still
-pending. [Results and diagnosis](docs/ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
-The benchmark below retains its measured revision; final 100-round acceptance
-and publication remain pending.
+**Release preparation:** a fresh `macos-15` ARM allocation still failed on a real
+**130.3 ms** observation gap (**169/170** tests). The first and third allocations and Linux
+passed **170/170** each and their package consumers. The **100 ms** limit and zero
+retries remain unchanged. [Allocation results and diagnosis](docs/ci-concurrency.md#fresh-macos-15-arm-allocations).
+Pinning the image has not resolved the failure. The benchmark below retains its
+measured revision; final 100-round acceptance and publication remain pending.
 
 Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
 from the repository root. This read-only command does not start tests or publish a package.

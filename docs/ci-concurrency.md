@@ -3,10 +3,79 @@
 The default regression suite uses **one browser worker**. CI requires the complete
 suite and package consumers on Linux and ARM; the candidate pins `macos-15`. The separately
 measured Intel environment remains a documented failed experiment, not a required
-runner or a passing result. Both required jobs still execute every fixture.
+runner or a passing result. Every executed required job still runs every fixture.
 The four-worker isolation comparison remains part of the local four-round
 verifier. A real gap above 100 ms still blocks a negative observation; retries
 remain disabled. Results below identify their source revision and runner.
+
+## Fresh macOS 15 ARM allocations
+
+The three-allocation comparison **did not pass**. The first and second jobs ran at
+`5aa44e0` in [run 41209737766](https://github.com/PerchAnton/keytrail/actions/runs/41209737766).
+The third ran at `82a8254` in a [single-allocation dispatch](https://github.com/PerchAnton/keytrail/actions/runs/41210833469).
+All execution input hashes are identical; only CI dispatch/matrix control changed.
+Each ARM job used a new runner ID and started after the previous one finished.
+GitHub-hosted VM allocation is verified; distinct physical hosts are not asserted.
+
+| Allocation | Job time (UTC, 31 October) | Runner ID | Full suite | Package consumers | Maximum passing-window gap |
+| --- | --- | ---: | ---: | --- | ---: |
+| ARM 1 | 14:21:17–14:25:47 | 1000003916 | 170/170 | Both passed | 74.7 ms |
+| ARM 2 | 14:25:49–14:30:09 | 1000003917 | 169/170 | Skipped after failure | 36.9 ms |
+| ARM 3 | 14:35:22–14:41:00 | 1000003918 | 170/170 | Both passed | 50.4 ms |
+| Linux baseline | 14:21:16–14:27:18 | 1000003915 | 170/170 | Both passed | 32.5 ms |
+
+The 36.9 ms value excludes the failed window: allocation 2 blocked at
+`T05.backward.002.unchanged` with a real **130.3 ms** gap. The fixture was
+`manual tabs record initial and final observations even for a short window`.
+Its six actual observations span 177.6 ms; 40 checks passed, one blocked and nine
+remained unrun. No keyboard action followed the blocked step. The original error,
+full raw report and timing attachment are retained.
+
+| Measurement at the failed reading | Duration |
+| --- | ---: |
+| Actual browser observation gap | 130.3 ms |
+| Host snapshot / preceding host pause | 130.144 / 0.047 ms |
+| Node user + system CPU | 37.757 ms |
+| Overlapping recorded GC | 7.042 ms |
+| First-to-last locator-call start | 25.001 ms |
+| Browser callback span / longest callback | 83.2 / 0.2 ms |
+
+A recorded GC overlaps the reading but does not account for the full delay.
+Callback bodies remain short while their execution is spread out. These timings
+do not establish a particular scheduler, transport, selector-resolution or browser
+cause. Pinning macOS 15 has not removed the intermittent gap. The next diagnosis
+needs to separate request dispatch, locator resolution and browser scheduling;
+repeating whole suites until they pass would not establish the cause.
+
+The initial matrix used `fail-fast: true`, cancelling allocation 3 before any
+runner was assigned. A selected-job resume also ended immediately with no steps;
+GitHub copied the earlier jobs' timestamps and outcomes into that control attempt.
+Neither cancelled reservation is counted as a test execution. The workflow now
+uses `fail-fast: false` with `max-parallel: 1`, and supports a bounded manual choice
+of one allocation. Only the never-executed third allocation was dispatched; the
+first two were not repeated. A targeted dispatch is a partial check, not a passing
+replacement for the failed comparison.
+
+```sh
+gh workflow run ci.yml --ref YOUR_BRANCH -f arm-allocation=3
+```
+
+Ordinary PR/main CI still requests all three ARM jobs plus Linux. Each executed
+job runs one complete round with `--workers=1 --retries=0`, then package consumers
+only if preceding checks pass. The 100 ms limit and failure exit status are unchanged.
+Separate artifacts retain allocation number, run/attempt, actual environment and
+raw results. The measured ARM image was `macos15` / `20261028.0489.1`, Darwin
+24.6.0, Apple M1 (Virtual), three logical CPUs, 7 GiB RAM, Node 24.22.1,
+Playwright 1.64.1 and Chromium 156.0.8078.4 on all three allocations.
+
+Independent validation checked **680 browser executions (679 passed, one failed)**,
+**644 unique journey IDs**, semantic signatures of passing reports, input hashes,
+52 guard subprocess exits per executed job, runner IDs/times and actual archive
+checksums. Linux and ARM allocations 1/3 each passed the clean vanilla and React
+consumers, including the expected negative exit and preserved HTML/JUnit reports.
+[Complete source-bound record](evidence/ci-fresh-arm-allocations.json).
+Package records qualify their tested archives, not later documentation-only
+archives. No final 100-round series, merge or publication was performed.
 
 ## Recurring ARM gaps: diagnosis remains open
 
@@ -110,15 +179,10 @@ Darwin 24.6.0, image `macos15` / `20261028.0489.1`, Node 24.22.1 and Chromium
 the recorded environment and workflow label identify the actual macOS 15 runner.
 [Complete source-bound record](evidence/ci-macos15-comparison.json).
 
-All three ARM rounds ran on **one allocated VM**. A subsequent CI invocation gets
-a new allocation, so sequential repeats cannot establish repeatability between
-allocations. CI now defines three separate ARM jobs, with `max-parallel: 1` and
-`fail-fast: true`. Each fresh allocation runs one complete browser round and its
-own package consumers, with one worker and no retries. Each job saves a separate
-artifact with its allocation number, workflow run/attempt and actual environment.
-The independent-allocation result is pending; unstarted jobs after a failure must
-not count as passes. The image comparison above is not a controlled proof that the
-OS version caused the earlier stalls.
+Those three ARM rounds ran on **one allocated VM**. The subsequent
+[fresh-allocation comparison](#fresh-macos-15-arm-allocations) reproduced the gap on
+macOS 15. The earlier image comparison is not a controlled proof that the OS version
+caused the stalls. Cancelled jobs are not counted as executed rounds.
 
 
 ## Consecutive window reads

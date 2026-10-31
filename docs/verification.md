@@ -1,14 +1,15 @@
 # Verification
 
-**Latest status (31 October 2026): the macOS 15 ARM comparison passed.**
-At `cc95784`, ARM passed **3 × 170 = 510** tests and Linux passed **170/170**,
-with zero retries/skips and both real package consumers on each platform. Maximum
-ARM gaps were **50.3 / 61.1 / 29.9 ms**, below the unchanged 100 ms bound.
-[Independently checked comparison](evidence/ci-macos15-comparison.json).
-The earlier macOS 26 diagnostic run failed at 549.8 ms; its evidence is retained.
-Production runtime is unchanged. Three rounds on one VM do not establish stability
-across new runner allocations; that validation remains pending before treating the
-configuration as a stability fix. [Diagnosis and scope](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+**Latest status (31 October 2026): macOS 15 ARM still reproduces observation gaps.**
+The second fresh allocation passed **169/170** tests and blocked at
+`T05.backward.002.unchanged` on **130.3 ms**. Its package stage was skipped.
+The first and third allocations each passed **170/170** and both package consumers;
+their maximum passing-window gaps were **74.7 / 50.4 ms**. Linux passed **170/170**
+and both consumers. All three ARM jobs ran sequentially on distinct runner IDs.
+[Source-bound allocation results](evidence/ci-fresh-arm-allocations.json).
+The 100 ms limit, one worker and zero test retries are unchanged. This comparison
+changes CI allocation, not production runtime; pinning macOS 15 has not removed
+the failure. [Diagnosis and scope](ci-concurrency.md#fresh-macos-15-arm-allocations).
 The [benchmark](performance.md) retains its measured `1b42666` identity.
 Final 100-round acceptance and publication remain deferred.
 
@@ -23,15 +24,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Comparison `cc95784`: Linux 170/170 and macOS 15 ARM 510/510; no retries/skips. Fresh-allocation validation remains pending |
+| Browser suite | Fresh allocations: ARM 170/170, 169/170, 170/170; Linux 170/170. Original 130.3 ms failure retained; no test retries/skips |
 | Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
 | Performance | Recorded `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
 | Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Comparison `cc95784`: two clean offline installations verified on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-macos15-comparison.json); final acceptance remains false |
-| Hosted platforms | Comparison `cc95784` passed all required checks; [validated record](evidence/ci-macos15-comparison.json). Recurring ARM gaps remain an open issue, not a resolved failure |
+| Package consumers | Linux and ARM allocations 1/3 passed both clean offline consumers; allocation 2 skipped after its browser failure. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-fresh-arm-allocations.json); final acceptance remains false |
+| Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified. One failed; [combined record](evidence/ci-fresh-arm-allocations.json). Original inputs `5aa44e0`, third allocation `82a8254` with identical execution hashes |
 
 ## Recorded performance (`1b42666`)
 

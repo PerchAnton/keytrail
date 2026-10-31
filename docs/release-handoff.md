@@ -1,14 +1,15 @@
 # Review the first release candidate
 
-**Latest status (31 October 2026): the macOS 15 ARM comparison passed.**
-At `cc95784`, ARM passed **3 × 170 = 510** tests and Linux passed **170/170**,
-with zero retries/skips and both real package consumers on each platform. Maximum
-ARM gaps were **50.3 / 61.1 / 29.9 ms**, below the unchanged 100 ms bound.
-[Independently checked comparison](evidence/ci-macos15-comparison.json).
-The earlier macOS 26 diagnostic run failed at 549.8 ms; its evidence is retained.
-Production runtime is unchanged. Three rounds on one VM do not establish stability
-across new runner allocations; that validation remains pending before treating the
-configuration as a stability fix. [Diagnosis and scope](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+**Latest status (31 October 2026): macOS 15 ARM still reproduces observation gaps.**
+The second fresh allocation passed **169/170** tests and blocked at
+`T05.backward.002.unchanged` on **130.3 ms**. Its package stage was skipped.
+The first and third allocations each passed **170/170** and both package consumers;
+their maximum passing-window gaps were **74.7 / 50.4 ms**. Linux passed **170/170**
+and both consumers. All three ARM jobs ran sequentially on distinct runner IDs.
+[Source-bound allocation results](evidence/ci-fresh-arm-allocations.json).
+The 100 ms limit, one worker and zero test retries are unchanged. This comparison
+changes CI allocation, not production runtime; pinning macOS 15 has not removed
+the failure. [Diagnosis and scope](ci-concurrency.md#fresh-macos-15-arm-allocations).
 The [benchmark](performance.md) retains its measured `1b42666` identity.
 Final 100-round acceptance and publication remain deferred.
 

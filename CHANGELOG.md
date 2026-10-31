@@ -7,8 +7,12 @@
   diagnostics and a read-only CI summary that retains failures without attachments.
   Three diagnostic ARM rounds passed; a fourth recorded a 549.8 ms gap with
   little CPU work and no overlapping recorded GC. Retain the failure and compare
-  the macOS 15 ARM image separately: three rounds and both package consumers
-  passed. These rounds share one VM; fresh-allocation validation remains pending.
+  the macOS 15 ARM image separately. Three rounds on one VM passed, but the
+  second fresh allocation reproduced a 130.3 ms gap. Preserve that failure.
+- Run ARM allocations as separate sequential jobs with one full round and package
+  consumers per job. Retain failures while allowing the remaining allocations to
+  finish; permit an explicit single-allocation dispatch without repeating other
+  results. Keep all 170 cases, the 100 ms bound and zero test retries.
 
 - Start the next manual-window browser read immediately after validating the previous
   snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.
