@@ -2,7 +2,12 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation:** main `02ee0953` passed Linux but failed macOS ARM on a 109.8 ms observation gap. The candidate removes the host timer between manual-window reads; CI at `7a60938` passed **510/510 on ARM** and **170/170 on Linux**, plus package consumers, with zero retries. Maximum ARM gaps were **35.8 / 45.2 / 31.0 ms** against the unchanged **100 ms** limit. Earlier archives, repeatability proofs and benchmarks retain their original source identity. [Diagnosis and validation](docs/ci-concurrency.md#consecutive-window-reads). Publication and final acceptance remain pending.
+**Release preparation:** merged main `1b42666` passed **510/510 checks on macOS ARM**
+(three rounds) and **170/170 on Linux**, plus both package consumers on each platform,
+without retries. A fresh **108/108 benchmark** matches this source; the results are
+below. The observation gap limit remains **100 ms**. [Current evidence](docs/verification.md)
+and [remaining release gates](docs/release-handoff.md). Publication and final
+100-round acceptance remain pending.
 
 Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
 from the repository root. This read-only command does not start tests or publish a package.
@@ -209,17 +214,20 @@ and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
 this source revision. This short development sample is not a guarantee against
 future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
 failures and measured limits. Final 100-round acceptance remains deferred; the
-[historical benchmark](docs/performance.md) passed all 108 tests at `da7e663`. Real-world adoption has not been established.
+[fresh benchmark](docs/performance.md) passed all 108 tests at `1b42666`. The current
+main also passed 170 Linux and 510 ARM checks with package consumers;
+[source-bound CI record](docs/evidence/ci-main-1b42666.json). Real-world adoption has not been established.
 
-### Historical measured overhead (`da7e663`, 31 October 2026)
+### Measured overhead (`1b42666`, 31 October 2026, 12:07 UTC)
 
 ![KeyTrail overhead against equivalent native Playwright checks](docs/assets/performance.svg)
 
-Median paired overhead is **4.1%** for dialogs, **-0.8%** for manual tabs
-and **2.5%** for form errors (`insertText`). All three synthetic workloads meet
+Median paired overhead is **4.8%** for dialogs, **-4.0%** for manual tabs
+and **2.8%** for form errors (`insertText`). All three synthetic workloads meet
 the 20% target on the recorded runner. Each has
 30 measured pairs after five warmups, with the same actions and semantic checks.
-Manual tabs include required observation windows. See [method, limitations and raw
+Manual tabs include required observation windows; the negative result is specific
+to this sample. See [method, limitations and raw
 samples](docs/performance.md); this is not a general speed or accessibility claim.
 
 Original code, rules and examples are licensed under [Apache-2.0](LICENSE).
