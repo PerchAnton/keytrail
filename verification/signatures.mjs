@@ -4,6 +4,8 @@ import { validJourneyResult } from '../artifacts/unit/validate.js';
 
 export const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const engineCases = new Set([
+  'observation dispatch preserves the caller async context',
+  'queued observation dispatch checks the budget before sending locator reads',
   'an early resolution error awaits slower sibling reads before clearing stored nodes',
   'a focus observation cannot combine two different instants',
   'replacement during observation is re-resolved and stored nodes are cleared',

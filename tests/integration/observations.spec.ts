@@ -2,6 +2,7 @@ import { test, expect, type Page, type JSHandle } from '@playwright/test';
 import { Driver } from '../../src/browser/driver.js';
 import { DEFAULTS } from '../../src/contracts/dialog.js';
 import { tabsHtml, tabsContract } from '../fixtures/tabs.js';
+import { AsyncLocalStorage } from 'node:async_hooks';
 
 function trackStores(page: Page) {
   const original = page.evaluateHandle, issued: JSHandle[] = [];
@@ -17,6 +18,46 @@ async function expectCleared(stores: JSHandle[]) {
 async function expectDisposed(stores: JSHandle[]) {
   for (const store of stores) await expect(store.evaluate(value => !!value)).rejects.toThrow();
 }
+
+test('observation dispatch preserves the caller async context', async ({ page }) => {
+  await page.setContent('<section><button>Open</button></section>');
+  const root = { id: 'root', locator: page.locator('section') };
+  const driver = new Driver(page, [root], root, { ...DEFAULTS }, performance.now());
+  const context = new AsyncLocalStorage<object>(), token = {};
+  const original = root.locator.evaluateAll;
+  let calls = 0;
+  root.locator.evaluateAll = (async (...args: Parameters<typeof original>) => {
+    expect(context.getStore()).toBe(token); calls++;
+    return original.apply(root.locator, args);
+  }) as typeof original;
+  try {
+    await context.run(token, async () => {
+      expect((await driver.snapshot()).present.has('root')).toBe(true);
+      expect((await driver.snapshot()).present.has('root')).toBe(true);
+    });
+    expect(calls).toBe(2); expect(driver.steps).toHaveLength(0);
+  } finally { root.locator.evaluateAll = original; await driver.dispose(); }
+});
+
+test('queued observation dispatch checks the budget before sending locator reads', async ({ page }) => {
+  await page.setContent('<section><button>Open</button></section>');
+  const root = { id: 'root', locator: page.locator('section') }, config = { ...DEFAULTS };
+  const driver = new Driver(page, [root], root, config, performance.now());
+  const stores = trackStores(page), original = root.locator.evaluateAll;
+  try {
+    await driver.snapshot();
+    let calls = 0;
+    root.locator.evaluateAll = (async (...args: Parameters<typeof original>) => {
+      calls++; return original.apply(root.locator, args);
+    }) as typeof original;
+    // Expire the budget at the handoff, after snapshot entry but before dispatch.
+    queueMicrotask(() => { config.scenarioTimeoutMs = 0; });
+    await expect(driver.snapshot()).rejects.toMatchObject({ code: 'SCENARIO_TIMEOUT' });
+    expect(calls).toBe(0); expect(driver.steps).toHaveLength(0);
+    await expectCleared(stores.issued);
+  } finally { root.locator.evaluateAll = original; await driver.dispose(); stores.restore(); }
+  await expectDisposed(stores.issued);
+});
 
 test('a focus observation cannot combine two different instants', async ({ page }) => {
   await page.setContent('<section id="dialog"><button id="a">A</button><button id="b">B</button></section>');

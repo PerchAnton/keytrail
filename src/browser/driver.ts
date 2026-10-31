@@ -149,14 +149,23 @@ export class Driver {
             if (result.status === 'rejected') throw result.reason;
             return result.value;
           };
-          const targetReads = Promise.allSettled(this.targets.map(async (target, slot) => {
-            const resolved = await resolve(target.locator, slot);
-            if (resolved.count > 1) throw new Blocked('TARGET_AMBIGUOUS');
+          const queries = [...this.targets.map((target, slot) => ({ locator: target.locator, slot })),
+            ...plans[scope].locators.map((locator, index) => ({ locator, slot: this.targets.length + index }))];
+          // Start transport work from a short stack. Playwright captures and maps
+          // stacks for each request; retaining the entire journey's async caller
+          // chain multiplies that work across every locator in every snapshot.
+          // A microtask adds no timer pause. It retains the current async context,
+          // and every query still checks the deadline and resolves fresh nodes.
+          const results = await new Promise<PromiseSettledResult<Awaited<ReturnType<typeof resolve>>>[]>(done => {
+            queueMicrotask(() => {
+              void Promise.allSettled(queries.map(({ locator, slot }) => resolve(locator, slot))).then(done);
+            });
+          });
+          const states = results.map((result, slot) => {
+            const resolved = unwrap(result);
+            if (slot < this.targets.length && resolved.count > 1) throw new Blocked('TARGET_AMBIGUOUS');
             return resolved;
-          }));
-          const roleReads = Promise.allSettled(plans[scope].locators.map((locator, index) => resolve(locator, this.targets.length + index)));
-          const [targetResults, roleResults] = await Promise.all([targetReads, roleReads]);
-          const states = [...targetResults.map(unwrap), ...roleResults.map(unwrap)].flatMap(result => result.state ? [result.state] : []);
+          }).flatMap(result => result.state ? [result.state] : []);
           if (states.length !== 1) throw new Blocked('BROWSER_ERROR');
           const state = states[0]!;
           readFinished = true;
