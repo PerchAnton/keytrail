@@ -1,12 +1,15 @@
 # Review the first release candidate
 
-**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
-(510/510), one Linux round (170/170) and both package consumers per platform, with
-zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
-maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
-The fresh [108-test benchmark](performance.md) matches this source. Earlier repeatability
-proofs remain historical; final 100-round acceptance is still deferred. This short
-sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
+**Latest status (31 October 2026): ARM stability remains under investigation.**
+Main `050d97c` failed on a 129.8 ms canary observation gap; [retained failure](evidence/ci-main-050d97c-failure.json).
+The diagnostic revision `ed74027` passed Linux 170/170 and three ARM rounds
+(510/510), plus both package consumers, with zero retries. ARM maxima were
+86.8 / 87.7 / 38.0 ms. The runtime was unchanged: a green diagnostic run does not
+close the earlier failure. [Diagnosis](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open)
+and [validated results](evidence/ci-arm-diagnostics.json).
+The [108-test benchmark](performance.md) retains its measured `1b42666` identity;
+changed diagnostic tests are not covered by its full input hashes. Final 100-round
+acceptance and publication remain deferred.
 
 The measured development snapshot is `1b42666fddf8c6653ae3898cbe99a61c5b671980`
 for **KeyTrail 0.1.0-alpha.6**. It is not a published release or final acceptance.
@@ -20,7 +23,7 @@ one Linux round (170 tests) and three macOS ARM rounds (510 tests), with zero
 retries and skips. Independent validation checked all four raw reports, 644 unique
 journey IDs, source hashes, guard exits and both platforms' archive checksums.
 Both platforms passed the real tarball checks in separate vanilla and React consumers.
-[Current main-CI record](evidence/ci-main-1b42666.json).
+[Preserved main-CI record](evidence/ci-main-1b42666.json).
 
 The fresh [benchmark](performance.md) passed 108/108 tests: five warmups and 30
 alternating measured pairs per workload, plus three negative controls. Independent
@@ -30,7 +33,7 @@ is specific to three synthetic fixtures on the recorded Mac, not a general speed
 
 The [local atomic-registration proof](evidence/development-atomic-observations.json)
 predates the consecutive-read scheduler. Its four rounds, four-worker comparison
-and 800 unique journey IDs remain historical. Neither that proof nor current main
+and 800 unique journey IDs remain historical. Neither that proof nor the preserved main
 CI is a final 100-round series.
 
 The earlier `8f119df` [browser review](evidence/browser-review.json) exercised the

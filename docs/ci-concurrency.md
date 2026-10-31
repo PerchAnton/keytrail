@@ -8,6 +8,58 @@ The four-worker isolation comparison remains part of the local four-round
 verifier. A real gap above 100 ms still blocks a negative observation; retries
 remain disabled. Results below identify their source revision and runner.
 
+## Recurring ARM gaps: diagnosis remains open
+
+The [main run at `050d97c`](https://github.com/PerchAnton/keytrail/actions/runs/41200576177)
+passed Linux 170/170 and its package consumers, but ARM passed only 169/170 in
+round one. The successful-input tabs canary blocked on an actual **129.8 ms** gap.
+Later rounds and ARM package consumers did not run. The original journey retained
+the correct `OBSERVATION_GAP` and stopped further actions. However, the canary's
+catch block expected an injected `BROWSER_ERROR` even on the successful-input path,
+masking the original error in the test output. That branch now rethrows the original
+failure. [Retained main failure](evidence/ci-main-050d97c-failure.json).
+
+The failed canary had no snapshot-timing attachment. Diagnostics now cover all
+canaries and retain host snapshot/locator durations, time between snapshots,
+browser callback durations and spans, CPU usage and load averages. Browser and
+host clocks remain separate. The read-only summary retains failures even when no
+attachment exists. It neither changes the runner result nor treats an expected
+blocked regression as an unexpected failure.
+
+The [diagnostic run at `ed74027`](https://github.com/PerchAnton/keytrail/actions/runs/41201812981)
+passed all checks and real package consumers on both platforms. Independent checks
+validated four raw reports, **680 executions**, **644 unique journey IDs**, semantic
+signatures, source hashes, guard exits and archive checksums.
+
+| Platform / round | Passed | Maximum passing-window gap |
+| --- | ---: | ---: |
+| Linux / 1 | 170/170 | 26.8 ms |
+| macOS ARM / 1 | 170/170 | 86.8 ms |
+| macOS ARM / 2 | 170/170 | 87.7 ms |
+| macOS ARM / 3 | 170/170 | 38.0 ms |
+
+**This is a diagnostic result, not a runtime fix or proof of stable ARM capacity.**
+The runtime was unchanged. The slowest second-round window had a 100.004 ms host
+snapshot, 0.025 ms between host snapshots, a 97.840 ms locator call, and browser
+callbacks individually no longer than 0.1 ms. Those callbacks were spread over
+47.8 ms. Substantial latency therefore occurred outside the callbacks themselves;
+this does not distinguish selector resolution, transport, garbage collection or
+process scheduling. The first-round canary also recorded high system load, but
+load averages alone cannot identify the cause. The profiler itself adds work.
+[Source-bound results and timing records](evidence/ci-arm-diagnostics.json).
+
+A local negative control injected one 150 ms delay into a copy of the successful
+canary. Its raw report failed with the original `OBSERVATION_GAP` (160.1 ms), retained
+the timing attachment and contained none of the canary values. This control is not
+a passing reliability round. Eight normal focused browser cases and four summary
+unit tests passed locally. The 100 ms bound, fresh locator resolution, zero retries
+and three-round ARM limit remain unchanged. No final 100-round series was run.
+
+The next root-cause experiment must correlate a slow request with host event-loop/
+GC activity and browser/runner scheduling before changing the scheduler again.
+Neither another unchanged green run nor a cached DOM binding closes this issue.
+Final acceptance and publication remain blocked while this investigation is open.
+
 ## Consecutive window reads
 
 The [post-merge main run](https://github.com/PerchAnton/keytrail/actions/runs/41194618651)

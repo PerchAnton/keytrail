@@ -16,6 +16,14 @@ test('failed canary remains a failure when timing diagnostics are missing', () =
   assert.equal(r.failedTests[0].windows[0].gapMs, 129.8);
 });
 
+test('a failed test without attachments is not omitted from diagnostics', () => {
+  const r = summarizeObservations(report('failed', []));
+  assert.equal(r.failedTests.length, 1);
+  assert.equal(r.failedTests[0].status, 'failed');
+  assert.equal(r.failedTests[0].timingAttachment, false);
+  assert.deepEqual(r.failedTests[0].windows, []);
+});
+
 test('an expected gap regression stays a passing test with a blocked journey', () => {
   const r = summarizeObservations(report('passed', [attachment('journey-result.json', journey)]));
   assert.equal(r.failedTests.length, 0);

@@ -2,6 +2,12 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Preserve unexpected canary failures instead of replacing their code with an
+  assertion for a deliberately injected browser error. Add missing canary timing
+  diagnostics and a read-only CI summary that retains failures without attachments.
+  The three-round diagnostic ARM run passed, but recurring observation gaps remain
+  under investigation; this is not a runtime stability fix.
+
 - Start the next manual-window browser read immediately after validating the previous
   snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.
   Retain the 100 ms limit, actual timestamps, fresh locators and zero retries.

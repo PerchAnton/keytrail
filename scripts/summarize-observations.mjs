@@ -14,7 +14,9 @@ export function summarizeObservations(report) {
         const journey = attachment('journey-result.json');
         const timings = attachment('snapshot-timings.json');
         const windows = (journey?.checks ?? []).filter(c => c.checkId.endsWith('.unchanged'));
-        if (!windows.length && !timings) continue;
+        // A setup/attachment failure may have no journey or timing record at all.
+        // Keep it visible instead of producing an empty failedTests list.
+        if (!windows.length && !timings && attempt.status === 'passed') continue;
         const readings = (timings?.readings ?? []).filter(r => r.window !== undefined && r.intervalMs !== undefined);
         const slowest = [...readings].sort((a, b) => b.intervalMs - a.intervalMs).slice(0, 3).map(r => {
           const callbacks = (r.resolutions ?? []).filter(s => s.browserStartedAt !== undefined && s.browserFinishedAt !== undefined);

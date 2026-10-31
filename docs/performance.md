@@ -1,6 +1,6 @@
 # Equivalent-work benchmark
 
-The current measurements apply to merged main `1b42666`, recorded on **31 October
+The recorded measurements apply to merged main `1b42666`, recorded on **31 October
 2026 at 12:07 UTC** (14:07 in Kyiv). All **108 benchmark tests passed**, without
 retries. Independent validation checked the complete raw report, all warmup and
 measured pairs, semantic equivalence, negative controls, environment and source
@@ -18,6 +18,11 @@ horizontal manual-activation tab list, and a two-field form with live error clea
 using `inputMode: "insertText"`. The opt-in per-character `type` mode is not measured.
 The reference is fixture-specific native Playwright. These samples do not measure
 real-world adoption, WCAG conformance or screen-reader behavior.
+
+The diagnostic follow-up changes tests, not production runtime or benchmark code.
+Its full input hash set therefore differs from these recorded measurements. Do not
+relabel this benchmark as a run of the diagnostic revision. The recurring ARM
+observation-gap investigation remains open; [latest status](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
 
 ## Recorded results — 31 October 2026, 12:07 UTC (`1b42666`)
 
