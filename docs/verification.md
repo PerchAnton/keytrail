@@ -1,6 +1,6 @@
 # Verification
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
@@ -16,19 +16,20 @@ component is accessible.
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard-atomic-observations.json) |
-| Performance | Historical `0300552`: 108/108 tests; median paired overhead: dialog 8.4%, manual tabs 0.8%, forms (`insertText`) 4.6%; [historical samples](performance.md) |
+| Performance | Current `da7e663`: 108/108 tests; median paired overhead: dialog 4.1%, manual tabs -0.8%, forms (`insertText`) 2.5%; [samples and validation](performance.md) |
 | Repeatability | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
 | Package consumers | Current `7e48291`: two clean offline installations verified locally and on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-atomic-observations.json); final acceptance remains false |
 | Hosted platforms | At `7e48291`: 3 × 169 macOS ARM and 169 Linux checks; all stages and clean package consumers passed. [Validated record](evidence/ci-atomic-observations.json). Earlier main ARM 126.7 ms and Intel 370 ms failures remain recorded. |
 
-## Historical performance (`0300552`)
+## Current performance (`da7e663`)
 
 ![Paired overhead and median/p95 timing results](assets/performance.svg)
 
 Thirty alternating measured pairs per workload, after five warmups per arm.
 The shared runner was an Apple M3 (8 logical CPUs), macOS arm64/Darwin 27.2.0,
-Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 29 October 2026 UTC
-(30 October in Kyiv). The benchmark ran after the reliability series.
+Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 31 October 2026. This benchmark ran independently of final reliability acceptance;
+no new 100-round series was run. [Historical results](history/performance-2026-10-29.md)
+are preserved separately.
 Every pair also passed semantic equivalence checks; three known defects agreed on
 the first mismatch and dependent checks. Manual tabs include required observation
 windows, which dominate duration. These figures do not establish a universal speed

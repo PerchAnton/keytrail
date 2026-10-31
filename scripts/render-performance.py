@@ -9,6 +9,9 @@ plt.rcParams.update({'svg.fonttype': 'none', 'svg.hashsalt': 'keytrail-performan
 root = Path(__file__).resolve().parents[1]
 kinds = [('dialog', 'Dialog'), ('tabs', 'Manual tabs'), ('formErrors', 'Form errors (insertText)')]
 records = [json.loads((root / f'docs/evidence/benchmark-{key}.json').read_text()) for key, _ in kinds]
+validation = json.loads((root / 'docs/evidence/benchmark-validation.json').read_text())
+assert all(r['sourceHashes'] == validation['sourceHashes'] for r in records)
+source = validation['sourceCommit'][:7]
 fig = plt.figure(figsize=(10, 6.4), facecolor='#f7f9fc', layout='constrained')
 gs = fig.add_gridspec(3, 1, height_ratios=[3, 1.2, .6])
 ax = fig.add_subplot(gs[0]); ax.set_facecolor('#f7f9fc')
@@ -20,6 +23,7 @@ ax.text(20.3, -.33, '20% target', color='#9b4d00', fontsize=10)
 ax.bar_label(bars, labels=[f'{0 if abs(value) < .05 else value:.1f}%' for value in values], padding=7, fontsize=13, fontweight='bold')
 ax.set_xlabel('Median paired overhead versus equivalent native Playwright checks (%)', fontsize=10)
 ax.set_title(f"KeyTrail {records[0]['version']}: measured overhead", loc='left', fontsize=20, fontweight='bold', pad=24)
+ax.text(0, 1.03, f"Source {source} · 108 tests passed · No retries", transform=ax.transAxes, fontsize=9, color='#394960')
 ax.spines[['top', 'right', 'left']].set_visible(False); ax.grid(axis='x', alpha=.12); ax.set_axisbelow(True)
 ax.tick_params(axis='y', length=0, labelsize=12)
 ax2 = fig.add_subplot(gs[1]); ax2.axis('off')

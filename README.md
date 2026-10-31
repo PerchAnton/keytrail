@@ -1,8 +1,8 @@
 # KeyTrail
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance and release performance evidence are deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation:** the [review snapshot and exact tested archive](docs/release-handoff.md) are recorded for merged `ca0a02b`. Main CI passed Linux 169/169 and macOS ARM 507/507. Publication and final acceptance remain pending.
+**Release preparation:** the [review snapshot and exact tested archive](docs/release-handoff.md) are recorded for merged `da7e663`. Main CI passed Linux 169/169 and macOS ARM 507/507. Publication and final acceptance remain pending.
 
 Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
 from the repository root. This read-only command does not start tests or publish a package.
@@ -208,14 +208,16 @@ sequential checks and **169 four-worker checks**, with matching semantics and
 and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
 this source revision. This short development sample is not a guarantee against
 future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
-failures and measured limits. Final 100-round acceptance and fresh release
-benchmarks remain deferred. Real-world adoption has not been established.
+failures and measured limits. Final 100-round acceptance remains deferred; the
+[current-source benchmark](docs/performance.md) has now passed all 108 tests. Real-world adoption has not been established.
 
-### Historical measured overhead (`0300552`)
+### Measured overhead (`da7e663`, 31 October 2026)
 
 ![KeyTrail overhead against equivalent native Playwright checks](docs/assets/performance.svg)
 
-All three synthetic workloads meet the 20% target on the recorded runner. Each has
+Median paired overhead is **4.1%** for dialogs, **-0.8%** for manual tabs
+and **2.5%** for form errors (`insertText`). All three synthetic workloads meet
+the 20% target on the recorded runner. Each has
 30 measured pairs after five warmups, with the same actions and semantic checks.
 Manual tabs include required observation windows. See [method, limitations and raw
 samples](docs/performance.md); this is not a general speed or accessibility claim.

@@ -1,23 +1,23 @@
 {
-  "recordedAt": "2026-10-30T21:21:31.138887+00:00",
+  "recordedAt": "2026-10-31T10:44:23.314558+00:00",
   "package": "keytrail",
   "version": "0.1.0-alpha.6",
-  "sourceCommit": "ca0a02be4bed9694d0edb4acdeeba910d56bc38a",
-  "sourceTree": "4ea23356e28e81e27fb515965441eeab8242c8eb",
+  "sourceCommit": "da7e66378619816cd9c7e065df95f0e2a6e67661",
+  "sourceTree": "5d7ac57b48340cafaa2d53be07cdfb424875abab",
   "status": "development-review-ready",
   "releaseReady": false,
   "published": false,
   "finalAcceptance": false,
   "archive": {
     "file": "keytrail-0.1.0-alpha.6.tgz",
-    "bytes": 354718,
-    "sha256": "738e6a55e0006fbe7f73c02e212519aeb5aa0cee158cd5d10608d4e20a098283",
+    "bytes": 355410,
+    "sha256": "da3f8891d390e9701bafe4aa58e5b1e91def5d2f23b8da9d86202ab536f0b558",
     "files": 100
   },
   "verificationLevel": "development",
   "mainCI": {
-    "runId": 41126695358,
-    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41126695358",
+    "runId": 41172735137,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41172735137",
     "conclusion": "success",
     "sourceHashesMatch": "development-atomic-observations.json",
     "uniqueJourneyRunIds": 640,
@@ -28,14 +28,14 @@
         "rounds": [
           {
             "tests": 169,
-            "sha256": "c5dbde1ce4072a72c3ea7bd366a50242cd2eedd139580a00726b663d5232da7a",
-            "maximumPassingWindowGapMs": 39.79999999998836
+            "sha256": "e14f45a7593ab4ffc3685611c4087202b929c25b425ff6a3b95637e94afbc927",
+            "maximumPassingWindowGapMs": 20.399999999965075
           }
         ],
         "archive": {
           "file": "keytrail-0.1.0-alpha.6.tgz",
-          "bytes": 354718,
-          "sha256": "738e6a55e0006fbe7f73c02e212519aeb5aa0cee158cd5d10608d4e20a098283",
+          "bytes": 355410,
+          "sha256": "da3f8891d390e9701bafe4aa58e5b1e91def5d2f23b8da9d86202ab536f0b558",
           "files": 100
         }
       },
@@ -45,24 +45,24 @@
         "rounds": [
           {
             "tests": 169,
-            "sha256": "24a37f4d51c23f091b5dc8e9e42e3b676bf6b08ff9ee16fa9df9f966807a798d",
-            "maximumPassingWindowGapMs": 78.70000000001164
+            "sha256": "49ea1ed5737504ff7a3ae33e59714c4f28e0d7fe98e6ec9077b0cec1adcb610e",
+            "maximumPassingWindowGapMs": 41.40000000002328
           },
           {
             "tests": 169,
-            "sha256": "6ca74067faddb2e4e55f474f5a9a9b4008958fc9769cb788b4dcee33fd9c6f6b",
-            "maximumPassingWindowGapMs": 57.09999999997672
+            "sha256": "2af2ecab951b066e8d7cb5ac184c8e885f90b23b3fb1857cc9533d332431defc",
+            "maximumPassingWindowGapMs": 69.29999999993015
           },
           {
             "tests": 169,
-            "sha256": "c3edfbf41a4ea5283a40ebc0c6ba41dfe7dda717ebe95289f7bc5838c03e91b6",
-            "maximumPassingWindowGapMs": 45.59999999997672
+            "sha256": "2b9aa19fdd8c6bdedff813c83793a206a0ca5b86c41ef12f5f80c70b927e3ba2",
+            "maximumPassingWindowGapMs": 62.59999999997672
           }
         ],
         "archive": {
           "file": "keytrail-0.1.0-alpha.6.tgz",
-          "bytes": 354718,
-          "sha256": "b237994e60ed30ec347fcc036fd661bfbbd182081d2df27bfc13df6e41a14c75",
+          "bytes": 355410,
+          "sha256": "d0e19b32039e2e9f69d2d009315df064f8e6fcb0efce54264304714562b3a565",
           "files": 100
         }
       }
@@ -89,10 +89,19 @@
   "pending": [
     "Select and freeze the final reviewed candidate.",
     "Run the explicitly requested 100-round final series for that source.",
-    "Collect the full equivalent-native benchmark for that source.",
     "Pass the package release gate with fresh final evidence.",
     "Obtain owner review and publication authorization.",
     "Verify registry ownership/authentication and publish the exact verified archive with the alpha tag."
   ],
-  "browserReviewScope": "browser-review.json retains the earlier 8f119df UI review; examples and runtime are unchanged."
+  "browserReviewScope": "browser-review.json retains the earlier 8f119df UI review; examples and runtime are unchanged.",
+  "performance": {
+    "record": "benchmark-validation.json",
+    "sourceCommit": "da7e66378619816cd9c7e065df95f0e2a6e67661",
+    "tests": 108,
+    "warmupsPerArm": 5,
+    "pairsPerWorkload": 30,
+    "retries": 0,
+    "targetMet": true,
+    "final100RoundsStarted": false
+  }
 }
