@@ -8,7 +8,6 @@
   Add a timer-order regression and match the native benchmark scheduler;
   prior measurements remain historical until refreshed.
 
-
 - Add a read-only release-evidence check that lists all pending records without
   running tests or changing artifacts. Share its validation with the final package
   gate and reject contradictory CI-guard exit codes, missing hashes and empty cases.

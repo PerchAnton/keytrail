@@ -4,7 +4,7 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-These measurements describe current main `da7e663`, recorded on 31 October 2026.
+These measurements describe the historical main snapshot `da7e663`, recorded on 31 October 2026.
 All 108 benchmark tests passed without retries. The raw report, all warmup and
 measured pairs, environment, source hashes and derived statistics were independently
 validated; [validation record](evidence/benchmark-validation.json).

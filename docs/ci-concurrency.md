@@ -39,6 +39,25 @@ scenario deadlines, transient component failures and handle cleanup remain requi
 Validation is limited to three ARM rounds and one Linux round in ordinary CI;
 final 100-round acceptance is not requested.
 
+The [CI run at `7a60938`](https://github.com/PerchAnton/keytrail/actions/runs/41196060997)
+passed all stages on both platforms. Independent validation checked four raw
+reports, **680 executions**, **644 distinct journey IDs**, semantic signatures,
+source hashes, guard exits and actual archive checksums. Both vanilla and React
+consumers passed on each platform. [Complete record](evidence/ci-consecutive-observations.json).
+
+| Platform / round | Passed | Maximum passing-window gap |
+| --- | ---: | ---: |
+| Linux / 1 | 170/170 | 32.2 ms |
+| macOS ARM / 1 | 170/170 | 35.8 ms |
+| macOS ARM / 2 | 170/170 | 45.2 ms |
+| macOS ARM / 3 | 170/170 | 31.0 ms |
+
+All rounds use one worker and zero retries or skips. Deliberate 150 ms gaps still
+block. These short results support the change in the recorded environments; they
+do not guarantee future shared-host latency. No final 100-round series or new local
+four-worker comparison was run. A six-case native-reference pilot passed semantic
+equivalence and negative controls, but supplies no performance claim.
+
 ## Private observation store
 
 Each driver owns one private browser `Map`, accessed through a public Playwright
