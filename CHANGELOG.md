@@ -2,6 +2,9 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Add a read-only release-evidence check that lists all pending records without
+  running tests or changing artifacts. Share its validation with the final package
+  gate and reject contradictory CI-guard exit codes, missing hashes and empty cases.
 - Recheck dialog-trigger focus in the activation preflight. Stop with
   `FOCUS_MISMATCH` before Enter/Space and report the actual observed focus.
 - Require initial/final manual-tabs observations spanning the declared window.

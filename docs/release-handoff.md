@@ -1,15 +1,15 @@
 # Review the first release candidate
 
-The reviewed development snapshot is `8f119df5a745b9971f486eb2c054f3c2c3e220ea`
+The reviewed development snapshot is `ca0a02be4bed9694d0edb4acdeeba910d56bc38a`
 for **KeyTrail 0.1.0-alpha.6**. It is not a published release or final acceptance.
 The [readiness record](evidence/release-readiness.json) identifies completed checks,
 the exact package archive and the work still deferred.
 
 ## What is already verified
 
-[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41104556559) passed
+[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41126695358) passed
 one Linux round (169 tests) and three macOS ARM rounds (507 tests). ARM passing-window
-maxima were 26.0, 46.8 and 31.0 ms; Linux's maximum was 32.1 ms. The limit remains
+maxima were 78.7, 57.1 and 45.6 ms; Linux's maximum was 39.8 ms. The limit remains
 100 ms and retries remain disabled. Both platforms also passed the real tarball
 checks in separate vanilla and React consumers.
 
@@ -18,7 +18,7 @@ contains four rounds (676 tests), a four-worker comparison (169 tests) and 800
 unique journey IDs. Its input hashes match the merged source. Main CI has its own
 640 unique journey IDs; these verification sets are not a final 100-round series.
 
-A [browser review](evidence/browser-review.json) exercised the standalone dialog,
+The earlier `8f119df` [browser review](evidence/browser-review.json) exercised the standalone dialog,
 manual tabs, form correction and React portal/remount. The saved negative HTML
 report shows the first mismatch and opens its original JSON attachment. This
 exploratory review does not replace owner review, pinned-browser qualification or
@@ -32,10 +32,10 @@ Download `linux-evidence` from the main CI run above. Keep these files together:
 - `package-verification.json`
 - `SHA256SUMS`
 
-The archive contains 96 files and is **277,781 bytes**. Its SHA-256 is:
+The archive contains 100 files and is **354,718 bytes**. Its SHA-256 is:
 
 ```text
-0280a1b20eb9ed2513c6a6d0573fd43336aac8ed18ae38ddab1a6ae703d6bc13
+738e6a55e0006fbe7f73c02e212519aeb5aa0cee158cd5d10608d4e20a098283
 ```
 
 Check the checksum from the artifact directory with `shasum -a 256 -c SHA256SUMS`
@@ -45,12 +45,16 @@ record: it must identify this archive and both consumers. Its level is
 A rebuild creates a different artifact and needs its own verification record.
 Checksums establish integrity, not signatures or publication authorization.
 
-The optional local review bundle adds the four raw CI reports, environment and
-guard records, the existing local proof, standard HTML/JUnit consumer reports,
-a screenshot, a manifest and a checksum list. It preserves the tarball bytes;
-it is not a replacement package or a GitHub release.
+The earlier local review bundle remains bound to `8f119df` and its original
+archive; it is retained as history. Use the `ca0a02b` CI artifact above for the
+newer snapshot. Do not mix either archive with the other verification record.
 
 ## Remaining release decisions and checks
+
+Run `node scripts/check-release-readiness.mjs` from the repository root to list
+the saved evidence still missing for this source. The command is read-only and
+does not start the deferred checks. Its successful exit would certify only the
+saved evidence checks, not publication readiness; see the [checklist](release-checklist.md).
 
 1. Select and freeze the final reviewed source.
 2. When explicitly requested, collect its 100-round final repeatability evidence
