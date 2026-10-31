@@ -1,12 +1,15 @@
 # KeyTrail
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation:** merged main `f9c492b` passed **3 × 172 ARM checks and
+**Frozen candidate:** [candidate/0.1.0-alpha.6](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
+remains at `1187fde`, which passed **3 × 172 ARM checks and
 172 Linux checks**, including both package consumers in each job, with no retries.
-Maximum ARM gaps were **69.0 / 61.0 / 42.2 ms**, below the unchanged **100 ms** limit.
-[Main CI evidence](docs/evidence/ci-main-f9c492b.json) · [Why 100 ms](docs/observation-gaps.md).
-The fresh benchmark below passed all **108 tests** for the same measured inputs.
+Maximum ARM gaps were **87.7 / 65.6 / 50.7 ms**, below the unchanged **100 ms** limit.
+[Main CI evidence](docs/evidence/ci-main-1187fde.json) · [Why 100 ms](docs/observation-gaps.md).
+The benchmark below was measured at `f9c492b`: **108 tests** passed, and its input
+hashes match `1187fde`. The [handoff](docs/release-handoff.md) identifies the preserved
+395,737-byte Linux archive and its checksum.
 Short checks do not guarantee host scheduling latency. Final 100-round acceptance
 and publication remain deferred.
 
@@ -215,9 +218,9 @@ and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
 this source revision. This short development sample is not a guarantee against
 future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
 failures and measured limits. Final 100-round acceptance remains deferred; the
-[current benchmark](docs/performance.md) passed all 108 tests at `f9c492b`. Its
-main CI passed 172 Linux and 516 ARM checks with package consumers;
-[source-bound CI record](docs/evidence/ci-main-f9c492b.json). Real-world adoption has not been established.
+[current benchmark](docs/performance.md) passed all 108 tests at `f9c492b`. The frozen
+`1187fde` candidate passed 172 Linux and 516 ARM checks with package consumers;
+[source-bound CI record](docs/evidence/ci-main-1187fde.json). Real-world adoption has not been established.
 
 ### Measured overhead (`f9c492b`, 31 October 2026, 16:13 UTC)
 

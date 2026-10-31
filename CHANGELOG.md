@@ -2,6 +2,11 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Align release instructions with the frozen `1187fde` candidate and its
+  395,737-byte Linux archive from CI 41219489046. Preserve the candidate tag,
+  earlier readiness snapshot and original benchmark identities. Keep final
+  acceptance and publication pending; rebuilt archives need their own checksums.
+
 - Require complete CI-guard source and recorder hashes in release evidence; reject
   recording metadata that would mask a stale source hash. Add four regressions.
 - Refresh the handoff and readiness snapshot for merged `f9c492b`: 688 passing

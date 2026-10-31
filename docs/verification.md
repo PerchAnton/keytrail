@@ -1,16 +1,18 @@
 # Verification
 
-**Latest development snapshot (31 October 2026): merged main `f9c492b`.**
-[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41215267386) passed
-three separate macOS 15 ARM allocations and Linux: **172 tests per job**, one
-worker, zero retries/skips, and both real package consumers in every job.
-ARM maximum passing-window gaps were **69.0 / 61.0 / 42.2 ms**; Linux was **32.7 ms**.
-The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-f9c492b.json).
-The [fresh benchmark](performance.md) passed **108/108** with matching input hashes.
-The earlier failures remain recorded; short successful checks do not guarantee
-shared-runner latency. Final 100-round acceptance and publication remain deferred.
+**Frozen candidate (31 October 2026): `1187fde`.**
+The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
+remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
+passed three separate macOS 15 ARM allocations and Linux: **172 tests per job**,
+one worker, zero retries/skips, and both real package consumers in every job.
+ARM maximum passing-window gaps were **87.7 / 65.6 / 50.7 ms**; Linux was **23.9 ms**.
+The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-1187fde.json).
+The [benchmark](performance.md) was measured at `f9c492b`: **108/108**, with
+input hashes matching this candidate. Earlier failures and measurements keep their
+source identities. Short checks do not guarantee shared-runner latency.
+Final 100-round acceptance and publication remain deferred.
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
@@ -21,7 +23,7 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | `f9c492b`: three ARM allocations 172/172 each; Linux 172/172. No retries/skips. Two added cases cover async context and budget expiry at dispatch; the earlier 130.3 ms failure is retained |
+| Browser suite | `1187fde`: three ARM allocations 172/172 each; Linux 172/172. No retries/skips. Two added cases cover async context and budget expiry at dispatch; the earlier 130.3 ms failure is retained |
 | Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
@@ -29,8 +31,14 @@ component is accessible.
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
 | Performance | Recorded `f9c492b`: 108/108 tests; median paired overhead: dialog -9.2%, manual tabs -6.8%, forms (`insertText`) -12.6%; [samples and validation](performance.md) |
 | Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | `f9c492b`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-main-f9c492b.json); final acceptance remains false |
-| Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `f9c492b`; Linux passed too. [Combined record](evidence/ci-main-f9c492b.json). This is a bounded development check, not a guaranteed latency bound |
+| Package consumers | `1187fde`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-main-1187fde.json); final acceptance remains false |
+| Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `1187fde`; Linux passed too. [Combined record](evidence/ci-main-1187fde.json). This is a bounded development check, not a guaranteed latency bound |
+
+The [interactive candidate review](evidence/browser-review-1187fde.json) checked the
+frozen examples and existing HTML/JSON/JUnit reports. No new full round was run;
+owner sign-off and final acceptance remain separate. The
+[archive handoff](release-handoff.md) distinguishes the preserved candidate from
+any later package rebuilt with updated documentation.
 
 ## Recorded performance (`f9c492b`)
 
