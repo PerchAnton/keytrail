@@ -7,7 +7,8 @@
   diagnostics and a read-only CI summary that retains failures without attachments.
   Three diagnostic ARM rounds passed; a fourth recorded a 549.8 ms gap with
   little CPU work and no overlapping recorded GC. Retain the failure and compare
-  the macOS 15 ARM image separately; this is not yet a runtime stability fix.
+  the macOS 15 ARM image separately: three rounds and both package consumers
+  passed. These rounds share one VM; fresh-allocation validation remains pending.
 
 - Start the next manual-window browser read immediately after validating the previous
   snapshot, removing a host pause that contributed to the ARM 109.8 ms gap.

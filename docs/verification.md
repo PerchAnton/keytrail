@@ -1,17 +1,16 @@
 # Verification
 
-**Latest status (31 October 2026): ARM stability remains under investigation.**
-Three diagnostic ARM rounds passed, but a fourth round at `a4f97fd` failed on a
-**549.8 ms** observation gap: 169/170 passed, with zero retries. The host read took
-551.8 ms while Node used 29.7 ms CPU; no overlapping GC event was recorded.
-Linux passed 170/170 and package consumers. [Retained fourth-round failure](evidence/ci-arm-fourth-diagnostic-failure.json).
-This does not yet distinguish host scheduling from synchronous waits. A separate
-comparison on `macos-15` ARM is pending, capped at three rounds and stopping on any
-failure. All 170 tests and the 100 ms bound remain unchanged.
-[Diagnosis](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
-The [benchmark](performance.md) retains its measured `1b42666` identity;
-changed diagnostic tests are not covered by its full input hashes. Final 100-round
-acceptance and publication remain deferred.
+**Latest status (31 October 2026): the macOS 15 ARM comparison passed.**
+At `cc95784`, ARM passed **3 × 170 = 510** tests and Linux passed **170/170**,
+with zero retries/skips and both real package consumers on each platform. Maximum
+ARM gaps were **50.3 / 61.1 / 29.9 ms**, below the unchanged 100 ms bound.
+[Independently checked comparison](evidence/ci-macos15-comparison.json).
+The earlier macOS 26 diagnostic run failed at 549.8 ms; its evidence is retained.
+Production runtime is unchanged. Three rounds on one VM do not establish stability
+across new runner allocations; that validation remains pending before treating the
+configuration as a stability fix. [Diagnosis and scope](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+The [benchmark](performance.md) retains its measured `1b42666` identity.
+Final 100-round acceptance and publication remain deferred.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -24,15 +23,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Diagnostic `ed74027`: Linux 170/170 and ARM 510/510; no retries/skips. Main `050d97c` ARM failure remains unresolved |
+| Browser suite | Comparison `cc95784`: Linux 170/170 and macOS 15 ARM 510/510; no retries/skips. Fresh-allocation validation remains pending |
 | Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
 | Performance | Recorded `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
 | Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Diagnostic `ed74027`: two clean offline installations verified on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-arm-diagnostics.json); final acceptance remains false |
-| Hosted platforms | Diagnostic `ed74027` passed all required checks; [validated record](evidence/ci-arm-diagnostics.json). Recurring ARM gaps remain an open issue, not a resolved failure |
+| Package consumers | Comparison `cc95784`: two clean offline installations verified on Linux/ARM CI; ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-macos15-comparison.json); final acceptance remains false |
+| Hosted platforms | Comparison `cc95784` passed all required checks; [validated record](evidence/ci-macos15-comparison.json). Recurring ARM gaps remain an open issue, not a resolved failure |
 
 ## Recorded performance (`1b42666`)
 

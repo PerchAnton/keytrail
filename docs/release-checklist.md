@@ -1,17 +1,16 @@
 # First alpha release checklist
 
-**Latest status (31 October 2026): ARM stability remains under investigation.**
-Three diagnostic ARM rounds passed, but a fourth round at `a4f97fd` failed on a
-**549.8 ms** observation gap: 169/170 passed, with zero retries. The host read took
-551.8 ms while Node used 29.7 ms CPU; no overlapping GC event was recorded.
-Linux passed 170/170 and package consumers. [Retained fourth-round failure](evidence/ci-arm-fourth-diagnostic-failure.json).
-This does not yet distinguish host scheduling from synchronous waits. A separate
-comparison on `macos-15` ARM is pending, capped at three rounds and stopping on any
-failure. All 170 tests and the 100 ms bound remain unchanged.
-[Diagnosis](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
-The [benchmark](performance.md) retains its measured `1b42666` identity;
-changed diagnostic tests are not covered by its full input hashes. Final 100-round
-acceptance and publication remain deferred.
+**Latest status (31 October 2026): the macOS 15 ARM comparison passed.**
+At `cc95784`, ARM passed **3 × 170 = 510** tests and Linux passed **170/170**,
+with zero retries/skips and both real package consumers on each platform. Maximum
+ARM gaps were **50.3 / 61.1 / 29.9 ms**, below the unchanged 100 ms bound.
+[Independently checked comparison](evidence/ci-macos15-comparison.json).
+The earlier macOS 26 diagnostic run failed at 549.8 ms; its evidence is retained.
+Production runtime is unchanged. Three rounds on one VM do not establish stability
+across new runner allocations; that validation remains pending before treating the
+configuration as a stability fix. [Diagnosis and scope](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+The [benchmark](performance.md) retains its measured `1b42666` identity.
+Final 100-round acceptance and publication remain deferred.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 

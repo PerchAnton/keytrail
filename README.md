@@ -2,12 +2,12 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation: ARM stability remains under investigation.** Three diagnostic
-ARM rounds passed, but a fourth recorded a **549.8 ms** gap and correctly blocked.
-Linux passed the full suite and package consumers. A separate `macos-15` ARM
-comparison is pending; this is not yet a stability fix. The **100 ms** limit,
-all 170 tests and zero retries remain unchanged.
-[Results and diagnosis](docs/ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+**Release preparation:** the `macos-15` ARM comparison passed **510/510** tests
+(three rounds); Linux passed **170/170**, with real package consumers on both.
+Maximum ARM gaps were **50.3 / 61.1 / 29.9 ms** against the unchanged **100 ms**
+limit, with zero retries. The earlier macOS 26 failure remains documented.
+These rounds used one ARM VM; validation across fresh runner allocations is still
+pending. [Results and diagnosis](docs/ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
 The benchmark below retains its measured revision; final 100-round acceptance
 and publication remain pending.
 

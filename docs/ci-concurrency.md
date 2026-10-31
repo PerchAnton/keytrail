@@ -1,7 +1,7 @@
 # Browser worker capacity and deadline checks
 
 The default regression suite uses **one browser worker**. CI requires the complete
-suite and package consumers on Linux and ARM `macos-latest`. The separately
+suite and package consumers on Linux and ARM; the candidate pins `macos-15`. The separately
 measured Intel environment remains a documented failed experiment, not a required
 runner or a passing result. Both required jobs still execute every fixture.
 The four-worker isolation comparison remains part of the local four-round
@@ -82,13 +82,41 @@ is wall time outside the event provider, not CPU usage; [process CPU time](https
 includes all process threads. Neither measure alone proves a particular scheduler
 or browser defect. The profiler adds work and is not a performance benchmark.
 
-The next comparison changes only the required ARM image from `macos-latest`
+The comparison changed only the required ARM image from `macos-latest`
 (observed as macOS 26) to `macos-15`, keeping one worker, every test, the 100 ms bound
 and zero retries. It is limited to three rounds and stops on the first failure.
 Both labels select standard ARM hardware according to [GitHub's runner reference](https://docs.github.com/en/actions/reference/runners/github-hosted-runners).
-This comparison is pending; it is not a claim that macOS 15 resolves host latency.
+The comparison at `cc95784` passed; it is not proof that macOS 15 eliminates host latency.
 No additional rounds of the old image or final 100-round series are scheduled.
 Final acceptance and publication remain blocked while the investigation is open.
+
+The [macOS 15 run](https://github.com/PerchAnton/keytrail/actions/runs/41204627899)
+passed all three ARM rounds and Linux, including build/types, 39 unit tests,
+22 script tests, 52 guard subprocess cases and both real package consumers per
+platform. Independent validation checked all four raw reports, 680 executions,
+644 unique journey IDs, semantic signatures, input hashes and archive checksums.
+The execution input hashes exactly match the failed fourth-round revision.
+
+| Platform / round | Passed | Maximum passing-window gap |
+| --- | ---: | ---: |
+| Linux / 1 | 170/170 | 22.1 ms |
+| macOS 15 ARM / 1 | 170/170 | 50.3 ms |
+| macOS 15 ARM / 2 | 170/170 | 61.1 ms |
+| macOS 15 ARM / 3 | 170/170 | 29.9 ms |
+
+The actual ARM environment was Apple M1 (Virtual), three logical CPUs, 7 GiB RAM,
+Darwin 24.6.0, image `macos15` / `20261028.0489.1`, Node 24.22.1 and Chromium
+156.0.8078.4. The historical artifact name `macos-latest-evidence` is retained;
+the recorded environment and workflow label identify the actual macOS 15 runner.
+[Complete source-bound record](evidence/ci-macos15-comparison.json).
+
+All three ARM rounds ran on **one allocated VM**. A subsequent CI invocation gets
+a new allocation, so sequential repeats cannot establish repeatability between
+allocations. Before presenting this candidate as a stability fix, use three
+separate ARM jobs (one full round and package consumers per allocation), with one
+worker and no retries. That matrix has not been run. The image comparison is not
+a controlled proof that the OS version caused the earlier stalls.
+
 
 ## Consecutive window reads
 
