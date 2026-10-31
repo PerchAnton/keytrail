@@ -1,15 +1,15 @@
 {
-  "checkedAt": "2026-10-31T12:10:50.581Z",
+  "checkedAt": "2026-10-31T16:14:07.953Z",
   "status": "passed",
-  "sourceCommit": "1b42666fddf8c6653ae3898cbe99a61c5b671980",
-  "sourceTree": "6e505becebf906e42e674ab9d9e6cc624cbd719c",
+  "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
+  "sourceTree": "28bb97b895edfc3e97099a9b49657f0bb8fa6770",
   "scope": "Independent recomputation of the full benchmark only. Final 100-round reliability acceptance was not run.",
   "tests": 108,
   "warmupsPerArm": 5,
   "pairsPerWorkload": 30,
   "retries": 0,
   "final100RoundsStarted": false,
-  "reportSha256": "a6bda30bc55617bab2abb614f6acc5b6277f6e349f41bb2077b124166411b588",
+  "reportSha256": "0280454cd270c3df62501de985a2a63f098550b3961a6181593a9b693615787b",
   "sourceHashes": {
     "benchmarks/manifests/dialog.json": "f82e636c87291fde4a4f45a42c0b717e68be28e8123e091702d746906eb59436",
     "benchmarks/manifests/formErrors.json": "71c4810c36c04b09e2d86f3c72a28d743157594d010e63dc27a9db9e3aa25354",
@@ -24,7 +24,7 @@
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
     "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
     "scripts/verify-reliability.mjs": "dd2d64fd7c3b73e532f843d85d29ff480c83ad5a614cd574b4cf90f84c656f1e",
-    "src/browser/driver.ts": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "src/browser/driver.ts": "ad9df369539c4a7f007ccaef1f662e1fb2abbdd34b0e51367d9f4c6c6a68bcfb",
     "src/browser/observation-store.ts": "0ef8c192bebb8bba446739bbcaa7725f832034f9abb1f93ac857f9345faa7995",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
@@ -52,12 +52,12 @@
     "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
     "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
     "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
-    "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
+    "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
     "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
     "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
-    "tests/integration/observations.spec.ts": "6dbc89aae8b27295caf3a127364d27ed89319bac1ccd8b31b4c2ca60eab92321",
+    "tests/integration/observations.spec.ts": "12a094cf19b9e4f95f5ccef1938e87df8527c25655160708d1f8eaba5e7858b0",
     "tests/integration/tabs.spec.ts": "e07df3d59efb49ac38607cdc29780a14184e7b52bc8d51400aec435e0ede8263",
-    "tests/support/snapshot-timings.ts": "c35da8727cca4bb6e54f4f897bed42c479dbe8cf46603f8c9c8c2e426417903f",
+    "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
     "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
     "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
     "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
@@ -68,7 +68,7 @@
     "tests/unit/verification-modes.test.mjs": "ff8211b23a9df0897a0c8731985bcab754b07a89c3e64e4c23c6e81372477173",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
     "verification/modes.mjs": "433218ce8b54643eda0011977a3908c6ec773956c4913b9c64c600f0248e296a",
-    "verification/signatures.mjs": "528fd54649777629c05db13d942187d17904382039f8cd904c0d752cb027ae7c"
+    "verification/signatures.mjs": "70ec3e117ff62f9f16f745ad25559f26c415af4afa272d3447054fab23959b5f"
   },
   "environment": {
     "node": "v24.22.1",
@@ -85,52 +85,52 @@
     "dialog": {
       "summary": {
         "keytrail": {
-          "medianMs": 147.03437450000092,
-          "p95Ms": 154.42120799999975
+          "medianMs": 127.33487549999927,
+          "p95Ms": 135.78862500000105
         },
         "native": {
-          "medianMs": 140.05827099999988,
-          "p95Ms": 145.1173749999998
+          "medianMs": 140.14345799999955,
+          "p95Ms": 159.2818329999991
         },
-        "pairedMedianOverheadPercent": 4.754320918385302,
-        "ratioOfMediansOverheadPercent": 4.980857931625504,
+        "pairedMedianOverheadPercent": -9.238574834530748,
+        "ratioOfMediansOverheadPercent": -9.139622129204438,
         "targetMet": true
       },
-      "measuredAt": "2026-10-31T12:07:50.072Z",
+      "measuredAt": "2026-10-31T16:13:47.223Z",
       "negativeControl": "D03.initial"
     },
     "tabs": {
       "summary": {
         "keytrail": {
-          "medianMs": 1630.0012915000116,
-          "p95Ms": 1645.4943330000024
+          "medianMs": 1561.5561455000025,
+          "p95Ms": 1576.388666999992
         },
         "native": {
-          "medianMs": 1703.2232084999996,
-          "p95Ms": 1715.7400000000052
+          "medianMs": 1672.7619169999962,
+          "p95Ms": 1737.6729590000032
         },
-        "pairedMedianOverheadPercent": -4.0247851308102875,
-        "ratioOfMediansOverheadPercent": -4.299020623637073,
+        "pairedMedianOverheadPercent": -6.7974480749702355,
+        "ratioOfMediansOverheadPercent": -6.6480334331998066,
         "targetMet": true
       },
-      "measuredAt": "2026-10-31T12:07:50.073Z",
+      "measuredAt": "2026-10-31T16:13:47.223Z",
       "negativeControl": "T05.forward.001.unchanged"
     },
     "formErrors": {
       "summary": {
         "keytrail": {
-          "medianMs": 144.5195415000053,
-          "p95Ms": 154.64404099999228
+          "medianMs": 123.55735399998957,
+          "p95Ms": 133.00862500001676
         },
         "native": {
-          "medianMs": 140.53931250001187,
-          "p95Ms": 144.15762500002165
+          "medianMs": 141.837978999989,
+          "p95Ms": 150.6062920000113
         },
-        "pairedMedianOverheadPercent": 2.807511270739693,
-        "ratioOfMediansOverheadPercent": 2.8321107661552603,
+        "pairedMedianOverheadPercent": -12.579124668783255,
+        "ratioOfMediansOverheadPercent": -12.888385134140156,
         "targetMet": true
       },
-      "measuredAt": "2026-10-31T12:07:50.073Z",
+      "measuredAt": "2026-10-31T16:13:47.223Z",
       "negativeControl": "F04.focus"
     }
   },

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import { inputHashes } from '../../verification/inputs.mjs';
 
@@ -63,12 +63,24 @@ export async function inspectReleaseEvidence() {
         assert(paired <= 20 && ratio <= 20);
       }
       if (record === 'ci-guard') {
+        // Check the complete input set, not just whichever hashes survived in
+        // the saved record. Keep this aligned with check-guard.mjs's recorder.
+        const guardPaths = Object.keys(currentHashes).filter(file =>
+          file.startsWith(`src${sep}`) || file.startsWith(join('tests', 'guard') + sep) ||
+          [join('scripts', 'build.mjs'), join('schema', 'journey-result.v1.json')].includes(file));
+        guardPaths.push(join('scripts', 'check-guard.mjs'));
+        assert.deepEqual(Object.keys(evidence.sourceHashes ?? {}).sort(), guardPaths.sort(),
+          'CI guard evidence must cover the complete current source, fixtures and recorder');
         assert(evidence.cases?.length > 0, 'Missing guard cases');
         assert.equal(new Set(evidence.cases.map(c => c.case)).size, evidence.cases.length, 'Duplicate guard cases');
         assert(evidence.cases.every(c => Number.isInteger(c.expectedExit) && c.actualExit === c.expectedExit), 'Guard exit codes do not match');
       }
       assert(evidence.sourceHashes && Object.keys(evidence.sourceHashes).length > 0, 'Missing source hashes');
-      for (const [file, expected] of Object.entries({ ...evidence.sourceHashes, ...evidence.recordingSourceHashes })) {
+      // Validate both maps independently: recording metadata must not override
+      // a stale hash in the source evidence.
+      for (const [file, expected] of [
+        ...Object.entries(evidence.sourceHashes), ...Object.entries(evidence.recordingSourceHashes ?? {}),
+      ]) {
         assert(resolve(cwd, file).startsWith(cwd + '/'), 'Evidence path escapes repository');
         const actual = createHash('sha256').update((await readFile(resolve(cwd, file), 'utf8')).replaceAll('\r\n', '\n')).digest('hex');
         assert.equal(actual, expected, `Refresh ${record} evidence after changing ${file}`);

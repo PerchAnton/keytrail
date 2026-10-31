@@ -1,18 +1,14 @@
 # First alpha release checklist
 
-**Latest status (31 October 2026): the observation-dispatch update passed bounded CI.**
-At `cd3216b`, three fresh macOS 15 ARM jobs each passed **172/172**; Linux also
-passed **172/172**. Both real package consumers passed in all four jobs. ARM
-maximum passing-window gaps were **39.9 / 59.5 / 56.7 ms**, with the unchanged
-**100 ms** limit, one worker and zero retries/skips.
-[Independently checked results](evidence/ci-observation-dispatch.json).
-The change reduces stack-formatting work while retaining fresh locator resolution,
-async context, budget checks and cleanup. The earlier 130.3 ms failure is retained;
-its exact hosted cause is not fully established, and this short series does not
-guarantee shared-host latency. [Why 100 ms and what changed](observation-gaps.md).
-The [benchmark](performance.md) retains its historical `1b42666` identity and does
-not qualify the changed runtime. Fresh benchmark evidence, final 100-round
-acceptance and publication remain pending.
+**Latest development snapshot (31 October 2026): merged main `f9c492b`.**
+[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41215267386) passed
+three separate macOS 15 ARM allocations and Linux: **172 tests per job**, one
+worker, zero retries/skips, and both real package consumers in every job.
+ARM maximum passing-window gaps were **69.0 / 61.0 / 42.2 ms**; Linux was **32.7 ms**.
+The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-f9c492b.json).
+The [fresh benchmark](performance.md) passed **108/108** with matching input hashes.
+The earlier failures remain recorded; short successful checks do not guarantee
+shared-runner latency. Final 100-round acceptance and publication remain deferred.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -20,20 +16,19 @@ Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
-## Preserved preparation snapshot (`1b42666`)
+## Current preparation snapshot (`f9c492b`)
 
 The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
-bind the preserved main-CI archive to `1b42666`. Linux passed 170/170 checks and
-macOS ARM passed 510/510, including actual package consumers on both platforms.
-The fresh benchmark passed 108/108 tests and both overhead calculations meet the
-20% target for every workload. The earlier exploratory browser review remains
-bound to its recorded revision; owner review of the final candidate is separate.
+identify the preserved main-CI archive and the fresh benchmark. Linux passed 172/172
+checks and three separate macOS ARM machines passed 516/516, with real package
+consumers in every job. The benchmark passed 108/108; both overhead calculations
+meet the 20% target for every workload. The earlier browser review remains tied to
+its original revision; owner review of the final candidate is still required.
 
-That recorded snapshot was **development-review-ready**, with `releaseReady: false` and
-`finalAcceptance: false`. The later ARM failure reopens the stability investigation. Final 100-round
-evidence, the release package gate and publication remain deferred. Do not repeat already sufficient development runs
-merely to update these documents. Documentation changes alter archive bytes, so a
-new archive needs its own package-consumer record and checksum.
+This is **development-review-ready**, with `releaseReady: false` and
+`finalAcceptance: false`. Do not repeat sufficient development rounds for changes
+to documentation or the release-evidence checker. New archive bytes still require
+their own package-consumer verification and checksum.
 
 ## Inspect remaining evidence without running tests
 
@@ -55,6 +50,8 @@ An evidence result alone is not release approval: the exact archive still needs
 the real `--release` consumer gate, independent raw-report validation, owner review
 and publication authorization. The release gate uses the same evidence validator.
 Historical results and development package records cannot satisfy final acceptance.
+For this snapshot, all saved-evidence checks except `reliability` pass. Its exit 1
+is expected while final acceptance is deferred; it is not a failed new browser run.
 
 ## Development checks
 
@@ -81,17 +78,17 @@ or external service is needed to run their browser tests.
 | Gate | Evidence / command |
 | --- | --- |
 | Public API, types, limits and errors agree | [Dialog](api.md), [tabs](tabs.md), [form errors](form-errors.md), [rules/codes](rules.md), [limits](limits.md); strict TypeScript checks |
-| Correct and defective fixtures | 170 browser regression tests; all three scenario families |
+| Correct and defective fixtures | 172 browser regression tests; all three scenario families |
 | Failures cannot silently pass CI | 52 subprocess guard cases including dependency failure, skip, retry and interrupted runs |
-| Release evidence fails closed | `node --test scripts/tests/*.test.mjs`; stale hashes, short series, retries, invalid benchmarks and contradictory guard exits are rejected |
+| Release evidence fails closed | `node --test scripts/tests/*.test.mjs`; stale or incomplete hashes, short series, retries, invalid benchmarks and contradictory guard exits are rejected |
 | Source-bound reliability | Pending for changed source; prior 100 × 163 proof is historical; [proof and protocol](reliability.md) |
-| Equivalent native measurements | Recorded `1b42666`: 108/108 tests, three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
+| Equivalent native measurements | Recorded `f9c492b`: 108/108 tests, three workloads, 30 measured pairs each; [method, samples and runner](performance.md) |
 | Vanilla tarball consumer | ESM/CJS imports and declarations; 6 browser tests and 3 guarded journeys |
 | React portal tarball consumer | StrictMode, real portal/remount, 3 browser tests, 1 guarded journey, separate failing process |
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |
 | Package inventory | License, notices, schema and exports; no test results, node_modules or local configuration |
 | Archive identity | `artifacts/package-verification.json` and `artifacts/SHA256SUMS` from the exact tested `.tgz` |
-| Hosted platform checks | Main `1b42666`: Linux 170 and ARM 510 passed with package consumers; the commit ultimately selected for release needs matching checks |
+| Hosted platform checks | Main `f9c492b`: Linux 172 and ARM 516 passed with package consumers; the commit ultimately selected for release needs matching checks |
 | Human review | Inspect HTML failure report and try the example with a keyboard; passing automation is not a conformance assessment |
 
 `pnpm check` runs build, types, unit, guard, one browser suite and actual package

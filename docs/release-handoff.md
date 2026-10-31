@@ -1,94 +1,74 @@
 # Review the first release candidate
 
-**Latest status (31 October 2026): the observation-dispatch update passed bounded CI.**
-At `cd3216b`, three fresh macOS 15 ARM jobs each passed **172/172**; Linux also
-passed **172/172**. Both real package consumers passed in all four jobs. ARM
-maximum passing-window gaps were **39.9 / 59.5 / 56.7 ms**, with the unchanged
-**100 ms** limit, one worker and zero retries/skips.
-[Independently checked results](evidence/ci-observation-dispatch.json).
-The change reduces stack-formatting work while retaining fresh locator resolution,
-async context, budget checks and cleanup. The earlier 130.3 ms failure is retained;
-its exact hosted cause is not fully established, and this short series does not
-guarantee shared-host latency. [Why 100 ms and what changed](observation-gaps.md).
-The [benchmark](performance.md) retains its historical `1b42666` identity and does
-not qualify the changed runtime. Fresh benchmark evidence, final 100-round
-acceptance and publication remain pending.
+**Latest development snapshot (31 October 2026): merged main `f9c492b`.**
+[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41215267386) passed
+three separate macOS 15 ARM allocations and Linux: **172 tests per job**, one
+worker, zero retries/skips, and both real package consumers in every job.
+ARM maximum passing-window gaps were **69.0 / 61.0 / 42.2 ms**; Linux was **32.7 ms**.
+The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-f9c492b.json).
+The [fresh benchmark](performance.md) passed **108/108** with matching input hashes.
+The earlier failures remain recorded; short successful checks do not guarantee
+shared-runner latency. Final 100-round acceptance and publication remain deferred.
 
-The measured development snapshot is `1b42666fddf8c6653ae3898cbe99a61c5b671980`
-for **KeyTrail 0.1.0-alpha.6**. It is not a published release or final acceptance.
-The [readiness record](evidence/release-readiness.json) identifies completed checks,
-the preserved main-CI archive and the work still deferred.
+The measured runtime is **KeyTrail 0.1.0-alpha.6** at `f9c492b7676d02628e7b91250b81d358ef03a2c7`.
+This is preparation for the first publication; no package or GitHub release exists.
+The [readiness record](evidence/release-readiness.json) separates completed checks
+from deferred final acceptance. Earlier source checkpoints keep their own evidence.
 
-## What was verified
+## What is ready
 
-[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41198529257) passed
-one Linux round (170 tests) and three macOS ARM rounds (510 tests), with zero
-retries and skips. Independent validation checked all four raw reports, 644 unique
-journey IDs, source hashes, guard exits and both platforms' archive checksums.
-Both platforms passed the real tarball checks in separate vanilla and React consumers.
-[Preserved main-CI record](evidence/ci-main-1b42666.json).
+- Main CI: **688/688** browser executions, **644** distinct journey IDs, matching
+  semantic signatures, source hashes, runner environments and both consumers in
+  each of four jobs. The three ARM allocations ran sequentially on distinct VMs.
+- Benchmark: **108/108**, five warmups and 30 alternating measured pairs per workload.
+  Median paired overhead: **-9.2% / -6.8% / -12.6%** for dialog, manual tabs
+  and form errors (`insertText`). Both calculations meet the 20% target. These are
+  three synthetic fixtures on one Mac, not a general speed or accessibility claim.
+- Release-evidence checker: **26 script tests**, including four new regressions.
+  Missing source/recorder hashes and conflicting recording metadata fail closed.
+- Vanilla and React portal consumers: installed archives, ESM/CJS, declarations,
+  keyboard journeys, CI guard, HTML/JUnit and the deliberately failing control.
 
-The fresh [benchmark](performance.md) passed 108/108 tests: five warmups and 30
-alternating measured pairs per workload, plus three negative controls. Independent
-recomputation confirmed overhead of 4.8% / -4.0% / 2.8% for dialog, manual tabs and
-form errors (`insertText`). Both calculations meet the 20% target. This evidence
-is specific to three synthetic fixtures on the recorded Mac, not a general speed claim.
-
-The [local atomic-registration proof](evidence/development-atomic-observations.json)
-predates the consecutive-read scheduler. Its four rounds, four-worker comparison
-and 800 unique journey IDs remain historical. Neither that proof nor the preserved main
-CI is a final 100-round series.
-
-The earlier `8f119df` [browser review](evidence/browser-review.json) exercised the
-standalone examples and React portal/remount, including the saved HTML failure
-report and its original JSON attachment. It does not qualify the current scheduler
-or replace owner review, pinned-browser qualification or an accessibility assessment.
-See [the report walkthrough](reports.md).
+The [earlier browser review](evidence/browser-review.json) belongs to `8f119df`.
+It does not replace owner review of the final candidate. Use the
+[report walkthrough](reports.md) to inspect the first mismatch and dependent checks.
 
 ## Preserve the tested main-CI archive
 
-Download `linux-evidence` from main CI **41198529257**. Keep these files together:
-
-- `keytrail-0.1.0-alpha.6.tgz`
-- `package-verification.json`
-- `SHA256SUMS`
-
-This archive contains 103 files and is **360,802 bytes**. Its SHA-256 is:
+Download **linux-evidence** from [main CI 41215267386](https://github.com/PerchAnton/keytrail/actions/runs/41215267386). Keep
+`keytrail-0.1.0-alpha.6.tgz`, `package-verification.json` and `SHA256SUMS` together.
+The preserved archive has **113 files**, **393,179 bytes**, SHA-256:
 
 ```text
-cc7994bc7027d4c2f9e64affece7362cbf2a365eb06e899b377cfd59191ffc85
+c159e66d6f11288479c7ef5c760579bceee8fd842273b7c157daa3d288a6e3c1
 ```
 
-It contains main `1b42666` before this benchmark documentation refresh. It is not
-the archive of the refreshed documents. Any new build must retain its own external
-`package-verification.json` and `SHA256SUMS`; do not apply this checksum to it.
-Archive hashes are recorded outside the archive to avoid self-reference.
+It contains `f9c492b` before this documentation and evidence-checker refresh.
+Any rebuilt archive needs its own external verification record and checksum;
+do not apply this hash to it. Archive hashes live outside the archive to avoid
+self-reference. Verify with `shasum -a 256 -c SHA256SUMS` on macOS or
+`sha256sum -c SHA256SUMS` on Linux. This record has level `development` and
+`finalAcceptance: false`. Checksums establish integrity, not signatures or approval.
 
-Check the checksum from the artifact directory with `shasum -a 256 -c SHA256SUMS`
-on macOS or `sha256sum -c SHA256SUMS` on Linux. The original verification record
-must identify this archive and both consumers. Its level is `development` and
-`finalAcceptance` is **false**. Checksums establish integrity, not signatures or
-publication authorization. Older review bundles keep their own records and hashes.
+## What still blocks publication
 
-## Remaining release decisions and checks
+Run `node scripts/check-release-readiness.mjs` to inspect evidence without starting
+tests. Policy, the three benchmarks and guard evidence pass for these inputs.
+**Final reliability remains blocked** because the preserved 100-round proof belongs
+to `0300552`. Exit 1 is expected while this final stage is deferred.
 
-Run `node scripts/check-release-readiness.mjs` to inspect the saved evidence without
-starting tests. For the unchanged measured inputs, policy, all three benchmarks and
-the guard record pass; final repeatability remains blocked by historical source
-hashes. A successful saved-evidence check alone would not establish publication
-readiness; see the [checklist](release-checklist.md).
+1. Review and freeze the candidate. Complete owner review of examples and the HTML
+   failure report; automation is not an accessibility assessment.
+2. Only when explicitly requested, collect the frozen source's 100-round final
+   series and independently validate the raw reports. Keep the 100 ms bound and
+   zero retries. Remeasure performance if its input hashes change.
+3. Pass `node scripts/check-package.mjs --release`, preserving the exact verified
+   archive, verification JSON and checksum. A development check cannot satisfy it.
+4. Confirm registry ownership/authentication and publication authorization. Publish
+   that exact archive with the **alpha** dist-tag, verify a clean registry install,
+   then attach matching files to the GitHub prerelease.
 
-1. Select and freeze the final reviewed source.
-2. When explicitly requested, collect its 100-round final repeatability evidence.
-   The current benchmark is already recorded; remeasure if its input hashes change.
-   The earlier `0300552` reliability proof cannot satisfy current final acceptance.
-3. Pass `node scripts/check-package.mjs --release` against fresh final evidence.
-4. Complete owner review of the examples and failure report.
-5. Confirm registry ownership/authentication and publication authorization, then
-   publish the exact verified archive with the `alpha` dist-tag and verify a clean
-   registry installation.
-
-On 30 October 2026, the npm registry returned 404 for `keytrail`, and GitHub listed
-no releases or tags. That historical check neither reserves the name nor establishes
-publication permissions. Recheck at publication. No registry or GitHub release was
-created during this preparation.
+The npm 404 recorded on 30 October is historical: it does not reserve a name or
+establish publication permissions. GitHub still had no releases when checked on
+31 October. Recheck registry state at publication. No publication or final
+100-round test was performed in this preparation.

@@ -2,6 +2,14 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Require complete CI-guard source and recorder hashes in release evidence; reject
+  recording metadata that would mask a stale source hash. Add four regressions.
+- Refresh the handoff and readiness snapshot for merged `f9c492b`: 688 passing
+  hosted browser checks and a fresh 108-test benchmark, without retries. Median
+  paired overhead is -9.2% / -6.8% / -12.6% for the three fixed workloads; this is
+  not a general speed claim. Preserve older evidence with its source identity.
+  Final 100-round acceptance and publication remain deferred.
+
 - Start fresh locator batches from a microtask with a shorter async call stack,
   reducing repeated stack-formatting work without a timer pause or cached DOM
   bindings. Preserve async context, per-query budgets, target-order errors and

@@ -16,8 +16,9 @@ fig = plt.figure(figsize=(10, 6.4), facecolor='#f7f9fc', layout='constrained')
 gs = fig.add_gridspec(3, 1, height_ratios=[3, 1.2, .6])
 ax = fig.add_subplot(gs[0]); ax.set_facecolor('#f7f9fc')
 values = [r['summary']['pairedMedianOverheadPercent'] for r in records]
-bars = ax.barh([label for _, label in kinds], values, color=['#2459a6', '#007d75', '#7951ab'], height=.5)
-ax.invert_yaxis(); ax.set_xlim(min(0, min(values) - 3) if min(values) < 0 else 0, max(24, max(values) + 4))
+bars = ax.barh([label.replace(' (insertText)', '\n(insertText)') for _, label in kinds], values, color=['#2459a6', '#007d75', '#7951ab'], height=.5)
+# Negative value labels extend left of the bar; leave room before the y labels.
+ax.invert_yaxis(); ax.set_xlim(min(0, min(values) - 6) if min(values) < 0 else 0, max(24, max(values) + 4))
 ax.axvline(20, color='#9b4d00', linestyle='--', linewidth=1.4)
 ax.text(20.3, -.33, '20% target', color='#9b4d00', fontsize=10)
 ax.bar_label(bars, labels=[f'{0 if abs(value) < .05 else value:.1f}%' for value in values], padding=7, fontsize=13, fontweight='bold')
