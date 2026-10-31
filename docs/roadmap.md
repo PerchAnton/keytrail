@@ -1,17 +1,18 @@
 # Milestones
 
-**Latest status (31 October 2026): macOS 15 ARM still reproduces observation gaps.**
-The second fresh allocation passed **169/170** tests and blocked at
-`T05.backward.002.unchanged` on **130.3 ms**. Its package stage was skipped.
-The first and third allocations each passed **170/170** and both package consumers;
-their maximum passing-window gaps were **74.7 / 50.4 ms**. Linux passed **170/170**
-and both consumers. All three ARM jobs ran sequentially on distinct runner IDs.
-[Source-bound allocation results](evidence/ci-fresh-arm-allocations.json).
-The 100 ms limit, one worker and zero test retries are unchanged. This comparison
-changes CI allocation, not production runtime; pinning macOS 15 has not removed
-the failure. [Diagnosis and scope](ci-concurrency.md#fresh-macos-15-arm-allocations).
-The [benchmark](performance.md) retains its measured `1b42666` identity.
-Final 100-round acceptance and publication remain deferred.
+**Latest status (31 October 2026): the observation-dispatch update passed bounded CI.**
+At `cd3216b`, three fresh macOS 15 ARM jobs each passed **172/172**; Linux also
+passed **172/172**. Both real package consumers passed in all four jobs. ARM
+maximum passing-window gaps were **39.9 / 59.5 / 56.7 ms**, with the unchanged
+**100 ms** limit, one worker and zero retries/skips.
+[Independently checked results](evidence/ci-observation-dispatch.json).
+The change reduces stack-formatting work while retaining fresh locator resolution,
+async context, budget checks and cleanup. The earlier 130.3 ms failure is retained;
+its exact hosted cause is not fully established, and this short series does not
+guarantee shared-host latency. [Why 100 ms and what changed](observation-gaps.md).
+The [benchmark](performance.md) retains its historical `1b42666` identity and does
+not qualify the changed runtime. Fresh benchmark evidence, final 100-round
+acceptance and publication remain pending.
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated
@@ -27,7 +28,7 @@ These checkpoints are not full 0.1.0 acceptance.
 | DEV06 | Horizontal/vertical tabs, automatic/manual activation, Home/End and exit | Implemented; see [tabs contract](tabs.md) |
 | DEV07 | Form errors, IDREF relationships, focus policies and declarative correction | Implemented; see [form errors contract](form-errors.md) |
 | DEV08 | CI completeness guard and subprocess failure tests | Implemented; see [CI guard](ci-guard.md) |
-| DEV09 | Repeatability, worker comparison, canaries, equivalent native benchmark | Historical `0300552`: 100 rounds, four-worker comparison and 108 benchmark cases passed; current `1b42666` benchmark: 108/108 passed; changed source uses four development rounds until final acceptance; [scope and evidence](reliability.md) |
+| DEV09 | Repeatability, worker comparison, canaries, equivalent native benchmark | Historical `0300552`: 100 rounds, four-worker comparison and 108 benchmark cases passed; recorded `1b42666` benchmark: 108/108 passed; changed source uses four development rounds until final acceptance; [scope and evidence](reliability.md) |
 | DEV10 | Full API docs, vanilla + React portal consumers, release checklist | Implemented for the alpha checkpoint; [release checklist](release-checklist.md); [review snapshot prepared](release-handoff.md); final acceptance and publication pending |
 
 No performance, superiority or adoption claim follows from passing the teaching fixtures.

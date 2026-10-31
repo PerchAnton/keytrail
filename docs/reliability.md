@@ -1,6 +1,13 @@
 # Full-suite repeatability protocol
 
-**Current evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
+**Latest bounded check:** `cd3216b` passed three sequential fresh macOS 15 ARM
+jobs and one Linux job, **172 tests each**, with package consumers, zero retries
+and the unchanged 100 ms bound. [Validated record](evidence/ci-observation-dispatch.json).
+This follow-up was limited to four full jobs in total; it is neither the local
+four-round-plus-isolation protocol nor final 100-round acceptance. Earlier proofs
+remain bound to their recorded sources. [Dispatch investigation](observation-gaps.md).
+
+**Historical main evidence (31 October 2026):** main `1b42666` passed three macOS ARM rounds
 (510/510), one Linux round (170/170) and both package consumers per platform, with
 zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
 maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).

@@ -2,6 +2,13 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Start fresh locator batches from a microtask with a shorter async call stack,
+  reducing repeated stack-formatting work without a timer pause or cached DOM
+  bindings. Preserve async context, per-query budgets, target-order errors and
+  all-settled cleanup. Add context and budget-handoff cases. The bounded check at
+  `cd3216b` passed 172 tests on each of three fresh ARM VMs and Linux, including
+  package consumers; the 100 ms bound and zero retries remain unchanged.
+
 - Preserve unexpected canary failures instead of replacing their code with an
   assertion for a deliberately injected browser error. Add missing canary timing
   diagnostics and a read-only CI summary that retains failures without attachments.

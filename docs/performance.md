@@ -19,10 +19,12 @@ using `inputMode: "insertText"`. The opt-in per-character `type` mode is not mea
 The reference is fixture-specific native Playwright. These samples do not measure
 real-world adoption, WCAG conformance or screen-reader behavior.
 
-The diagnostic follow-up changes tests, not production runtime or benchmark code.
-Its full input hash set therefore differs from these recorded measurements. Do not
-relabel this benchmark as a run of the diagnostic revision. The recurring ARM
-observation-gap investigation remains open; [latest status](ci-concurrency.md#recurring-arm-gaps-diagnosis-remains-open).
+The later observation-dispatch follow-up changes production runtime as well as
+tests. These measurements therefore remain historical and do not qualify that
+candidate. Its focused CPU profiles identify stack-processing overhead; they are
+not a replacement for this equivalent-work benchmark. A fresh benchmark remains
+pending after the candidate is settled. [Dispatch investigation](observation-gaps.md)
+and [hosted checks](ci-concurrency.md) retain their separate scope and source identities.
 
 ## Recorded results — 31 October 2026, 12:07 UTC (`1b42666`)
 

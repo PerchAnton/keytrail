@@ -2,12 +2,14 @@
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-**Release preparation:** a fresh `macos-15` ARM allocation still failed on a real
-**130.3 ms** observation gap (**169/170** tests). The first and third allocations and Linux
-passed **170/170** each and their package consumers. The **100 ms** limit and zero
-retries remain unchanged. [Allocation results and diagnosis](docs/ci-concurrency.md#fresh-macos-15-arm-allocations).
-Pinning the image has not resolved the failure. The benchmark below retains its
-measured revision; final 100-round acceptance and publication remain pending.
+**Release preparation:** the observation-dispatch update at `cd3216b` passed
+**3 × 172 ARM checks and 172 Linux checks**, including both package consumers in
+each job. Maximum ARM gaps were **39.9 / 59.5 / 56.7 ms** against the unchanged
+**100 ms** limit, with zero retries. [Results](docs/ci-concurrency.md#observation-dispatch-overhead)
+· [Why 100 ms](docs/observation-gaps.md). The earlier failure is retained; this
+short series does not guarantee host scheduling latency. The benchmark below is
+historical for the changed runtime; fresh benchmark evidence, final 100-round
+acceptance and publication remain pending.
 
 Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
 from the repository root. This read-only command does not start tests or publish a package.

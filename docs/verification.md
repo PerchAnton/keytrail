@@ -1,17 +1,18 @@
 # Verification
 
-**Latest status (31 October 2026): macOS 15 ARM still reproduces observation gaps.**
-The second fresh allocation passed **169/170** tests and blocked at
-`T05.backward.002.unchanged` on **130.3 ms**. Its package stage was skipped.
-The first and third allocations each passed **170/170** and both package consumers;
-their maximum passing-window gaps were **74.7 / 50.4 ms**. Linux passed **170/170**
-and both consumers. All three ARM jobs ran sequentially on distinct runner IDs.
-[Source-bound allocation results](evidence/ci-fresh-arm-allocations.json).
-The 100 ms limit, one worker and zero test retries are unchanged. This comparison
-changes CI allocation, not production runtime; pinning macOS 15 has not removed
-the failure. [Diagnosis and scope](ci-concurrency.md#fresh-macos-15-arm-allocations).
-The [benchmark](performance.md) retains its measured `1b42666` identity.
-Final 100-round acceptance and publication remain deferred.
+**Latest status (31 October 2026): the observation-dispatch update passed bounded CI.**
+At `cd3216b`, three fresh macOS 15 ARM jobs each passed **172/172**; Linux also
+passed **172/172**. Both real package consumers passed in all four jobs. ARM
+maximum passing-window gaps were **39.9 / 59.5 / 56.7 ms**, with the unchanged
+**100 ms** limit, one worker and zero retries/skips.
+[Independently checked results](evidence/ci-observation-dispatch.json).
+The change reduces stack-formatting work while retaining fresh locator resolution,
+async context, budget checks and cleanup. The earlier 130.3 ms failure is retained;
+its exact hosted cause is not fully established, and this short series does not
+guarantee shared-host latency. [Why 100 ms and what changed](observation-gaps.md).
+The [benchmark](performance.md) retains its historical `1b42666` identity and does
+not qualify the changed runtime. Fresh benchmark evidence, final 100-round
+acceptance and publication remain pending.
 
 **Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
@@ -24,15 +25,15 @@ component is accessible.
 | --- | --- |
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
-| Browser suite | Fresh allocations: ARM 170/170, 169/170, 170/170; Linux 170/170. Original 130.3 ms failure retained; no test retries/skips |
+| Browser suite | `cd3216b`: three ARM allocations 172/172 each; Linux 172/172. No retries/skips. Two added cases cover async context and budget expiry at dispatch; the earlier 130.3 ms failure is retained |
 | Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
 | Performance | Recorded `1b42666`: 108/108 tests; median paired overhead: dialog 4.8%, manual tabs -4.0%, forms (`insertText`) 2.8%; [samples and validation](performance.md) |
 | Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
-| Package consumers | Linux and ARM allocations 1/3 passed both clean offline consumers; allocation 2 skipped after its browser failure. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archive hashes and results](evidence/ci-fresh-arm-allocations.json); final acceptance remains false |
-| Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified. One failed; [combined record](evidence/ci-fresh-arm-allocations.json). Original inputs `5aa44e0`, third allocation `82a8254` with identical execution hashes |
+| Package consumers | `cd3216b`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-observation-dispatch.json); final acceptance remains false |
+| Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `cd3216b`; Linux passed too. [Combined record](evidence/ci-observation-dispatch.json). This is a bounded development check, not a guaranteed latency bound |
 
 ## Recorded performance (`1b42666`)
 

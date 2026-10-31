@@ -1,0 +1,691 @@
+{
+  "recordedAt": "2026-10-31T15:04:28.679497+00:00",
+  "scope": "Exploratory local profiles of the same two focused tabs cases, one worker, zero retries; not full rounds, a benchmark, a hosted-stall reproduction or a release acceptance proof. CPU-profiler sample durations are estimates, not process CPU time. Different sampling counts follow from completing the same timed windows.",
+  "baselineCommit": "35b4e940b01735d9a33875b6ec4f2630565fd85e",
+  "candidateCommit": "cd3216b3d3e1b75b5010d947b0c8ff69bd6f218f",
+  "platform": "Darwin",
+  "arch": "arm64",
+  "osRelease": "27.2.0",
+  "captures": [
+    {
+      "phase": "baseline",
+      "tests": [
+        "tabs pass manual Enter",
+        "manual tabs record initial and final observations even for a short window"
+      ],
+      "passed": 2,
+      "retries": 0,
+      "reportSha256": "8367e1648e30f4b8b2e42004119d598e76ab4555426e7430d867f36ca5433c9d",
+      "snapshots": 508,
+      "windowSnapshotDurationMs": {
+        "count": 352,
+        "median": 4.083895500000001,
+        "p95NearestRank": 5.280375,
+        "maximum": 6.95475
+      },
+      "windowSnapshotCpuMs": {
+        "count": 352,
+        "median": 4.1215,
+        "p95NearestRank": 8.626,
+        "maximum": 12.154
+      },
+      "windowGapMs": {
+        "count": 352,
+        "median": 4.100000008940697,
+        "p95NearestRank": 5.299999997019768,
+        "maximum": 6.700000002980232
+      },
+      "profiles": [
+        {
+          "file": "CPU.20261031.165356.69667.0.001.cpuprofile",
+          "sha256": "3f29b8060e5bafadbb7402e16472db36a80011600076f8a8732e21210a654c78",
+          "sampledDurationMs": 3617.083,
+          "stackFormattingSelfSamplesMs": 1.167,
+          "topSelfSamples": [
+            {
+              "function": "(idle)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 3156.959
+            },
+            {
+              "function": "wrapSafe",
+              "file": "loader",
+              "line": 1819,
+              "sampledMs": 82.707
+            },
+            {
+              "function": "readFileUtf8",
+              "file": "",
+              "line": 0,
+              "sampledMs": 35.75
+            },
+            {
+              "function": "(garbage collector)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 31.875
+            },
+            {
+              "function": "compileForInternalLoader",
+              "file": "realm",
+              "line": 383,
+              "sampledMs": 28.666
+            },
+            {
+              "function": "parseChannelMessages",
+              "file": "serialization",
+              "line": 100,
+              "sampledMs": 20.208
+            },
+            {
+              "function": "(program)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 19.957
+            },
+            {
+              "function": "__init",
+              "file": "coreBundle.js",
+              "line": 12,
+              "sampledMs": 13.125
+            },
+            {
+              "function": "nextTick",
+              "file": "task_queues",
+              "line": 113,
+              "sampledMs": 10.124
+            },
+            {
+              "function": "__require",
+              "file": "babelBundle.js",
+              "line": 8,
+              "sampledMs": 10.043
+            },
+            {
+              "function": "",
+              "file": "program.js",
+              "line": 40,
+              "sampledMs": 10.0
+            },
+            {
+              "function": "__require",
+              "file": "utilsBundle.js",
+              "line": 8,
+              "sampledMs": 7.958
+            }
+          ]
+        },
+        {
+          "file": "CPU.20261031.165357.69688.0.001.cpuprofile",
+          "sha256": "87cd51f74be6dec67f6835c6650d7f1343f079337edeebe539cdabd575c53829",
+          "sampledDurationMs": 3190.125,
+          "stackFormattingSelfSamplesMs": 907.637,
+          "topSelfSamples": [
+            {
+              "function": "(idle)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 419.249
+            },
+            {
+              "function": "",
+              "file": "utilsBundle.js",
+              "line": 25088,
+              "sampledMs": 310.962
+            },
+            {
+              "function": "cloneCallSite",
+              "file": "utilsBundle.js",
+              "line": 25086,
+              "sampledMs": 182.878
+            },
+            {
+              "function": "wrapCallSite",
+              "file": "utilsBundle.js",
+              "line": 25096,
+              "sampledMs": 136.708
+            },
+            {
+              "function": "prepareStackTrace",
+              "file": "utilsBundle.js",
+              "line": 25152,
+              "sampledMs": 119.048
+            },
+            {
+              "function": "object3.<computed>",
+              "file": "utilsBundle.js",
+              "line": 25089,
+              "sampledMs": 113.668
+            },
+            {
+              "function": "(garbage collector)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 110.706
+            },
+            {
+              "function": "_race",
+              "file": "coreBundle.js",
+              "line": 3610,
+              "sampledMs": 105.122
+            },
+            {
+              "function": "",
+              "file": "coreBundle.js",
+              "line": 16564,
+              "sampledMs": 98.373
+            },
+            {
+              "function": "ProtocolError",
+              "file": "coreBundle.js",
+              "line": 12816,
+              "sampledMs": 92.417
+            },
+            {
+              "function": "writeUtf8String",
+              "file": "",
+              "line": 0,
+              "sampledMs": 85.081
+            },
+            {
+              "function": "send",
+              "file": "coreBundle.js",
+              "line": 40842,
+              "sampledMs": 60.165
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "initial microtask prototype (before removing one redundant async wrapper)",
+      "tests": [
+        "tabs pass manual Enter",
+        "manual tabs record initial and final observations even for a short window"
+      ],
+      "passed": 2,
+      "retries": 0,
+      "reportSha256": "1805d84af3f5b86ee23d4ed0ec1ebcdfc9d4cefc1b464601f914511f4a413667",
+      "snapshots": 565,
+      "windowSnapshotDurationMs": {
+        "count": 409,
+        "median": 3.521666,
+        "p95NearestRank": 4.671083,
+        "maximum": 9.100958
+      },
+      "windowSnapshotCpuMs": {
+        "count": 409,
+        "median": 3.581,
+        "p95NearestRank": 7.75,
+        "maximum": 37.611000000000004
+      },
+      "windowGapMs": {
+        "count": 409,
+        "median": 3.5,
+        "p95NearestRank": 4.700000002980232,
+        "maximum": 7.199999988079071
+      },
+      "profiles": [
+        {
+          "file": "CPU.20261031.165712.69924.0.001.cpuprofile",
+          "sha256": "d24b377befaec8cafb6bc36ff2e21b5d30ca73598ebe024737b6408a51fbf0e7",
+          "sampledDurationMs": 3197.334,
+          "stackFormattingSelfSamplesMs": 4.457,
+          "topSelfSamples": [
+            {
+              "function": "(idle)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 2739.248
+            },
+            {
+              "function": "wrapSafe",
+              "file": "loader",
+              "line": 1819,
+              "sampledMs": 82.708
+            },
+            {
+              "function": "(garbage collector)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 37.832
+            },
+            {
+              "function": "parseChannelMessages",
+              "file": "serialization",
+              "line": 100,
+              "sampledMs": 27.376
+            },
+            {
+              "function": "(program)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 24.5
+            },
+            {
+              "function": "__require",
+              "file": "babelBundle.js",
+              "line": 8,
+              "sampledMs": 13.292
+            },
+            {
+              "function": "readFileUtf8",
+              "file": "",
+              "line": 0,
+              "sampledMs": 9.665
+            },
+            {
+              "function": "__require",
+              "file": "utilsBundle.js",
+              "line": 8,
+              "sampledMs": 9.25
+            },
+            {
+              "function": "__init",
+              "file": "coreBundle.js",
+              "line": 12,
+              "sampledMs": 8.751
+            },
+            {
+              "function": "nextTick",
+              "file": "task_queues",
+              "line": 113,
+              "sampledMs": 6.124
+            },
+            {
+              "function": "compileForInternalLoader",
+              "file": "realm",
+              "line": 383,
+              "sampledMs": 6.041
+            },
+            {
+              "function": "channel.onread",
+              "file": "child_process",
+              "line": 683,
+              "sampledMs": 4.667
+            }
+          ]
+        },
+        {
+          "file": "CPU.20261031.165712.69944.0.001.cpuprofile",
+          "sha256": "93d46e2bf0b6da7cdc3e0681e6f31774b5fb28e9f42b3cdcc15b6ddf790d4b55",
+          "sampledDurationMs": 2789.417,
+          "stackFormattingSelfSamplesMs": 721.827,
+          "topSelfSamples": [
+            {
+              "function": "",
+              "file": "utilsBundle.js",
+              "line": 25088,
+              "sampledMs": 270.833
+            },
+            {
+              "function": "(idle)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 163.666
+            },
+            {
+              "function": "cloneCallSite",
+              "file": "utilsBundle.js",
+              "line": 25086,
+              "sampledMs": 135.834
+            },
+            {
+              "function": "ProtocolError",
+              "file": "coreBundle.js",
+              "line": 12816,
+              "sampledMs": 120.875
+            },
+            {
+              "function": "",
+              "file": "coreBundle.js",
+              "line": 16564,
+              "sampledMs": 115.791
+            },
+            {
+              "function": "prepareStackTrace",
+              "file": "utilsBundle.js",
+              "line": 25152,
+              "sampledMs": 115.372
+            },
+            {
+              "function": "writeUtf8String",
+              "file": "",
+              "line": 0,
+              "sampledMs": 100.001
+            },
+            {
+              "function": "wrapCallSite",
+              "file": "utilsBundle.js",
+              "line": 25096,
+              "sampledMs": 99.164
+            },
+            {
+              "function": "(garbage collector)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 96.75
+            },
+            {
+              "function": "_race",
+              "file": "coreBundle.js",
+              "line": 3610,
+              "sampledMs": 89.418
+            },
+            {
+              "function": "send",
+              "file": "coreBundle.js",
+              "line": 40842,
+              "sampledMs": 70.453
+            },
+            {
+              "function": "object3.<computed>",
+              "file": "utilsBundle.js",
+              "line": 25089,
+              "sampledMs": 67.623
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "final candidate",
+      "tests": [
+        "tabs pass manual Enter",
+        "manual tabs record initial and final observations even for a short window"
+      ],
+      "passed": 2,
+      "retries": 0,
+      "reportSha256": "edde2aaa3d3996ba229182a97cf023c98ecaee430e784a811363cc63c493bb01",
+      "snapshots": 565,
+      "windowSnapshotDurationMs": {
+        "count": 409,
+        "median": 3.50775,
+        "p95NearestRank": 4.535083,
+        "maximum": 8.682083
+      },
+      "windowSnapshotCpuMs": {
+        "count": 409,
+        "median": 3.515,
+        "p95NearestRank": 8.5,
+        "maximum": 34.431
+      },
+      "windowGapMs": {
+        "count": 409,
+        "median": 3.5,
+        "p95NearestRank": 4.5999999940395355,
+        "maximum": 7.0999999940395355
+      },
+      "profiles": [
+        {
+          "file": "CPU.20261031.170224.70465.0.001.cpuprofile",
+          "sha256": "bd2facff6f03ef5437ff1defe8a09cd7e8c721ee4ebfbb13b4999beb01c6b826",
+          "sampledDurationMs": 3131.292,
+          "stackFormattingSelfSamplesMs": 2.417,
+          "topSelfSamples": [
+            {
+              "function": "(idle)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 2749.873
+            },
+            {
+              "function": "wrapSafe",
+              "file": "loader",
+              "line": 1819,
+              "sampledMs": 73.5
+            },
+            {
+              "function": "(program)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 31.041
+            },
+            {
+              "function": "parseChannelMessages",
+              "file": "serialization",
+              "line": 100,
+              "sampledMs": 28.625
+            },
+            {
+              "function": "(garbage collector)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 27.292
+            },
+            {
+              "function": "__init",
+              "file": "coreBundle.js",
+              "line": 12,
+              "sampledMs": 12.709
+            },
+            {
+              "function": "readFileUtf8",
+              "file": "",
+              "line": 0,
+              "sampledMs": 10.375
+            },
+            {
+              "function": "nextTick",
+              "file": "task_queues",
+              "line": 113,
+              "sampledMs": 8.833
+            },
+            {
+              "function": "compileForInternalLoader",
+              "file": "realm",
+              "line": 383,
+              "sampledMs": 8.708
+            },
+            {
+              "function": "__require",
+              "file": "utilsBundle.js",
+              "line": 8,
+              "sampledMs": 8.541
+            },
+            {
+              "function": "__require",
+              "file": "babelBundle.js",
+              "line": 8,
+              "sampledMs": 6.25
+            },
+            {
+              "function": "init",
+              "file": "utilsBundle.js",
+              "line": 59171,
+              "sampledMs": 5.0
+            }
+          ]
+        },
+        {
+          "file": "CPU.20261031.170224.70485.0.001.cpuprofile",
+          "sha256": "92520e3cb18a15a1060741a2a4efa7595c320df4476105ba245eae62aafa54d1",
+          "sampledDurationMs": 2793.708,
+          "stackFormattingSelfSamplesMs": 741.297,
+          "topSelfSamples": [
+            {
+              "function": "",
+              "file": "utilsBundle.js",
+              "line": 25088,
+              "sampledMs": 226.964
+            },
+            {
+              "function": "(idle)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 193.788
+            },
+            {
+              "function": "cloneCallSite",
+              "file": "utilsBundle.js",
+              "line": 25086,
+              "sampledMs": 166.42
+            },
+            {
+              "function": "ProtocolError",
+              "file": "coreBundle.js",
+              "line": 12816,
+              "sampledMs": 123.542
+            },
+            {
+              "function": "prepareStackTrace",
+              "file": "utilsBundle.js",
+              "line": 25152,
+              "sampledMs": 113.875
+            },
+            {
+              "function": "object3.<computed>",
+              "file": "utilsBundle.js",
+              "line": 25089,
+              "sampledMs": 112.498
+            },
+            {
+              "function": "wrapCallSite",
+              "file": "utilsBundle.js",
+              "line": 25096,
+              "sampledMs": 105.455
+            },
+            {
+              "function": "",
+              "file": "coreBundle.js",
+              "line": 16564,
+              "sampledMs": 99.421
+            },
+            {
+              "function": "_race",
+              "file": "coreBundle.js",
+              "line": 3610,
+              "sampledMs": 95.5
+            },
+            {
+              "function": "(garbage collector)",
+              "file": "",
+              "line": 0,
+              "sampledMs": 90.75
+            },
+            {
+              "function": "CustomError",
+              "file": "coreBundle.js",
+              "line": 12875,
+              "sampledMs": 69.418
+            },
+            {
+              "function": "send",
+              "file": "coreBundle.js",
+              "line": 40842,
+              "sampledMs": 69.125
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unchangedFixtureAndToolingFiles": [
+    "tests/integration/tabs.spec.ts",
+    "tests/fixtures/tabs.ts",
+    "tests/support/snapshot-timings.ts",
+    "playwright.config.ts",
+    "pnpm-lock.yaml"
+  ],
+  "driverHashes": {
+    "baseline": "f7fd30689fecd1b0d43fadccd3fe30804928b4c5a8297cdb67654481472b9530",
+    "candidate": "ad9df369539c4a7f007ccaef1f662e1fb2abbdd34b0e51367d9f4c6c6a68bcfb"
+  },
+  "stackFrameProbe": {
+    "scope": "One warmed interaction snapshot per implementation through the same 24-level async caller chain; baseline and candidate bundled with identical esbuild options. Original Error.prepareStackTrace is forwarded unchanged and restored afterward. Counts establish less stack-formatting work, not a time bound or hosted root cause.",
+    "baseline": {
+      "scope": "One warmed interaction snapshot through a 24-level async caller chain. The existing stack formatter is forwarded unchanged; only frame counts are recorded.",
+      "name": "baseline",
+      "frameCounts": [
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        13,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        10,
+        12,
+        10,
+        12,
+        39
+      ],
+      "formattedStacks": 33,
+      "totalMappedFrames": 787,
+      "maximumFrames": 46
+    },
+    "candidate": {
+      "scope": "One warmed interaction snapshot through a 24-level async caller chain. The existing stack formatter is forwarded unchanged; only frame counts are recorded.",
+      "name": "candidate",
+      "frameCounts": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        13,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        10,
+        12,
+        10,
+        12,
+        39
+      ],
+      "formattedStacks": 33,
+      "totalMappedFrames": 477,
+      "maximumFrames": 39
+    },
+    "rawReportSha256": "cc2fadeb0face746255d9be771f1caba76c18287ab315502855081e0a6b3f041",
+    "probeSource": "import { test, expect } from '@playwright/test';\nimport { writeFileSync } from 'node:fs';\nimport { Driver as Baseline } from './baseline.mjs';\nimport { Driver as Candidate } from './candidate.mjs';\nimport { tabsHtml, tabsContract } from '../../tests/fixtures/tabs.js';\nimport { DEFAULTS } from '../../src/contracts/common.js';\n\nfor (const [name, Driver] of [['baseline', Baseline], ['candidate', Candidate]] as const) {\n  test(name, async ({ page }) => {\n    await page.setContent(tabsHtml({ activation: 'manual' }));\n    const c = tabsContract(page, { activation: 'manual' });\n    const d = new Driver(page, [c.tablist, ...c.items.flatMap(i => [i.tab, i.panel])], c.tablist,\n      { ...DEFAULTS }, performance.now(), c);\n    const original = Error.prepareStackTrace;\n    const frameCounts: number[] = [];\n    let measuring = false;\n    try {\n      await d.snapshot('interaction');\n      Error.prepareStackTrace = (error, frames) => {\n        if (measuring) frameCounts.push(frames.length);\n        return original(error, frames);\n      };\n      async function callerChain(depth: number): Promise<void> {\n        await Promise.resolve();\n        if (depth) await callerChain(depth - 1);\n        else expect((await d.snapshot('interaction')).tabs?.structure).toBe(true);\n      }\n      measuring = true;\n      await callerChain(24);\n      measuring = false;\n      expect(frameCounts.length).toBeGreaterThan(0);\n      writeFileSync(`artifacts/stack-probe/${name}-frames.json`, JSON.stringify({\n        scope: 'One warmed interaction snapshot through a 24-level async caller chain. The existing stack formatter is forwarded unchanged; only frame counts are recorded.',\n        name, frameCounts, formattedStacks: frameCounts.length,\n        totalMappedFrames: frameCounts.reduce((a,b) => a+b, 0), maximumFrames: Math.max(...frameCounts),\n      }, null, 2) + '\\n');\n    } finally { measuring = false; Error.prepareStackTrace = original; await d.dispose(); }\n  });\n}\n",
+    "files": {
+      "baseline.mjs": "ad248113a0b684f8dc0adddc32458c3b1cd0bcc77afb1a2151979a0469c9b59d",
+      "candidate.mjs": "eee46dab587cb0fd7fe040adabacff00991ac73fe0449739ecac18dcd0c4c464",
+      "probe.spec.ts": "70d9e33a56a9c4aeb6eedefcb767d372a1d246dea12ceff86a268150a9d0eab0",
+      "playwright.config.ts": "7bd4768788bc9d9eff6e9622e532fe2c1ca5629c872549e520b93d8250de9f34"
+    },
+    "buildOptions": "--bundle --platform=node --target=node24 --format=esm --external:@playwright/test"
+  }
+}

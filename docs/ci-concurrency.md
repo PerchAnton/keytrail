@@ -8,6 +8,47 @@ The four-worker isolation comparison remains part of the local four-round
 verifier. A real gap above 100 ms still blocks a negative observation; retries
 remain disabled. Results below identify their source revision and runner.
 
+## Observation dispatch overhead
+
+The [bounded CI at `cd3216b`](https://github.com/PerchAnton/keytrail/actions/runs/41212912852)
+passed all four jobs. Each ARM allocation ran one complete suite after the previous
+ARM job finished; Linux supplied the fourth full round. Every job used one worker,
+zero retries and the unchanged **100 ms** limit. Both actual package consumers
+passed in each job.
+
+| Job | Full suite | Maximum passing-window gap |
+| --- | ---: | ---: |
+| macOS 15 ARM / allocation 1 | 172/172 | 39.9 ms |
+| macOS 15 ARM / allocation 2 | 172/172 | 59.5 ms |
+| macOS 15 ARM / allocation 3 | 172/172 | 56.7 ms |
+| Linux baseline | 172/172 | 34.0 ms |
+
+The reader now dispatches fresh locator queries from a microtask with a short
+async stack. A focused probe with identically bundled baseline/candidate readers
+formatted 33 stacks in each case, but reduced total formatted frames from 787 to
+477. Local CPU profiles identified stack/source-map processing as substantial
+host work. This is a reduction in identified overhead, not proof of the precise
+cause of the earlier 130.3 ms hosted stall. [Rationale and complete profile scope](observation-gaps.md).
+
+The microtask adds no timer pause and retains the caller's async context. Every
+query still checks its budget; all sibling reads settle before target-order errors
+or cleanup. Two added cases cover context propagation and expiry at the dispatch
+handoff. Existing replacement, live-binding, foreign-context, late-sibling cleanup,
+timer-order and before/after transport-gap cases all remain enabled.
+
+Independent validation checked **688 executions**, **644 unique journey IDs**,
+semantic signatures, source hashes, 52 guard subprocess cases per job, separate
+runner IDs, non-overlapping ARM times and each actual tarball checksum. It also
+checked the clean vanilla/React reports and the expected negative exit-1 case.
+[Source-bound evidence](evidence/ci-observation-dispatch.json).
+
+The historical failures below are preserved. A short passing sample cannot
+establish a universal scheduling bound on shared hosts. Future actual gaps above
+100 ms must still block. The prior equivalent-work benchmark remains historical
+because runtime changed; no new benchmark or final 100-round series was run.
+Subsequent documentation-only commits do not replace the tested source or archive
+identities. No merge or publication was performed.
+
 ## Fresh macOS 15 ARM allocations
 
 The three-allocation comparison **did not pass**. The first and second jobs ran at
