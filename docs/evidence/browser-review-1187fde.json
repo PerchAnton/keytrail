@@ -1,0 +1,120 @@
+{
+  "reviewedAt": "2026-10-31T17:26:11.149985+00:00",
+  "sourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
+  "candidateRef": "candidate/0.1.0-alpha.6",
+  "version": "0.1.0-alpha.6",
+  "scope": "Interactive review of the frozen examples in the in-app browser and inspection of preserved CI reports. No new Playwright suite or reliability round.",
+  "interactiveChecks": [
+    {
+      "example": "React portal, corrected",
+      "result": "passed",
+      "observed": [
+        "Tab reaches Edit profile",
+        "Enter opens with Display name focused",
+        "Tab moves to Close and wraps to Display name",
+        "Shift+Tab wraps back to Close",
+        "Escape closes and returns focus to Edit profile",
+        "Reopen/remount preserves initial focus",
+        "Close activated by Enter returns focus to Edit profile"
+      ]
+    },
+    {
+      "example": "React initial-focus defect",
+      "result": "expected-defect-observed",
+      "observed": [
+        "Enter opens with Close focused instead of Display name",
+        "Matches D03.initial in the preserved negative report"
+      ]
+    },
+    {
+      "example": "React return-focus defect",
+      "result": "expected-defect-observed",
+      "observed": [
+        "Initial focus reaches Display name",
+        "Escape closes but focus does not return to Edit profile",
+        "Matches D07.returned, observed body, in the preserved teaching report"
+      ]
+    },
+    {
+      "example": "Vanilla dialog",
+      "result": "passed",
+      "observed": [
+        "Tab and Enter reach and open the dialog",
+        "Display name initially focused",
+        "Forward and backward focus wrap within dialog",
+        "Escape returns focus to Edit profile"
+      ]
+    },
+    {
+      "example": "Vanilla manual tabs",
+      "result": "passed",
+      "observed": [
+        "Tab enters General",
+        "Right focuses Privacy without changing selected General or visible General panel",
+        "Enter selects Privacy and its panel",
+        "Home focuses General without changing selected Privacy",
+        "Space selects General",
+        "Left wraps to Privacy",
+        "End reaches Privacy without selecting it",
+        "Tab exits to the selected General panel"
+      ]
+    },
+    {
+      "example": "Vanilla form errors",
+      "result": "passed",
+      "observed": [
+        "Keyboard Save with invalid fixture value reveals the declared error and focuses Email",
+        "Synthetic reader@example.test entered using the browser typing command",
+        "Keyboard Save clears the error and displays The declared error is cleared."
+      ],
+      "scope": "This walkthrough does not separately qualify the library type versus insertText modes."
+    }
+  ],
+  "visualChecks": {
+    "reactPortal": "Visible focus ring and controls fit the narrow review panel; no visible overlap in the inspected state.",
+    "formErrors": "Error, hint, focus ring and Save are readable in the inspected state.",
+    "htmlReport": "First mismatch and JSON attachment can be expanded. Standard raw JSON is dense in a narrow panel."
+  },
+  "reportChecks": {
+    "sourceCIRun": 41219489046,
+    "reportsReusedWithoutModification": true,
+    "negative": {
+      "playwrightUnexpected": 1,
+      "junitErrors": 1,
+      "firstMismatch": "D03.initial / FOCUS_MISMATCH",
+      "expected": "display-name",
+      "observed": "close-profile",
+      "coverage": {
+        "planned": 18,
+        "passed": 5,
+        "failed": 1,
+        "notRun": 12
+      },
+      "allNotRunBlockedBy": "D03.initial"
+    },
+    "guarded": {
+      "playwrightExpected": 1,
+      "junitErrors": 0,
+      "journeyPassed": 18,
+      "journeyPlanned": 18
+    },
+    "teaching": {
+      "playwrightExpected": 3,
+      "junitErrors": 0,
+      "scope": "Two green teaching tests assert failed journeys; they do not certify the defective components."
+    }
+  },
+  "integrity": {
+    "verifiedFiles": 76,
+    "zipSha256": "c0cac286d286c0ff00e7dc3cdcd14ba07efd0b6a148fd05e998ff1baed0a0220",
+    "packageSha256": "42f45c5eac7958d55b3b23b40ea0c484b85c56fdcd01f6b22a716e39b9d26967",
+    "frozenBundleUnchanged": true,
+    "remoteMainAndTagStillMatch": true
+  },
+  "ownerSignOff": "pending",
+  "finalAcceptance": false,
+  "releaseReady": false,
+  "newFullRounds": 0,
+  "final100RoundsStarted": false,
+  "scopeNote": "Exploratory keyboard and report review. It does not measure observation cadence, replace final repeatability evidence or establish accessibility conformance."
+}

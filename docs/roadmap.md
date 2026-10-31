@@ -1,14 +1,16 @@
 # Milestones
 
-**Latest development snapshot (31 October 2026): merged main `f9c492b`.**
-[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41215267386) passed
-three separate macOS 15 ARM allocations and Linux: **172 tests per job**, one
-worker, zero retries/skips, and both real package consumers in every job.
-ARM maximum passing-window gaps were **69.0 / 61.0 / 42.2 ms**; Linux was **32.7 ms**.
-The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-f9c492b.json).
-The [fresh benchmark](performance.md) passed **108/108** with matching input hashes.
-The earlier failures remain recorded; short successful checks do not guarantee
-shared-runner latency. Final 100-round acceptance and publication remain deferred.
+**Frozen candidate (31 October 2026): `1187fde`.**
+The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
+remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
+passed three separate macOS 15 ARM allocations and Linux: **172 tests per job**,
+one worker, zero retries/skips, and both real package consumers in every job.
+ARM maximum passing-window gaps were **87.7 / 65.6 / 50.7 ms**; Linux was **23.9 ms**.
+The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-1187fde.json).
+The [benchmark](performance.md) was measured at `f9c492b`: **108/108**, with
+input hashes matching this candidate. Earlier failures and measurements keep their
+source identities. Short checks do not guarantee shared-runner latency.
+Final 100-round acceptance and publication remain deferred.
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated

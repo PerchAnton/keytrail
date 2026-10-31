@@ -1,0 +1,136 @@
+{
+  "recordedAt": "2026-10-31T16:16:11.776778+00:00",
+  "package": "keytrail",
+  "version": "0.1.0-alpha.6",
+  "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
+  "sourceTree": "28bb97b895edfc3e97099a9b49657f0bb8fa6770",
+  "status": "development-review-ready",
+  "releaseReady": false,
+  "published": false,
+  "finalAcceptance": false,
+  "archive": {
+    "file": "keytrail-0.1.0-alpha.6.tgz",
+    "bytes": 393179,
+    "sha256": "c159e66d6f11288479c7ef5c760579bceee8fd842273b7c157daa3d288a6e3c1",
+    "files": 113
+  },
+  "verificationLevel": "development",
+  "mainCI": {
+    "runId": 41215267386,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41215267386",
+    "conclusion": "success",
+    "sourceHashesMatch": "ci-main-f9c492b.json",
+    "uniqueJourneyRunIds": 644,
+    "totalExecutions": 688,
+    "platforms": [
+      {
+        "platform": "linux-x64",
+        "allocation": 0,
+        "artifact": "linux-evidence",
+        "tests": 172,
+        "rawReportSha256": "b59da227ec480dce603a222dc3b653eff0f279fc10665835c3dd49115ecdecad",
+        "maximumPassingWindowGapMs": 32.69999999998254,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 393179,
+          "sha256": "c159e66d6f11288479c7ef5c760579bceee8fd842273b7c157daa3d288a6e3c1",
+          "files": 113
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 1,
+        "artifact": "macos-15-arm-round-1-evidence",
+        "tests": 172,
+        "rawReportSha256": "07b625bb3cf24c96e61bdf4d081cd7467d144a2876a12205e82c542a4a69e0ab",
+        "maximumPassingWindowGapMs": 69,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 393179,
+          "sha256": "be82552237088e36913716eae47971e07531e4996c0e2c4a744d8e123fc570a0",
+          "files": 113
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 2,
+        "artifact": "macos-15-arm-round-2-evidence",
+        "tests": 172,
+        "rawReportSha256": "799a4f7041598f58b1171d96dc9c6630495925581427ae0727b10e920bc52f6f",
+        "maximumPassingWindowGapMs": 61,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 393179,
+          "sha256": "be82552237088e36913716eae47971e07531e4996c0e2c4a744d8e123fc570a0",
+          "files": 113
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 3,
+        "artifact": "macos-15-arm-round-3-evidence",
+        "tests": 172,
+        "rawReportSha256": "9bd24e9f92c45f1d48e5454cc7fe96be12035ae7b3e99e6ba6a93397eb3f9621",
+        "maximumPassingWindowGapMs": 42.20000000001164,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 393179,
+          "sha256": "be82552237088e36913716eae47971e07531e4996c0e2c4a744d8e123fc570a0",
+          "files": 113
+        }
+      }
+    ]
+  },
+  "localDevelopment": {
+    "record": "development-atomic-observations.json",
+    "identity": "8d4ca629173b3dfc93c7e517029efe5b9bdef7b0ee63ccab0162b2873e13bd98",
+    "fullRounds": 4,
+    "sequentialExecutions": 676,
+    "isolationExecutions": 169,
+    "uniqueJourneyRunIds": 800,
+    "retries": 0,
+    "historical": true,
+    "scope": "The atomic-registration revision before the consecutive-read scheduler; not current-source or final acceptance evidence."
+  },
+  "browserReview": "browser-review.json",
+  "registryCheck": {
+    "date": "2026-10-30",
+    "url": "https://registry.npmjs.org/keytrail",
+    "httpStatus": 404,
+    "result": "No package record found; name reservation and publication permission are not established by this response.",
+    "githubReleases": 0,
+    "githubTags": 0
+  },
+  "pending": [
+    "Select and freeze the final reviewed candidate.",
+    "Run the explicitly requested 100-round final series for that source.",
+    "Pass the package release gate with fresh final evidence.",
+    "Obtain owner review and publication authorization.",
+    "Verify registry ownership/authentication and publish the exact verified archive with the alpha tag."
+  ],
+  "browserReviewScope": "browser-review.json retains the earlier 8f119df exploratory UI review. The current scheduler was not requalified by that review; owner review of the final candidate remains separate.",
+  "performance": {
+    "record": "benchmark-validation.json",
+    "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
+    "tests": 108,
+    "warmupsPerArm": 5,
+    "pairsPerWorkload": 30,
+    "retries": 0,
+    "targetMet": true,
+    "final100RoundsStarted": false,
+    "measuredAt": "2026-10-31T16:13:47.223Z",
+    "pairedMedianOverheadPercent": {
+      "dialog": -9.238574834530748,
+      "tabs": -6.7974480749702355,
+      "formErrors": -12.579124668783255
+    }
+  },
+  "archiveScope": "Preserved Linux archive from main CI 41215267386 at f9c492b, before this evidence and release-checker refresh. Rebuilt archives require their own external verification record and checksum.",
+  "preparationChecks": {
+    "scriptTests": 26,
+    "newRegressions": 4,
+    "newRuntimeRoundsStarted": 0,
+    "runtimeInputsChanged": false,
+    "final100RoundsStarted": false
+  }
+}

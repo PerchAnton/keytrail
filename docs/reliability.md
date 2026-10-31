@@ -1,8 +1,8 @@
 # Full-suite repeatability protocol
 
-**Latest bounded check:** merged main `f9c492b` passed three sequential fresh macOS 15 ARM
+**Frozen candidate check:** `1187fde` passed three sequential fresh macOS 15 ARM
 jobs and one Linux job, **172 tests each**, with package consumers, zero retries
-and the unchanged 100 ms bound. [Validated record](evidence/ci-main-f9c492b.json).
+and the unchanged 100 ms bound. [Validated record](evidence/ci-main-1187fde.json).
 This follow-up was limited to four full jobs in total; it is neither the local
 four-round-plus-isolation protocol nor final 100-round acceptance. Earlier proofs
 remain bound to their recorded sources. [Dispatch investigation](observation-gaps.md).
@@ -12,11 +12,12 @@ remain bound to their recorded sources. [Dispatch investigation](observation-gap
 zero retries. Maximum ARM observation gaps were 47.4 / 38.4 / 39.5 ms; Linux's
 maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evidence/ci-main-1b42666.json).
 The [historical benchmark for that source](history/performance-1b42666-2026-10-31.md) remains preserved.
-The new [108-test benchmark](performance.md) matches `f9c492b`. Earlier repeatability
+The [108-test benchmark](performance.md) was measured at `f9c492b`; its input hashes
+match the frozen `1187fde` candidate. Earlier repeatability
 proofs remain historical; final 100-round acceptance is still deferred. This short
 sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 ## Current development policy
 

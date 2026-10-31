@@ -1,34 +1,40 @@
 # First alpha release checklist
 
-**Latest development snapshot (31 October 2026): merged main `f9c492b`.**
-[Main CI](https://github.com/PerchAnton/keytrail/actions/runs/41215267386) passed
-three separate macOS 15 ARM allocations and Linux: **172 tests per job**, one
-worker, zero retries/skips, and both real package consumers in every job.
-ARM maximum passing-window gaps were **69.0 / 61.0 / 42.2 ms**; Linux was **32.7 ms**.
-The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-f9c492b.json).
-The [fresh benchmark](performance.md) passed **108/108** with matching input hashes.
-The earlier failures remain recorded; short successful checks do not guarantee
-shared-runner latency. Final 100-round acceptance and publication remain deferred.
+**Frozen candidate (31 October 2026): `1187fde`.**
+The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
+remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
+passed three separate macOS 15 ARM allocations and Linux: **172 tests per job**,
+one worker, zero retries/skips, and both real package consumers in every job.
+ARM maximum passing-window gaps were **87.7 / 65.6 / 50.7 ms**; Linux was **23.9 ms**.
+The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-1187fde.json).
+The [benchmark](performance.md) was measured at `f9c492b`: **108/108**, with
+input hashes matching this candidate. Earlier failures and measurements keep their
+source identities. Short checks do not guarantee shared-runner latency.
+Final 100-round acceptance and publication remain deferred.
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. Final 100-round acceptance remains deferred until the candidate is frozen; [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
 numbers were source checkpoints, not published packages. This document prepares
 the first publication; it does not assert that a release exists.
 
-## Current preparation snapshot (`f9c492b`)
+## Frozen candidate snapshot (`1187fde`)
 
 The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
 identify the preserved main-CI archive and the fresh benchmark. Linux passed 172/172
 checks and three separate macOS ARM machines passed 516/516, with real package
 consumers in every job. The benchmark passed 108/108; both overhead calculations
-meet the 20% target for every workload. The earlier browser review remains tied to
-its original revision; owner review of the final candidate is still required.
+meet the 20% target for every workload. The [interactive candidate review](evidence/browser-review-1187fde.json) records
+keyboard and report checks at `1187fde`; it does not imply owner sign-off or final acceptance.
 
-This is **development-review-ready**, with `releaseReady: false` and
+This is a **frozen development candidate**, with `releaseReady: false` and
 `finalAcceptance: false`. Do not repeat sufficient development rounds for changes
 to documentation or the release-evidence checker. New archive bytes still require
-their own package-consumer verification and checksum.
+their own package-consumer verification and checksum. The preserved Linux archive
+has **115 files / 395,737 bytes**, SHA-256
+`42f45c5eac7958d55b3b23b40ea0c484b85c56fdcd01f6b22a716e39b9d26967`.
+These updated instructions postdate that archive; keep the candidate tag fixed.
+A package rebuilt with these documents must not inherit the old archive checksum.
 
 ## Inspect remaining evidence without running tests
 
@@ -88,7 +94,7 @@ or external service is needed to run their browser tests.
 | Reporter compatibility | HTML and JUnit from passing and failing React runs; original failed attachment and `not_run` dependency links retained |
 | Package inventory | License, notices, schema and exports; no test results, node_modules or local configuration |
 | Archive identity | `artifacts/package-verification.json` and `artifacts/SHA256SUMS` from the exact tested `.tgz` |
-| Hosted platform checks | Main `f9c492b`: Linux 172 and ARM 516 passed with package consumers; the commit ultimately selected for release needs matching checks |
+| Hosted platform checks | Candidate `1187fde`: Linux 172 and ARM 516 passed with package consumers; the commit ultimately selected for release needs matching checks |
 | Human review | Inspect HTML failure report and try the example with a keyboard; passing automation is not a conformance assessment |
 
 `pnpm check` runs build, types, unit, guard, one browser suite and actual package
@@ -118,7 +124,9 @@ for the final release gate. Checksums are integrity checks, not signatures.
 
 ## Publication remains a separate step
 
-- Select the reviewed commit and require successful CI for it.
+- Keep the reviewed `candidate/0.1.0-alpha.6` tag at `1187fde`. Any later release
+  snapshot needs its own identity; do not move the existing tag. Verify that the
+  selected release inputs and archive have matching evidence.
 - Check registry name availability, ownership and release authentication at that time.
 - Use the exact tested tarball; rebuilding after verification changes its identity.
 - Publish as an npm prerelease with the **alpha** dist-tag; do not update `latest`.
