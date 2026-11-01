@@ -6,7 +6,7 @@
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Four rounds plus worker isolation remain the default development protocol. The separately requested final 100-round series is complete for frozen candidate 1187fde. Changed verification inputs require their own evidence; development success never substitutes for final acceptance.",
-  "finalAcceptanceSourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
+  "reason": "Use four rounds for development. The first beta completed its separate final series.",
+  "finalAcceptanceSourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
   "finalAcceptanceRecord": "reliability.json"
 }

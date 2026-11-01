@@ -101,7 +101,7 @@ assertion. Those detector tests belong outside an application journey project.
 `pnpm test:guard` launches actual Playwright child processes and checks their exit
 codes, including recovered retries, empty discovery, dependency failure, corrupt
 attachments, internal errors, timeout and SIGINT. It writes
-`artifacts/guard-verification.json`; the [recorded evidence](evidence/ci-guard.json)
+`artifacts/guard-verification.json`; the [recorded evidence](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/ci-guard.json)
 includes source hashes. `pnpm test:package` additionally runs three real browser
 journeys with the installed reporter in a fresh offline consumer.
 

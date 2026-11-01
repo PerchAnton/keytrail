@@ -22,7 +22,7 @@ Chromium 156.0.8078.4. These are results from synthetic fixtures, not customer d
 | Tabs defects and boundaries | Wrong arrow, missing wrap, premature/manual activation, focus drift, selected/visible counts, IDREF, roving, exit, unsupported modes, budgets and safe reports |
 | Form cases | First-invalid/live, summary/resubmit, stay, summary links, external messages, supported native controls, Unicode/empty correction and replaced fields |
 | Form defects and boundaries | Text, IDREF and invalid state, wrong focus/link, focus loss before insertion, non-editable fields, uncleared errors, limits, contexts and safe reports |
-| CI guard subprocesses | 48 cases with asserted actual exit codes; [record](evidence/ci-guard.json) |
+| CI guard subprocesses | 48 cases with asserted actual exit codes; [record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/ci-guard.json) |
 | Package consumers | Fresh offline install; ESM/CJS imports and declarations; six Chromium examples plus three corrected journeys with the installed CI guard |
 
 Defect tests pass because they observe the expected failures. They do not count

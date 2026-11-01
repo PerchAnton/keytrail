@@ -7,11 +7,12 @@ showing the first mismatch and the observations that could not run.
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
 [Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Read reports](docs/reports.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Release checklist](docs/release-checklist.md)
 
-**First beta candidate, `0.1.0-beta.1`.** Try the package with a real keyboard
+**First beta, `0.1.0-beta.1`.** Try the package with a real keyboard
 journey in Chromium using Node.js 24 and Playwright Test 1.64.1. The beta covers
 custom ARIA dialogs, fixed tab lists and declared form-error recovery. Its reports
 include the package version so feedback can be tied to the build under test.
-[Beta scope and release checks](docs/releases/0.1.0-beta.1.md).
+The beta passed 100 × 172 sequential tests, a matching 172-test four-worker run
+and 52 CI guard cases. [Beta scope and release checks](docs/releases/0.1.0-beta.1.md).
 
 ```text
 Tab to trigger → Enter → initial focus → Tab cycle → Shift+Tab cycle → Escape
@@ -185,7 +186,7 @@ The `1187fde` alpha candidate completed **100 × 172 = 17,200** sequential
 executions plus **172** matching four-worker checks. Independent validation
 confirmed **16,261 distinct journey IDs**, zero retries/skips/failures and unchanged
 source/build hashes. The run finished at **2026-10-31 22:45 UTC**.
-[Final proof](docs/evidence/reliability.json) · [Validation and report checksums](docs/evidence/reliability-validation-1187fde.json).
+[Final proof](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/reliability.json) · [Validation and report checksums](docs/evidence/reliability-validation-1187fde.json).
 
 The earlier revision `0300552` completed **100 rounds × 163 tests = 16,300 executions**,
 followed by **163 passing tests on four workers**, with no retries or semantic

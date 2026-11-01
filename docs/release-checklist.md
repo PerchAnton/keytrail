@@ -26,7 +26,7 @@ the first publication; it does not assert that a release exists.
 
 ## Frozen candidate snapshot (`1187fde`)
 
-The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
+The [handoff guide](release-handoff.md) and [readiness record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/release-readiness.json)
 identify the preserved main-CI archive and the fresh benchmark. Linux passed 172/172
 checks and three separate macOS ARM machines passed 516/516, with real package
 consumers in every job. The benchmark passed 108/108; both overhead calculations

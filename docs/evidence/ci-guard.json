@@ -1,8 +1,8 @@
 {
-  "recordedAt": "2026-10-31T15:03:46.764Z",
-  "version": "0.1.0-alpha.6",
+  "recordedAt": "2026-11-01T08:23:49.748Z",
+  "version": "0.1.0-beta.1",
   "node": "v24.22.1",
-  "platform": "linux",
+  "platform": "darwin",
   "playwright": "1.64.1",
   "scope": "Actual Playwright subprocess exit codes using synthetic reports and fault injection; browser consumers checked separately.",
   "sourceHashes": {
@@ -25,7 +25,7 @@
     "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
     "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
     "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
-    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "src/version.ts": "022e788ad37df8e452259fd9c607ebf0dd6e67511ff895424cd885124837aac6",
     "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
     "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
     "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",

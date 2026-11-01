@@ -16,7 +16,7 @@ The explicitly requested local final series completed successfully, on the froze
 | Independent validation completed | 2026-10-31 22:45:15 UTC; 1 November 00:45 in Kyiv |
 | Environment | Apple M3, Darwin 27.2.0 arm64, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4 |
 
-The [final proof](evidence/reliability.json), [policy](evidence/acceptance-policy.json)
+The [final proof](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/reliability.json), [policy](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/acceptance-policy.json)
 and [independent validation](evidence/reliability-validation-1187fde.json) agree on
 identity `34885215059b2e87247ff89f09cb859e606bec2e797d5d75602eea91c245f9f5`.
 The separate validator reread all 101 original reports, verified schemas, relationships,

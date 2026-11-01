@@ -4,7 +4,7 @@ The recorded measurements apply to merged main `f9c492b`, recorded on **31 Octob
 2026 at 16:13 UTC** (18:13 in Kyiv). All **108 benchmark tests passed**, without
 retries. Independent validation checked the complete raw report, all warmup and
 measured pairs, semantic equivalence, negative controls, environment and source
-hashes, then recomputed both overhead calculations; [validation record](evidence/benchmark-validation.json).
+hashes, then recomputed both overhead calculations; [validation record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-validation.json).
 No samples were discarded or selected from another run.
 
 At the time of this benchmark (31 October 2026, 16:13 UTC), final reliability
@@ -49,8 +49,8 @@ that KeyTrail is faster than every possible native test.
 All three meet the 20% target under both calculations. The runner was an Apple M3
 (8 logical CPUs), macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1,
 Chromium 156.0.8078.4; one worker, no concurrent test process observed at start.
-Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
-[tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
+Raw pairs and source hashes: [dialog](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-dialog.json),
+[tabs](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-tabs.json), [forms](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-formErrors.json).
 Values are rounded to one decimal place. The negative values describe this
 sample only; it does not establish a general speed advantage, confidence interval
 or cross-machine result. Required negative observation windows dominate its duration.

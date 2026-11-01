@@ -23,7 +23,7 @@ The frozen source is **KeyTrail 0.1.0-alpha.6** at
 at that commit. These instructions were updated after the freeze; they describe
 the preserved archive and do not change its contents or verification level.
 This is preparation for the first publication; no package or GitHub release exists.
-The [readiness record](evidence/release-readiness.json) separates completed checks
+The [readiness record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/release-readiness.json) separates completed checks
 from the completed source-bound reliability series and the still-pending release
 archive gate. Earlier source checkpoints keep their own evidence.
 
@@ -32,7 +32,7 @@ archive gate. Earlier source checkpoints keep their own evidence.
 - Final local reliability: **100 × 172 = 17,200** sequential executions and **172**
   four-worker checks; zero retries, skips or unexpected failures. All **101** raw
   reports, **16,261** distinct journey IDs and source/build hashes independently
-  validated. [Proof](evidence/reliability.json) · [Validation](evidence/reliability-validation-1187fde.json).
+  validated. [Proof](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/reliability.json) · [Validation](evidence/reliability-validation-1187fde.json).
 
 - Main CI: **688/688** browser executions, **644** distinct journey IDs, matching
   semantic signatures, source hashes, runner environments and both consumers in
