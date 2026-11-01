@@ -7,8 +7,17 @@ measured pairs, semantic equivalence, negative controls, environment and source
 hashes, then recomputed both overhead calculations; [validation record](evidence/benchmark-validation.json).
 No samples were discarded or selected from another run.
 
-This benchmark is separate from final 100-round reliability acceptance, which was
-not run and remains deferred. The earlier [12:07 UTC measurements at `1b42666`](history/performance-1b42666-2026-10-31.md),
+At the time of this benchmark (31 October 2026, 16:13 UTC), final reliability
+verification for the frozen candidate had not yet run and was still deferred.
+The `1187fde` candidate subsequently completed **100 × 172 = 17,200** sequential
+test executions and **172** matching four-worker checks, with the unchanged
+**100 ms** bound and zero retries/skips. Independent validation of all **101** raw
+reports finished at **22:45 UTC on 31 October** (00:45 on 1 November in Kyiv).
+See the [completed final series](reliability.md#final-candidate-result-1187fde)
+and its [validation record](evidence/reliability-validation-1187fde.json).
+These are separate runs; the benchmark retains its original `f9c492b` identity.
+
+The earlier [12:07 UTC measurements at `1b42666`](history/performance-1b42666-2026-10-31.md),
 [October 31 measurements at `da7e663`](history/performance-da7e663-2026-10-31.md)
 and [October 29 measurements](history/performance-2026-10-29.md) keep their original
 source identities. Both KeyTrail and the native reference changed since those runs;
