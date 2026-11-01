@@ -1,23 +1,5 @@
 # KeyTrail
 
-**Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
-
-**Frozen candidate:** [candidate/0.1.0-alpha.6](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
-remains at `1187fde`, which passed **3 × 172 ARM checks and
-172 Linux checks**, including both package consumers in each job, with no retries.
-Maximum ARM gaps were **87.7 / 65.6 / 50.7 ms**, below the unchanged **100 ms** limit.
-[Main CI evidence](docs/evidence/ci-main-1187fde.json) · [Why 100 ms](docs/observation-gaps.md).
-The benchmark below was measured at `f9c492b`: **108 tests** passed, and its input
-hashes match `1187fde`. The [handoff](docs/release-handoff.md) identifies the preserved
-395,737-byte Linux archive and its checksum.
-Short checks do not guarantee host scheduling latency. The final local series is now
-complete; [independent validation](docs/evidence/reliability-validation-1187fde.json)
-binds all 101 reports to this candidate. Release archive verification and publication
-remain pending; the preserved CI archive keeps its development verification level.
-
-Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
-from the repository root. This read-only command does not start tests or publish a package.
-
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.
@@ -25,9 +7,11 @@ showing the first mismatch and the observations that could not run.
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
 [Dialog API](docs/api.md) · [Tabs API](docs/tabs.md) · [Form errors API](docs/form-errors.md) · [CI guard](docs/ci-guard.md) · [Read reports](docs/reports.md) · [Limits](docs/limits.md) · [Performance](docs/performance.md) · [Release checklist](docs/release-checklist.md)
 
-**Status: dialogs, tabs and form errors, `0.1.0-alpha.6` source/package candidate.** No npm
-publication or GitHub release yet. This milestone implements custom ARIA dialogs, fixed tab lists and
-declared form-error recovery, plus a CI reporter that requires complete results for every discovered journey test and attempt.
+**First beta candidate, `0.1.0-beta.1`.** Try the package with a real keyboard
+journey in Chromium using Node.js 24 and Playwright Test 1.64.1. The beta covers
+custom ARIA dialogs, fixed tab lists and declared form-error recovery. Its reports
+include the package version so feedback can be tied to the build under test.
+[Beta scope and release checks](docs/releases/0.1.0-beta.1.md).
 
 ```text
 Tab to trigger → Enter → initial focus → Tab cycle → Shift+Tab cycle → Escape
@@ -69,14 +53,14 @@ its HTML/JUnit reports and incomplete attachment. Dependency installation and th
 React lockfile preparation use the registry. The actual consumer installation then
 uses `--offline --frozen-lockfile` in a separate empty directory; browser tests need
 only the local fixture server.
-It leaves `artifacts/keytrail-0.1.0-alpha.6.tgz`, a development verification record
+It leaves `artifacts/keytrail-0.1.0-beta.1.tgz`, a development verification record
 and `SHA256SUMS`. This checks package usability; final acceptance is a separate
 [explicit gate](docs/reliability.md).
 
 Install that archive into an existing Playwright project:
 
 ```sh
-npm install --save-dev /absolute/path/to/keytrail-0.1.0-alpha.6.tgz @playwright/test@1.64.1
+npm install --save-dev /absolute/path/to/keytrail-0.1.0-beta.1.tgz @playwright/test@1.64.1
 ```
 
 ## Try the React portal
@@ -197,7 +181,7 @@ The [verification record](docs/verification.md) separates completed checks from 
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
 repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md).
-The current `1187fde` candidate completed **100 × 172 = 17,200** sequential
+The `1187fde` alpha candidate completed **100 × 172 = 17,200** sequential
 executions plus **172** matching four-worker checks. Independent validation
 confirmed **16,261 distinct journey IDs**, zero retries/skips/failures and unchanged
 source/build hashes. The run finished at **2026-10-31 22:45 UTC**.
@@ -225,7 +209,7 @@ sequential checks and **169 four-worker checks**, with matching semantics and
 and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
 this source revision. This short development sample is not a guarantee against
 future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
-failures and measured limits. The current final series is recorded above; the
+failures and measured limits. The alpha final series is recorded above; the
 [current benchmark](docs/performance.md) passed all 108 tests at `f9c492b`. The frozen
 `1187fde` candidate passed 172 Linux and 516 ARM checks with package consumers;
 [source-bound CI record](docs/evidence/ci-main-1187fde.json). Real-world adoption has not been established.

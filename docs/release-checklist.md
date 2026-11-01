@@ -1,5 +1,8 @@
 # First alpha release checklist
 
+This page records the `0.1.0-alpha.6` handoff. For the first beta candidate,
+see [the beta scope and release checks](releases/0.1.0-beta.1.md).
+
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
