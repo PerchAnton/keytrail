@@ -1,10 +1,10 @@
 {
-  "recordedAt": "2026-10-31T18:02:43+00:00",
+  "recordedAt": "2026-11-01T07:40:03.297976+00:00",
   "package": "keytrail",
   "version": "0.1.0-alpha.6",
   "sourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
   "sourceTree": "66c009fe73901828ddc47961dcf2aa4789816e7d",
-  "status": "frozen-development-candidate",
+  "status": "frozen-candidate-final-reliability-verified",
   "releaseReady": false,
   "published": false,
   "finalAcceptance": false,
@@ -102,12 +102,12 @@
     "candidateTag": "candidate/0.1.0-alpha.6"
   },
   "pending": [
-    "Obtain owner sign-off and publication authorization.",
-    "Only after an explicit request, collect and independently validate the final 100-round proof for the selected source inputs.",
-    "Pass the release package gate with fresh final evidence and retain the exact verified archive.",
-    "Verify registry ownership/authentication and publish the final verified archive with the alpha tag."
+    "Obtain owner sign-off on the examples and HTML report.",
+    "Identify the release snapshot without moving candidate/0.1.0-alpha.6.",
+    "Pass node scripts/check-package.mjs --release for that snapshot and retain its exact archive, verification record and new checksum.",
+    "Confirm registry ownership/authentication and explicit publication authorization before publishing with the alpha dist-tag."
   ],
-  "browserReviewScope": "Interactive review of the frozen examples and preserved CI HTML/JSON/JUnit reports; no new reliability round. Owner sign-off and final acceptance are pending. browser-review.json retains the earlier 8f119df review.",
+  "browserReviewScope": "Interactive review of frozen examples and preserved CI HTML/JSON/JUnit reports, separate from final reliability. Owner sign-off remains pending. browser-review.json retains the earlier 8f119df review.",
   "performance": {
     "record": "benchmark-validation.json",
     "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
@@ -127,14 +127,17 @@
   },
   "archiveScope": "Preserved Linux development archive from main CI 41219489046 at 1187fde. This documentation update postdates the archive. Rebuilt archives contain different documentation and need their own package verification record and checksum; never reuse this hash for them.",
   "preparationChecks": {
-    "scope": "Documentation and evidence-pointer update only. The 26 script tests and four regressions were already verified in the recorded candidate CI.",
+    "scope": "Record the completed local final series and update release instructions. No new full browser rounds, benchmark, package consumer run or hosted CI requested for this update.",
     "sourceHashSetsRechecked": true,
-    "rawCIReread": true,
+    "buildHashesRechecked": true,
+    "rawReportsRechecked": 101,
+    "releaseScriptTestsPassed": 26,
+    "savedEvidenceChecksPassed": 6,
     "newRuntimeRoundsStarted": 0,
     "newBenchmarkRunsStarted": 0,
     "newPackageTestsStarted": 0,
     "runtimeInputsChanged": false,
-    "final100RoundsStarted": false
+    "publicationAuthorized": false
   },
   "candidateTag": {
     "ref": "candidate/0.1.0-alpha.6",
@@ -142,5 +145,79 @@
     "commit": "1187fde7e0307705354864e739cb1cccce134165",
     "policy": "Keep this tag at the recorded commit; later documentation does not change the frozen archive."
   },
-  "previousSnapshot": "release-readiness-f9c492b.json"
+  "previousSnapshot": "release-readiness-1187fde-before-final.json",
+  "evidenceReady": true,
+  "finalReliabilityVerified": true,
+  "finalAcceptanceScope": "The selected release archive has not passed the release package gate. The source-bound final reliability series is complete; the preserved archive remains development-verified.",
+  "finalReliability": {
+    "record": "reliability.json",
+    "validationRecord": "reliability-validation-1187fde.json",
+    "sourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
+    "identity": "34885215059b2e87247ff89f09cb859e606bec2e797d5d75602eea91c245f9f5",
+    "status": "passed",
+    "mode": "final",
+    "startedAt": "2026-10-31T18:24:24.546Z",
+    "finishedAt": "2026-10-31T22:45:07.527Z",
+    "validationFinishedAt": "2026-10-31T22:45:15.913569+00:00",
+    "fullRounds": 100,
+    "testsPerRound": 172,
+    "sequentialExecutions": 17200,
+    "isolationExecutions": 172,
+    "workers": 1,
+    "isolationWorkers": 4,
+    "uniqueJourneyRunIds": 16261,
+    "rawReports": 101,
+    "retries": 0,
+    "skips": 0,
+    "unexpectedFailures": 0,
+    "observationGapLimitMs": 100,
+    "environment": {
+      "node": "24.22.1",
+      "platform": "darwin",
+      "release": "27.2.0",
+      "arch": "arm64",
+      "cpu": "Apple M3",
+      "logicalCpus": 8,
+      "playwright": "1.64.1",
+      "chromium": "156.0.8078.4"
+    }
+  },
+  "savedEvidenceCheck": {
+    "checkedAt": "2026-11-01T07:40:03.297976+00:00",
+    "package": "keytrail",
+    "version": "0.1.0-alpha.6",
+    "evidenceReady": true,
+    "checks": [
+      {
+        "id": "acceptance-policy",
+        "status": "passed"
+      },
+      {
+        "id": "reliability",
+        "status": "passed"
+      },
+      {
+        "id": "benchmark-dialog",
+        "status": "passed"
+      },
+      {
+        "id": "benchmark-tabs",
+        "status": "passed"
+      },
+      {
+        "id": "benchmark-formErrors",
+        "status": "passed"
+      },
+      {
+        "id": "ci-guard",
+        "status": "passed"
+      }
+    ],
+    "scope": "Saved final evidence only. No tests, builds, file writes or publication.",
+    "remaining": [
+      "Confirm the selected candidate identity and retain its independently validated raw final reports.",
+      "Pass node scripts/check-package.mjs --release and preserve the exact verified archive.",
+      "Complete owner review and confirm registry access and publication authorization."
+    ]
+  }
 }

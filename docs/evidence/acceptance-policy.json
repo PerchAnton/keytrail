@@ -1,8 +1,9 @@
 {
   "version": "0.1.0-alpha.6",
-  "decisionDate": "2026-10-30",
+  "decisionDate": "2026-11-01",
   "referenceTargetRounds": 100,
   "minimumCompletedRounds": 100,
-  "seriesIdentity": "191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed",
-  "reason": "Historical source revision 0300552 completed all 100 full rounds without retries and a matching four-worker comparison. This identity is retained as history; changed source requires a new explicitly requested final series. The 100-round requirement is unchanged."
+  "seriesIdentity": "34885215059b2e87247ff89f09cb859e606bec2e797d5d75602eea91c245f9f5",
+  "sourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
+  "reason": "The explicitly requested local final series for frozen candidate 1187fde completed 100 full rounds and the matching four-worker comparison with a 100 ms observation-gap limit and zero retries. All 101 raw reports were independently validated. This establishes source-bound reliability; archive verification, owner review and publication authorization remain separate."
 }

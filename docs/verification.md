@@ -10,9 +10,12 @@ The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-1187fde
 The [benchmark](performance.md) was measured at `f9c492b`: **108/108**, with
 input hashes matching this candidate. Earlier failures and measurements keep their
 source identities. Short checks do not guarantee shared-runner latency.
-Final 100-round acceptance and publication remain deferred.
+Final source-bound reliability completed on 31 October 2026 UTC (1 November in Kyiv):
+**100 × 172 sequential executions + 172 four-worker checks**, zero retries/skips.
+[Independent validation](evidence/reliability-validation-1187fde.json).
+The release archive gate, owner sign-off and publication authorization remain separate.
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
@@ -24,19 +27,20 @@ component is accessible.
 | TypeScript | Strict library, integration and benchmark checks passed |
 | Unit tests | 39 passed, including verification-mode and resume-boundary checks |
 | Browser suite | `1187fde`: three ARM allocations 172/172 each; Linux 172/172. No retries/skips. Two added cases cover async context and budget expiry at dispatch; the earlier 130.3 ms failure is retained |
-| Worker isolation (historical `7e48291`) | 169/169 on four local workers; matching semantic signatures; 800 distinct journey IDs across all five runs |
+| Worker isolation (`1187fde`) | 172/172 on four local workers; semantic signature matches all 100 sequential rounds |
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | Release evidence validator | 26 script tests passed, including four regressions for incomplete or conflicting guard hashes; no browser rounds run by these tests |
 | CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
 | Performance | Recorded `f9c492b`: 108/108 tests; median paired overhead: dialog -9.2%, manual tabs -6.8%, forms (`insertText`) -12.6%; [samples and validation](performance.md) |
-| Repeatability (historical) | `7e48291`: 4 × 169 = 676 sequential checks plus 169 four-worker checks; [development proof](evidence/development-atomic-observations.json). Final 100-round acceptance remains deferred; [historical proof](evidence/reliability.json) |
+| Final repeatability (`1187fde`) | 100 × 172 = 17,200 sequential executions; 16,261 distinct journey IDs across all 101 reports; zero retries/skips/failures. [Proof](evidence/reliability.json) and [independent validation](evidence/reliability-validation-1187fde.json) |
 | Package consumers | `1187fde`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-main-1187fde.json); final acceptance remains false |
 | Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `1187fde`; Linux passed too. [Combined record](evidence/ci-main-1187fde.json). This is a bounded development check, not a guaranteed latency bound |
 
 The [interactive candidate review](evidence/browser-review-1187fde.json) checked the
-frozen examples and existing HTML/JSON/JUnit reports. No new full round was run;
-owner sign-off and final acceptance remain separate. The
+frozen examples and existing HTML/JSON/JUnit reports. That interactive review did
+not run a full suite;
+owner sign-off remains separate from the completed final reliability series. The
 [archive handoff](release-handoff.md) distinguishes the preserved candidate from
 any later package rebuilt with updated documentation.
 
@@ -47,7 +51,7 @@ any later package rebuilt with updated documentation.
 Thirty alternating measured pairs per workload, after five warmups per arm.
 The local runner was an Apple M3 (8 logical CPUs), macOS arm64/Darwin 27.2.0,
 Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4, on 31 October 2026. This benchmark ran independently of final reliability acceptance;
-no new 100-round series was run. The [earlier October 31 result](history/performance-da7e663-2026-10-31.md)
+it did not start a reliability series. The later final series is recorded separately above. The [earlier October 31 result](history/performance-da7e663-2026-10-31.md)
 and [October 29 result](history/performance-2026-10-29.md) are preserved separately.
 Every pair also passed semantic equivalence checks; three known defects agreed on
 the first mismatch and dependent checks. Manual tabs include required observation
@@ -66,7 +70,7 @@ and are not added to the new total.
 The historical alpha.5 record accepted 45 rounds and excluded its interrupted 46th
 round; it remains history rather than evidence for the changed runtime.
 
-The historical proof and [version-bound policy](evidence/acceptance-policy.json) agree
+The [historical proof](evidence/reliability-0300552.json) and [historical policy](evidence/acceptance-policy-0300552.json) agree
 on the source hashes at `0300552`, 100 completed rounds and the final isolation signature.
 The 101 raw reports contain 16,463 test executions, including 303 engine-only
 tests without a journey attachment. All 16,160 journey IDs are distinct.

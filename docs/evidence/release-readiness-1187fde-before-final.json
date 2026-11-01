@@ -1,0 +1,146 @@
+{
+  "recordedAt": "2026-10-31T18:02:43+00:00",
+  "package": "keytrail",
+  "version": "0.1.0-alpha.6",
+  "sourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
+  "sourceTree": "66c009fe73901828ddc47961dcf2aa4789816e7d",
+  "status": "frozen-development-candidate",
+  "releaseReady": false,
+  "published": false,
+  "finalAcceptance": false,
+  "archive": {
+    "file": "keytrail-0.1.0-alpha.6.tgz",
+    "bytes": 395737,
+    "sha256": "42f45c5eac7958d55b3b23b40ea0c484b85c56fdcd01f6b22a716e39b9d26967",
+    "files": 115
+  },
+  "verificationLevel": "development",
+  "mainCI": {
+    "runId": 41219489046,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/41219489046",
+    "conclusion": "success",
+    "sourceHashesMatch": "ci-main-1187fde.json",
+    "uniqueJourneyRunIds": 644,
+    "totalExecutions": 688,
+    "platforms": [
+      {
+        "platform": "linux-x64",
+        "allocation": 0,
+        "artifact": "linux-evidence",
+        "tests": 172,
+        "rawReportSha256": "5b931fc7393ef29f9d9f24eab30a9545369849ded07f5b4884b59efef39f26ab",
+        "maximumPassingWindowGapMs": 23.89999999999418,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 395737,
+          "sha256": "42f45c5eac7958d55b3b23b40ea0c484b85c56fdcd01f6b22a716e39b9d26967",
+          "files": 115
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 1,
+        "artifact": "macos-15-arm-round-1-evidence",
+        "tests": 172,
+        "rawReportSha256": "b60e9c99a4c4bc3dcf752ca5872ca797edb155715006f921f9abea488795ce52",
+        "maximumPassingWindowGapMs": 87.70000000001164,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 395737,
+          "sha256": "ef22a9f1b567ad336c24c78493ac10c8e07194800f2c39b49aa6a8d74963389e",
+          "files": 115
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 2,
+        "artifact": "macos-15-arm-round-2-evidence",
+        "tests": 172,
+        "rawReportSha256": "9748cfa56d5eb578a2d39bd6e8d22bdaac736a4bf753ef6d1e581408a00f9a4e",
+        "maximumPassingWindowGapMs": 65.60000000003492,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 395737,
+          "sha256": "ef22a9f1b567ad336c24c78493ac10c8e07194800f2c39b49aa6a8d74963389e",
+          "files": 115
+        }
+      },
+      {
+        "platform": "macos-15-arm64",
+        "allocation": 3,
+        "artifact": "macos-15-arm-round-3-evidence",
+        "tests": 172,
+        "rawReportSha256": "85c552d2427ee4751cc00b0b7f2172761bc017d70b06aadf6bc3377d53609604",
+        "maximumPassingWindowGapMs": 50.70000000001164,
+        "archive": {
+          "file": "keytrail-0.1.0-alpha.6.tgz",
+          "bytes": 395737,
+          "sha256": "ef22a9f1b567ad336c24c78493ac10c8e07194800f2c39b49aa6a8d74963389e",
+          "files": 115
+        }
+      }
+    ]
+  },
+  "localDevelopment": {
+    "record": "development-atomic-observations.json",
+    "identity": "8d4ca629173b3dfc93c7e517029efe5b9bdef7b0ee63ccab0162b2873e13bd98",
+    "fullRounds": 4,
+    "sequentialExecutions": 676,
+    "isolationExecutions": 169,
+    "uniqueJourneyRunIds": 800,
+    "retries": 0,
+    "historical": true,
+    "scope": "The atomic-registration revision before the consecutive-read scheduler; not current-source or final acceptance evidence."
+  },
+  "browserReview": "browser-review-1187fde.json",
+  "registryCheck": {
+    "date": "2026-10-31",
+    "url": "https://registry.npmjs.org/keytrail",
+    "httpStatus": 404,
+    "result": "No package record found during the candidate review; this does not reserve the name or establish publication permission. Recheck at publication.",
+    "githubReleases": 0,
+    "candidateTag": "candidate/0.1.0-alpha.6"
+  },
+  "pending": [
+    "Obtain owner sign-off and publication authorization.",
+    "Only after an explicit request, collect and independently validate the final 100-round proof for the selected source inputs.",
+    "Pass the release package gate with fresh final evidence and retain the exact verified archive.",
+    "Verify registry ownership/authentication and publish the final verified archive with the alpha tag."
+  ],
+  "browserReviewScope": "Interactive review of the frozen examples and preserved CI HTML/JSON/JUnit reports; no new reliability round. Owner sign-off and final acceptance are pending. browser-review.json retains the earlier 8f119df review.",
+  "performance": {
+    "record": "benchmark-validation.json",
+    "sourceCommit": "f9c492b7676d02628e7b91250b81d358ef03a2c7",
+    "tests": 108,
+    "warmupsPerArm": 5,
+    "pairsPerWorkload": 30,
+    "retries": 0,
+    "targetMet": true,
+    "final100RoundsStarted": false,
+    "measuredAt": "2026-10-31T16:13:47.223Z",
+    "pairedMedianOverheadPercent": {
+      "dialog": -9.238574834530748,
+      "tabs": -6.7974480749702355,
+      "formErrors": -12.579124668783255
+    },
+    "scope": "Measured at f9c492b; its complete benchmark input hash set matches the frozen 1187fde candidate. No measurement is relabelled as a new run."
+  },
+  "archiveScope": "Preserved Linux development archive from main CI 41219489046 at 1187fde. This documentation update postdates the archive. Rebuilt archives contain different documentation and need their own package verification record and checksum; never reuse this hash for them.",
+  "preparationChecks": {
+    "scope": "Documentation and evidence-pointer update only. The 26 script tests and four regressions were already verified in the recorded candidate CI.",
+    "sourceHashSetsRechecked": true,
+    "rawCIReread": true,
+    "newRuntimeRoundsStarted": 0,
+    "newBenchmarkRunsStarted": 0,
+    "newPackageTestsStarted": 0,
+    "runtimeInputsChanged": false,
+    "final100RoundsStarted": false
+  },
+  "candidateTag": {
+    "ref": "candidate/0.1.0-alpha.6",
+    "object": "ec7787951cc5de28136059c7a3188678eea01801",
+    "commit": "1187fde7e0307705354864e739cb1cccce134165",
+    "policy": "Keep this tag at the recorded commit; later documentation does not change the frozen archive."
+  },
+  "previousSnapshot": "release-readiness-f9c492b.json"
+}

@@ -1,6 +1,6 @@
 # KeyTrail
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](docs/reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 **Frozen candidate:** [candidate/0.1.0-alpha.6](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at `1187fde`, which passed **3 × 172 ARM checks and
@@ -10,8 +10,10 @@ Maximum ARM gaps were **87.7 / 65.6 / 50.7 ms**, below the unchanged **100 ms** 
 The benchmark below was measured at `f9c492b`: **108 tests** passed, and its input
 hashes match `1187fde`. The [handoff](docs/release-handoff.md) identifies the preserved
 395,737-byte Linux archive and its checksum.
-Short checks do not guarantee host scheduling latency. Final 100-round acceptance
-and publication remain deferred.
+Short checks do not guarantee host scheduling latency. The final local series is now
+complete; [independent validation](docs/evidence/reliability-validation-1187fde.json)
+binds all 101 reports to this candidate. Release archive verification and publication
+remain pending; the preserved CI archive keeps its development verification level.
 
 Inspect the remaining saved evidence with `node scripts/check-release-readiness.mjs`
 from the repository root. This read-only command does not start tests or publish a package.
@@ -195,6 +197,12 @@ The [verification record](docs/verification.md) separates completed checks from 
 full 0.1 acceptance criteria. The [performance protocol](docs/performance.md) compares
 equivalent fixed workloads. The [full-suite verifier](docs/reliability.md) records
 repeatability and attachment isolation. Alpha.6 adds [release correctness regressions](docs/release-audit.md).
+The current `1187fde` candidate completed **100 × 172 = 17,200** sequential
+executions plus **172** matching four-worker checks. Independent validation
+confirmed **16,261 distinct journey IDs**, zero retries/skips/failures and unchanged
+source/build hashes. The run finished at **2026-10-31 22:45 UTC**.
+[Final proof](docs/evidence/reliability.json) · [Validation and report checksums](docs/evidence/reliability-validation-1187fde.json).
+
 The earlier revision `0300552` completed **100 rounds × 163 tests = 16,300 executions**,
 followed by **163 passing tests on four workers**, with no retries or semantic
 differences. Every raw report and its source identity was independently checked.
@@ -217,7 +225,7 @@ sequential checks and **169 four-worker checks**, with matching semantics and
 and [CI evidence](docs/evidence/ci-atomic-observations.json) bind the results to
 this source revision. This short development sample is not a guarantee against
 future runner stalls. [The investigation](docs/ci-concurrency.md) retains earlier
-failures and measured limits. Final 100-round acceptance remains deferred; the
+failures and measured limits. The current final series is recorded above; the
 [current benchmark](docs/performance.md) passed all 108 tests at `f9c492b`. The frozen
 `1187fde` candidate passed 172 Linux and 516 ARM checks with package consumers;
 [source-bound CI record](docs/evidence/ci-main-1187fde.json). Real-world adoption has not been established.
