@@ -12,6 +12,11 @@ export type ObservationRequest = {
 /** Serialized once per journey. Keep the reader self-contained in the browser. */
 export function createObservationStore(requests: Record<'complete' | 'interaction', ObservationRequest>) {
   const store = new Map<number, Element[]>();
+  // The XPath query and its callback are separate browser tasks. If IDs are
+  // reassigned between them, a union cannot tell which slot returned which node.
+  let idObserver: MutationObserver | undefined;
+  let idsChanged = false;
+  const stopBatch = () => { idsChanged = true; idObserver?.disconnect(); };
   const read = ({ targetSlots, roleSlots, dialogId, tabs, form, semantics }: ObservationRequest) => {
     try {
       const targets = targetSlots.map(({ id, slot }) => ({ id, node: store.get(slot)?.[0] ?? null }));
@@ -130,14 +135,33 @@ export function createObservationStore(requests: Record<'complete' | 'interactio
       return result;
     } finally { store.clear(); }
   };
+  const finish = (request: ObservationRequest) =>
+    store.size === request.targetSlots.length + request.roleSlots.length ? read(request) : null;
   return Object.assign(store, {
+    stopBatch,
     register(nodes: Element[], slot: number, scope: 'complete' | 'interaction') {
       store.set(slot, nodes);
       const request = requests[scope];
-      // The last fresh locator resolution reads the DOM in the same browser task.
-      // Earlier registrations return only their count; no extra host request is needed.
-      return { count: nodes.length,
-        state: store.size === request.targetSlots.length + request.roleSlots.length ? read(request) : null };
+      const node = nodes.length === 1 ? nodes[0] : undefined;
+      const hint = scope === 'interaction' && request.tabs && slot < request.targetSlots.length && node &&
+        node !== document.documentElement && node.getRootNode() === document && /^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(node.id)
+        ? node.id : null;
+      if (hint && !idObserver && !idsChanged) {
+        idObserver = new MutationObserver(stopBatch);
+        idObserver.observe(document, { subtree: true, childList: true, attributes: true, attributeFilter: ['id'] });
+      }
+      return { count: nodes.length, state: finish(request), hint, fallback: false };
+    },
+    registerBatch(nodes: Element[], ids: string[]) {
+      const byId = new Map(nodes.map(node => [node.id, node]));
+      if (idsChanged || idObserver?.takeRecords().length || nodes.length !== ids.length ||
+          nodes.some(node => node === document.documentElement || node.getRootNode() !== document) ||
+          !ids.every(id => byId.has(id))) {
+        stopBatch();
+        return { count: 0, state: null, hint: null, fallback: true };
+      }
+      ids.forEach((id, slot) => store.set(slot, [byId.get(id)!]));
+      return { count: nodes.length, state: finish(requests.interaction), hint: null, fallback: false };
     },
   });
 }

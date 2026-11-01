@@ -124,6 +124,43 @@ test('interaction observations detect an added tab with fallback role tokens', a
   } finally { await driver.dispose(); }
 });
 
+for (const change of ['extra-match', 'rebound', 'swapped-ids'] as const) {
+  test(`grouped manual reads resolve the original locator after ${change}`, async ({ page }) => {
+    await page.setContent(tabsHtml({ activation: 'manual' }));
+    const contract = tabsContract(page, { activation: 'manual' });
+    const original = page.locator('#tab-0'), other = page.locator('#tab-1');
+    await original.evaluate(el => el.setAttribute('data-candidate', ''));
+    const probe = { id: 'probe', locator: page.locator('[data-candidate]') };
+    const driver = new Driver(page, [contract.tablist, probe, contract.items[0]!.panel],
+      contract.tablist, { ...DEFAULTS }, performance.now(), contract);
+    try {
+      await original.focus();
+      expect((await driver.snapshot('interaction')).focus).toBe('probe');
+      expect((await driver.snapshot('interaction')).focus).toBe('probe');
+      if (change === 'extra-match') {
+        await other.evaluate(el => el.setAttribute('data-candidate', ''));
+        await expect(driver.snapshot('interaction')).rejects.toMatchObject({ code: 'TARGET_AMBIGUOUS' });
+      } else if (change === 'rebound') {
+        await original.evaluate(el => el.removeAttribute('data-candidate'));
+        await other.evaluate(el => el.setAttribute('data-candidate', ''));
+        expect((await driver.snapshot('interaction')).focus).toBe('unknown');
+        await other.focus();
+        expect((await driver.snapshot('interaction')).focus).toBe('probe');
+      } else {
+        await original.evaluate(el => {
+          const other = document.getElementById('panel-0')!;
+          [el.id, other.id] = [other.id, el.id];
+        });
+        // The CSS panel locator now resolves to nothing. The still-focused
+        // original node remains the probe even though it carries the old panel ID.
+        const state = await driver.snapshot('interaction');
+        expect(state.focus).toBe('probe');
+        expect(state.present.has(contract.items[0]!.panel.id)).toBe(false);
+      }
+    } finally { await driver.dispose(); }
+  });
+}
+
 test('replacement during observation is re-resolved and stored nodes are cleared', async ({ page }) => {
   await page.setContent('<section id="dialog"><button id="a">A</button></section>');
   const a = { id: 'a', locator: page.locator('#a') }, dialog = { id: 'dialog', locator: page.locator('#dialog') };

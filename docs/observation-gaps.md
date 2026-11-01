@@ -17,7 +17,32 @@ would accept a larger unobserved interval; it would not make the browser reader
 faster. A component mismatch actually observed in that interval still takes
 precedence over a sampling gap.
 
-## What the macOS 15 failure established
+## A 106.5 ms gap on macOS 15 ARM
+
+The [third ARM job](https://github.com/PerchAnton/keytrail/actions/runs/41312102590/job/124864435775)
+blocked the vertical manual Home/End case at `T05.restore.001.unchanged`.
+The previous observation was at 3093.9 ms on the browser clock. The first of
+the next ten callbacks began at 3196.5 ms, and the next observation was at
+3200.4 ms. On the host clock the snapshot took 106.87 ms, with just 0.043 ms
+between reads. The ten callback bodies each took at most 0.2 ms. Most of the
+gap accumulated before the first callback. The trace cannot distinguish time
+waiting for Playwright, Chromium or the host scheduler. [Raw reports](https://github.com/PerchAnton/keytrail/actions/runs/41312102590/artifacts/13085498506).
+
+The interaction reader can now resolve several original locators in one
+Playwright query. The three-tab fixture has seven declared targets. When their
+DOM IDs are distinct and simple, one grouped target query plus three role
+queries replaces ten separate calls per subsequent sample. A DOM ID is only
+a hint for associating results with slots. Every branch still runs the
+original locator and flags any match with an unexpected ID. Changed bindings,
+ambiguous results and document mutations that invalidate the grouping return
+the reader to individual queries. Only a fresh, complete snapshot enters the
+observation window. ID-less controls use the individual path throughout.
+
+The 100 ms limit applies to both paths. Separate controls delay a required
+role query before or after its browser callback to exercise genuine gaps. The
+published beta and its 100-round qualification refer to the tagged source.
+
+## Earlier 130.3 ms gap on macOS 15
 
 The [retained second-allocation failure](evidence/ci-fresh-arm-allocations.json)
 recorded a real 130.3 ms browser-clock gap. The host snapshot took 130.144 ms, with

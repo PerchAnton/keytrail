@@ -102,7 +102,8 @@ retains its specific failure instead of being hidden by the timing problem.
 The 100 ms bound is twice the execution contract's 50 ms target interval. It is a
 sampling policy, not a WCAG or human-perception threshold. See
 [observation gaps](observation-gaps.md) for the rationale, retained failure and
-dispatch-overhead investigation.
+dispatch-overhead investigation, including how the reader groups fresh locator
+queries when the declared targets have distinct DOM IDs.
 
 Each negative check records `observationIntervalsMs`, `observationCount`,
 `maxObservationGapMs` and `observationWindowMs`. The associated step also records

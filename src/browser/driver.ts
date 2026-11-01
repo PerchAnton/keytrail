@@ -24,6 +24,7 @@ export class Driver {
   private interrupted: MessageCode | undefined;
   private actions = 0;
   private observationStore: JSHandle<ReturnType<typeof createObservationStore>> | undefined;
+  private interactionBatch: { locator: Locator; ids: string[] } | null | undefined;
   private dismissals: Promise<unknown>[] = [];
   private fragmentNavigation: { base: string } | undefined;
   readonly steps: StepResult[] = [];
@@ -57,6 +58,7 @@ export class Driver {
     this.page.off('dialog', this.onDialog);
     await Promise.all(this.dismissals);
     const store = this.observationStore; this.observationStore = undefined;
+    if (this.tabsContract) await store?.evaluate(value => value.stopBatch()).catch(() => undefined);
     await store?.dispose().catch(() => undefined);
   }
   guard(): void {
@@ -122,13 +124,15 @@ export class Driver {
         const store = this.observationStore;
         let readFinished = false;
         try {
+          const batch = scope === 'interaction' ? this.interactionBatch : null;
           const resolve = async (locator: Locator, slot: number) => {
             this.guard();
             if (locator.page() !== this.page) throw new Blocked('UNSUPPORTED_CONTEXT');
             let result: ReturnType<ReturnType<typeof createObservationStore>['register']>;
             try {
-              result = await locator.evaluateAll((nodes, { store, slot, scope }) => store.register(nodes, slot, scope),
-                { store, slot, scope });
+              result = slot === -1 && batch
+                ? await locator.evaluateAll((nodes, { store, ids }) => store.registerBatch(nodes, ids), { store, ids: batch.ids })
+                : await locator.evaluateAll((nodes, { store, slot, scope }) => store.register(nodes, slot, scope), { store, slot, scope });
             } catch (error) {
               this.guard();
               // A non-DOM handle cannot cross execution contexts. Diagnose a
@@ -149,7 +153,8 @@ export class Driver {
             if (result.status === 'rejected') throw result.reason;
             return result.value;
           };
-          const queries = [...this.targets.map((target, slot) => ({ locator: target.locator, slot })),
+          const targetQueries = batch ? [{ locator: batch.locator, slot: -1 }] : this.targets.map((target, slot) => ({ locator: target.locator, slot }));
+          const queries = [...targetQueries,
             ...plans[scope].locators.map((locator, index) => ({ locator, slot: this.targets.length + index }))];
           // Start transport work from a short stack. Playwright captures and maps
           // stacks for each request; retaining the entire journey's async caller
@@ -161,16 +166,26 @@ export class Driver {
               void Promise.allSettled(queries.map(({ locator, slot }) => resolve(locator, slot))).then(done);
             });
           });
-          const states = results.map((result, slot) => {
-            const resolved = unwrap(result);
-            if (slot < this.targets.length && resolved.count > 1) throw new Blocked('TARGET_AMBIGUOUS');
-            return resolved;
-          }).flatMap(result => result.state ? [result.state] : []);
+          const resolved = results.map((result, index) => {
+            const reply = unwrap(result);
+            if (!batch && index < this.targets.length && reply.count > 1) throw new Blocked('TARGET_AMBIGUOUS');
+            return reply;
+          });
+          if (batch && resolved[0]!.fallback) {
+            this.interactionBatch = null;
+            if (performance.now() >= deadline) throw new Blocked('EXPECTATION_TIMEOUT');
+            continue; // The finally block clears partial slots. Credit only the next fresh reading.
+          }
+          const states = resolved.flatMap(result => result.state ? [result.state] : []);
           if (states.length !== 1) throw new Blocked('BROWSER_ERROR');
           const state = states[0]!;
           readFinished = true;
           this.guard();
           if (state.code) throw new Blocked(state.code);
+          if (scope === 'interaction' && this.interactionBatch === undefined && !state.detached) {
+            const hints = resolved.slice(0, this.targets.length).map(reply => reply.hint);
+            this.interactionBatch = this.makeInteractionBatch(hints);
+          }
           if (!state.detached) return { observedAt: state.observedAt, focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,
             ...(state.tabs ? { tabs: state.tabs } : {}), ...(state.form ? { form: state.form } : {}) };
         } finally {
@@ -183,6 +198,17 @@ export class Driver {
         await delay(Math.max(1, Math.min(20, deadline - performance.now(), this.remaining())));
       }
     } catch (error) { throw this.normalize(error); }
+  }
+  private makeInteractionBatch(hints: (string | null)[]) {
+    if (hints.length < 3 || hints.length > 16 || !hints.every((id): id is string => id !== null) ||
+        new Set(hints).size !== hints.length || !this.targets.every(({ locator }) =>
+          typeof locator.locator === 'function' && typeof locator.or === 'function')) return null;
+    // Run the ORIGINAL locators afresh in one Playwright query. A match with a
+    // different ID emits its tree root as a witness, even when the expected
+    // node also matches. Only simple ASCII IDs from register() enter the XPath.
+    const guarded = this.targets.map(({ locator }, i) => locator.locator(
+      `xpath=self::*[@id='${hints[i]}'] | self::*[not(@id='${hints[i]}')]/ancestor-or-self::*[last()]`));
+    return { ids: hints, locator: guarded.reduce((union, locator) => union.or(locator)) };
   }
   async press(key: PressKey, target: Target | null, requireInside = false,
     inspectBefore?: (state: Snapshot) => void): Promise<Snapshot> {
