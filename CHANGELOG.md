@@ -2,10 +2,17 @@
 
 ## 0.1.0-alpha.6 — source candidate
 
+- Record the completed final series for frozen `1187fde`: 100 × 172 sequential
+  test executions and 172 matching four-worker checks, with zero retries/skips
+  and the unchanged 100 ms bound. Independently validate all 101 raw reports,
+  16,261 distinct journey IDs and source/build hashes. Preserve earlier proofs
+  under their original identities. Saved release evidence passes all six checks;
+  the exact release archive gate, owner sign-off and publication remain pending.
+
 - Align release instructions with the frozen `1187fde` candidate and its
   395,737-byte Linux archive from CI 41219489046. Preserve the candidate tag,
-  earlier readiness snapshot and original benchmark identities. Keep final
-  acceptance and publication pending; rebuilt archives need their own checksums.
+  earlier readiness snapshot and original benchmark identities. Rebuilt archives
+  need their own checksums and release verification; publication remains pending.
 
 - Require complete CI-guard source and recorder hashes in release evidence; reject
   recording metadata that would mask a stale source hash. Add four regressions.
@@ -13,7 +20,7 @@
   hosted browser checks and a fresh 108-test benchmark, without retries. Median
   paired overhead is -9.2% / -6.8% / -12.6% for the three fixed workloads; this is
   not a general speed claim. Preserve older evidence with its source identity.
-  Final 100-round acceptance and publication remain deferred.
+  This earlier update deferred final acceptance; the completed series is recorded above.
 
 - Start fresh locator batches from a microtask with a shorter async call stack,
   reducing repeated stack-formatting work without a timer pause or cached DOM
@@ -79,8 +86,8 @@
 - Require full one-worker CI suites and package consumers on Linux and macOS ARM.
   Retain the unsuccessful Intel capacity experiments and the unchanged 100 ms bound.
 - Retain the earlier candidate's independently checked 100-round proof and 108-test
-  benchmark as historical evidence. The changed candidate still requires a fresh full
-  reliability series; those historical hashes do not satisfy its package gate.
+  benchmark as historical evidence. The fresh final series for `1187fde` is recorded
+  above; the historical hashes do not satisfy its package gate.
 - Default repeatability to four development rounds; require explicit `--final` for
   100-round acceptance, with separate outputs and checkpoints for each mode.
 - Test actual tarball consumers in ordinary CI; require `--release` for the extra
@@ -90,7 +97,7 @@
 - Record the fresh `1b42666` benchmark: 108/108 tests, median paired overhead
   4.8% / -4.0% / 2.8% for dialogs, manual tabs and form errors (`insertText`).
   Both calculations meet the 20% target; preserve the older records as history.
-- Final 100-round acceptance remains deferred until explicitly requested.
+- Complete the subsequently authorized final reliability series for `1187fde`.
   No release published.
 
 ## 0.1.0-alpha.5 — source candidate

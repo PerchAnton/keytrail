@@ -7,7 +7,7 @@ try {
   const report = await inspectReleaseEvidence();
   report.scope = 'Saved final evidence only. No tests, builds, file writes or publication.';
   report.remaining = [
-    'Freeze the reviewed candidate and independently validate its raw final reports.',
+    'Confirm the selected candidate identity and retain its independently validated raw final reports.',
     'Pass node scripts/check-package.mjs --release and preserve the exact verified archive.',
     'Complete owner review and confirm registry access and publication authorization.',
   ];

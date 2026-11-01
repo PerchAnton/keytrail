@@ -1,5 +1,38 @@
 # Full-suite repeatability protocol
 
+## Final candidate result: `1187fde`
+
+The explicitly requested local final series completed successfully, on the frozen
+`1187fde7e0307705354864e739cb1cccce134165` source. The candidate tag is unchanged.
+
+| Measurement | Result |
+| --- | --- |
+| Full sequential rounds | 100 × 172 = 17,200 passing test executions, one worker |
+| Four-worker comparison | 172/172 passed; same semantic signature as every round |
+| Retries, skips, flaky tests and unexpected failures | 0 |
+| Distinct journey run IDs | 16,261 across 101 reports; 11 engine-only tests per report have no journey attachment |
+| Observation-gap limit | 100 ms, unchanged |
+| Series started / finished (UTC) | 2026-10-31 18:24:24 / 22:45:07 |
+| Independent validation completed | 2026-10-31 22:45:15 UTC; 1 November 00:45 in Kyiv |
+| Environment | Apple M3, Darwin 27.2.0 arm64, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4 |
+
+The [final proof](evidence/reliability.json), [policy](evidence/acceptance-policy.json)
+and [independent validation](evidence/reliability-validation-1187fde.json) agree on
+identity `34885215059b2e87247ff89f09cb859e606bec2e797d5d75602eea91c245f9f5`.
+The separate validator reread all 101 original reports, verified schemas, relationships,
+semantic signatures, environment, distinct IDs and all 51 source / 57 build hashes.
+It uses the same report-validation primitives as the series verifier; this is not
+an external audit. Raw reports, logs and checkpoints are retained locally under
+`artifacts/reliability/2026-10-31T18-24-24-545Z-34885215059b`; their SHA-256 inventory
+is committed in the validation record. The inventory is not a public raw-report archive.
+No historical rounds or hosted attempts are included in this total.
+
+This completes source-bound reliability for the candidate. It does not upgrade the
+existing development tarball to a release-verified archive or authorize publication.
+The [handoff](release-handoff.md) lists the remaining archive and review gates.
+
+## Hosted checks and retained development history
+
 **Frozen candidate check:** `1187fde` passed three sequential fresh macOS 15 ARM
 jobs and one Linux job, **172 tests each**, with package consumers, zero retries
 and the unchanged 100 ms bound. [Validated record](evidence/ci-main-1187fde.json).
@@ -14,17 +47,18 @@ maximum was 26.3 ms, below the unchanged 100 ms limit. [Validated main CI](evide
 The [historical benchmark for that source](history/performance-1b42666-2026-10-31.md) remains preserved.
 The [108-test benchmark](performance.md) was measured at `f9c492b`; its input hashes
 match the frozen `1187fde` candidate. Earlier repeatability
-proofs remain historical; final 100-round acceptance is still deferred. This short
+proofs remain historical; the current final result is recorded above. This short
 sample does not guarantee host scheduling latency; [diagnosis and scope](ci-concurrency.md#consecutive-window-reads).
 
-**Development verification:** The default repeatability check runs four full rounds and a separate four-worker comparison. The candidate is frozen. Final 100-round acceptance remains deferred until explicitly requested. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
+**Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 ## Current development policy
 
 Use four complete sequential rounds during development, plus a separate four-worker
 isolation run. Keep one worker per round, retries disabled and the 100 ms observation
-gap limit. The [policy](evidence/development-policy.json) defers final acceptance;
-it does not lower its 100-round requirement.
+gap limit. The [policy](evidence/development-policy.json) keeps this short protocol
+separate from the completed, explicitly requested final series. Its final requirement
+remains 100 rounds; do not repeat it for documentation-only changes.
 
 The atomic-registration follow-up changes the implementation and regression hooks.
 At `7e48291`, four rounds and the four-worker comparison passed: **676 + 169**
@@ -32,7 +66,7 @@ executions, 800 distinct journey IDs, matching signatures and zero retries.
 [Independent validation](evidence/development-atomic-observations.json) reread all
 five raw reports and checked the recorded source hashes. This proof predates the
 consecutive-read scheduler and is historical for current main.
-No final 100-round series is requested or running.
+The final series for `1187fde` is now complete and recorded above; no verifier is running.
 
 At `4abf74c`, the private store and cached reader passed **four full rounds × 169 = 676**
 sequential executions and **169 four-worker checks**, without retries, skips or
@@ -75,7 +109,7 @@ removed and disabled. The final source revision completed the full protocol:
 | Started / finished (UTC) | 2026-10-29 17:26:55 / 22:31:11 |
 | Environment | Apple M3, Darwin 27.2.0 arm64, Node 24.22.1, Playwright 1.64.1, Chromium 156.0.8078.4 |
 
-The [proof](evidence/reliability.json) and [acceptance policy](evidence/acceptance-policy.json)
+The [historical proof](evidence/reliability-0300552.json) and [historical policy](evidence/acceptance-policy-0300552.json)
 use series identity `191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed`.
 Independent validation reread all 101 raw reports, checked their hashes and source
 inputs, and repeated report, signature and UUID validation. The raw reports and
@@ -185,11 +219,12 @@ Development writes `artifacts/reliability-development.json`, smoke writes
 `artifacts/reliability-verification.json`. Development and smoke records have
 `acceptance: false`; they never replace the final proof.
 
-Final acceptance is a separate, deferred action:
+The final source-bound series for `1187fde` has already passed. For a future
+explicitly selected candidate with changed verification inputs, the separate protocol is:
 
 ```sh
 pnpm verify:reliability --final
-pnpm benchmark
+# Run pnpm benchmark only if benchmark input hashes changed.
 # Independently validate raw reports and refresh the committed release evidence.
 node scripts/check-package.mjs --release
 ```

@@ -1,10 +1,12 @@
 {
-  "decisionDate": "2026-10-30",
+  "decisionDate": "2026-11-01",
   "developmentRounds": 4,
   "finalAcceptanceRounds": 100,
-  "finalAcceptanceDeferred": true,
+  "finalAcceptanceDeferred": false,
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Stabilize the development candidate with short full-suite runs. Request the 100-round protocol explicitly only after the candidate is frozen for final acceptance. Development success is not final acceptance."
+  "reason": "Four rounds plus worker isolation remain the default development protocol. The separately requested final 100-round series is complete for frozen candidate 1187fde. Changed verification inputs require their own evidence; development success never substitutes for final acceptance.",
+  "finalAcceptanceSourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
+  "finalAcceptanceRecord": "reliability.json"
 }

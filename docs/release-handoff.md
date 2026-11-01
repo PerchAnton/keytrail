@@ -10,7 +10,10 @@ The **100 ms** limit is unchanged. [Verified CI record](evidence/ci-main-1187fde
 The [benchmark](performance.md) was measured at `f9c492b`: **108/108**, with
 input hashes matching this candidate. Earlier failures and measurements keep their
 source identities. Short checks do not guarantee shared-runner latency.
-Final 100-round acceptance and publication remain deferred.
+Final source-bound reliability completed on 31 October 2026 UTC (1 November in Kyiv):
+**100 × 172 sequential executions + 172 four-worker checks**, zero retries/skips.
+[Independent validation](evidence/reliability-validation-1187fde.json).
+The release archive gate, owner sign-off and publication authorization remain separate.
 
 The frozen source is **KeyTrail 0.1.0-alpha.6** at
 `1187fde7e0307705354864e739cb1cccce134165`. The annotated candidate tag remains
@@ -18,9 +21,15 @@ at that commit. These instructions were updated after the freeze; they describe
 the preserved archive and do not change its contents or verification level.
 This is preparation for the first publication; no package or GitHub release exists.
 The [readiness record](evidence/release-readiness.json) separates completed checks
-from deferred final acceptance. Earlier source checkpoints keep their own evidence.
+from the completed source-bound reliability series and the still-pending release
+archive gate. Earlier source checkpoints keep their own evidence.
 
 ## What is ready
+
+- Final local reliability: **100 × 172 = 17,200** sequential executions and **172**
+  four-worker checks; zero retries, skips or unexpected failures. All **101** raw
+  reports, **16,261** distinct journey IDs and source/build hashes independently
+  validated. [Proof](evidence/reliability.json) · [Validation](evidence/reliability-validation-1187fde.json).
 
 - Main CI: **688/688** browser executions, **644** distinct journey IDs, matching
   semantic signatures, source hashes, runner environments and both consumers in
@@ -40,7 +49,7 @@ defects. The preserved HTML/JSON/JUnit reports agree: the corrected journey pass
 18/18 checks; wrong initial focus fails `D03.initial` and leaves 12 dependent checks
 `not_run`. The separate return-focus defect fails `D07.returned`.
 This interactive review does not measure sampling cadence, provide owner sign-off
-or replace final acceptance. The [earlier review](evidence/browser-review.json)
+or replace the separately recorded final reliability check. The [earlier review](evidence/browser-review.json)
 remains tied to `8f119df`. Use the [report walkthrough](reports.md) to inspect the
 first mismatch and dependent checks.
 
@@ -86,26 +95,28 @@ and [earlier CI proof](evidence/ci-main-f9c492b.json); it is not this candidate.
 ## What still blocks publication
 
 Run `node scripts/check-release-readiness.mjs` to inspect evidence without starting
-tests. Policy, the three benchmarks and guard evidence pass for these inputs.
-**Final reliability remains blocked** because the preserved 100-round proof belongs
-to `0300552`. Exit 1 is expected while this final stage is deferred.
+tests. Policy, final reliability, all three benchmarks and guard evidence now pass
+for the candidate input hashes: **six passed checks, exit 0**. This means evidence
+is ready for package verification, not that an archive is approved for publication.
+The completed 100-round series must not be repeated for this documentation update.
 
 1. Keep the frozen candidate tag at `1187fde`. Complete owner sign-off on the
-   examples and HTML report. Record a new identity if a later release snapshot
-   is selected; these documentation changes do not retag the preserved candidate.
-2. Only when explicitly requested, collect the frozen source's 100-round final
-   series and independently validate the raw reports. Keep the 100 ms bound and
-   zero retries. Remeasure performance if its input hashes change.
-3. Once matching final evidence is available, pass
-   `node scripts/check-package.mjs --release` for the selected release snapshot.
-   Preserve that exact verified archive, verification JSON and checksum. Its record
-   must have `verificationLevel: release` and `finalAcceptance: true`.
-   The preserved development archive does not satisfy this gate.
-4. Confirm registry ownership/authentication and publication authorization. Publish
-   that exact archive with the **alpha** dist-tag, verify a clean registry install,
-   then attach matching files to the GitHub prerelease.
+   examples and HTML report. Identify the later release snapshot containing these
+   updated documents separately; do not move the candidate tag.
+2. Preserve the final raw reports and their committed checksum inventory. Runtime,
+   tests, schema, dependency/configuration and verifier input hashes remain unchanged.
+   The `f9c492b` benchmark still matches; no new measurement is claimed.
+3. Run `node scripts/check-package.mjs --release` for the selected release snapshot.
+   This command builds and packs a new archive, then tests both clean consumers.
+   Preserve its own archive, verification JSON and checksum. Require
+   `verificationLevel: release` and `finalAcceptance: true`; the preserved Linux CI
+   development archive keeps `finalAcceptance: false` and its original checksum.
+4. Confirm registry ownership/authentication and explicit publication authorization.
+   Publish the exact release-verified archive with the **alpha** dist-tag, verify
+   a clean registry install, then attach matching files to the GitHub prerelease.
 
 The candidate review on 31 October received npm HTTP 404 and found no GitHub
 releases. The candidate tag exists, but it is not a release. A registry 404 does
 not reserve the name or establish publication permissions. Recheck registry access
-at publication. No publication or final 100-round test was performed in this update.
+at publication. This update records the completed local series without rerunning it.
+No new archive, registry publication or GitHub release was created.

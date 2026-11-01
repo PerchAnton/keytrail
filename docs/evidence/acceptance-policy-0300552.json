@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0-alpha.6",
+  "decisionDate": "2026-10-30",
+  "referenceTargetRounds": 100,
+  "minimumCompletedRounds": 100,
+  "seriesIdentity": "191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed",
+  "reason": "Historical source revision 0300552 completed all 100 full rounds without retries and a matching four-worker comparison. This identity is retained as history; changed source requires a new explicitly requested final series. The 100-round requirement is unchanged."
+}
