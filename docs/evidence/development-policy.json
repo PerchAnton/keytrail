@@ -1,12 +1,16 @@
 {
-  "decisionDate": "2026-11-04",
+  "decisionDate": "2026-11-05",
   "developmentRounds": 4,
-  "finalAcceptanceRounds": 100,
+  "finalAcceptanceRounds": 10,
   "finalAcceptanceDeferred": true,
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Use four rounds for development. Final verification of beta.2 is not authorized. The recorded beta.1 series certifies only f775b30.",
-  "finalAcceptanceSourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
-  "finalAcceptanceRecord": "reliability.json"
+  "reason": "Four development rounds are separate from the ten final beta rounds. Smoke, hosted CI and historical results are not credited to the final series.",
+  "finalAcceptanceSourceCommit": null,
+  "finalAcceptanceRecord": null,
+  "historicalBeta1": {
+    "sourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
+    "record": "https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.1/docs/evidence/reliability.json"
+  }
 }

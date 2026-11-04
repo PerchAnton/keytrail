@@ -42,7 +42,7 @@ No performance, superiority or adoption claim follows from passing the teaching 
 The [benchmark](performance.md) uses equivalent actions, observations, limits and
 serialization, with 5 warmups and 30 alternating measured runs. Its 20% criterion
 is evaluated per workload; no average across workloads hides a missed target.
-[Full-suite repeatability](reliability.md) retains the original 100-round target.
+[Full-suite repeatability](reliability.md) requires ten final rounds for beta.2 onward. The following counts describe historical alpha sources.
 The historical 45-round checkpoint belongs to alpha.5. The alpha.6 runtime at
 `0300552` completed a 100-round series and a matching four-worker run. Later runtime
 changes used four-round development series; the frozen `1187fde` has now completed

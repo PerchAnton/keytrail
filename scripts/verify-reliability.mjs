@@ -10,7 +10,8 @@ import { inputHashes } from '../verification/inputs.mjs';
 import { digest, inspectReport, semanticSignatures } from '../verification/signatures.mjs';
 import { reliabilityMode, canResumeReliability } from '../verification/modes.mjs';
 
-const selection = reliabilityMode(process.argv.slice(2));
+const pkg = JSON.parse(await readFile('package.json', 'utf8'));
+const selection = reliabilityMode(process.argv.slice(2), pkg.version);
 const { mode, rounds, workers } = selection;
 const require = createRequire(import.meta.url), cli = require.resolve('@playwright/test/cli');
 const inputs = await inputHashes();
@@ -34,6 +35,7 @@ else checkpoint = { startedAt: new Date().toISOString(), identity, environment, 
   targetRounds: rounds, workers, retries: 0, status: 'running', rounds: [] };
 assert.equal(checkpoint.mode, mode, 'CHECKPOINT_MODE');
 assert.equal(checkpoint.targetRounds, rounds, 'CHECKPOINT_ROUNDS');
+assert(checkpoint.rounds.length <= rounds, 'CHECKPOINT_TOO_MANY_ROUNDS');
 assert.equal(checkpoint.workers, workers, 'CHECKPOINT_WORKERS');
 assert.notEqual(checkpoint.status, 'failed', 'Failed series is retained. Diagnose it, then use --new-series; failures cannot be skipped.');
 await atomic(latestPath, { identity, folder, mode, targetRounds: rounds, smoke: rounds === 1 });
@@ -88,9 +90,9 @@ try {
   checkpoint.finishedAt = new Date().toISOString(); checkpoint.status = 'passed';
   checkpoint.caseCount = baseline.length; checkpoint.totalSequentialExecutions = rounds * baseline.length;
   checkpoint.uniqueJourneyRunIds = seen.size;
-  checkpoint.acceptance = mode === 'final' && rounds === 100;
+  checkpoint.acceptance = mode === 'final' && checkpoint.rounds.length === rounds;
   await atomic(join(folder, 'checkpoint.json'), checkpoint);
-  const proof = { package: 'keytrail', version: JSON.parse(await readFile('package.json', 'utf8')).version, ...checkpoint, cases: baseline };
+  const proof = { package: 'keytrail', version: pkg.version, ...checkpoint, cases: baseline };
   await atomic(selection.output, proof);
   console.log(`Verified ${checkpoint.totalSequentialExecutions} sequential fixture executions and ${cases.length} parallel checks. Full acceptance: ${checkpoint.acceptance}.`);
 } catch (error) {

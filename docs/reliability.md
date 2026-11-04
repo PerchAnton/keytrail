@@ -6,7 +6,9 @@ The alpha and beta.1 results below are historical and do not qualify the current
 source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
 No new final series or publication is authorized by this document.
 
-## Final candidate result: `1187fde`
+From beta.2, the final target is **10 complete sequential rounds** on the same frozen source and environment, followed by a separate matching four-worker run. The 100 ms limit and zero retries are unchanged. The four ordinary CI allocations are development evidence and are not part of the final series.
+
+## Historical final candidate result: `1187fde`
 
 The explicitly requested local final series completed successfully, on the frozen
 `1187fde7e0307705354864e739cb1cccce134165` source. The candidate tag is unchanged.
@@ -63,8 +65,7 @@ sample does not guarantee host scheduling latency; [diagnosis and scope](ci-conc
 Use four complete sequential rounds during development, plus a separate four-worker
 isolation run. Keep one worker per round, retries disabled and the 100 ms observation
 gap limit. The [policy](evidence/development-policy.json) keeps this short protocol
-separate from the completed, explicitly requested final series. Its final requirement
-remains 100 rounds; do not repeat it for documentation-only changes.
+separate from beta final qualification. The [beta acceptance policy](evidence/acceptance-policy.json) requires ten final rounds; do not repeat a completed series for documentation-only changes.
 
 The atomic-registration follow-up changes the implementation and regression hooks.
 At `7e48291`, four rounds and the four-worker comparison passed: **676 + 169**
@@ -169,7 +170,7 @@ in Git history and the retained local raw artifacts.
 ## Default protocol
 
 The default verifier runs the entire integration suite four times **one complete
-round after another**, then checks worker isolation. Only `--final` selects 100 rounds. By default each round uses one worker,
+round after another**, then checks worker isolation. Only `--final` selects the ten beta rounds. By default each round uses one worker,
 followed by a four-worker run. `--workers=2` runs tests on two workers within each
 round and additionally requires a matching one-worker run before the four-worker
 run. This optional mode is separate from the current one-worker release protocol.
@@ -185,8 +186,7 @@ pnpm verify:reliability
 ```
 
 Run only one verifier at a time in a working copy; checkpoints and report paths
-are shared within that copy. The four-round check takes about 12–15 minutes on the recorded laptop; the final
-100-round check takes several hours. Keep the machine awake and avoid other browser or
+are shared within that copy. The four-round development check took about 12–15 minutes on the recorded laptop; the duration on another machine can differ. Keep the machine awake and avoid other browser or
 CPU-heavy work. Node, Playwright, Chromium, OS, architecture and CPU are recorded.
 On macOS, `caffeinate` prevents idle sleep for the command; closing the lid can
 still suspend the machine. An interrupted round is not considered complete.
@@ -218,7 +218,7 @@ cannot resume each other’s checkpoints, even when their source hashes match. A
 cannot be resumed as though the failed round never happened. Diagnose the failure;
 use `--new-series` to start a new complete series. `--smoke` runs only one complete
 round plus the configured worker comparisons and is explicitly **not** acceptance
-evidence. Smoke rounds are not added to the 100-round count.
+evidence. Neither smoke nor development rounds are added to the ten-round final series. A checkpoint with the old 100-round target cannot resume as a beta final series.
 
 Development writes `artifacts/reliability-development.json`, smoke writes
 `artifacts/reliability-smoke.json`, and only `--final` writes
@@ -235,7 +235,7 @@ pnpm verify:reliability --final
 node scripts/check-package.mjs --release
 ```
 
-The explicit release package gate requires 100 completed rounds, final mode,
+The explicit beta release package gate requires all ten completed rounds, final mode,
 matching source hashes, full benchmark evidence and the four-worker comparison.
 The normal `pnpm test:package` still tests the exact archive, imports, types and
 both clean consumers, but marks its result `verificationLevel: development` and
@@ -245,7 +245,7 @@ This is repeatability evidence for synthetic fixtures in one environment, not a
 claim that arbitrary applications cannot be flaky. Hosted Linux/macOS CI can check
 portability separately. One-worker browser checks passed on Linux and macOS; the
 measured two-worker macOS limitations remain in [CI capacity notes](ci-concurrency.md).
-Ordinary CI jobs do not repeat the suite 100 times.
+Ordinary CI does not start the final series.
 
 ## Own-report privacy
 

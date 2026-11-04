@@ -2,6 +2,8 @@
 
 ## 0.1.0-beta.2 — unreleased
 
+- Set final beta qualification to ten sequential full-suite rounds plus a matching four-worker comparison. Keep the 100 ms bound, zero retries and all source and package checks. The recorded alpha and beta.1 series remain historical.
+
 - Combine fresh target and role queries in repeated manual observations, with missing-membership and mutation guards. Real gaps above 100 ms still block; no retries or cached observations are introduced.
 - Retain grouped fresh locator reads and the extra-match, rebound and swapped-ID regressions.
 - Recognize all three cases in the strict reliability validator and validate real browser reports in CI.

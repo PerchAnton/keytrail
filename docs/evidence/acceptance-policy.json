@@ -1,9 +1,9 @@
 {
   "version": "0.1.0-beta.2",
-  "decisionDate": "2026-11-04",
-  "referenceTargetRounds": 100,
-  "minimumCompletedRounds": 100,
+  "decisionDate": "2026-11-05",
+  "referenceTargetRounds": 10,
+  "minimumCompletedRounds": 10,
   "seriesIdentity": null,
   "sourceCommit": null,
-  "reason": "Unpublished development candidate. A new source-bound final series requires separate approval; beta.1 evidence is historical."
+  "reason": "From beta.2, final qualification requires ten complete sequential rounds on one frozen candidate plus a matching four-worker comparison. Historical alpha and beta.1 evidence is not counted. No new final series has been authorized."
 }

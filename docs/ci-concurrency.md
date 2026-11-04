@@ -256,8 +256,7 @@ A new regression queues a host timer after the first real window snapshot and
 requires the next read to start before it runs. Restoring the old pause must fail
 that regression. Existing before/after transport-delay tests, short-window coverage,
 scenario deadlines, transient component failures and handle cleanup remain required.
-Validation is limited to three ARM rounds and one Linux round in ordinary CI;
-final 100-round acceptance is not requested.
+That development check was limited to three ARM rounds and one Linux round; it did not run the then-current 100-round final protocol.
 
 The [CI run at `7a60938`](https://github.com/PerchAnton/keytrail/actions/runs/41196060997)
 passed all stages on both platforms. Independent validation checked four raw
@@ -491,7 +490,7 @@ outlier remains unresolved. Ordinary CI therefore uses the fully checked ARM
 macOS image and Linux; Intel can be investigated separately without claiming a
 passing result for it. This selects the required runner, not a subset of tests:
 all 169 cases, guard subprocesses and package consumers remain mandatory.
-Final 100-round acceptance is still deferred.
+At that revision the 100-round final acceptance check was still deferred.
 
 ## Earlier reductions and the unchanged sampling limit
 

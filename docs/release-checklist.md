@@ -6,7 +6,9 @@ The alpha and beta.1 results below are historical and do not qualify the current
 source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
 No new final series or publication is authorized by this document.
 
-This page records the `0.1.0-alpha.6` handoff. For the first beta candidate,
+For beta.2 onward, require ten complete final rounds on one frozen candidate, then the matching four-worker comparison. Validate the raw reports, keep the 100 ms gap bound and zero retries, and verify the exact archive separately. Development rounds do not count toward the ten.
+
+The history below records the `0.1.0-alpha.6` handoff. For the first beta candidate,
 see [the beta scope and release checks](releases/0.1.0-beta.1.md).
 
 **Frozen candidate (31 October 2026): `1187fde`.**
@@ -61,8 +63,8 @@ node scripts/check-release-readiness.mjs --json
 
 This read-only command checks the saved acceptance policy, final repeatability,
 three benchmark records and CI-guard evidence against the current inputs. It lists
-all blocked records in one run. It does not build, run browser tests, start the
-100-round series, delete existing artifacts or publish anything. Exit 0 means the
+all blocked records in one run. It does not build, run browser tests, start a
+final series, delete existing artifacts or publish anything. Exit 0 means the
 saved evidence passed validation; exit 1 means evidence is pending or invalid;
 exit 2 means the command could not inspect the checkout or its options.
 

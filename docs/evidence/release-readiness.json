@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-11-04",
+  "recordedAt": "2026-11-05",
   "package": "keytrail",
   "version": "0.1.0-beta.2",
   "status": "unpublished-development-candidate",
@@ -15,7 +15,7 @@
   },
   "remaining": [
     "Agree a frozen candidate and authorize a new final cycle separately.",
-    "Refresh source-bound benchmark, CI guard and 100-round evidence with four-worker comparison.",
+    "Refresh source-bound benchmark and CI guard evidence; verify ten sequential final rounds plus the separate four-worker comparison.",
     "Validate the exact release archive and authorize publication separately."
   ],
   "note": "Historical results remain unchanged and do not qualify beta.2. Run scripts/check-release-readiness.mjs for current hash checks."

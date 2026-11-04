@@ -180,7 +180,9 @@ our separate interaction-check, edit-session or RefMint projects.
 
 ## Development and evidence
 
-The published beta was qualified at `f775b30` with 100 rounds of 172 tests,
+From **0.1.0-beta.2**, final qualification requires **10 complete sequential rounds** on one frozen source, plus a separate matching four-worker run. Retries stay disabled and the observation-gap limit stays at **100 ms**. The four ordinary CI jobs are development evidence; they do not count toward the ten. See the [beta protocol](docs/reliability.md#default-protocol).
+
+The published beta.1 was qualified at `f775b30` with 100 rounds of 172 tests,
 172 matching four-worker tests, a 100 ms observation limit and zero retries.
 [Beta qualification and scope](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.1/docs/releases/0.1.0-beta.1.md).
 
@@ -203,7 +205,7 @@ The frozen alpha candidate `1187fde` completed **100 × 172 = 17,200** sequentia
 executions plus **172** matching four-worker checks. Independent validation
 confirmed **16,261 distinct journey IDs**, zero retries/skips/failures and unchanged
 source/build hashes. The run finished at **2026-10-31 22:45 UTC**.
-[Final proof](docs/evidence/reliability.json) · [Validation and report checksums](docs/evidence/reliability-validation-1187fde.json).
+[Final alpha proof](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/reliability.json) · [Validation and report checksums](docs/evidence/reliability-validation-1187fde.json).
 
 The earlier revision `0300552` completed **100 rounds × 163 tests = 16,300 executions**,
 followed by **163 passing tests on four workers**, with no retries or semantic

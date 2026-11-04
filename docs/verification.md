@@ -66,6 +66,8 @@ advantage or replace checks in a consumer application.
 
 ## Repeatability and safety
 
+Starting with beta.2, final repeatability requires ten complete sequential rounds for one frozen candidate and a matching four-worker comparison. The earlier 100-round reports below retain their original scope.
+
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
 snapshots. The earlier alpha.6 local series at `0300552` completed all 100 rounds and its four-worker
