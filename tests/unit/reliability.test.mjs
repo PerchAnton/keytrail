@@ -27,3 +27,43 @@ test('reliability signatures ignore timing while preserving observations, codes 
   const trace = structuredClone(original); trace[0].actionTrace[0].stepId = 'step-002';
   assert.deepEqual(semanticSignatures(original), semanticSignatures(trace));
 });
+
+function engineFixture(title) {
+  const value = fixture();
+  const spec = value.suites[0].specs[0];
+  spec.file = 'observations.spec.ts';
+  spec.title = title;
+  spec.tests[0].results[0].attachments = [];
+  return value;
+}
+for (const variant of ['extra-match', 'rebound', 'swapped-ids']) {
+  test(`reliability accepts the grouped manual read regression: ${variant}`, () => {
+    const title = `grouped manual reads resolve the original locator after ${variant}`;
+    assert.deepEqual(inspectReport(engineFixture(title), 1), [
+      { id: 'fixture-id', file: 'observations.spec.ts', title, kind: 'engine-observation' },
+    ]);
+  });
+}
+test('reliability rejects an unknown engine case, including a similar grouped read name', () => {
+  for (const title of ['unknown engine case', 'grouped manual reads resolve the original locator after unknown']) {
+    assert.throws(() => inspectReport(engineFixture(title), 1), /UNRECOGNIZED_ENGINE_CASE/);
+  }
+});
+test('reliability accepts the single-request and live-membership regressions', () => {
+  for (const title of [
+    'grouped manual reads resolve targets and roles in one fresh request',
+    'grouped manual reads detect missing-target without DOM mutations',
+    'grouped manual reads detect missing-role without DOM mutations',
+    'grouped manual reads detect added-role without DOM mutations',
+    'grouped manual reads reject mutations between resolution and the atomic callback',
+  ]) assert.equal(inspectReport(engineFixture(title), 1)[0].kind, 'engine-observation');
+});
+test('known engine cases still reject retries and unexpected journey attachments', () => {
+  const title = 'grouped manual reads resolve the original locator after rebound';
+  const retry = engineFixture(title);
+  retry.suites[0].specs[0].tests[0].results[0].retry = 1;
+  assert.throws(() => inspectReport(retry, 1), /RETRY/);
+  const attachment = engineFixture(title);
+  attachment.suites[0].specs[0].tests[0].results[0].attachments = [{ name: 'journey-result.json' }];
+  assert.throws(() => inspectReport(attachment, 1), /ENGINE_ATTACHMENT/);
+});

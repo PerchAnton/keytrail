@@ -1,5 +1,12 @@
 # First alpha release checklist
 
+**Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
+
+For beta.2 onward, require ten complete final rounds on one frozen candidate, then the matching four-worker comparison. Validate the raw reports, keep the 100 ms gap bound and zero retries, and verify the exact archive separately. Development rounds do not count toward the ten.
+
+The history below records the `0.1.0-alpha.6` handoff. For the first beta candidate,
+see [the beta scope and release checks](releases/0.1.0-beta.1.md).
+
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
@@ -18,12 +25,12 @@ The release archive gate, owner sign-off and publication authorization remain se
 **Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
-numbers were source checkpoints, not published packages. This document prepares
-the first publication; it does not assert that a release exists.
+numbers were source checkpoints, not published packages. This section preserves
+the alpha handoff before the later beta.1 publication.
 
 ## Frozen candidate snapshot (`1187fde`)
 
-The [handoff guide](release-handoff.md) and [readiness record](evidence/release-readiness.json)
+The [handoff guide](release-handoff.md) and [readiness record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/release-readiness.json)
 identify the preserved main-CI archive and the fresh benchmark. Linux passed 172/172
 checks and three separate macOS ARM machines passed 516/516, with real package
 consumers in every job. The benchmark passed 108/108; both overhead calculations
@@ -52,8 +59,8 @@ node scripts/check-release-readiness.mjs --json
 
 This read-only command checks the saved acceptance policy, final repeatability,
 three benchmark records and CI-guard evidence against the current inputs. It lists
-all blocked records in one run. It does not build, run browser tests, start the
-100-round series, delete existing artifacts or publish anything. Exit 0 means the
+all blocked records in one run. It does not build, run browser tests, start a
+final series, delete existing artifacts or publish anything. Exit 0 means the
 saved evidence passed validation; exit 1 means evidence is pending or invalid;
 exit 2 means the command could not inspect the checkout or its options.
 

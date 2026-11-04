@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0-alpha.6",
-  "decisionDate": "2026-11-01",
-  "referenceTargetRounds": 100,
-  "minimumCompletedRounds": 100,
-  "seriesIdentity": "34885215059b2e87247ff89f09cb859e606bec2e797d5d75602eea91c245f9f5",
-  "sourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
-  "reason": "The explicitly requested local final series for frozen candidate 1187fde completed 100 full rounds and the matching four-worker comparison with a 100 ms observation-gap limit and zero retries. All 101 raw reports were independently validated. This establishes source-bound reliability; archive verification, owner review and publication authorization remain separate."
+  "version": "0.1.0-beta.2",
+  "decisionDate": "2026-11-05",
+  "referenceTargetRounds": 10,
+  "minimumCompletedRounds": 10,
+  "seriesIdentity": "2900580925b456fd0e912349665abc58cca56b34af2eb1e8c11ea841d120eaea",
+  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "reason": "All ten complete rounds and the four-worker comparison passed on this source. The validation record inventories the eleven raw reports."
 }

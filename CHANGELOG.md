@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-beta.2
+
+- Set final beta qualification to ten sequential full-suite rounds plus a matching four-worker comparison. Keep the 100 ms bound, zero retries and all source and package checks. The recorded alpha and beta.1 series remain historical.
+
+- Combine fresh target and role queries in repeated manual observations, with missing-membership and mutation guards. Real gaps above 100 ms still block; no retries or cached observations are introduced.
+- Retain grouped fresh locator reads and the extra-match, rebound and swapped-ID regressions.
+- Recognize all three cases in the strict reliability validator and validate real browser reports in CI.
+- Reconcile the published beta.1 history with main; retain its evidence as historical, and use the beta publication channel for the next candidate.
+- Verify ten complete rounds and a separate four-worker comparison on the beta.2 source. Include source hashes, report checksums and benchmark records in the release evidence.
+
+## 0.1.0-beta.1 — first beta candidate
+
+- Prepare dialogs, tabs and form recovery for trials in consumer projects.
+  Package metadata and journey reports identify this build as `0.1.0-beta.1`.
+  The npm prerelease channel is `beta`.
+
 ## 0.1.0-alpha.6 — source candidate
 
 - Record the completed final series for frozen `1187fde`: 100 × 172 sequential

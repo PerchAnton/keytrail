@@ -1,12 +1,16 @@
 {
-  "decisionDate": "2026-11-01",
+  "decisionDate": "2026-11-05",
   "developmentRounds": 4,
-  "finalAcceptanceRounds": 100,
+  "finalAcceptanceRounds": 10,
   "finalAcceptanceDeferred": false,
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Four rounds plus worker isolation remain the default development protocol. The separately requested final 100-round series is complete for frozen candidate 1187fde. Changed verification inputs require their own evidence; development success never substitutes for final acceptance.",
-  "finalAcceptanceSourceCommit": "1187fde7e0307705354864e739cb1cccce134165",
-  "finalAcceptanceRecord": "reliability.json"
+  "reason": "Development uses four rounds. Beta.2 completed its separate ten-round final series.",
+  "finalAcceptanceSourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "finalAcceptanceRecord": "reliability.json",
+  "historicalBeta1": {
+    "sourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
+    "record": "https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.1/docs/evidence/reliability.json"
+  }
 }

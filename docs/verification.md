@@ -1,5 +1,7 @@
 # Verification
 
+**Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
+
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
@@ -17,7 +19,7 @@ The release archive gate, owner sign-off and publication authorization remain se
 
 **Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
+The historical alpha source candidate was `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
 may deliberately observe a failed or blocked journey; it does not mean that its
 component is accessible.
@@ -31,9 +33,9 @@ component is accessible.
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | Release evidence validator | 26 script tests passed, including four regressions for incomplete or conflicting guard hashes; no browser rounds run by these tests |
-| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
+| CI guard | 52 actual subprocess exit-code cases; [current guard record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/ci-guard.json) |
 | Performance | Recorded `f9c492b`: 108/108 tests; median paired overhead: dialog -9.2%, manual tabs -6.8%, forms (`insertText`) -12.6%; [samples and validation](performance.md) |
-| Final repeatability (`1187fde`) | 100 × 172 = 17,200 sequential executions; 16,261 distinct journey IDs across all 101 reports; zero retries/skips/failures. [Proof](evidence/reliability.json) and [independent validation](evidence/reliability-validation-1187fde.json) |
+| Final repeatability (`1187fde`) | 100 × 172 = 17,200 sequential executions; 16,261 distinct journey IDs across all 101 reports; zero retries/skips/failures. [Proof](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/reliability.json) and [independent validation](evidence/reliability-validation-1187fde.json) |
 | Package consumers | `1187fde`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-main-1187fde.json); final acceptance remains false |
 | Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `1187fde`; Linux passed too. [Combined record](evidence/ci-main-1187fde.json). This is a bounded development check, not a guaranteed latency bound |
 
@@ -46,7 +48,7 @@ any later package rebuilt with updated documentation.
 
 ## Recorded performance (`f9c492b`)
 
-![Paired overhead and median/p95 timing results](assets/performance.svg)
+![Paired overhead and median/p95 timing results](history/performance-f9c492b.svg)
 
 Thirty alternating measured pairs per workload, after five warmups per arm.
 The local runner was an Apple M3 (8 logical CPUs), macOS arm64/Darwin 27.2.0,
@@ -59,6 +61,8 @@ windows, which dominate duration. These figures do not establish a universal spe
 advantage or replace checks in a consumer application.
 
 ## Repeatability and safety
+
+Starting with beta.2, final repeatability requires ten complete sequential rounds for one frozen candidate and a matching four-worker comparison. The earlier 100-round reports below retain their original scope.
 
 [The full-suite protocol](reliability.md) retains every raw run, rejects retries,
 checks attachment identity, and prevents combining different source/environment
@@ -118,4 +122,4 @@ both error and failure counts are considered; neither is treated as success.
 The [report guide](reports.md) explains the saved artifacts. Earlier transport revisions have their own four-round development evidence; these
 do not certify the current consecutive-read scheduler. Consumer checks remain additional
 evidence, not extra sequential rounds.
-No npm package or GitHub release has been published; see the [release checklist](release-checklist.md).
+The beta.2 results are recorded in the [release notes](releases/0.1.0-beta.2.md).

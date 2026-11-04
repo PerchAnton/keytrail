@@ -24,7 +24,7 @@ export class Driver {
   private interrupted: MessageCode | undefined;
   private actions = 0;
   private observationStore: JSHandle<ReturnType<typeof createObservationStore>> | undefined;
-  private interactionBatch: { locator: Locator; ids: string[] } | null | undefined;
+  private interactionBatch: { locator: Locator; slots: string[][] } | null | undefined;
   private dismissals: Promise<unknown>[] = [];
   private fragmentNavigation: { base: string } | undefined;
   readonly steps: StepResult[] = [];
@@ -111,6 +111,7 @@ export class Driver {
     // focus, selection, visibility, roving state and structure; do not resolve
     // unused name/panel-role metadata there. Omitted metadata stays unobserved.
     const plans = this.plans();
+    if (scope === 'complete') this.interactionBatch = undefined;
     const deadline = performance.now() + this.remaining();
     try {
       while (true) {
@@ -131,7 +132,7 @@ export class Driver {
             let result: ReturnType<ReturnType<typeof createObservationStore>['register']>;
             try {
               result = slot === -1 && batch
-                ? await locator.evaluateAll((nodes, { store, ids }) => store.registerBatch(nodes, ids), { store, ids: batch.ids })
+                ? await locator.evaluateAll((nodes, { store, slots }) => store.registerBatch(nodes, slots), { store, slots: batch.slots, scope })
                 : await locator.evaluateAll((nodes, { store, slot, scope }) => store.register(nodes, slot, scope), { store, slot, scope });
             } catch (error) {
               this.guard();
@@ -153,8 +154,8 @@ export class Driver {
             if (result.status === 'rejected') throw result.reason;
             return result.value;
           };
-          const targetQueries = batch ? [{ locator: batch.locator, slot: -1 }] : this.targets.map((target, slot) => ({ locator: target.locator, slot }));
-          const queries = [...targetQueries,
+          const queries = batch ? [{ locator: batch.locator, slot: -1 }] : [
+            ...this.targets.map((target, slot) => ({ locator: target.locator, slot })),
             ...plans[scope].locators.map((locator, index) => ({ locator, slot: this.targets.length + index }))];
           // Start transport work from a short stack. Playwright captures and maps
           // stacks for each request; retaining the entire journey's async caller
@@ -183,8 +184,7 @@ export class Driver {
           this.guard();
           if (state.code) throw new Blocked(state.code);
           if (scope === 'interaction' && this.interactionBatch === undefined && !state.detached) {
-            const hints = resolved.slice(0, this.targets.length).map(reply => reply.hint);
-            this.interactionBatch = this.makeInteractionBatch(hints);
+            this.interactionBatch = this.makeInteractionBatch(resolved.map(reply => reply.hint), plans.interaction.locators);
           }
           if (!state.detached) return { observedAt: state.observedAt, focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,
             ...(state.tabs ? { tabs: state.tabs } : {}), ...(state.form ? { form: state.form } : {}) };
@@ -199,16 +199,27 @@ export class Driver {
       }
     } catch (error) { throw this.normalize(error); }
   }
-  private makeInteractionBatch(hints: (string | null)[]) {
-    if (hints.length < 3 || hints.length > 16 || !hints.every((id): id is string => id !== null) ||
-        new Set(hints).size !== hints.length || !this.targets.every(({ locator }) =>
-          typeof locator.locator === 'function' && typeof locator.or === 'function')) return null;
-    // Run the ORIGINAL locators afresh in one Playwright query. A match with a
-    // different ID emits its tree root as a witness, even when the expected
-    // node also matches. Only simple ASCII IDs from register() enter the XPath.
-    const guarded = this.targets.map(({ locator }, i) => locator.locator(
-      `xpath=self::*[@id='${hints[i]}'] | self::*[not(@id='${hints[i]}')]/ancestor-or-self::*[last()]`));
-    return { ids: hints, locator: guarded.reduce((union, locator) => union.or(locator)) };
+  private makeInteractionBatch(hints: (string[] | null)[], roles: Locator[]) {
+    if (this.targets.length < 3 || this.targets.length > 16 || !hints.every((ids): ids is string[] => ids !== null) ||
+        hints.some(ids => new Set(ids).size !== ids.length) || new Set(hints.flat()).size > 32 ||
+        hints.slice(0, this.targets.length).some(ids => ids.length !== 1) ||
+        new Set(hints.slice(0, this.targets.length).flat()).size !== this.targets.length) return null;
+    // Resolve EVERY original target and role query again. Unexpected matches
+    // emit a root witness. Missing matches need a separate witness: another
+    // target or role query might still return the same element.
+    const locators = [...this.targets.map(t => t.locator), ...roles];
+    const guarded = locators.map((locator, slot) => {
+      const allowed = hints[slot]!.map(id => `@id='${id}'`).join(' or ') || 'false()';
+      return locator.locator(`xpath=self::*[${allowed}] | self::*[not(${allowed})]/ancestor-or-self::*[last()]`);
+    });
+    for (const [slot, locator] of locators.entries()) for (const id of hints[slot]!) {
+      // A missing ID unique to one slot is already caught by registerBatch's
+      // exact node-set check. Only shared IDs can conceal missing membership.
+      if (!hints.some((ids, other) => other !== slot && ids.includes(id))) continue;
+      const match = hints[slot]!.length === 1 ? locator : locator.and(this.page.locator(`[id="${id}"]`));
+      guarded.push(this.page.locator('html').filter({ hasNot: match }));
+    }
+    return { slots: hints, locator: guarded.reduce((union, locator) => union.or(locator)) };
   }
   async press(key: PressKey, target: Target | null, requireInside = false,
     inspectBefore?: (state: Snapshot) => void): Promise<Snapshot> {

@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { join, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import { inputHashes } from '../../verification/inputs.mjs';
+import { betaFinalRounds } from '../../verification/modes.mjs';
 
 // Reading evidence never builds, runs tests, writes records or publishes.
 export async function inspectReleaseEvidence() {
@@ -20,8 +21,9 @@ export async function inspectReleaseEvidence() {
   await check('acceptance-policy', async () => {
     policy = await readJSON('docs/evidence/acceptance-policy.json');
     assert.equal(policy.version, pkg.version, 'Acceptance policy version differs');
-    assert.equal(policy.minimumCompletedRounds, 100, 'Final acceptance requires 100 rounds');
-    assert.equal(policy.referenceTargetRounds, 100, 'Final target must remain 100 rounds');
+    const target = betaFinalRounds(pkg.version);
+    assert.equal(policy.minimumCompletedRounds, target, `Final beta acceptance requires ${target} rounds`);
+    assert.equal(policy.referenceTargetRounds, target, `Final beta target must be ${target} rounds`);
     assert.match(policy.seriesIdentity, /^[a-f0-9]{64}$/, 'Missing final series identity');
   });
   for (const record of ['reliability', 'benchmark-dialog', 'benchmark-tabs', 'benchmark-formErrors', 'ci-guard']) {
@@ -36,7 +38,7 @@ export async function inspectReleaseEvidence() {
         assert.equal(evidence.identity, policy.seriesIdentity);
         assert.equal(evidence.targetRounds, policy.referenceTargetRounds);
         const completed = evidence.rounds.length;
-        assert(completed >= policy.minimumCompletedRounds && completed <= evidence.targetRounds, 'The complete 100-round series is required');
+        assert.equal(completed, betaFinalRounds(pkg.version), 'The complete final beta series is required');
         assert.equal(evidence.acceptance, completed === evidence.targetRounds);
         assert([1, 2].includes(evidence.workers)); assert.equal(evidence.parallel.workers, 4);
         assert.equal(evidence.retries, 0, 'Retries are not accepted'); assert.equal(evidence.totalSequentialExecutions, evidence.caseCount * completed);

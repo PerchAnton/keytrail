@@ -23,16 +23,16 @@ async function fixture(t) {
   for (const file of ['src/example.ts', 'tests/guard/fixture.mjs', 'pnpm-lock.yaml', 'playwright.config.ts', 'schema/journey-result.v1.json', 'scripts/build.mjs', 'scripts/check-guard.mjs', 'scripts/verify-reliability.mjs']) {
     await writeFile(join(root, file), 'synthetic fixture\n');
   }
-  await json(root, 'package.json', { name: 'keytrail', version: '0.1.0-alpha.6' });
+  await json(root, 'package.json', { name: 'keytrail', version: '0.1.0-beta.2' });
   const hashes = spawnSync(process.execPath, ['--input-type=module', '-e', `import { inputHashes } from ${JSON.stringify(inputs)}; console.log(JSON.stringify(await inputHashes()))`], { cwd: root, encoding: 'utf8' });
   assert.equal(hashes.status, 0, hashes.stderr);
-  const sourceHashes = JSON.parse(hashes.stdout), version = '0.1.0-alpha.6';
+  const sourceHashes = JSON.parse(hashes.stdout), version = '0.1.0-beta.2';
   const cases = [{ id: 'synthetic-case' }], signature = hash(JSON.stringify(cases));
   const identity = 'a'.repeat(64);
-  await json(root, 'docs/evidence/acceptance-policy.json', { version, seriesIdentity: identity, minimumCompletedRounds: 100, referenceTargetRounds: 100 });
+  await json(root, 'docs/evidence/acceptance-policy.json', { version, seriesIdentity: identity, minimumCompletedRounds: 10, referenceTargetRounds: 10 });
   await json(root, 'docs/evidence/reliability.json', { version, sourceHashes, status: 'passed', acceptance: true, mode: 'final', identity,
-    targetRounds: 100, workers: 1, retries: 0, caseCount: 1, cases, totalSequentialExecutions: 100,
-    rounds: Array.from({ length: 100 }, (_, i) => ({ round: i + 1, tests: 1, passed: 1, signature })),
+    targetRounds: 10, workers: 1, retries: 0, caseCount: 1, cases, totalSequentialExecutions: 10,
+    rounds: Array.from({ length: 10 }, (_, i) => ({ round: i + 1, tests: 1, passed: 1, signature })),
     parallel: { workers: 4, passed: 1, signature } });
   for (const kind of ['dialog', 'tabs', 'formErrors']) await json(root, `docs/evidence/benchmark-${kind}.json`, {
     version, sourceHashes, pilot: false, samplesPerArm: 30, warmupsPerArm: 5,
@@ -45,7 +45,7 @@ async function fixture(t) {
   guardHashes[join('scripts', 'check-guard.mjs')] = hash('synthetic fixture\n');
   await json(root, 'docs/evidence/ci-guard.json', { version, sourceHashes: guardHashes,
     cases: [{ case: 'pass', expectedExit: 0, actualExit: 0 }, { case: 'fail', expectedExit: 1, actualExit: 1 }] });
-  for (const file of ['package-verification.json', 'SHA256SUMS', 'keytrail-0.1.0-alpha.6.tgz']) {
+  for (const file of ['package-verification.json', 'SHA256SUMS', 'keytrail-0.1.0-beta.2.tgz']) {
     await writeFile(join(root, 'artifacts', file), 'preserve this existing artifact\n');
   }
   return root;
@@ -71,7 +71,7 @@ async function snapshot(root) {
   await walk(''); return result;
 }
 
-test('readiness is read-only and a valid evidence set still requires the real package gate', async t => {
+test('readiness is read-only and ten final beta rounds with matching evidence still require the real package gate', async t => {
   const root = await fixture(t), before = await snapshot(root), result = run(root);
   assert.equal(result.status, 0, result.stderr); assert.equal(result.report.evidenceReady, true);
   assert.equal(result.report.checks.length, 6);
@@ -89,7 +89,7 @@ test('stale source reports all affected gates without deleting artifacts', async
 });
 
 for (const [name, record, mutate] of [
-  ['short series', 'reliability', e => { e.rounds.length = 4; e.totalSequentialExecutions = 4; }],
+  ['nine final beta rounds', 'reliability', e => { e.rounds.length = 9; e.totalSequentialExecutions = 9; }],
   ['development mode', 'reliability', e => { e.mode = 'development'; }],
   ['retry', 'reliability', e => { e.retries = 1; }],
   ['worker mismatch', 'reliability', e => { e.parallel.signature = 'bad'; }],
@@ -109,6 +109,9 @@ for (const [name, record, mutate] of [
   }],
   ['empty guard cases', 'ci-guard', e => { e.cases = []; }],
   ['duplicate guard cases', 'ci-guard', e => { e.cases.push(e.cases[0]); }],
+  ['obsolete final target', 'acceptance-policy', e => { e.referenceTargetRounds = 100; }],
+  ['legacy final report', 'reliability', e => { e.targetRounds = 100; }],
+  ['missing isolation comparison', 'reliability', e => { delete e.parallel; }],
   ['reduced acceptance policy', 'acceptance-policy', e => { e.minimumCompletedRounds = 4; }],
 ]) test(`rejects ${name}`, async t => {
   const root = await fixture(t); await change(root, record, mutate);
@@ -136,7 +139,7 @@ test('the real release entry point rejects development evidence before packing',
   const root = await fixture(t); await change(root, 'reliability', e => { e.mode = 'development'; });
   const result = spawnSync(process.execPath, [packageCheck, '--release'], { cwd: root, encoding: 'utf8' });
   assert.equal(result.status, 1); assert.match(result.stderr, /Final release evidence is not ready/);
-  assert.equal(await readFile(join(root, 'artifacts/keytrail-0.1.0-alpha.6.tgz'), 'utf8'), 'preserve this existing artifact\n');
+  assert.equal(await readFile(join(root, 'artifacts/keytrail-0.1.0-beta.2.tgz'), 'utf8'), 'preserve this existing artifact\n');
   await assert.rejects(readFile(join(root, 'artifacts/package-verification.json')), { code: 'ENOENT' });
 });
 

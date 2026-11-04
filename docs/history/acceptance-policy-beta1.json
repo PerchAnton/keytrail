@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0-beta.1",
+  "decisionDate": "2026-11-01",
+  "referenceTargetRounds": 100,
+  "minimumCompletedRounds": 100,
+  "seriesIdentity": "f84bdd822fef7a49a72867b702afb2a8521d6725518c277ea37ee801b36c9389",
+  "sourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
+  "reason": "The full beta series passed validation on the recorded source and environment."
+}

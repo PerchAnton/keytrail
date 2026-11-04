@@ -1,5 +1,7 @@
 # Milestones
 
+**Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
+
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
@@ -17,7 +19,7 @@ The release archive gate, owner sign-off and publication authorization remain se
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated
-`0.1.0-alpha.1`. The current `0.1.0-alpha.6` source candidate includes DEV09 verification
+`0.1.0-alpha.1`. The historical `0.1.0-alpha.6` source candidate included DEV09 verification
 and browser-read optimization, DEV10 examples, and the [release correctness audit](release-audit.md).
 These checkpoints are not full 0.1.0 acceptance.
 
@@ -36,7 +38,7 @@ No performance, superiority or adoption claim follows from passing the teaching 
 The [benchmark](performance.md) uses equivalent actions, observations, limits and
 serialization, with 5 warmups and 30 alternating measured runs. Its 20% criterion
 is evaluated per workload; no average across workloads hides a missed target.
-[Full-suite repeatability](reliability.md) retains the original 100-round target.
+[Full-suite repeatability](reliability.md) requires ten final rounds for beta.2 onward. The following counts describe historical alpha sources.
 The historical 45-round checkpoint belongs to alpha.5. The alpha.6 runtime at
 `0300552` completed a 100-round series and a matching four-worker run. Later runtime
 changes used four-round development series; the frozen `1187fde` has now completed

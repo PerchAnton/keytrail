@@ -1,4 +1,4 @@
-import { test, expect, type Page, type JSHandle } from '@playwright/test';
+import { test, expect, type Page, type JSHandle, type Locator } from '@playwright/test';
 import { Driver } from '../../src/browser/driver.js';
 import { DEFAULTS } from '../../src/contracts/dialog.js';
 import { tabsHtml, tabsContract } from '../fixtures/tabs.js';
@@ -122,6 +122,76 @@ test('interaction observations detect an added tab with fallback role tokens', a
     expect((await driver.snapshot('interaction')).tabs?.structure).toBe(false);
     expect(driver.steps).toHaveLength(0);
   } finally { await driver.dispose(); }
+});
+
+test('grouped manual reads resolve targets and roles in one fresh request', async ({ page }) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const contract = tabsContract(page, { activation: 'manual' }), stores = trackStores(page);
+  const driver = new Driver(page, [contract.tablist, ...contract.items.flatMap(i => [i.tab, i.panel])],
+    contract.tablist, { ...DEFAULTS }, performance.now(), contract);
+  const prototype = Object.getPrototypeOf(contract.tablist.locator) as Locator, original = prototype.evaluateAll;
+  let calls = 0;
+  prototype.evaluateAll = (async function (this: Locator, ...args: Parameters<typeof original>) {
+    calls++; return original.apply(this, args);
+  }) as typeof original;
+  try {
+    const first = await driver.snapshot('interaction'); calls = 0;
+    const next = await driver.snapshot('interaction');
+    expect(calls).toBe(1);
+    expect(next.tabs).toEqual(first.tabs); expect(next.observedAt).toBeGreaterThan(first.observedAt);
+    await expectCleared(stores.issued);
+    // Complete reads refresh the plan after keyboard actions and mutations.
+    await driver.snapshot(); await driver.snapshot('interaction'); calls = 0;
+    await driver.snapshot('interaction'); expect(calls).toBe(1);
+  } finally { prototype.evaluateAll = original; await driver.dispose(); stores.restore(); }
+  await expectDisposed(stores.issued);
+});
+
+for (const change of ['missing-target', 'missing-role', 'added-role'] as const) {
+  test(`grouped manual reads detect ${change} without DOM mutations`, async ({ page }) => {
+    await page.setContent(tabsHtml({ activation: 'manual' }));
+    const originalContract = tabsContract(page, { activation: 'manual' }), getByRole = page.getByRole;
+    const contract = { ...originalContract, items: originalContract.items.map((item, index) =>
+      index === 0 && change === 'missing-target' ? { ...item, tab: { ...item.tab, locator: page.locator('#tab-0:not(:focus)') } } : item) };
+    // A controlled live query changes membership on focus, without changing
+    // attributes/tree/text. The mutation observer cannot substitute for queries.
+    if (change !== 'missing-target') page.getByRole = ((...args: Parameters<typeof getByRole>) => args[0] === 'tab'
+      ? page.locator('[role=tab]:not(:focus)') : getByRole.apply(page, args)) as typeof getByRole;
+    if (change === 'added-role') await page.locator('#tab-0').focus();
+    const driver = new Driver(page, [contract.tablist, ...contract.items.flatMap(i => [i.tab, i.panel])],
+      contract.tablist, { ...DEFAULTS }, performance.now(), contract);
+    try {
+      await driver.snapshot('interaction'); await driver.snapshot('interaction');
+      await page.locator(change === 'added-role' ? '#after' : '#tab-0').focus();
+      const state = await driver.snapshot('interaction');
+      expect(state.present.has(contract.items[0]!.tab.id)).toBe(change !== 'missing-target');
+      expect(state.tabs?.structure).toBe(change === 'added-role');
+      expect(driver.steps).toHaveLength(0);
+    } finally { page.getByRole = getByRole; await driver.dispose(); }
+  });
+}
+
+test('grouped manual reads reject mutations between resolution and the atomic callback', async ({ page }) => {
+  await page.setContent(tabsHtml({ activation: 'manual' }));
+  const contract = tabsContract(page, { activation: 'manual' });
+  const driver = new Driver(page, [contract.tablist, ...contract.items.flatMap(i => [i.tab, i.panel])],
+    contract.tablist, { ...DEFAULTS }, performance.now(), contract);
+  const prototype = Object.getPrototypeOf(contract.tablist.locator) as Locator, original = prototype.evaluateAll;
+  let injected = false;
+  try {
+    await driver.snapshot('interaction'); await driver.snapshot('interaction');
+    prototype.evaluateAll = (async function (this: Locator, ...args: Parameters<typeof original>) {
+      if (!injected && args[1] && 'slots' in (args[1] as object)) {
+        injected = true;
+        const wrapper = new Function('nodes', 'arg', `nodes.find(node => node.id === 'tab-0').setAttribute('role', 'button');
+          return (${args[0].toString()})(nodes, arg);`);
+        return original.call(this, wrapper as (nodes: Element[], arg: unknown) => unknown, args[1]);
+      }
+      return original.apply(this, args);
+    }) as typeof original;
+    expect((await driver.snapshot('interaction')).tabs?.structure).toBe(false);
+    expect(injected).toBe(true);
+  } finally { prototype.evaluateAll = original; await driver.dispose(); }
 });
 
 for (const change of ['extra-match', 'rebound', 'swapped-ids'] as const) {
