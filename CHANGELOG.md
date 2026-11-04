@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-beta.1 — first beta candidate
+
+- Prepare dialogs, tabs and form recovery for trials in consumer projects.
+  Package metadata and journey reports identify this build as `0.1.0-beta.1`.
+  The npm prerelease channel is `beta`.
+
 ## 0.1.0-alpha.6 — source candidate
 
 - Record the completed final series for frozen `1187fde`: 100 × 172 sequential

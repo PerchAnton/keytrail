@@ -4,11 +4,20 @@ The recorded measurements apply to merged main `f9c492b`, recorded on **31 Octob
 2026 at 16:13 UTC** (18:13 in Kyiv). All **108 benchmark tests passed**, without
 retries. Independent validation checked the complete raw report, all warmup and
 measured pairs, semantic equivalence, negative controls, environment and source
-hashes, then recomputed both overhead calculations; [validation record](evidence/benchmark-validation.json).
+hashes, then recomputed both overhead calculations; [validation record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-validation.json).
 No samples were discarded or selected from another run.
 
-This benchmark is separate from final 100-round reliability acceptance, which was
-not run and remains deferred. The earlier [12:07 UTC measurements at `1b42666`](history/performance-1b42666-2026-10-31.md),
+At the time of this benchmark (31 October 2026, 16:13 UTC), final reliability
+verification for the frozen candidate had not yet run and was still deferred.
+The `1187fde` candidate subsequently completed **100 × 172 = 17,200** sequential
+test executions and **172** matching four-worker checks, with the unchanged
+**100 ms** bound and zero retries/skips. Independent validation of all **101** raw
+reports finished at **22:45 UTC on 31 October** (00:45 on 1 November in Kyiv).
+See the [completed final series](reliability.md#final-candidate-result-1187fde)
+and its [validation record](evidence/reliability-validation-1187fde.json).
+These are separate runs; the benchmark retains its original `f9c492b` identity.
+
+The earlier [12:07 UTC measurements at `1b42666`](history/performance-1b42666-2026-10-31.md),
 [October 31 measurements at `da7e663`](history/performance-da7e663-2026-10-31.md)
 and [October 29 measurements](history/performance-2026-10-29.md) keep their original
 source identities. Both KeyTrail and the native reference changed since those runs;
@@ -40,8 +49,8 @@ that KeyTrail is faster than every possible native test.
 All three meet the 20% target under both calculations. The runner was an Apple M3
 (8 logical CPUs), macOS arm64 / Darwin 27.2.0, Node 24.22.1, Playwright 1.64.1,
 Chromium 156.0.8078.4; one worker, no concurrent test process observed at start.
-Raw pairs and source hashes: [dialog](evidence/benchmark-dialog.json),
-[tabs](evidence/benchmark-tabs.json), [forms](evidence/benchmark-formErrors.json).
+Raw pairs and source hashes: [dialog](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-dialog.json),
+[tabs](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-tabs.json), [forms](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/benchmark-formErrors.json).
 Values are rounded to one decimal place. The negative values describe this
 sample only; it does not establish a general speed advantage, confidence interval
 or cross-machine result. Required negative observation windows dominate its duration.

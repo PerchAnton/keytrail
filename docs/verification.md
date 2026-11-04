@@ -31,9 +31,9 @@ component is accessible.
 | Canary isolation | Six cases: successful and exceptional paths for each scenario; five distinct markers |
 | Observation lifetime | Coherent focus, detached replacement, changed locator bindings, absent targets, late sibling cleanup and final map disposal |
 | Release evidence validator | 26 script tests passed, including four regressions for incomplete or conflicting guard hashes; no browser rounds run by these tests |
-| CI guard | 52 actual subprocess exit-code cases; [current guard record](evidence/ci-guard.json) |
+| CI guard | 52 actual subprocess exit-code cases; [current guard record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/ci-guard.json) |
 | Performance | Recorded `f9c492b`: 108/108 tests; median paired overhead: dialog -9.2%, manual tabs -6.8%, forms (`insertText`) -12.6%; [samples and validation](performance.md) |
-| Final repeatability (`1187fde`) | 100 × 172 = 17,200 sequential executions; 16,261 distinct journey IDs across all 101 reports; zero retries/skips/failures. [Proof](evidence/reliability.json) and [independent validation](evidence/reliability-validation-1187fde.json) |
+| Final repeatability (`1187fde`) | 100 × 172 = 17,200 sequential executions; 16,261 distinct journey IDs across all 101 reports; zero retries/skips/failures. [Proof](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/reliability.json) and [independent validation](evidence/reliability-validation-1187fde.json) |
 | Package consumers | `1187fde`: both clean offline consumers passed in all four jobs. ESM/CJS declarations; vanilla: 6 browser tests + 3 guarded journeys; React: 3 browser tests + 1 guarded journey + expected exit-1 control. [Archives and results](evidence/ci-main-1187fde.json); final acceptance remains false |
 | Hosted platforms | Three distinct macOS 15 ARM runner IDs and non-overlapping job times verified at `1187fde`; Linux passed too. [Combined record](evidence/ci-main-1187fde.json). This is a bounded development check, not a guaranteed latency bound |
 

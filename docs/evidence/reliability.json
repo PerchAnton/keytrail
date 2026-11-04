@@ -1,8 +1,8 @@
 {
   "package": "keytrail",
-  "version": "0.1.0-alpha.6",
-  "startedAt": "2026-10-31T18:24:24.546Z",
-  "identity": "34885215059b2e87247ff89f09cb859e606bec2e797d5d75602eea91c245f9f5",
+  "version": "0.1.0-beta.1",
+  "startedAt": "2026-11-01T08:23:50.122Z",
+  "identity": "f84bdd822fef7a49a72867b702afb2a8521d6725518c277ea37ee801b36c9389",
   "environment": {
     "node": "24.22.1",
     "platform": "darwin",
@@ -14,7 +14,7 @@
     "chromium": "156.0.8078.4"
   },
   "sourceHashes": {
-    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
+    "package.json": "9fb4a852e13994f1618daee230d6a35a8f40ecea4fdfe2010e2204e02b280621",
     "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
@@ -39,7 +39,7 @@
     "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
     "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
     "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
-    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "src/version.ts": "022e788ad37df8e452259fd9c607ebf0dd6e67511ff895424cd885124837aac6",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
@@ -78,710 +78,710 @@
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 156758.378
+      "durationMs": 156583.514
     },
     {
       "round": 2,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 156108.599
+      "durationMs": 156344.118
     },
     {
       "round": 3,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155728.23700000002
+      "durationMs": 156307.38
     },
     {
       "round": 4,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155828.036
+      "durationMs": 156203.95799999998
     },
     {
       "round": 5,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155699.86
+      "durationMs": 156339.343
     },
     {
       "round": 6,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155816.83099999998
+      "durationMs": 156194.758
     },
     {
       "round": 7,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155745.298
+      "durationMs": 156468.36800000002
     },
     {
       "round": 8,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155697.191
+      "durationMs": 156316.012
     },
     {
       "round": 9,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155696.293
+      "durationMs": 156182.82499999998
     },
     {
       "round": 10,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155781.57299999997
+      "durationMs": 156236.131
     },
     {
       "round": 11,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155912.527
+      "durationMs": 156218.856
     },
     {
       "round": 12,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155684.959
+      "durationMs": 156189.319
     },
     {
       "round": 13,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155816.872
+      "durationMs": 156150.665
     },
     {
       "round": 14,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 156260.114
+      "durationMs": 156326.608
     },
     {
       "round": 15,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155555.33599999998
+      "durationMs": 155943.771
     },
     {
       "round": 16,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155914.571
+      "durationMs": 155604.58000000002
     },
     {
       "round": 17,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 156369.335
+      "durationMs": 155566.14200000002
     },
     {
       "round": 18,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 156589.13100000002
+      "durationMs": 155552.772
     },
     {
       "round": 19,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155619.016
+      "durationMs": 155705.41499999998
     },
     {
       "round": 20,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155879.139
+      "durationMs": 155625.573
     },
     {
       "round": 21,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155592.868
+      "durationMs": 155617.687
     },
     {
       "round": 22,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155640.325
+      "durationMs": 155896.049
     },
     {
       "round": 23,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155693.332
+      "durationMs": 155583.388
     },
     {
       "round": 24,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155623.859
+      "durationMs": 155618.35499999998
     },
     {
       "round": 25,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155626.89299999998
+      "durationMs": 155709.611
     },
     {
       "round": 26,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155609.645
+      "durationMs": 155558.573
     },
     {
       "round": 27,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155629.277
+      "durationMs": 155725.94999999998
     },
     {
       "round": 28,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155758.883
+      "durationMs": 155611.239
     },
     {
       "round": 29,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155650.474
+      "durationMs": 155654.40099999998
     },
     {
       "round": 30,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155712.423
+      "durationMs": 155850.67799999999
     },
     {
       "round": 31,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155591.679
+      "durationMs": 155530.802
     },
     {
       "round": 32,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155677.01799999998
+      "durationMs": 155643.497
     },
     {
       "round": 33,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155789.053
+      "durationMs": 155700.20200000002
     },
     {
       "round": 34,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155600.492
+      "durationMs": 155465.898
     },
     {
       "round": 35,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155586.454
+      "durationMs": 155654.40399999998
     },
     {
       "round": 36,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155735.273
+      "durationMs": 155583.443
     },
     {
       "round": 37,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155710.108
+      "durationMs": 155822.27899999998
     },
     {
       "round": 38,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155539.15899999999
+      "durationMs": 155616.412
     },
     {
       "round": 39,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155602.906
+      "durationMs": 155714.699
     },
     {
       "round": 40,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155500.769
+      "durationMs": 155706.644
     },
     {
       "round": 41,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155491.109
+      "durationMs": 155581.344
     },
     {
       "round": 42,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155586.827
+      "durationMs": 155715.984
     },
     {
       "round": 43,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155621.28999999998
+      "durationMs": 155563.985
     },
     {
       "round": 44,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155590.80299999999
+      "durationMs": 155622.964
     },
     {
       "round": 45,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155668.747
+      "durationMs": 155633.703
     },
     {
       "round": 46,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155694.82499999998
+      "durationMs": 155814.999
     },
     {
       "round": 47,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155527.07900000003
+      "durationMs": 155652.809
     },
     {
       "round": 48,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155585.556
+      "durationMs": 155560.53699999998
     },
     {
       "round": 49,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155645.57
+      "durationMs": 155640.891
     },
     {
       "round": 50,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155577.143
+      "durationMs": 155771.3
     },
     {
       "round": 51,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155608.78100000002
+      "durationMs": 155748.969
     },
     {
       "round": 52,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155681.313
+      "durationMs": 155666.321
     },
     {
       "round": 53,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155638.51599999997
+      "durationMs": 155772.338
     },
     {
       "round": 54,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155658.71300000002
+      "durationMs": 155659.13
     },
     {
       "round": 55,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155700.305
+      "durationMs": 155680.51
     },
     {
       "round": 56,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155710.024
+      "durationMs": 155653.53
     },
     {
       "round": 57,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155654.89299999998
+      "durationMs": 155683.147
     },
     {
       "round": 58,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155664.438
+      "durationMs": 155653.948
     },
     {
       "round": 59,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155667.25699999998
+      "durationMs": 155611.36000000002
     },
     {
       "round": 60,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155666.22
+      "durationMs": 155574.03
     },
     {
       "round": 61,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155851.80000000002
+      "durationMs": 155710.693
     },
     {
       "round": 62,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155593.319
+      "durationMs": 155572.101
     },
     {
       "round": 63,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155725.145
+      "durationMs": 155671.86599999998
     },
     {
       "round": 64,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155683.666
+      "durationMs": 155614.315
     },
     {
       "round": 65,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155630.889
+      "durationMs": 155598.703
     },
     {
       "round": 66,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155625.41499999998
+      "durationMs": 155655.866
     },
     {
       "round": 67,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155629.54
+      "durationMs": 155630.578
     },
     {
       "round": 68,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155727.49300000002
+      "durationMs": 155619.759
     },
     {
       "round": 69,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155645.294
+      "durationMs": 155775.07100000003
     },
     {
       "round": 70,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155522.62900000002
+      "durationMs": 156180.37
     },
     {
       "round": 71,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155580.37600000002
+      "durationMs": 156153.682
     },
     {
       "round": 72,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155564.435
+      "durationMs": 156191.863
     },
     {
       "round": 73,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155653.09600000002
+      "durationMs": 156153.87399999998
     },
     {
       "round": 74,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155689.94900000002
+      "durationMs": 156142.88400000002
     },
     {
       "round": 75,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155678.981
+      "durationMs": 156178.115
     },
     {
       "round": 76,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155618.41900000002
+      "durationMs": 156254.61899999998
     },
     {
       "round": 77,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155715.31100000002
+      "durationMs": 156420.676
     },
     {
       "round": 78,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155688.788
+      "durationMs": 156166.757
     },
     {
       "round": 79,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155572.744
+      "durationMs": 157705.86899999998
     },
     {
       "round": 80,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155692.938
+      "durationMs": 156547.782
     },
     {
       "round": 81,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155522.887
+      "durationMs": 156568.74000000002
     },
     {
       "round": 82,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155643.606
+      "durationMs": 156432.205
     },
     {
       "round": 83,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155896.578
+      "durationMs": 156267.651
     },
     {
       "round": 84,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155676.376
+      "durationMs": 156409.26700000002
     },
     {
       "round": 85,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155559.067
+      "durationMs": 156483.028
     },
     {
       "round": 86,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155676.704
+      "durationMs": 156450.542
     },
     {
       "round": 87,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155610.95
+      "durationMs": 156502.07700000002
     },
     {
       "round": 88,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155527.91
+      "durationMs": 156342.662
     },
     {
       "round": 89,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155573.51700000002
+      "durationMs": 156477.173
     },
     {
       "round": 90,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155490.114
+      "durationMs": 156357.807
     },
     {
       "round": 91,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155567.13700000002
+      "durationMs": 156501.908
     },
     {
       "round": 92,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155710.063
+      "durationMs": 156489.046
     },
     {
       "round": 93,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155876.874
+      "durationMs": 156550.7
     },
     {
       "round": 94,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155660.614
+      "durationMs": 156418.442
     },
     {
       "round": 95,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155485.557
+      "durationMs": 156572.72499999998
     },
     {
       "round": 96,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155515.98
+      "durationMs": 156400.71
     },
     {
       "round": 97,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155684.148
+      "durationMs": 156547.619
     },
     {
       "round": 98,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155548.637
+      "durationMs": 156377.609
     },
     {
       "round": 99,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155524.736
+      "durationMs": 156376.714
     },
     {
       "round": 100,
       "tests": 172,
       "passed": 172,
       "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-      "durationMs": 155721.22699999998
+      "durationMs": 156231.737
     }
   ],
-  "lastCompletedAt": "2026-10-31T22:44:22.419Z",
+  "lastCompletedAt": "2026-11-01T12:44:16.601Z",
   "parallel": {
     "workers": 4,
     "passed": 172,
     "signature": "7d4f58e2773e59f891f575c7761fe53e3061496432f703000c68b47ec974baf1",
-    "durationMs": 44821.017
+    "durationMs": 45400.315
   },
-  "finishedAt": "2026-10-31T22:45:07.527Z",
+  "finishedAt": "2026-11-01T12:45:02.297Z",
   "caseCount": 172,
   "totalSequentialExecutions": 17200,
   "uniqueJourneyRunIds": 16261,
