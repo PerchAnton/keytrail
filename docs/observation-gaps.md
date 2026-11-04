@@ -17,7 +17,46 @@ would accept a larger unobserved interval; it would not make the browser reader
 faster. A component mismatch actually observed in that interval still takes
 precedence over a sampling gap.
 
-## A 106.5 ms gap on macOS 15 ARM
+## Beta.2: a 130.2 ms gap with four requests
+
+[ARM allocation 1](https://github.com/PerchAnton/keytrail/actions/runs/41894988515/job/126802001120)
+on `564c95c` blocked the short-window case at `T05.forward.001.unchanged`.
+The interval was **130.2 ms**. The host snapshot took 130.607 ms, of which
+123.385 ms was event-loop idle time. The longest locator request took
+129.836 ms; the longest browser callback took 0.3 ms. No recorded GC overlapped.
+These measurements locate most of the delay outside the DOM callback; they do
+not identify an exact transport or operating-system cause. Allocation 2 later
+blocked manual Space with a **107.3 ms** interval. Both failures remain failures.
+
+Repeated interaction observations now combine the original target **and role**
+queries into one public Playwright locator request. The three-tab fixture uses
+one request instead of four after the initial individual read. Only simple,
+distinct target IDs and bounded role mappings qualify for this path. IDs map
+fresh query results to slots; they never replace the original queries.
+
+An unexpected match emits a root witness. A missing shared match emits another
+witness, so a target cannot conceal a missing role (or vice versa). Attribute,
+tree or text changes between resolution and the atomic callback invalidate the
+mapping. Focus and CSS-dependent queries are still resolved afresh even without
+DOM mutations. A fallback clears partial slots and performs a new individual
+read; the elapsed time remains part of the measured interval. Complete reads
+allow a new mapping after an action. No element binding or previous state fills
+an unobserved interval.
+
+This reduces protocol requests, **not a guaranteed worst-case latency**. In one
+local run of two selected fixtures per revision, snapshot medians were 1.789 ms
+before and 1.871 ms after, and maximum measured intervals were 8.6 and 11.2 ms.
+The extra membership guards have a cost. These small local samples do not prove
+shared-runner stability or qualify a release. The bounded CI check is one Linux
+round plus three sequential fresh macOS 15 ARM allocations, without test retries.
+
+Regression cases verify one fresh request, missing/added query membership
+without DOM mutations, and mutations between resolution and reading. Separate
+controls delay real interaction queries before or after evaluation and still
+require `OBSERVATION_GAP`, no activation and recorded intervals above 100 ms.
+All new engine cases remain explicitly listed in the strict report validator.
+
+## Earlier 106.5 ms gap on macOS 15 ARM
 
 The [third ARM job](https://github.com/PerchAnton/keytrail/actions/runs/41312102590/job/124864435775)
 blocked the vertical manual Home/End case at `T05.restore.001.unchanged`.
@@ -28,18 +67,18 @@ between reads. The ten callback bodies each took at most 0.2 ms. Most of the
 gap accumulated before the first callback. The trace cannot distinguish time
 waiting for Playwright, Chromium or the host scheduler. [Raw reports](https://github.com/PerchAnton/keytrail/actions/runs/41312102590/artifacts/13085498506).
 
-The interaction reader can now resolve several original locators in one
+That revision made the interaction reader resolve several original locators in one
 Playwright query. The three-tab fixture has seven declared targets. When their
 DOM IDs are distinct and simple, one grouped target query plus three role
-queries replaces ten separate calls per subsequent sample. A DOM ID is only
+queries replaced ten separate calls per subsequent sample. A DOM ID was only
 a hint for associating results with slots. Every branch still runs the
 original locator and flags any match with an unexpected ID. Changed bindings,
 ambiguous results and document mutations that invalidate the grouping return
 the reader to individual queries. Only a fresh, complete snapshot enters the
 observation window. ID-less controls use the individual path throughout.
 
-The 100 ms limit applies to both paths. Separate controls delay a required
-role query before or after its browser callback to exercise genuine gaps. The
+The 100 ms limit applies to both paths. At that revision, controls delayed a
+required role query before or after its browser callback. The
 published beta and its 100-round qualification refer to the tagged source.
 
 ## Earlier 130.3 ms gap on macOS 15

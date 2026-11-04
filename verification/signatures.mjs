@@ -18,6 +18,11 @@ const engineCases = new Set([
   'grouped manual reads resolve the original locator after extra-match',
   'grouped manual reads resolve the original locator after rebound',
   'grouped manual reads resolve the original locator after swapped-ids',
+  'grouped manual reads resolve targets and roles in one fresh request',
+  'grouped manual reads detect missing-target without DOM mutations',
+  'grouped manual reads detect missing-role without DOM mutations',
+  'grouped manual reads detect added-role without DOM mutations',
+  'grouped manual reads reject mutations between resolution and the atomic callback',
 ]);
 /** Normalize only UUID/time and measured windows; keep semantic observations and actions. */
 export function inspectReport(report, workers, seenRunIds = new Set(), environment) {

@@ -2,6 +2,7 @@
 
 ## 0.1.0-beta.2 — unreleased
 
+- Combine fresh target and role queries in repeated manual observations, with missing-membership and mutation guards. Real gaps above 100 ms still block; no retries or cached observations are introduced.
 - Retain grouped fresh locator reads and the extra-match, rebound and swapped-ID regressions.
 - Recognize all three cases in the strict reliability validator and validate real browser reports in CI.
 - Reconcile the published beta.1 history with main; retain its evidence as historical, and use the beta publication channel for the next candidate.

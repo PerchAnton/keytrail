@@ -49,6 +49,15 @@ test('reliability rejects an unknown engine case, including a similar grouped re
     assert.throws(() => inspectReport(engineFixture(title), 1), /UNRECOGNIZED_ENGINE_CASE/);
   }
 });
+test('reliability accepts the single-request and live-membership regressions', () => {
+  for (const title of [
+    'grouped manual reads resolve targets and roles in one fresh request',
+    'grouped manual reads detect missing-target without DOM mutations',
+    'grouped manual reads detect missing-role without DOM mutations',
+    'grouped manual reads detect added-role without DOM mutations',
+    'grouped manual reads reject mutations between resolution and the atomic callback',
+  ]) assert.equal(inspectReport(engineFixture(title), 1)[0].kind, 'engine-observation');
+});
 test('known engine cases still reject retries and unexpected journey attachments', () => {
   const title = 'grouped manual reads resolve the original locator after rebound';
   const retry = engineFixture(title);

@@ -12,8 +12,9 @@ export type ObservationRequest = {
 /** Serialized once per journey. Keep the reader self-contained in the browser. */
 export function createObservationStore(requests: Record<'complete' | 'interaction', ObservationRequest>) {
   const store = new Map<number, Element[]>();
-  // The XPath query and its callback are separate browser tasks. If IDs are
-  // reassigned between them, a union cannot tell which slot returned which node.
+  // Query resolution and the atomic callback are separate browser tasks. Any
+  // intervening attribute/tree change invalidates the slot mapping. Queries
+  // still run afresh: the observer alone cannot track CSS or focus selectors.
   let idObserver: MutationObserver | undefined;
   let idsChanged = false;
   const stopBatch = () => { idsChanged = true; idObserver?.disconnect(); };
@@ -140,19 +141,22 @@ export function createObservationStore(requests: Record<'complete' | 'interactio
   return Object.assign(store, {
     stopBatch,
     register(nodes: Element[], slot: number, scope: 'complete' | 'interaction') {
+      if (scope === 'complete') {
+        idObserver?.disconnect(); idObserver = undefined; idsChanged = false;
+      }
       store.set(slot, nodes);
       const request = requests[scope];
-      const node = nodes.length === 1 ? nodes[0] : undefined;
-      const hint = scope === 'interaction' && request.tabs && slot < request.targetSlots.length && node &&
-        node !== document.documentElement && node.getRootNode() === document && /^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(node.id)
-        ? node.id : null;
+      const hint = scope === 'interaction' && request.tabs && nodes.every(node =>
+        node !== document.documentElement && node.getRootNode() === document && /^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(node.id))
+        ? nodes.map(node => node.id) : null;
       if (hint && !idObserver && !idsChanged) {
         idObserver = new MutationObserver(stopBatch);
-        idObserver.observe(document, { subtree: true, childList: true, attributes: true, attributeFilter: ['id'] });
+        idObserver.observe(document, { subtree: true, childList: true, attributes: true, characterData: true });
       }
       return { count: nodes.length, state: finish(request), hint, fallback: false };
     },
-    registerBatch(nodes: Element[], ids: string[]) {
+    registerBatch(nodes: Element[], slots: string[][]) {
+      const ids = [...new Set(slots.flat())];
       const byId = new Map(nodes.map(node => [node.id, node]));
       if (idsChanged || idObserver?.takeRecords().length || nodes.length !== ids.length ||
           nodes.some(node => node === document.documentElement || node.getRootNode() !== document) ||
@@ -160,7 +164,7 @@ export function createObservationStore(requests: Record<'complete' | 'interactio
         stopBatch();
         return { count: 0, state: null, hint: null, fallback: true };
       }
-      ids.forEach((id, slot) => store.set(slot, [byId.get(id)!]));
+      slots.forEach((ids, slot) => store.set(slot, ids.map(id => byId.get(id)!)));
       return { count: nodes.length, state: finish(requests.interaction), hint: null, fallback: false };
     },
   });

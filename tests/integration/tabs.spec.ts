@@ -1,4 +1,4 @@
-import { test, expect, type Page, type TestInfo } from '@playwright/test';
+import { test, expect, type Page, type TestInfo, type Locator } from '@playwright/test';
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import { readFileSync } from 'node:fs';
 import { mock } from 'node:test';
@@ -173,21 +173,15 @@ test('tabs attachment failure preserves the detected defect', async ({ page }, i
 for (const latency of ['before', 'after'] as const) test(`manual tabs block a browser observation gap ${latency} evaluation`, async ({ page }, info) => {
   await page.setContent(tabsHtml({ activation: 'manual' }));
   const contract = tabsContract(page, { activation: 'manual' });
-  // Delay a role query that every real interaction snapshot needs, including
-  // the grouped-target path. Keep the actual browser clock and DOM readings.
-  const role = page.getByRole.bind(page);
-  const hook = mock.method(page, 'getByRole', (...args: Parameters<typeof role>) => {
-    const locator = role(...args);
-    if (args[0] === 'alertdialog') {
-      const original = locator.evaluateAll.bind(locator);
-      locator.evaluateAll = (async (...call: Parameters<typeof original>) => {
-        if (latency === 'before') await new Promise(resolve => setTimeout(resolve, 150));
-        const value = await original(...call);
-        if (latency === 'after') await new Promise(resolve => setTimeout(resolve, 150));
-        return value;
-      }) as typeof locator.evaluateAll;
-    }
-    return locator;
+  // Delay real transport on both individual and grouped interaction queries.
+  // Keep the browser clock and DOM readings; grouping must not hide a gap.
+  const prototype = Object.getPrototypeOf(contract.tablist.locator) as Locator, original = prototype.evaluateAll;
+  const hook = mock.method(prototype, 'evaluateAll', async function (this: Locator, ...args: Parameters<typeof original>) {
+    const interaction = (args[1] as { scope?: string } | undefined)?.scope === 'interaction';
+    if (interaction && latency === 'before') await new Promise(resolve => setTimeout(resolve, 150));
+    const value = await original.apply(this, args);
+    if (interaction && latency === 'after') await new Promise(resolve => setTimeout(resolve, 150));
+    return value;
   });
   let error: JourneyAssertionError;
   try { error = await failure(page, info, { ...contract, observationWindowMs: 50 }); }
