@@ -1,10 +1,6 @@
 # Milestones
 
-**Current development: `0.1.0-beta.2` (unpublished).** The published version is
-[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
-The alpha and beta.1 results below are historical and do not qualify the current
-source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
-No new final series or publication is authorized by this document.
+**Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)

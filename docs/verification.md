@@ -1,10 +1,6 @@
 # Verification
 
-**Current development: `0.1.0-beta.2` (unpublished).** The published version is
-[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
-The alpha and beta.1 results below are historical and do not qualify the current
-source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
-No new final series or publication is authorized by this document.
+**Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
@@ -52,7 +48,7 @@ any later package rebuilt with updated documentation.
 
 ## Recorded performance (`f9c492b`)
 
-![Paired overhead and median/p95 timing results](assets/performance.svg)
+![Paired overhead and median/p95 timing results](history/performance-f9c492b.svg)
 
 Thirty alternating measured pairs per workload, after five warmups per arm.
 The local runner was an Apple M3 (8 logical CPUs), macOS arm64/Darwin 27.2.0,
@@ -126,4 +122,4 @@ both error and failure counts are considered; neither is treated as success.
 The [report guide](reports.md) explains the saved artifacts. Earlier transport revisions have their own four-round development evidence; these
 do not certify the current consecutive-read scheduler. Consumer checks remain additional
 evidence, not extra sequential rounds.
-Beta.1 has been published; beta.2 remains an unpublished development candidate. See the [current preparation](releases/0.1.0-beta.2.md).
+The beta.2 results are recorded in the [release notes](releases/0.1.0-beta.2.md).

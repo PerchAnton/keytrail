@@ -1,11 +1,11 @@
 {
-  "recordedAt": "2026-11-05",
+  "recordedAt": "2026-11-04T23:36:09.274Z",
   "package": "keytrail",
   "version": "0.1.0-beta.2",
-  "status": "unpublished-development-candidate",
+  "status": "final-evidence-verified",
   "releaseReady": false,
   "published": false,
-  "finalAcceptance": false,
+  "finalAcceptance": true,
   "historicalRelease": {
     "version": "0.1.0-beta.1",
     "tag": "v0.1.0-beta.1",
@@ -14,9 +14,18 @@
     "record": "../history/release-readiness-beta1.json"
   },
   "remaining": [
-    "Agree a frozen candidate and authorize a new final cycle separately.",
-    "Refresh source-bound benchmark and CI guard evidence; verify ten sequential final rounds plus the separate four-worker comparison.",
-    "Validate the exact release archive and authorize publication separately."
+    "Verify and retain the exact release archive, install it from npm, and publish its receipt."
   ],
-  "note": "Historical results remain unchanged and do not qualify beta.2. Run scripts/check-release-readiness.mjs for current hash checks."
+  "note": "This snapshot records the evidence before packing. The GitHub release supplies the archive checksum and the registry installation receipt.",
+  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "fullRounds": 10,
+  "sequentialExecutions": 1800,
+  "fourWorkerExecutions": 180,
+  "rawReports": 11,
+  "distinctJourneyIds": 1771,
+  "benchmarkTests": 108,
+  "guardCases": 52,
+  "retries": 0,
+  "observationGapLimitMs": 100,
+  "independentValidation": "reliability-validation-fd8f58a.json"
 }

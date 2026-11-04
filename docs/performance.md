@@ -1,10 +1,22 @@
 # Equivalent-work benchmark
 
-**Current development: `0.1.0-beta.2` (unpublished).** The published version is
-[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
-The alpha and beta.1 results below are historical and do not qualify the current
-source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
-No new final series or publication is authorized by this document.
+**Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
+
+## Beta.2 measurements on `fd8f58a`
+
+All 108 tests passed on the recorded Mac. Each workload contributed five warmups, thirty alternating measured pairs and one defect control. Both overhead calculations met the 20% criterion in each of the three synthetic Chromium fixtures.
+
+![Beta.2 paired timing results](assets/performance.svg)
+
+| Workload | KeyTrail median (ms) | Native median (ms) | Median paired overhead | Ratio of medians |
+| --- | ---: | ---: | ---: | ---: |
+| Dialog | 131.1 | 143.4 | -8.5% | -8.6% |
+| Manual tabs | 1565.5 | 1664.8 | -5.5% | -6.0% |
+| Form errors | 127.0 | 142.7 | -10.8% | -11.0% |
+
+These results describe equivalent fixture work in this environment. [Pair-level validation](evidence/benchmark-validation.json).
+
+## Historical alpha benchmark
 
 The recorded measurements apply to merged main `f9c492b`, recorded on **31 October
 2026 at 16:13 UTC** (18:13 in Kyiv). All **108 benchmark tests passed**, without
@@ -19,7 +31,7 @@ The `1187fde` candidate subsequently completed **100 × 172 = 17,200** sequentia
 test executions and **172** matching four-worker checks, with the unchanged
 **100 ms** bound and zero retries/skips. Independent validation of all **101** raw
 reports finished at **22:45 UTC on 31 October** (00:45 on 1 November in Kyiv).
-See the [completed final series](reliability.md#final-candidate-result-1187fde)
+See the [completed final series](reliability.md#historical-final-candidate-result-1187fde)
 and its [validation record](evidence/reliability-validation-1187fde.json).
 These are separate runs; the benchmark retains its original `f9c492b` identity.
 
@@ -44,7 +56,7 @@ that KeyTrail is faster than every possible native test.
 
 ## Recorded results — 31 October 2026, 16:13 UTC (`f9c492b`)
 
-![Measured overhead and timings](assets/performance.svg)
+![Measured overhead and timings](history/performance-f9c492b.svg)
 
 | Workload | Native median / p95 (ms) | KeyTrail median / p95 (ms) | Median paired overhead | Ratio of medians |
 | --- | --- | --- | --- | --- |

@@ -3,7 +3,7 @@
   "decisionDate": "2026-11-05",
   "referenceTargetRounds": 10,
   "minimumCompletedRounds": 10,
-  "seriesIdentity": null,
-  "sourceCommit": null,
-  "reason": "From beta.2, final qualification requires ten complete sequential rounds on one frozen candidate plus a matching four-worker comparison. Historical alpha and beta.1 evidence is not counted. No new final series has been authorized."
+  "seriesIdentity": "2900580925b456fd0e912349665abc58cca56b34af2eb1e8c11ea841d120eaea",
+  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "reason": "All ten complete rounds and the four-worker comparison passed on this source. The validation record inventories the eleven raw reports."
 }

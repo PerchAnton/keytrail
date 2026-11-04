@@ -2,13 +2,13 @@
   "decisionDate": "2026-11-05",
   "developmentRounds": 4,
   "finalAcceptanceRounds": 10,
-  "finalAcceptanceDeferred": true,
+  "finalAcceptanceDeferred": false,
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Four development rounds are separate from the ten final beta rounds. Smoke, hosted CI and historical results are not credited to the final series.",
-  "finalAcceptanceSourceCommit": null,
-  "finalAcceptanceRecord": null,
+  "reason": "Development uses four rounds. Beta.2 completed its separate ten-round final series.",
+  "finalAcceptanceSourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "finalAcceptanceRecord": "reliability.json",
   "historicalBeta1": {
     "sourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
     "record": "https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.1/docs/evidence/reliability.json"
