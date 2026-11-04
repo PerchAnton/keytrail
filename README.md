@@ -26,6 +26,10 @@ it to see which makes the failure easier to diagnose.
 [Release archive and checksum](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1) ·
 [Independent validation of the beta's 101 reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.1/docs/evidence/reliability-validation-f775b30.json).
 
+**Development branch:** `0.1.0-beta.2` is an unpublished candidate. It includes
+new grouped-locator regressions and strict browser-report validation. The beta.1
+results do not certify these changes. [Preparation and evidence status](docs/releases/0.1.0-beta.2.md).
+
 ```text
 Tab to trigger → Enter → initial focus → Tab cycle → Shift+Tab cycle → Escape
                                                                          ↓

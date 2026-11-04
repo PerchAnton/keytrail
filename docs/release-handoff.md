@@ -1,5 +1,11 @@
 # Review the first release candidate
 
+**Current development: `0.1.0-beta.2` (unpublished).** The published version is
+[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
+The alpha and beta.1 results below are historical and do not qualify the current
+source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
+No new final series or publication is authorized by this document.
+
 This page records the `0.1.0-alpha.6` handoff. For the first beta candidate,
 see [the beta scope and release checks](releases/0.1.0-beta.1.md).
 
@@ -22,7 +28,7 @@ The frozen source is **KeyTrail 0.1.0-alpha.6** at
 `1187fde7e0307705354864e739cb1cccce134165`. The annotated candidate tag remains
 at that commit. These instructions were updated after the freeze; they describe
 the preserved archive and do not change its contents or verification level.
-This is preparation for the first publication; no package or GitHub release exists.
+This section preserves the pre-publication alpha handoff; beta.1 was subsequently published.
 The [readiness record](https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/release-readiness.json) separates completed checks
 from the completed source-bound reliability series and the still-pending release
 archive gate. Earlier source checkpoints keep their own evidence.

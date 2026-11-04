@@ -1,12 +1,12 @@
 {
-  "decisionDate": "2026-11-01",
+  "decisionDate": "2026-11-04",
   "developmentRounds": 4,
   "finalAcceptanceRounds": 100,
-  "finalAcceptanceDeferred": false,
+  "finalAcceptanceDeferred": true,
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Use four rounds for development. The first beta completed its separate final series.",
+  "reason": "Use four rounds for development. Final verification of beta.2 is not authorized. The recorded beta.1 series certifies only f775b30.",
   "finalAcceptanceSourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
   "finalAcceptanceRecord": "reliability.json"
 }

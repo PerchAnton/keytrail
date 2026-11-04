@@ -1,5 +1,11 @@
 # Full-suite repeatability protocol
 
+**Current development: `0.1.0-beta.2` (unpublished).** The published version is
+[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
+The alpha and beta.1 results below are historical and do not qualify the current
+source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
+No new final series or publication is authorized by this document.
+
 ## Final candidate result: `1187fde`
 
 The explicitly requested local final series completed successfully, on the frozen

@@ -1,5 +1,11 @@
 # Verification
 
+**Current development: `0.1.0-beta.2` (unpublished).** The published version is
+[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
+The alpha and beta.1 results below are historical and do not qualify the current
+source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
+No new final series or publication is authorized by this document.
+
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
@@ -17,7 +23,7 @@ The release archive gate, owner sign-off and publication authorization remain se
 
 **Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
-The current source candidate is `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
+The historical alpha source candidate was `0.1.0-alpha.6`, ruleset 0.4.0, schema 1.
 Measurements use synthetic fixtures, not customer data. A passing regression test
 may deliberately observe a failed or blocked journey; it does not mean that its
 component is accessible.
@@ -118,4 +124,4 @@ both error and failure counts are considered; neither is treated as success.
 The [report guide](reports.md) explains the saved artifacts. Earlier transport revisions have their own four-round development evidence; these
 do not certify the current consecutive-read scheduler. Consumer checks remain additional
 evidence, not extra sequential rounds.
-No npm package or GitHub release has been published; see the [release checklist](release-checklist.md).
+Beta.1 has been published; beta.2 remains an unpublished development candidate. See the [current preparation](releases/0.1.0-beta.2.md).

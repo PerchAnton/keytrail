@@ -1,21 +1,22 @@
 {
-  "sourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
-  "version": "0.1.0-beta.1",
-  "status": "ready-for-release-package-check",
-  "recordedAt": "2026-11-01T12:45:04.560Z",
-  "fullRounds": 100,
-  "sequentialExecutions": 17200,
-  "fourWorkerExecutions": 172,
-  "rawReports": 101,
-  "distinctJourneyIds": 16261,
-  "benchmarkTests": 108,
-  "guardCases": 52,
-  "retries": 0,
-  "observationGapLimitMs": 100,
-  "proof": "reliability.json",
-  "independentValidation": "reliability-validation-f775b30.json",
-  "benchmark": "benchmark-validation.json",
-  "guard": "ci-guard.json",
-  "archiveVerification": "See the release package-verification.json and SHA256SUMS accompanying the tested archive.",
-  "alphaSnapshot": "https://github.com/PerchAnton/keytrail/blob/3620f256aea5997938f2565236af381cfe79a91a/docs/evidence/release-readiness.json"
+  "recordedAt": "2026-11-04",
+  "package": "keytrail",
+  "version": "0.1.0-beta.2",
+  "status": "unpublished-development-candidate",
+  "releaseReady": false,
+  "published": false,
+  "finalAcceptance": false,
+  "historicalRelease": {
+    "version": "0.1.0-beta.1",
+    "tag": "v0.1.0-beta.1",
+    "commit": "ae553d6122e40281cb52bd3c4986a71ab17c68d7",
+    "qualifiedSource": "f775b308382b37f50bdeeb63b2d92b45878ad048",
+    "record": "../history/release-readiness-beta1.json"
+  },
+  "remaining": [
+    "Agree a frozen candidate and authorize a new final cycle separately.",
+    "Refresh source-bound benchmark, CI guard and 100-round evidence with four-worker comparison.",
+    "Validate the exact release archive and authorize publication separately."
+  ],
+  "note": "Historical results remain unchanged and do not qualify beta.2. Run scripts/check-release-readiness.mjs for current hash checks."
 }

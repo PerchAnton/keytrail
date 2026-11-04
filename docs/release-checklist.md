@@ -1,5 +1,11 @@
 # First alpha release checklist
 
+**Current development: `0.1.0-beta.2` (unpublished).** The published version is
+[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
+The alpha and beta.1 results below are historical and do not qualify the current
+source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
+No new final series or publication is authorized by this document.
+
 This page records the `0.1.0-alpha.6` handoff. For the first beta candidate,
 see [the beta scope and release checks](releases/0.1.0-beta.1.md).
 
@@ -21,8 +27,8 @@ The release archive gate, owner sign-off and publication authorization remain se
 **Final reliability verified:** The frozen `1187fde` candidate completed **100 × 172 = 17,200** sequential test executions and **172** matching four-worker checks, with a **100 ms** limit and zero retries/skips. All 101 raw reports were independently validated. Development still defaults to four rounds. See the [protocol and retained results](reliability.md). Ordinary CI checks the real package and clean consumers without claiming final acceptance.
 
 Candidate: **0.1.0-alpha.6**, ruleset **0.4.0**, schema **1**. The earlier alpha
-numbers were source checkpoints, not published packages. This document prepares
-the first publication; it does not assert that a release exists.
+numbers were source checkpoints, not published packages. This section preserves
+the alpha handoff before the later beta.1 publication.
 
 ## Frozen candidate snapshot (`1187fde`)
 

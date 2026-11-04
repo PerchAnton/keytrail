@@ -1,5 +1,11 @@
 # Milestones
 
+**Current development: `0.1.0-beta.2` (unpublished).** The published version is
+[`0.1.0-beta.1`](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.1).
+The alpha and beta.1 results below are historical and do not qualify the current
+source. See [the beta.2 preparation and evidence status](releases/0.1.0-beta.2.md).
+No new final series or publication is authorized by this document.
+
 **Frozen candidate (31 October 2026): `1187fde`.**
 The [candidate/0.1.0-alpha.6 tag](https://github.com/PerchAnton/keytrail/tree/candidate/0.1.0-alpha.6)
 remains at this commit. [Candidate CI](https://github.com/PerchAnton/keytrail/actions/runs/41219489046)
@@ -17,7 +23,7 @@ The release archive gate, owner sign-off and publication authorization remain se
 
 The supplied development specification v1.0 (28 October 2026) defines a full 0.1.0
 target. This repository starts with its DEV01–DEV05 dialog checkpoint, designated
-`0.1.0-alpha.1`. The current `0.1.0-alpha.6` source candidate includes DEV09 verification
+`0.1.0-alpha.1`. The historical `0.1.0-alpha.6` source candidate included DEV09 verification
 and browser-read optimization, DEV10 examples, and the [release correctness audit](release-audit.md).
 These checkpoints are not full 0.1.0 acceptance.
 

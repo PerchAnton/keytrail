@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-beta.2 — unreleased
+
+- Retain grouped fresh locator reads and the extra-match, rebound and swapped-ID regressions.
+- Recognize all three cases in the strict reliability validator and validate real browser reports in CI.
+- Reconcile the published beta.1 history with main; retain its evidence as historical, and use the beta publication channel for the next candidate.
+- Final qualification and publication remain pending separate approval.
+
 ## 0.1.0-beta.1 — first beta candidate
 
 - Prepare dialogs, tabs and form recovery for trials in consumer projects.
