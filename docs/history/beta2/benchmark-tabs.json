@@ -1,0 +1,463 @@
+{
+  "version": "0.1.0-beta.2",
+  "sourceHashes": {
+    "benchmarks/manifests/dialog.json": "f82e636c87291fde4a4f45a42c0b717e68be28e8123e091702d746906eb59436",
+    "benchmarks/manifests/formErrors.json": "71c4810c36c04b09e2d86f3c72a28d743157594d010e63dc27a9db9e3aa25354",
+    "benchmarks/manifests/tabs.json": "bdac6daffce4ccbf1c030f0f1d1af959dda72dfe7acfb34bd89876ca2ea7b240",
+    "benchmarks/native-reference.ts": "d5619ca14626a3c052b9679ffc5de81be57b1d25c1c266aa3f6c537a4f17a2dc",
+    "benchmarks/performance.spec.ts": "f9a373f65b358daf16c4165a21ae2c15d3bbd2c823fd3102220c05fb639b2f68",
+    "benchmarks/playwright.config.ts": "d0b33dcbf7f603dbaa0848c433929cdc59123cbbb17fcde1adbdd4d24f0532f7",
+    "benchmarks/reporter.mjs": "d4584a0c9426eebb9d911e8f06ab6cd113a57065e17880b2255c060b404d9b2a",
+    "package.json": "2e2b8f41afbab8bc968807836f118fb053907d33bd14753dc6b96857b1097cf9",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
+    "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
+    "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "aa9eb724680e2d8310cc60a2a5af04e2cd49dce783e890d2f952d5da81f05ef1",
+    "src/browser/driver.ts": "edc87ddf15a427195a8273e65ccd216add885f91523aad0ac1cf5dac94ac86b6",
+    "src/browser/observation-store.ts": "af90ff30efddc1853c3f61258acc2ce58532c8524fe0723ba391472221522f43",
+    "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
+    "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
+    "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
+    "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
+    "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
+    "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
+    "src/engine/observation-window.ts": "5f165904842f33e170f6f8f38fd53789c3124b39a1149335430e1ecbd1bd46b9",
+    "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
+    "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
+    "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
+    "src/reporting/result.ts": "06bbe42cba6f4ff464d68c0a00ce181830b9c8724dfa72c934edf5907cb6a7f2",
+    "src/reporting/serialize.ts": "766736300eec0ab76e58fb935c4bdd95692d49e6fcb3c1bb1f363255e800e45d",
+    "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
+    "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
+    "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
+    "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
+    "src/version.ts": "eacd7b7414b19f63a81cf19dcdaa0f60a5006069028d0bbd004fd727462f7d51",
+    "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
+    "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
+    "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
+    "tests/guard/fault-reporter.mjs": "1d71672317608ea4356c94eb52a6c0c87942cd1b4f104efe87f90a278fc67391",
+    "tests/guard/fixture.spec.mjs": "d5cb1caf78222537f88196d69146827cff7e325f1f9b0fb841a98ca67314297b",
+    "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
+    "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
+    "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
+    "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
+    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
+    "tests/integration/observations.spec.ts": "3c1da9634cc221759b247b8cdd52662b4838d1f982a710d4188d145309f12dc1",
+    "tests/integration/tabs.spec.ts": "e7ef141fddb0cd5109ca5060ee854ceb7568d8a472d5cc678a407d5485c0bc7d",
+    "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
+    "tests/unit/reliability.test.mjs": "d5a8e5f1efb9fa14b1041a32aaf2da9ce5e3264fd4681398e758a001f8bc2426",
+    "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "2f3423a30f998d0ea65c7fca229296944c0f61952f0316c2a2f62fccbfdc8c97",
+    "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
+    "verification/modes.mjs": "848d9299c07aefd96a71c7deea61258a01737591d32f23f06b5065d4b0b2dc46",
+    "verification/signatures.mjs": "2702214e19b118817d96e3d6b6a28dce58540b64ae5db739ea806bd69b2a9816"
+  },
+  "startedAt": "2026-11-04T23:07:36.370Z",
+  "measuredAt": "2026-11-04T23:10:06.945Z",
+  "pilot": false,
+  "kind": "tabs",
+  "warmupsPerArm": 5,
+  "samplesPerArm": 30,
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "darwin",
+    "release": "27.2.0",
+    "arch": "arm64",
+    "cpu": "Apple M3",
+    "logicalCpus": 8,
+    "playwright": "1.64.1",
+    "chromium": "156.0.8078.4",
+    "workers": 1
+  },
+  "equivalence": {
+    "fixedManifest": true,
+    "actionAndCheckSignatures": true,
+    "negativeControl": "T05.forward.001.unchanged",
+    "reportSerialization": true,
+    "pageSetupAndTeardownExcluded": true,
+    "freshTestPerPair": true
+  },
+  "summary": {
+    "keytrail": {
+      "medianMs": 1565.5227085000006,
+      "p95Ms": 1614.128749999989
+    },
+    "native": {
+      "medianMs": 1664.7761460000038,
+      "p95Ms": 1691.252625000001
+    },
+    "pairedMedianOverheadPercent": -5.549285801461262,
+    "ratioOfMediansOverheadPercent": -5.961968985348676,
+    "targetMet": true
+  },
+  "pairs": [
+    {
+      "kind": "tabs",
+      "pair": 0,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1564.7785829999993,
+      "nativeMs": 1676.4237089999951,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 1,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1565.1737920000014,
+      "nativeMs": 1633.0783749999973,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 2,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1564.4137919999994,
+      "nativeMs": 1677.7532500000016,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 3,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1567.255624999998,
+      "nativeMs": 1624.7923749999973,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 4,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1564.6416250000038,
+      "nativeMs": 1675.7012499999983,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 5,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1565.8716249999998,
+      "nativeMs": 1651.7812919999997,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 6,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1560.2712919999976,
+      "nativeMs": 1691.252625000001,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 7,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1590.6734999999971,
+      "nativeMs": 1638.820749999999,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 8,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1561.138874999997,
+      "nativeMs": 1664.2356670000008,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 9,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1570.9733340000093,
+      "nativeMs": 1646.9945420000004,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 10,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1566.7281670000084,
+      "nativeMs": 1676.427708000003,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 11,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1563.546875,
+      "nativeMs": 1638.009665999998,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 12,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1562.6163749999978,
+      "nativeMs": 1666.8926670000073,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 13,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1565.8720830000093,
+      "nativeMs": 1635.7568750000064,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 14,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1568.531833000001,
+      "nativeMs": 1665.7267500000016,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 15,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1572.3008750000008,
+      "nativeMs": 1640.9393750000017,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 16,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1566.4042079999927,
+      "nativeMs": 1679.8165410000074,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 17,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1563.0720000000001,
+      "nativeMs": 1635.3334170000016,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 18,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1563.891374999992,
+      "nativeMs": 1665.3166250000068,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 19,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1563.1208750000078,
+      "nativeMs": 1638.9867499999964,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 20,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1562.815917,
+      "nativeMs": 1671.874250000008,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 21,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1566.738750000004,
+      "nativeMs": 1636.4496250000084,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 22,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1560.8736670000071,
+      "nativeMs": 1685.457917000007,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 23,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1573.598915999988,
+      "nativeMs": 1661.028582999992,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 24,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1563.0252920000057,
+      "nativeMs": 1671.9567499999976,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 25,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1592.8271249999962,
+      "nativeMs": 1647.7625419999968,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 26,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1614.128749999989,
+      "nativeMs": 1801.7268750000076,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 27,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1575.1904170000053,
+      "nativeMs": 1643.2959589999955,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 28,
+      "warmup": false,
+      "order": [
+        "keytrail",
+        "native"
+      ],
+      "keytrailMs": 1563.797041999991,
+      "nativeMs": 1671.1629170000087,
+      "chromium": "156.0.8078.4"
+    },
+    {
+      "kind": "tabs",
+      "pair": 29,
+      "warmup": false,
+      "order": [
+        "native",
+        "keytrail"
+      ],
+      "keytrailMs": 1664.0726250000007,
+      "nativeMs": 1675.5112089999893,
+      "chromium": "156.0.8078.4"
+    }
+  ]
+}

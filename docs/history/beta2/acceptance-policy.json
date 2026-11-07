@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0-beta.2",
+  "decisionDate": "2026-11-05",
+  "referenceTargetRounds": 10,
+  "minimumCompletedRounds": 10,
+  "seriesIdentity": "2900580925b456fd0e912349665abc58cca56b34af2eb1e8c11ea841d120eaea",
+  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "reason": "All ten complete rounds and the four-worker comparison passed on this source. The validation record inventories the eleven raw reports."
+}

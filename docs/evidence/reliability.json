@@ -1,20 +1,20 @@
 {
   "package": "keytrail",
-  "version": "0.1.0-beta.2",
-  "startedAt": "2026-11-04T23:10:07.494Z",
-  "identity": "2900580925b456fd0e912349665abc58cca56b34af2eb1e8c11ea841d120eaea",
+  "version": "0.1.0",
+  "startedAt": "2026-11-07T19:42:32.910Z",
+  "identity": "1a42b55f244820c4ed909720acf6f19c657691a266b4770e24e41c698fb41148",
   "environment": {
     "node": "24.22.1",
     "platform": "darwin",
     "release": "27.2.0",
     "arch": "arm64",
-    "cpu": "Apple M3",
+    "cpu": "Apple M4",
     "logicalCpus": 8,
     "playwright": "1.64.1",
     "chromium": "156.0.8078.4"
   },
   "sourceHashes": {
-    "package.json": "2e2b8f41afbab8bc968807836f118fb053907d33bd14753dc6b96857b1097cf9",
+    "package.json": "b29ae7ffecfe80a49890b4a54a378dfa68484fb24c71fed24a498c01ccb425c1",
     "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
@@ -39,7 +39,7 @@
     "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
     "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
     "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
-    "src/version.ts": "eacd7b7414b19f63a81cf19dcdaa0f60a5006069028d0bbd004fd727462f7d51",
+    "src/version.ts": "adacec0bf403bcf0cecb839676536541ea024e0fb56d792358d977420a41bdd4",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
@@ -61,9 +61,9 @@
     "tests/unit/reliability.test.mjs": "d5a8e5f1efb9fa14b1041a32aaf2da9ce5e3264fd4681398e758a001f8bc2426",
     "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
     "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
-    "tests/unit/verification-modes.test.mjs": "2f3423a30f998d0ea65c7fca229296944c0f61952f0316c2a2f62fccbfdc8c97",
+    "tests/unit/verification-modes.test.mjs": "3c22f98cf9596ea3654d325652d07e0b2f68de0bffa9a4475b13da1b8f837adb",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
-    "verification/modes.mjs": "848d9299c07aefd96a71c7deea61258a01737591d32f23f06b5065d4b0b2dc46",
+    "verification/modes.mjs": "922d3ac3076b1b2a470d2a2990a432a78eec5a850702176ec759998626d6a995",
     "verification/signatures.mjs": "2702214e19b118817d96e3d6b6a28dce58540b64ae5db739ea806bd69b2a9816"
   },
   "mode": "final",
@@ -78,80 +78,80 @@
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 150087.838
+      "durationMs": 148965.104
     },
     {
       "round": 2,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 149772.694
+      "durationMs": 148648.448
     },
     {
       "round": 3,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 149670.33899999998
+      "durationMs": 147950.78900000002
     },
     {
       "round": 4,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 149771.803
+      "durationMs": 147795.142
     },
     {
       "round": 5,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 149721.108
+      "durationMs": 148442.15899999999
     },
     {
       "round": 6,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 150541.894
+      "durationMs": 147570.64
     },
     {
       "round": 7,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 150108.713
+      "durationMs": 147912.392
     },
     {
       "round": 8,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 150054.513
+      "durationMs": 147549.041
     },
     {
       "round": 9,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 149892.431
+      "durationMs": 147083.76299999998
     },
     {
       "round": 10,
       "tests": 180,
       "passed": 180,
       "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 151709.776
+      "durationMs": 147536.145
     }
   ],
-  "lastCompletedAt": "2026-11-04T23:35:11.775Z",
+  "lastCompletedAt": "2026-11-07T20:07:15.124Z",
   "parallel": {
     "workers": 4,
     "passed": 180,
     "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-    "durationMs": 43396.119999999995
+    "durationMs": 42798.595
   },
-  "finishedAt": "2026-11-04T23:35:55.470Z",
+  "finishedAt": "2026-11-07T20:07:58.191Z",
   "caseCount": 180,
   "totalSequentialExecutions": 1800,
   "uniqueJourneyRunIds": 1771,

@@ -1,4 +1,21 @@
-# First alpha release checklist
+# Release checklist
+
+## Non-prerelease 0.1.0
+
+The current candidate is tracked in [PR #23](https://github.com/PerchAnton/keytrail/pull/23).
+The stable policy retains ten complete final rounds, a separate four-worker
+comparison, zero retries/skips and the 100 ms observation limit. This candidate
+has new version/verification inputs and must have its own evidence; historical
+beta.2 records below do not certify it. Use `check-release-readiness.mjs` and the
+exact `check-package.mjs --release` consumer gate after recording the new results.
+
+Publish a normal GitHub release only after qualification. npm publication is a
+separate step: preserve the exact archive
+and checksum, and keep npm publication pending until registry readback and a clean
+install pass. A stable npm publication uses `latest`, leaving `beta` unchanged.
+See [the compatibility and support policy](stability.md).
+
+## Historical alpha/beta qualification
 
 **Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 

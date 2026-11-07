@@ -7,7 +7,11 @@ showing the first mismatch and the observations that could not run.
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
 [Dialog API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/api.md) · [Tabs API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/tabs.md) · [Form errors API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/form-errors.md) · [CI guard](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/ci-guard.md) · [Read reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/reports.md) · [Limits](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/limits.md) · [Performance](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/performance.md) · [Release checklist](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/release-checklist.md)
 
-**Try the published beta in an existing Playwright project** (Node.js 24 and Chromium).
+**Try KeyTrail in an existing Playwright project** (Node.js 24 and Chromium).
+
+The 0.1.0 release archive is qualified separately from npm publication. Until
+0.1.0 appears in npm, install the published beta below or download the exact
+0.1.0 archive from the GitHub release and verify its SHA256SUMS.
 
 ```sh
 npm install --save-dev --save-exact keytrail@0.1.0-beta.2 @playwright/test@1.64.1
@@ -25,6 +29,11 @@ it to see which makes the failure easier to diagnose.
 [Published npm package](https://www.npmjs.com/package/keytrail/v/0.1.0-beta.2) ·
 [Release archive and checksum](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.2) ·
 [Independent validation of the beta's 11 reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/evidence/reliability-validation-fd8f58a.json).
+
+The 0.1.0 candidate preserves beta.2 runtime behavior apart from package-version metadata.
+It passed its own 1,800 sequential checks and 180 four-worker checks, with zero
+retries/skips. npm publication is pending. [0.1.0 evidence and migration](docs/releases/0.1.0.md) ·
+[Compatibility and support](docs/stability.md).
 
 Beta.2 combines repeated manual-tab observations in one fresh request and checks the actual report in CI. [Release notes and qualification](docs/releases/0.1.0-beta.2.md).
 
@@ -177,6 +186,10 @@ replace axe-core, manual testing or your component tests. It has no dependency o
 our separate interaction-check, edit-session or RefMint projects.
 
 ## Development and evidence
+
+The 0.1.0 source `85cee8c` completed its own ten-round final series and a separate
+four-worker comparison. [Validation and raw report checksums](docs/evidence/reliability-validation-85cee8c.json).
+Historical alpha/beta results below retain their original identities.
 
 From **0.1.0-beta.2**, final qualification requires **10 complete sequential rounds** on one frozen source, plus a separate matching four-worker run. Retries stay disabled and the observation-gap limit stays at **100 ms**. The four ordinary CI jobs are development evidence; they do not count toward the ten. See the [beta protocol](docs/reliability.md#default-protocol).
 

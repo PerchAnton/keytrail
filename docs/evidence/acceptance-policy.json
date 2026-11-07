@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0-beta.2",
-  "decisionDate": "2026-11-05",
+  "version": "0.1.0",
+  "decisionDate": "2026-11-07",
   "referenceTargetRounds": 10,
   "minimumCompletedRounds": 10,
-  "seriesIdentity": "2900580925b456fd0e912349665abc58cca56b34af2eb1e8c11ea841d120eaea",
-  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
-  "reason": "All ten complete rounds and the four-worker comparison passed on this source. The validation record inventories the eleven raw reports."
+  "seriesIdentity": "1a42b55f244820c4ed909720acf6f19c657691a266b4770e24e41c698fb41148",
+  "sourceCommit": "85cee8c7cc2180e90ac553cfcfc839d049c56601",
+  "reason": "This stable candidate completed its own ten final rounds plus the separate four-worker comparison; beta.2 proof remains in docs/history/beta2."
 }

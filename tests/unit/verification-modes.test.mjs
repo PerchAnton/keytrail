@@ -17,7 +17,7 @@ test('development runs four rounds without writing final acceptance evidence', (
   assert.throws(() => reliabilityMode(['--rounds=100']));
 });
 
-test('the recorded beta policies agree with the final and development verifier modes', () => {
+test('the recorded policies agree with the final and development verifier modes', () => {
   const acceptance = read('../../docs/evidence/acceptance-policy.json');
   const development = read('../../docs/evidence/development-policy.json');
   const final = reliabilityMode(['--final'], version);
@@ -26,7 +26,7 @@ test('the recorded beta policies agree with the final and development verifier m
   assert.equal(acceptance.minimumCompletedRounds, final.rounds);
   assert.equal(development.finalAcceptanceRounds, final.rounds);
   assert.equal(development.developmentRounds, reliabilityMode([]).rounds);
-  assert.throws(() => reliabilityMode(['--final'], '0.1.0-alpha.6'), /No beta final policy/);
+  assert.throws(() => reliabilityMode(['--final'], '0.1.0-alpha.6'), /No final acceptance policy/);
 });
 
 test('a short or legacy series cannot resume as a final series', () => {
@@ -46,4 +46,13 @@ test('package final acceptance requires an explicit release option', () => {
   assert.equal(packageMode(['--release']), 'release');
   assert.throws(() => packageMode(['--release', '--development']));
   assert.throws(() => packageMode(['--relase']));
+});
+
+test('stable and beta versions retain ten final rounds and reject unsupported labels', () => {
+  for (const v of ['0.1.0', '1.0.0', '0.1.0-beta.2']) {
+    assert.equal(reliabilityMode(['--final'], v).rounds, 10);
+  }
+  for (const v of ['0.1.0-alpha.6', '0.1.0-rc.1', '01.0.0', '0.1.0-beta.02', '0.1.0+build', '0.1.0\n']) {
+    assert.throws(() => reliabilityMode(['--final'], v), /No final acceptance policy/);
+  }
 });

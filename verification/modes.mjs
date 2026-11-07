@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 
-// Current beta policy only. Historical candidates retain the policy on their tag.
+// Beta and non-prerelease candidates require the same ten rounds. Historical
+// candidates retain the policy on their tag.
 export function betaFinalRounds(version) {
-  assert.match(version, /^\d+\.\d+\.\d+-beta\.\d+$/, 'No beta final policy for this package version');
+  assert.match(version, /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-beta\.(?:0|[1-9]\d*))?$(?![\s\S])/, 'No final acceptance policy for this package version');
   return 10;
 }
 

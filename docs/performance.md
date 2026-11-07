@@ -1,5 +1,21 @@
 # Equivalent-work benchmark
 
+## 0.1.0 measurements on `85cee8c`
+
+All 108 checks passed on Apple M4/macOS ARM, Node 24.22.1 and Chromium 156.0.8078.4.
+Each synthetic workload used five warmups and thirty alternating measured pairs,
+plus a defect control. Both overhead calculations met the unchanged 20% bound.
+
+| Workload | KeyTrail median (ms) | Native median (ms) | Median paired overhead | Ratio of medians |
+| --- | ---: | ---: | ---: | ---: |
+| dialog | 121.4 | 130.9 | -7.6% | -7.3% |
+| tabs | 1539.5 | 1606.3 | -4.7% | -4.2% |
+| formErrors | 114.3 | 127.9 | -10.7% | -10.7% |
+
+[Raw-report validation](evidence/benchmark-validation-85cee8c.json).
+These samples do not establish a general speed advantage, real-world adoption
+or future shared-runner reliability. Earlier measurements below remain historical.
+
 **Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 
 ## Beta.2 measurements on `fd8f58a`

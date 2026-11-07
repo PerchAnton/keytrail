@@ -1,31 +1,37 @@
 {
-  "recordedAt": "2026-11-04T23:36:09.274Z",
   "package": "keytrail",
-  "version": "0.1.0-beta.2",
-  "status": "final-evidence-verified",
-  "releaseReady": false,
-  "published": false,
-  "finalAcceptance": true,
-  "historicalRelease": {
-    "version": "0.1.0-beta.1",
-    "tag": "v0.1.0-beta.1",
-    "commit": "ae553d6122e40281cb52bd3c4986a71ab17c68d7",
-    "qualifiedSource": "f775b308382b37f50bdeeb63b2d92b45878ad048",
-    "record": "../history/release-readiness-beta1.json"
-  },
-  "remaining": [
-    "Verify and retain the exact release archive, install it from npm, and publish its receipt."
+  "version": "0.1.0",
+  "evidenceReady": true,
+  "checks": [
+    {
+      "id": "acceptance-policy",
+      "status": "passed"
+    },
+    {
+      "id": "reliability",
+      "status": "passed"
+    },
+    {
+      "id": "benchmark-dialog",
+      "status": "passed"
+    },
+    {
+      "id": "benchmark-tabs",
+      "status": "passed"
+    },
+    {
+      "id": "benchmark-formErrors",
+      "status": "passed"
+    },
+    {
+      "id": "ci-guard",
+      "status": "passed"
+    }
   ],
-  "note": "This snapshot records the evidence before packing. The GitHub release supplies the archive checksum and the registry installation receipt.",
-  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
-  "fullRounds": 10,
-  "sequentialExecutions": 1800,
-  "fourWorkerExecutions": 180,
-  "rawReports": 11,
-  "distinctJourneyIds": 1771,
-  "benchmarkTests": 108,
-  "guardCases": 52,
-  "retries": 0,
-  "observationGapLimitMs": 100,
-  "independentValidation": "reliability-validation-fd8f58a.json"
+  "scope": "Saved final evidence only. No tests, builds, file writes or publication.",
+  "remaining": [
+    "Confirm the selected candidate identity and retain its independently validated raw final reports.",
+    "Pass node scripts/check-package.mjs --release and preserve the exact verified archive.",
+    "Complete owner review and confirm registry access and publication authorization."
+  ]
 }

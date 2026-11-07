@@ -1,4 +1,10 @@
-# Review the first release candidate
+# Release handoff
+
+For the current 0.1.0 candidate, use the [release checklist](release-checklist.md#non-prerelease-010)
+and [support/compatibility policy](stability.md). The alpha/beta material below is
+historical and does not approve a new archive or assign an old checksum to it.
+
+## Historical first release candidate
 
 **Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 
