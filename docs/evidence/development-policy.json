@@ -1,16 +1,20 @@
 {
-  "decisionDate": "2026-11-05",
+  "decisionDate": "2026-11-07",
   "developmentRounds": 4,
   "finalAcceptanceRounds": 10,
   "finalAcceptanceDeferred": false,
   "defaultWorkers": 1,
   "isolationWorkers": 4,
   "retries": 0,
-  "reason": "Development uses four rounds. Beta.2 completed its separate ten-round final series.",
-  "finalAcceptanceSourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+  "reason": "Development remains four rounds. The 0.1.0 frozen source completed its own ten-round final series.",
+  "finalAcceptanceSourceCommit": "85cee8c7cc2180e90ac553cfcfc839d049c56601",
   "finalAcceptanceRecord": "reliability.json",
   "historicalBeta1": {
     "sourceCommit": "f775b308382b37f50bdeeb63b2d92b45878ad048",
     "record": "https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.1/docs/evidence/reliability.json"
+  },
+  "historicalBeta2": {
+    "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
+    "record": "../history/beta2/reliability.json"
   }
 }

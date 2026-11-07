@@ -3,7 +3,7 @@
   "decisionDate": "2026-11-07",
   "referenceTargetRounds": 10,
   "minimumCompletedRounds": 10,
-  "seriesIdentity": null,
-  "sourceCommit": null,
-  "reason": "New stable candidate pending its own ten-round final series. Beta.2 proof is preserved in docs/history/beta2."
+  "seriesIdentity": "1a42b55f244820c4ed909720acf6f19c657691a266b4770e24e41c698fb41148",
+  "sourceCommit": "85cee8c7cc2180e90ac553cfcfc839d049c56601",
+  "reason": "This stable candidate completed its own ten final rounds plus the separate four-worker comparison; beta.2 proof remains in docs/history/beta2."
 }

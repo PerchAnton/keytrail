@@ -1,0 +1,53 @@
+{
+  "version": "0.1.0",
+  "sourceCommit": "85cee8c7cc2180e90ac553cfcfc839d049c56601",
+  "rawReportSha256": "20153cbf804f5bf367154ded0dcad52ed660f605ab884614aacf5fe386066ae7",
+  "tests": 108,
+  "retries": 0,
+  "skips": 0,
+  "rawPairsMatchSavedRecords": true,
+  "warmupsPerArm": 5,
+  "measuredPairsPerWorkload": 30,
+  "negativeControls": 3,
+  "summaries": {
+    "dialog": {
+      "keytrail": {
+        "medianMs": 121.40752049999901,
+        "p95Ms": 130.4582500000006
+      },
+      "native": {
+        "medianMs": 130.933583,
+        "p95Ms": 138.39749999999913
+      },
+      "pairedMedianOverheadPercent": -7.641920930315655,
+      "ratioOfMediansOverheadPercent": -7.275492109614834,
+      "targetMet": true
+    },
+    "tabs": {
+      "keytrail": {
+        "medianMs": 1539.4627295000028,
+        "p95Ms": 1612.4501669999881
+      },
+      "native": {
+        "medianMs": 1606.2599169999994,
+        "p95Ms": 1704.1659589999908
+      },
+      "pairedMedianOverheadPercent": -4.657173901053152,
+      "ratioOfMediansOverheadPercent": -4.158554091591437,
+      "targetMet": true
+    },
+    "formErrors": {
+      "keytrail": {
+        "medianMs": 114.30487500000163,
+        "p95Ms": 119.7410830000008
+      },
+      "native": {
+        "medianMs": 127.93941650001216,
+        "p95Ms": 136.05858300000546
+      },
+      "pairedMedianOverheadPercent": -10.6597191311323,
+      "ratioOfMediansOverheadPercent": -10.657029610580748,
+      "targetMet": true
+    }
+  }
+}

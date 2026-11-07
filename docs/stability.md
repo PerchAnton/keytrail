@@ -30,4 +30,4 @@ Playwright tests remain useful; these checks do not certify accessibility.
 Publish the exact qualified archive with npm's latest tag and a GitHub release
 with prerelease=false. Preserve the beta tag and older release assets. Verify
 registry bytes and a clean install before claiming publication. No workflow
-publishes automatically; the owner authorized this release on 7 November 2026.
+publishes automatically.

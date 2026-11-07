@@ -1,5 +1,11 @@
 # Full-suite repeatability protocol
 
+**0.1.0 qualification.** Frozen source `85cee8c` completed 10 × 180 sequential
+executions and 180 matching four-worker checks, with zero retries/skips and
+1,771 distinct journey IDs. The observation-gap bound remains 100 ms.
+[Current proof](evidence/reliability.json) · [Independent raw-report validation](evidence/reliability-validation-85cee8c.json).
+These fixture runs do not guarantee future shared-runner scheduling.
+
 **Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 
 From beta.2, the final target is **10 complete sequential rounds** on the same frozen source and environment, followed by a separate matching four-worker run. The 100 ms limit and zero retries are unchanged. The four ordinary CI allocations are development evidence and are not part of the final series.

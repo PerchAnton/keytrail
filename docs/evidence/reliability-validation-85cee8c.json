@@ -1,0 +1,94 @@
+{
+  "version": "0.1.0",
+  "sourceCommit": "85cee8c",
+  "checkedAt": "2026-11-07T20:12:49.526Z",
+  "scope": "Independent reread of all raw files, checksum inventory and structural checks; repository schema/signature validator also applied.",
+  "sequentialRounds": 10,
+  "sequentialExecutions": 1800,
+  "parallelExecutions": 180,
+  "uniqueJourneyRunIds": 1771,
+  "retries": 0,
+  "skips": 0,
+  "highestPassingObservationGapMs": 51.60000000009313,
+  "observationGapLimitMs": 100,
+  "semanticResultsMatch": true,
+  "records": [
+    {
+      "file": "round-001.json",
+      "sha256": "be77e9197ef558824af452db46e6257410646d0e7cf925b0a6db45fe4afb71fe",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-002.json",
+      "sha256": "493bddfd721693643c19eadcad363532017524fe6b38f5385b3ebb3d763848ab",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-003.json",
+      "sha256": "75aa5c4e9c621c36270482f10bc62f8accbce9e888ec287d08499ceaa16ba95e",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-004.json",
+      "sha256": "d1277a5656fb0b44155713037310f78a9901e22ca29c904e9ea76431fa29418c",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-005.json",
+      "sha256": "fa3f3b017e3efe05f80eacef55923bacd6250ece5c7f25a30737c6f1dc827534",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-006.json",
+      "sha256": "c21129d5bf3f030f388e12620a62b4f8c7ad834d383b7b09e1d575b02d6229f3",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-007.json",
+      "sha256": "6c7cdf1f6020685c8cbc716d23ef9b527d5575e1ed8d706ba308c60f3345db18",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-008.json",
+      "sha256": "3c87570b9892f579d7bafcafbb66cd67c91a32b32eb42def0808bdcef4752b4a",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-009.json",
+      "sha256": "bf8a4bf144545cdcc2b33ee7fe202bb8470d2fa7f328f69d7173c76ce0dc8162",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "round-010.json",
+      "sha256": "ca5461a79354b9634dfc82059e03da059ae9e92add5f2746b9cfebb2202ad7ad",
+      "tests": 180,
+      "workers": 1,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    },
+    {
+      "file": "workers4.json",
+      "sha256": "f6b175b18f27efba979390526417ece8cc812c15986e48edbc504a09a5895fb4",
+      "tests": 180,
+      "workers": 4,
+      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e"
+    }
+  ]
+}
