@@ -7,10 +7,10 @@ showing the first mismatch and the observations that could not run.
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
 [Dialog API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/api.md) · [Tabs API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/tabs.md) · [Form errors API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/form-errors.md) · [CI guard](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/ci-guard.md) · [Read reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/reports.md) · [Limits](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/limits.md) · [Performance](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/performance.md) · [Release checklist](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/release-checklist.md)
 
-**Try the published beta in an existing Playwright project** (Node.js 24 and Chromium).
+**Try the 0.1.0 candidate in an existing Playwright project** (Node.js 24 and Chromium).
 
 ```sh
-npm install --save-dev --save-exact keytrail@0.1.0-beta.2 @playwright/test@1.64.1
+npm install --save-dev --save-exact keytrail@0.1.0 @playwright/test@1.64.1
 ```
 
 Start with a dialog where the keyboard focus matters. The
@@ -25,6 +25,9 @@ it to see which makes the failure easier to diagnose.
 [Published npm package](https://www.npmjs.com/package/keytrail/v/0.1.0-beta.2) ·
 [Release archive and checksum](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.2) ·
 [Independent validation of the beta's 11 reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/evidence/reliability-validation-fd8f58a.json).
+
+The 0.1.0 candidate preserves beta.2 runtime behavior apart from package-version metadata.
+Its own final acceptance and registry publication are pending. [Compatibility and support](docs/stability.md).
 
 Beta.2 combines repeated manual-tab observations in one fresh request and checks the actual report in CI. [Release notes and qualification](docs/releases/0.1.0-beta.2.md).
 

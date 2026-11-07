@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0
+
+- First non-prerelease candidate, with 0.1.x compatibility and support policy.
+- Accept stable versions in final verification without reducing ten rounds,
+  four-worker comparison, zero retries or the 100 ms observation bound.
+- Preserve runtime behavior, result schema 1 and ruleset 0.4.0 from beta.2.
+  Package-version metadata changes; publication requires fresh candidate evidence.
+
 ## 0.1.0-beta.2
 
 - Set final beta qualification to ten sequential full-suite rounds plus a matching four-worker comparison. Keep the 100 ms bound, zero retries and all source and package checks. The recorded alpha and beta.1 series remain historical.

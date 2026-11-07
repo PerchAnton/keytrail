@@ -13,7 +13,7 @@ const inputs = new URL('../../verification/inputs.mjs', import.meta.url).href;
 const hash = value => createHash('sha256').update(value).digest('hex');
 const json = async (root, file, value) => writeFile(join(root, file), JSON.stringify(value));
 
-async function fixture(t) {
+async function fixture(t, version = '0.1.0-beta.2') {
   const root = await mkdtemp(join(tmpdir(), 'keytrail-release-gate-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   for (const dir of ['src', 'tests/guard', 'verification', 'benchmarks', 'schema', 'scripts', 'docs/evidence', 'artifacts']) {
@@ -23,10 +23,10 @@ async function fixture(t) {
   for (const file of ['src/example.ts', 'tests/guard/fixture.mjs', 'pnpm-lock.yaml', 'playwright.config.ts', 'schema/journey-result.v1.json', 'scripts/build.mjs', 'scripts/check-guard.mjs', 'scripts/verify-reliability.mjs']) {
     await writeFile(join(root, file), 'synthetic fixture\n');
   }
-  await json(root, 'package.json', { name: 'keytrail', version: '0.1.0-beta.2' });
+  await json(root, 'package.json', { name: 'keytrail', version });
   const hashes = spawnSync(process.execPath, ['--input-type=module', '-e', `import { inputHashes } from ${JSON.stringify(inputs)}; console.log(JSON.stringify(await inputHashes()))`], { cwd: root, encoding: 'utf8' });
   assert.equal(hashes.status, 0, hashes.stderr);
-  const sourceHashes = JSON.parse(hashes.stdout), version = '0.1.0-beta.2';
+  const sourceHashes = JSON.parse(hashes.stdout);
   const cases = [{ id: 'synthetic-case' }], signature = hash(JSON.stringify(cases));
   const identity = 'a'.repeat(64);
   await json(root, 'docs/evidence/acceptance-policy.json', { version, seriesIdentity: identity, minimumCompletedRounds: 10, referenceTargetRounds: 10 });
@@ -147,4 +147,11 @@ test('unknown options fail without changing files', async t => {
   const root = await fixture(t), before = await snapshot(root), result = run(root, ['--final']);
   assert.equal(result.status, 2); assert.match(result.stderr, /Usage:/);
   assert.deepEqual(await snapshot(root), before);
+});
+
+test('stable readiness requires all ten rounds and matching source hashes', async t => {
+  const root = await fixture(t, '0.1.0');
+  assert.equal(run(root).status, 0);
+  await change(root, 'reliability', e => { e.rounds.pop(); e.totalSequentialExecutions = 9; });
+  assert.equal(run(root).status, 1);
 });
