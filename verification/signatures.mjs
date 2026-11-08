@@ -24,6 +24,10 @@ const engineCases = new Set([
   'grouped manual reads detect added-role without DOM mutations',
   'grouped manual reads reject mutations between resolution and the atomic callback',
 ]);
+// The same exact binding/mutation regressions cover both observation scopes.
+for (const name of [...engineCases]) if (name.startsWith('grouped manual reads ')) {
+  engineCases.add(name.replace('grouped manual reads ', 'grouped complete reads '));
+}
 /** Normalize only UUID/time and measured windows; keep semantic observations and actions. */
 export function inspectReport(report, workers, seenRunIds = new Set(), environment) {
   assert.equal(report.config.workers, workers, 'WORKER_COUNT');

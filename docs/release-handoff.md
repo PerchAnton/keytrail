@@ -1,5 +1,8 @@
 # Release handoff
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
 0.1.0 is published on npm under `latest`; [the registry receipt](evidence/npm-0.1.0.json)
 confirms exact bytes and both clean consumers. See the [release checklist](release-checklist.md#non-prerelease-010)
 and [support/compatibility policy](stability.md). The alpha/beta material below is

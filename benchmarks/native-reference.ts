@@ -81,6 +81,16 @@ function createNativeStore(requests: Record<'complete' | 'interaction', NativeRe
     } finally { registry.clear(); }
   };
   return Object.assign(registry, {
+    registerTargets(nodes: Element[], targets: { slot: string; selector: string }[], scope: 'complete' | 'interaction') {
+      const counts = targets.map(target => {
+        const matches = nodes.filter(node => node.matches(target.selector));
+        registry.set(target.slot, matches);
+        return matches.length;
+      });
+      const request = requests[scope];
+      return { count: nodes.length, counts,
+        state: registry.size === request.slots.length + Object.keys(request.roleSlots).length ? read(request) : null };
+    },
     register(nodes: Element[], slot: string, scope: 'complete' | 'interaction') {
       registry.set(slot, nodes);
       const request = requests[scope];
@@ -115,7 +125,14 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     if (performance.now() - started >= config.scenarioTimeoutMs) throw new NativeFailure('SCENARIO_TIMEOUT');
   };
   const remaining = () => { guard(); return Math.max(1, Math.min(config.timeoutMs, config.scenarioTimeoutMs - (performance.now() - started))); };
-  const targets = manifest.targets.map(t => ({ id: t.id, locator: page.locator(t.selector) }));
+  // These independent fixture manifests contain only simple CSS ID selectors,
+  // optionally qualified by a tag. Resolve their union once per reading; use
+  // Element.matches to retain each exact slot and duplicate/missing counts.
+  assert(manifest.targets.every(t => /^(?:[a-z][a-z0-9-]*)?#[A-Za-z][A-Za-z0-9_-]*$/.test(t.selector)), 'NATIVE_FIXTURE_SELECTOR');
+  const targetQuery = page.locator(manifest.targets.map(t => t.selector).join(','));
+  const targetSlots = manifest.targets.map(t => ({ slot: `target:${t.id}`, selector: t.selector }));
+  const targets = manifest.targets;
+
   const plan = (semantics: boolean) => {
     const roleQueries = [
       ['dialog', page.getByRole('dialog', { includeHidden: true })],
@@ -143,7 +160,7 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     store ??= await page.evaluateHandle(createNativeStore, { complete: plans.complete.request, interaction: plans.interaction.request });
     const registry = store;
     let readFinished = false;
-    const resolve = async (locator: typeof targets[number]['locator'], slot: string) => {
+    const resolve = async (locator: import('@playwright/test').Locator, slot: string) => {
       guard();
       if (locator.page() !== page) throw new NativeFailure('UNSUPPORTED_CONTEXT');
       let response: ReturnType<ReturnType<typeof createNativeStore>['register']>;
@@ -162,13 +179,25 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     try {
       // The fixture reference independently uses a private registry, fresh
       // locator resolution and atomic cleanup, matching the measured work.
-      const targetReads = Promise.allSettled(targets.map(async t => {
-        const slot = `target:${t.id}`, response = await resolve(t.locator, slot);
-        if (response.count > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
-        return response;
-      }));
-      const roleReads = Promise.allSettled(plans[scope].roleQueries.map(([name, locator]) => resolve(locator, `role:${name}`)));
-      const [reads, rolesRead] = await Promise.all([targetReads, roleReads]);
+      // Start transport requests from a short stack, as a standalone native
+      // test can do. Playwright formats each request's stack; retaining the
+      // entire async journey adds unrelated host work to every observation.
+      // No timer, cached binding or relaxed observation limit is introduced.
+      type Responses = PromiseSettledResult<Awaited<ReturnType<typeof resolve>>>[];
+      const [reads, rolesRead] = await new Promise<[Responses, Responses]>(done => {
+        queueMicrotask(() => {
+          const targetReads = Promise.allSettled([(async () => {
+            guard();
+            const response = await targetQuery.evaluateAll((nodes, { registry, targets, scope }) =>
+              registry.registerTargets(nodes, targets, scope), { registry, targets: targetSlots, scope });
+            guard();
+            if (response.counts.some(count => count > 1)) throw new NativeFailure('TARGET_AMBIGUOUS');
+            return response;
+          })()]);
+          const roleReads = Promise.allSettled(plans[scope].roleQueries.map(([name, locator]) => resolve(locator, `role:${name}`)));
+          void Promise.all([targetReads, roleReads]).then(done);
+        });
+      });
       const rejected = reads.find(r => r.status === 'rejected');
       if (rejected?.status === 'rejected') throw rejected.reason;
       const roleFailure = rolesRead.find(r => r.status === 'rejected');

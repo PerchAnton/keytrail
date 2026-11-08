@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0 — unreleased
+
+- Define the 1.x API, schema, ruleset and environment compatibility commitment.
+- Preserve documented journey behavior, schema 1, ruleset 0.4.0 and the 100 ms observation bound.
+- Group complete live observations as well as manual-tab reads, retaining mutation and membership guards; add eight complete-read regressions.
+- Reduce independent native benchmark target-query and stack-formatting overhead.
+- Keep old qualification historical; final acceptance for this candidate is pending.
+
 ## 0.1.0
 
 - First non-prerelease, with 0.1.x compatibility and support policy.

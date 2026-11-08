@@ -1,5 +1,8 @@
 # Milestones
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
 **Beta.2 qualification.** Source `fd8f58a` completed ten rounds of 180 tests and the separate 180-test four-worker comparison. All eleven raw reports matched, with 1,771 distinct journey IDs and zero retries. [Beta.2 release notes](releases/0.1.0-beta.2.md) · [Independent validation](evidence/reliability-validation-fd8f58a.json).
 
 **Frozen candidate (31 October 2026): `1187fde`.**

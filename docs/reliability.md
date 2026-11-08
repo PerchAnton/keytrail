@@ -1,5 +1,8 @@
 # Full-suite repeatability protocol
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
 **0.1.0 qualification.** Frozen source `85cee8c` completed 10 × 180 sequential
 executions and 180 matching four-worker checks, with zero retries/skips and
 1,771 distinct journey IDs. The observation-gap bound remains 100 ms.

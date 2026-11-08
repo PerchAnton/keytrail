@@ -67,3 +67,13 @@ test('known engine cases still reject retries and unexpected journey attachments
   attachment.suites[0].specs[0].tests[0].results[0].attachments = [{ name: 'journey-result.json' }];
   assert.throws(() => inspectReport(attachment, 1), /ENGINE_ATTACHMENT/);
 });
+
+test('reliability accepts every complete-read regression and rejects an unknown variant', () => {
+  for (const suffix of [
+    'resolve the original locator after extra-match', 'resolve the original locator after rebound',
+    'resolve the original locator after swapped-ids', 'resolve targets and roles in one fresh request',
+    'detect missing-target without DOM mutations', 'detect missing-role without DOM mutations',
+    'detect added-role without DOM mutations', 'reject mutations between resolution and the atomic callback',
+  ]) assert.equal(inspectReport(engineFixture(`grouped complete reads ${suffix}`), 1)[0].kind, 'engine-observation');
+  assert.throws(() => inspectReport(engineFixture('grouped complete reads resolve the original locator after unknown'), 1), /UNRECOGNIZED_ENGINE_CASE/);
+});

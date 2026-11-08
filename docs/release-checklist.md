@@ -1,5 +1,8 @@
 # Release checklist
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
 ## Non-prerelease 0.1.0
 
 [PR #23](https://github.com/PerchAnton/keytrail/pull/23) is merged. The exact qualified

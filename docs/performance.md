@@ -1,5 +1,34 @@
 # Equivalent-work benchmark
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
+## 1.0.0 qualification in progress
+
+Three complete benchmark attempts on 8 November were rejected (105/108,
+106/108 and 106/108). Manual-tab observation gaps exceeded 100 ms. Failed
+samples are preserved and excluded from performance claims, not replaced individually.
+
+Diagnostic CPU profiles identified stack-formatting work in the reference's
+Playwright transport calls. Short-stack dispatch reduced that work but did not
+eliminate the failures. A separate timing trace reproduced a 120.3 ms gap with
+99.5 ms of host idle time and no overlapping host GC; this is evidence of waiting
+for browser/transport work, not proof of a particular operating-system cause.
+
+The fixture-specific native reference now resolves its simple CSS target union
+in one request, retaining per-selector counts and the independent live ARIA
+queries. It still performs every check and records actual browser timestamps.
+KeyTrail's existing guarded query grouping now covers complete observations too:
+every original locator is re-evaluated, unexpected/missing members or mutations
+trigger a fresh fallback read, and semantic metadata is included for complete
+reads. No targets, states or successful timestamps are reused across readings.
+
+Eight binding/mutation regressions additionally cover complete reads. The strict
+report validator explicitly recognizes those cases and still rejects unknown
+ones. The API, defaults, deadlines and 100 ms bound are unchanged. Short pilot
+results are diagnostic only; a new full benchmark and final series are required.
+Earlier reference timings are not a controlled before/after comparison.
+
 ## 0.1.0 measurements on `85cee8c`
 
 All 108 checks passed on Apple M4/macOS ARM, Node 24.22.1 and Chromium 156.0.8078.4.

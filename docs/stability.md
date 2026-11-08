@@ -1,33 +1,53 @@
-# Compatibility and support for 0.1.x
+# Compatibility and support for 1.x
 
-0.1.0 is the first non-prerelease. Patch releases in 0.1.x preserve the documented
-exports, contract defaults, result schema 1, ruleset 0.4.0 and rule identifiers.
-Incompatible changes require a new minor, migration notes and regressions. A
-future 1.0 requires a separate long-term compatibility decision.
+**Unpublished 1.0.0 candidate.** The current registry release is 0.1.0; its
+[original policy](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/stability.md)
+remains attached to that tag. Runtime behavior is unchanged apart from package metadata.
 
-The supported environment remains Node 24, the exact Playwright 1.64.1 peer and
-its Chromium, Linux and macOS ARM. Other browsers and Windows are not claimed.
-Keep exact pins and run your application's keyboard tests before upgrading.
-Report timings, environment metadata and prose are not stable machine interfaces.
+## Supported contract
 
-Maintenance by PerchAnton is best effort, targeting the latest 0.1.x patch.
-There is no SLA, fixed support term, independent security audit or accessibility
-certification. Deprecations must document an alternative before removal. Report
-bugs with synthetic fixtures, exact versions and the original failing report.
+- Root ESM/CJS exports: `assertDialogJourney`, `assertTabsJourney`,
+  `assertFormErrorsJourney`, `JourneyAssertionError` and the documented TypeScript types.
+- `keytrail/ci-guard` default reporter and `CiGuardOptions`; the
+  `keytrail/schema/journey-result.v1.json` export and schema-1 report structure.
+- Existing contract defaults, error codes, rule identifiers and ruleset 0.4.0.
+  The observation gap bound stays 100 ms. A blocked check cannot become a pass by
+  hiding missing observations; incomplete reports remain a CI failure.
+- Node 24, exact Playwright 1.64.1 and its Chromium, Linux and macOS ARM.
+  Future Node majors, other browsers, Windows and Intel macOS are not claimed.
 
-## Acceptance and migration
+Follow [Semantic Versioning 2.0](https://semver.org/spec/v2.0.0.html). Patches fix
+deviations from this contract with a regression and an explanation of changed
+results. Compatible additions and deprecations require a minor. Existing entry
+points and deprecations remain usable throughout 1.x.
 
-Stable uses the same ten complete final rounds plus a separate four-worker run,
-zero retries/skips and the unchanged 100 ms observation gap. New source or
-verification inputs need matching proof. The completed beta.2 series remains
-historical evidence and is not relabelled as a stable run. Both exact-archive
-consumers, benchmark and CI guard remain separate gates.
+Removing an export, changing defaults or failure semantics, tightening accepted
+contracts, extending an exhaustively matchable union, or changing the schema in a
+way that breaks existing readers requires a major. The schema is intentionally
+strict: do not assume new JSON fields are silently acceptable. A new rule that
+rejects a previously valid contract needs a ruleset change **and** either a major
+package version or an explicit opt-in preserving old defaults. Package, ruleset
+and schema versions describe different boundaries; one does not override another.
 
-No contract or result-schema migration from beta.2 is intended. Package-version
-metadata changes to 0.1.0. Existing reports keep their original version. Native
-Playwright tests remain useful; these checks do not certify accessibility.
+Keep the currently supported Node and Playwright peer usable throughout 1.x.
+Support may be expanded only with compatibility tests; requiring a new peer or
+dropping a supported environment is a major change. Exact report prose, timings,
+environment metadata, internal modules and example scaffolding are not API promises.
 
-Publish the exact qualified archive with npm's latest tag and a GitHub release
-with prerelease=false. Preserve the beta tag and older release assets. Verify
-registry bytes and a clean install before claiming publication. No workflow
-publishes automatically.
+Maintenance by PerchAnton is best effort, targeting the latest 1.x release once
+published. There is no SLA, fixed support term, independent security audit or
+accessibility certification. Report bugs with synthetic fixtures, exact versions
+and the original failing report. Native Playwright tests remain useful.
+
+## Qualification and migration
+
+No contract or schema migration from 0.1.0 is intended. Package metadata changes
+to 1.0.0; old reports retain their original version. Re-run application tests before
+upgrading. Do not interpret an unchanged schema as evidence for untested source.
+
+The candidate requires its own ten complete final rounds plus a separate
+four-worker run, zero retries/skips and the 100 ms observation bound. Freeze inputs
+and obtain explicit authorization before that series. Benchmark, CI guard and both
+exact-archive consumers are separate gates. Existing 0.1.0 evidence is historical;
+the release gate must stay closed until all candidate-specific evidence is ready.
+See [the 1.0 checklist](releases/1.0.0.md).
