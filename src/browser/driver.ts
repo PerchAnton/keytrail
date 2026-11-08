@@ -24,7 +24,7 @@ export class Driver {
   private interrupted: MessageCode | undefined;
   private actions = 0;
   private observationStore: JSHandle<ReturnType<typeof createObservationStore>> | undefined;
-  private interactionBatch: { locator: Locator; slots: string[][] } | null | undefined;
+  private observationBatches: Record<'complete' | 'interaction', { locator: Locator; slots: string[][] } | null | undefined> = { complete: undefined, interaction: undefined };
   private dismissals: Promise<unknown>[] = [];
   private fragmentNavigation: { base: string } | undefined;
   readonly steps: StepResult[] = [];
@@ -58,7 +58,7 @@ export class Driver {
     this.page.off('dialog', this.onDialog);
     await Promise.all(this.dismissals);
     const store = this.observationStore; this.observationStore = undefined;
-    if (this.tabsContract) await store?.evaluate(value => value.stopBatch()).catch(() => undefined);
+    await store?.evaluate(value => value.stopBatch()).catch(() => undefined);
     await store?.dispose().catch(() => undefined);
   }
   guard(): void {
@@ -111,7 +111,6 @@ export class Driver {
     // focus, selection, visibility, roving state and structure; do not resolve
     // unused name/panel-role metadata there. Omitted metadata stays unobserved.
     const plans = this.plans();
-    if (scope === 'complete') this.interactionBatch = undefined;
     const deadline = performance.now() + this.remaining();
     try {
       while (true) {
@@ -125,14 +124,15 @@ export class Driver {
         const store = this.observationStore;
         let readFinished = false;
         try {
-          const batch = scope === 'interaction' ? this.interactionBatch : null;
+          const batch = this.observationBatches[scope];
+          if (!batch) this.observationBatches[scope === 'complete' ? 'interaction' : 'complete'] = undefined;
           const resolve = async (locator: Locator, slot: number) => {
             this.guard();
             if (locator.page() !== this.page) throw new Blocked('UNSUPPORTED_CONTEXT');
             let result: ReturnType<ReturnType<typeof createObservationStore>['register']>;
             try {
               result = slot === -1 && batch
-                ? await locator.evaluateAll((nodes, { store, slots }) => store.registerBatch(nodes, slots), { store, slots: batch.slots, scope })
+                ? await locator.evaluateAll((nodes, { store, slots, scope }) => store.registerBatch(nodes, slots, scope), { store, slots: batch.slots, scope })
                 : await locator.evaluateAll((nodes, { store, slot, scope }) => store.register(nodes, slot, scope), { store, slot, scope });
             } catch (error) {
               this.guard();
@@ -173,7 +173,7 @@ export class Driver {
             return reply;
           });
           if (batch && resolved[0]!.fallback) {
-            this.interactionBatch = null;
+            this.observationBatches[scope] = undefined;
             if (performance.now() >= deadline) throw new Blocked('EXPECTATION_TIMEOUT');
             continue; // The finally block clears partial slots. Credit only the next fresh reading.
           }
@@ -183,8 +183,8 @@ export class Driver {
           readFinished = true;
           this.guard();
           if (state.code) throw new Blocked(state.code);
-          if (scope === 'interaction' && this.interactionBatch === undefined && !state.detached) {
-            this.interactionBatch = this.makeInteractionBatch(resolved.map(reply => reply.hint), plans.interaction.locators);
+          if (!batch && !state.detached) {
+            this.observationBatches[scope] = this.makeObservationBatch(resolved.map(reply => reply.hint), plans[scope].locators);
           }
           if (!state.detached) return { observedAt: state.observedAt, focus: state.focus, focused: new Set(state.focused), present: new Set(state.present), inside: state.inside,
             ...(state.tabs ? { tabs: state.tabs } : {}), ...(state.form ? { form: state.form } : {}) };
@@ -199,7 +199,7 @@ export class Driver {
       }
     } catch (error) { throw this.normalize(error); }
   }
-  private makeInteractionBatch(hints: (string[] | null)[], roles: Locator[]) {
+  private makeObservationBatch(hints: (string[] | null)[], roles: Locator[]) {
     if (this.targets.length < 3 || this.targets.length > 16 || !hints.every((ids): ids is string[] => ids !== null) ||
         hints.some(ids => new Set(ids).size !== ids.length) || new Set(hints.flat()).size > 32 ||
         hints.slice(0, this.targets.length).some(ids => ids.length !== 1) ||

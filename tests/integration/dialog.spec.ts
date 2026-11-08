@@ -3,6 +3,7 @@ import { Ajv2020 } from 'ajv/dist/2020.js';
 import { readFileSync } from 'node:fs';
 import { assertDialogJourney, JourneyAssertionError, type JourneyResult } from '../../src/index.js';
 import { dialogHtml, dialogContract, type Variant } from '../fixtures/dialog.js';
+import { Driver } from '../../src/browser/driver.js';
 
 const validate = new Ajv2020({ strict: true }).compile(JSON.parse(readFileSync('schema/journey-result.v1.json', 'utf8')));
 function verifyResult(result: JourneyResult, info: TestInfo) {
@@ -269,14 +270,17 @@ for (const openKey of ['Enter', 'Space'] as const) test(`dialog rejects focus dr
   await page.evaluate(() => document.getElementById('outside')!.addEventListener('click', () => document.getElementById('open')!.click()));
   await page.keyboard.press('Tab');
   const contract = { ...dialogContract(page), openKey };
-  const locator = contract.trigger.locator, evaluateAll = locator.evaluateAll;
+  const snapshot = Driver.prototype.snapshot;
   let observations = 0;
-  locator.evaluateAll = (async (...args: Parameters<typeof evaluateAll>) => {
-    // First read establishes entry; the next is the action's own preflight snapshot.
-    if (++observations === 2) await page.locator('#outside').focus();
-    return evaluateAll.apply(locator, args);
-  }) as typeof evaluateAll;
-  const error = await failure(page, info, contract);
+  Driver.prototype.snapshot = async function (...args) {
+    // Inject at the second logical reading, whether transport is grouped or
+    // per-locator: this is the activation preflight, not a later action.
+    if (this.page === page && ++observations === 2) await page.locator('#outside').focus();
+    return snapshot.apply(this, args);
+  };
+  let error: JourneyAssertionError;
+  try { error = await failure(page, info, contract); }
+  finally { Driver.prototype.snapshot = snapshot; }
   expect(observations).toBe(2);
   expect(error.code).toBe('FOCUS_MISMATCH'); expect(error.result.outcome).toBe('failed');
   expect(error.result.checks[0]).toMatchObject({ status: 'fail', observed: { focus: 'unknown' } });

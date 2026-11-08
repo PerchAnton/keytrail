@@ -141,12 +141,12 @@ export function createObservationStore(requests: Record<'complete' | 'interactio
   return Object.assign(store, {
     stopBatch,
     register(nodes: Element[], slot: number, scope: 'complete' | 'interaction') {
-      if (scope === 'complete') {
+      if (store.size === 0) {
         idObserver?.disconnect(); idObserver = undefined; idsChanged = false;
       }
       store.set(slot, nodes);
       const request = requests[scope];
-      const hint = scope === 'interaction' && request.tabs && nodes.every(node =>
+      const hint = nodes.every(node =>
         node !== document.documentElement && node.getRootNode() === document && /^[A-Za-z][A-Za-z0-9_-]{0,63}$/.test(node.id))
         ? nodes.map(node => node.id) : null;
       if (hint && !idObserver && !idsChanged) {
@@ -155,7 +155,7 @@ export function createObservationStore(requests: Record<'complete' | 'interactio
       }
       return { count: nodes.length, state: finish(request), hint, fallback: false };
     },
-    registerBatch(nodes: Element[], slots: string[][]) {
+    registerBatch(nodes: Element[], slots: string[][], scope: 'complete' | 'interaction') {
       const ids = [...new Set(slots.flat())];
       const byId = new Map(nodes.map(node => [node.id, node]));
       if (idsChanged || idObserver?.takeRecords().length || nodes.length !== ids.length ||
@@ -165,7 +165,7 @@ export function createObservationStore(requests: Record<'complete' | 'interactio
         return { count: 0, state: null, hint: null, fallback: true };
       }
       slots.forEach((ids, slot) => store.set(slot, ids.map(id => byId.get(id)!)));
-      return { count: nodes.length, state: finish(requests.interaction), hint: null, fallback: false };
+      return { count: nodes.length, state: finish(requests[scope]), hint: null, fallback: false };
     },
   });
 }
