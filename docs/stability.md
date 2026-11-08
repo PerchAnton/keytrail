@@ -1,8 +1,9 @@
 # Compatibility and support for 1.x
 
-**Unpublished 1.0.0 candidate.** The current registry release is 0.1.0; its
-[original policy](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/stability.md)
-remains attached to that tag. Runtime behavior is unchanged apart from package metadata.
+**1.0.0 is published and qualified.** [Registry and installation receipt](evidence/npm-1.0.0.json).
+The [0.1.x policy](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/stability.md)
+remains attached to its tag. The 1.0 release groups complete live observations
+while preserving documented contracts, defaults and report semantics.
 
 ## Supported contract
 
@@ -34,8 +35,8 @@ Support may be expanded only with compatibility tests; requiring a new peer or
 dropping a supported environment is a major change. Exact report prose, timings,
 environment metadata, internal modules and example scaffolding are not API promises.
 
-Maintenance by PerchAnton is best effort, targeting the latest 1.x release once
-published. There is no SLA, fixed support term, independent security audit or
+Maintenance by PerchAnton is best effort, targeting the latest 1.x release.
+There is no SLA, fixed support term, independent security audit or
 accessibility certification. Report bugs with synthetic fixtures, exact versions
 and the original failing report. Native Playwright tests remain useful.
 
@@ -45,9 +46,12 @@ No contract or schema migration from 0.1.0 is intended. Package metadata changes
 to 1.0.0; old reports retain their original version. Re-run application tests before
 upgrading. Do not interpret an unchanged schema as evidence for untested source.
 
-The candidate requires its own ten complete final rounds plus a separate
+Each new candidate requires its own ten complete final rounds plus a separate
 four-worker run, zero retries/skips and the 100 ms observation bound. Freeze inputs
 and obtain explicit authorization before that series. Benchmark, CI guard and both
 exact-archive consumers are separate gates. Existing 0.1.0 evidence is historical;
 the release gate must stay closed until all candidate-specific evidence is ready.
 See [the 1.0 checklist](releases/1.0.0.md).
+
+The 1.0.0 source completed these gates: ten rounds, the four-worker comparison,
+benchmark, guard and both consumers. [Completed release checks](releases/1.0.0.md).

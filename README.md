@@ -1,6 +1,7 @@
 # KeyTrail
 
-**1.0.0 source qualification complete; registry publication pending.** [Release checklist](docs/releases/1.0.0.md).
+**1.0.0 is published on npm under `latest`.** [Release checklist](docs/releases/1.0.0.md).
+[Verified registry bytes and clean installations](docs/evidence/npm-1.0.0.json); `beta` remains `0.1.0-beta.2`.
 Source `d43e235` passed **10 × 188 = 1,880** sequential checks and **188** matching
 four-worker checks, with zero retries/skips and the unchanged **100 ms** bound.
 All eleven raw reports were independently validated: **1,771 unique journey IDs**,
@@ -18,9 +19,9 @@ showing the first mismatch and the observations that could not run.
 
 **Try KeyTrail in an existing Playwright project** (Node.js 24 and Chromium).
 
-This page documents **1.0.0**. Confirm registry availability in the
-[current release status](https://github.com/PerchAnton/keytrail/blob/main/README.md)
-before installing. The earlier `beta` release remains available separately.
+This page documents published **1.0.0**. Its exact archive and clean installations
+are verified in the [npm receipt](docs/evidence/npm-1.0.0.json). The earlier `beta`
+release remains available separately.
 
 ```sh
 npm install --save-dev --save-exact keytrail@1.0.0 @playwright/test@1.64.1
@@ -88,7 +89,7 @@ uses `--offline --frozen-lockfile` in a separate empty directory; browser tests 
 only the local fixture server.
 On the tagged checkout this builds `artifacts/keytrail-1.0.0.tgz`.
 For the exact published tarball and consumer results, use the
-[release assets](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0).
+[release assets](https://github.com/PerchAnton/keytrail/releases/tag/v1.0.0).
 
 ## Try the React portal
 

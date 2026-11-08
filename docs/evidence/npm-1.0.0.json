@@ -1,0 +1,108 @@
+{
+  "package": "keytrail",
+  "version": "1.0.0",
+  "checkedAt": "2026-11-08T09:34:04.838Z",
+  "publishedAt": "2026-11-08T09:33:42.350Z",
+  "distTags": {
+    "beta": "0.1.0-beta.2",
+    "latest": "1.0.0"
+  },
+  "archive": {
+    "bytes": 549575,
+    "sha256": "92d57d16e32d137cf3444e57e2ddf9d37614ba603a4a9dc19254a1daf16db97d",
+    "integrity": "sha512-v0OP3LlEk81rHMcOiOLxCiTyAn6xhYJYdriI/eOpxX0I0zPAvBvzod8Uonj8tzvj+3DTqg7IRG6o5wXvY/Zk/g==",
+    "shasum": "025710322be8631106d9e78d00ce6936ef5e7896",
+    "tarball": "https://registry.npmjs.org/keytrail/-/keytrail-1.0.0.tgz"
+  },
+  "exactBytesMatch": true,
+  "registryIntegrityMatch": true,
+  "installation": "passed",
+  "releaseTag": "v1.0.0",
+  "releaseCommit": "2e6ed6514124e2ee1f6cd8f16da14ce8d0508e81",
+  "qualificationSource": "d43e2359eeb3174b6b62f2af9fe15a95e1ac14a9",
+  "qualification": {
+    "sequentialRounds": 10,
+    "sequentialChecks": 1880,
+    "parallelWorkers": 4,
+    "parallelChecks": 188,
+    "uniqueJourneyIds": 1771,
+    "retries": 0,
+    "skips": 0,
+    "observationLimitMs": 100,
+    "maximumPassingGapMs": 47.7,
+    "benchmarkChecks": 108,
+    "guardChecks": 52
+  },
+  "mainCi": {
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/42466140995",
+    "conclusion": "success",
+    "headSha": "2e6ed6514124e2ee1f6cd8f16da14ce8d0508e81",
+    "jobs": 4,
+    "actualReportsValidated": 4,
+    "cases": 752
+  },
+  "consumers": {
+    "package": "keytrail",
+    "version": "1.0.0",
+    "checkedAt": "2026-11-08T09:36:39.228Z",
+    "verificationLevel": "release",
+    "finalAcceptance": true,
+    "node": "v24.22.1",
+    "platform": "darwin",
+    "playwright": "1.64.1",
+    "archive": {
+      "file": "keytrail-1.0.0.tgz",
+      "bytes": 549575,
+      "sha256": "92d57d16e32d137cf3444e57e2ddf9d37614ba603a4a9dc19254a1daf16db97d",
+      "files": 144
+    },
+    "checks": {
+      "evidenceSourceHashes": true,
+      "offlineConsumer": true,
+      "esm": true,
+      "cjs": true,
+      "typesEsm": true,
+      "typesCjs": true,
+      "browserExamples": 6,
+      "guardedBrowserExamples": 3,
+      "guardEsm": true,
+      "guardCjs": true
+    },
+    "consumers": {
+      "vanilla": {
+        "registryMetadataPreparation": true,
+        "offlineInstall": true,
+        "frozenDependencyGraph": true,
+        "types": true,
+        "browserTests": 6,
+        "guardedJourneys": 3
+      },
+      "reactPortal": {
+        "registryMetadataPreparation": true,
+        "offlineInstall": true,
+        "frozenDependencyGraph": true,
+        "react": "19.3.1",
+        "reactDom": "19.3.1",
+        "types": true,
+        "strictMode": true,
+        "browserTests": 3,
+        "guardedJourneys": 1,
+        "negativeExitCode": 1,
+        "html": true,
+        "junit": true,
+        "failedAttachment": true,
+        "dependencyReferences": true
+      }
+    },
+    "published": true,
+    "registry": "https://registry.npmjs.org",
+    "primaryConsumerInstalledByRegistryVersion": true,
+    "primaryConsumerInitiallyEmpty": true
+  },
+  "githubRelease": "https://github.com/PerchAnton/keytrail/releases/tag/v1.0.0",
+  "archiveRebuiltForPublication": false,
+  "notes": [
+    "Original package-verification.json records pre-publication acceptance and remains unchanged.",
+    "Registry propagation and an initial pnpm cache-preparation failure are not browser-test failures; final clean consumer verification passed."
+  ]
+}

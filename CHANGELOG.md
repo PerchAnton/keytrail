@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.0.0 — unreleased
+## 1.0.0 — 2026-11-08
 
+- Publish the exact qualified archive under npm `latest`; preserve `beta`. Verify registry bytes, integrity and clean vanilla/React installations. [Publication receipt](docs/evidence/npm-1.0.0.json).
 - Define the 1.x API, schema, ruleset and environment compatibility commitment.
 - Preserve documented journey behavior, schema 1, ruleset 0.4.0 and the 100 ms observation bound.
 - Group complete live observations as well as manual-tab reads, retaining mutation and membership guards; add eight complete-read regressions.

@@ -1,6 +1,7 @@
 # Equivalent-work benchmark
 
-**1.0.0 source qualification complete; registry publication pending.** [Release checklist](releases/1.0.0.md).
+**1.0.0 is published on npm under `latest`.** [Release checklist](releases/1.0.0.md).
+[Verified registry bytes and clean installations](evidence/npm-1.0.0.json); `beta` remains `0.1.0-beta.2`.
 Source `d43e235` passed **10 × 188 = 1,880** sequential checks and **188** matching
 four-worker checks, with zero retries/skips and the unchanged **100 ms** bound.
 All eleven raw reports were independently validated: **1,771 unique journey IDs**,
