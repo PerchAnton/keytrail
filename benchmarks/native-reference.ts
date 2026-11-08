@@ -162,13 +162,22 @@ export async function nativeJourney(page: Page, info: TestInfo, manifest: Manife
     try {
       // The fixture reference independently uses a private registry, fresh
       // locator resolution and atomic cleanup, matching the measured work.
-      const targetReads = Promise.allSettled(targets.map(async t => {
-        const slot = `target:${t.id}`, response = await resolve(t.locator, slot);
-        if (response.count > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
-        return response;
-      }));
-      const roleReads = Promise.allSettled(plans[scope].roleQueries.map(([name, locator]) => resolve(locator, `role:${name}`)));
-      const [reads, rolesRead] = await Promise.all([targetReads, roleReads]);
+      // Start transport requests from a short stack, as a standalone native
+      // test can do. Playwright formats each request's stack; retaining the
+      // entire async journey adds unrelated host work to every observation.
+      // No timer, cached binding or relaxed observation limit is introduced.
+      type Responses = PromiseSettledResult<Awaited<ReturnType<typeof resolve>>>[];
+      const [reads, rolesRead] = await new Promise<[Responses, Responses]>(done => {
+        queueMicrotask(() => {
+          const targetReads = Promise.allSettled(targets.map(async t => {
+            const slot = `target:${t.id}`, response = await resolve(t.locator, slot);
+            if (response.count > 1) throw new NativeFailure('TARGET_AMBIGUOUS');
+            return response;
+          }));
+          const roleReads = Promise.allSettled(plans[scope].roleQueries.map(([name, locator]) => resolve(locator, `role:${name}`)));
+          void Promise.all([targetReads, roleReads]).then(done);
+        });
+      });
       const rejected = reads.find(r => r.status === 'rejected');
       if (rejected?.status === 'rejected') throw rejected.reason;
       const roleFailure = rolesRead.find(r => r.status === 'rejected');

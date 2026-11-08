@@ -3,6 +3,22 @@
 **1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
 The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
 
+## 1.0.0 qualification in progress
+
+Two complete benchmark attempts on 8 November were rejected (105/108 and
+106/108). Manual-tab observation gaps exceeded 100 ms; the second attempt,
+on external power, failed only in the native reference. Failed samples are
+preserved and excluded from performance claims, not replaced individually.
+
+Diagnostic CPU profiles identified stack-formatting work in the reference's
+Playwright transport calls. Its independent dispatch now starts in a microtask,
+matching the short-stack technique already used by KeyTrail. Every original
+locator still resolves afresh, all reads settle, and observation timestamps,
+checks, deadlines and the 100 ms bound are unchanged. Three diagnostic repetitions
+before and after passed their defect controls and equivalent-work checks; profiles
+are diagnostic evidence, not release timing measurements. A new complete benchmark
+is required. This does not establish the cause of every earlier observation gap.
+
 ## 0.1.0 measurements on `85cee8c`
 
 All 108 checks passed on Apple M4/macOS ARM, Node 24.22.1 and Chromium 156.0.8078.4.
