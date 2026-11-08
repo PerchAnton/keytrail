@@ -5,34 +5,35 @@ expected focus order; KeyTrail presses keys, checks the result and attaches a re
 showing the first mismatch and the observations that could not run.
 
 [![CI](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml/badge.svg)](https://github.com/PerchAnton/keytrail/actions/workflows/ci.yml)
-[Dialog API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/api.md) · [Tabs API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/tabs.md) · [Form errors API](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/form-errors.md) · [CI guard](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/ci-guard.md) · [Read reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/reports.md) · [Limits](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/limits.md) · [Performance](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/performance.md) · [Release checklist](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/release-checklist.md)
+[Dialog API](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/api.md) · [Tabs API](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/tabs.md) · [Form errors API](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/form-errors.md) · [CI guard](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/ci-guard.md) · [Read reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/reports.md) · [Limits](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/limits.md) · [Performance](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/performance.md) · [Release checklist](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/release-checklist.md)
 
 **Try KeyTrail in an existing Playwright project** (Node.js 24 and Chromium).
 
-The 0.1.0 release archive is qualified separately from npm publication. Until
-0.1.0 appears in npm, install the published beta below or download the exact
-0.1.0 archive from the GitHub release and verify its SHA256SUMS.
+**0.1.0 is published on npm under `latest`.** The registry archive matches the
+qualified GitHub release byte for byte. `beta` remains `0.1.0-beta.2`.
+[Registry installation and consumer verification](docs/evidence/npm-0.1.0.json).
 
 ```sh
-npm install --save-dev --save-exact keytrail@0.1.0-beta.2 @playwright/test@1.64.1
+npm install --save-dev --save-exact keytrail@0.1.0 @playwright/test@1.64.1
 ```
 
 Start with a dialog where the keyboard focus matters. The
-[React portal example](https://github.com/PerchAnton/keytrail/tree/v0.1.0-beta.2/examples/react-portal)
+[React portal example](https://github.com/PerchAnton/keytrail/tree/v0.1.0/examples/react-portal)
 should focus the name field on opening. In the broken fixture it focuses Close.
-The [report screenshot and walkthrough](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/reports.md)
+The [report screenshot and walkthrough](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/reports.md)
 show `D03.initial`, expected `display-name`, observed `close-profile`. Later
 checks are marked `not_run`. Try one dialog in your app and ask a teammate to
 locate the mismatch from the report. Keep the native Playwright test alongside
 it to see which makes the failure easier to diagnose.
 
-[Published npm package](https://www.npmjs.com/package/keytrail/v/0.1.0-beta.2) ·
-[Release archive and checksum](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.2) ·
-[Independent validation of the beta's 11 reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/evidence/reliability-validation-fd8f58a.json).
+[Published npm package](https://www.npmjs.com/package/keytrail/v/0.1.0) ·
+[Release archive and checksum](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0) ·
+[Validation of the release's 11 reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/evidence/reliability-validation-85cee8c.json).
 
-The 0.1.0 candidate preserves beta.2 runtime behavior apart from package-version metadata.
+The 0.1.0 release preserves beta.2 runtime behavior apart from package-version metadata.
 It passed its own 1,800 sequential checks and 180 four-worker checks, with zero
-retries/skips. npm publication is pending. [0.1.0 evidence and migration](docs/releases/0.1.0.md) ·
+retries/skips. Clean npm installations passed ESM/CJS, types, vanilla and React
+portal checks, including guarded journeys and a deliberate failure/report check. [0.1.0 evidence and migration](docs/releases/0.1.0.md) ·
 [Compatibility and support](docs/stability.md).
 
 Beta.2 combines repeated manual-tab observations in one fresh request and checks the actual report in CI. [Release notes and qualification](docs/releases/0.1.0-beta.2.md).
@@ -55,10 +56,10 @@ versions; its intentionally broken fixture is our teaching example, not an upstr
 ## Try the packaged example
 
 Node.js 24 and pnpm 11.25.0 are used for development. The tested Playwright peer version
-is **1.64.1**, with its Chromium **156.0.8078.4**. [Compatibility](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/compatibility.md).
+is **1.64.1**, with its Chromium **156.0.8078.4**. [Compatibility](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/compatibility.md).
 
 ```sh
-git clone --branch v0.1.0-beta.2 https://github.com/PerchAnton/keytrail.git
+git clone --branch v0.1.0 https://github.com/PerchAnton/keytrail.git
 cd keytrail
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm --dir examples/react-portal install --frozen-lockfile --ignore-scripts
@@ -77,13 +78,13 @@ its HTML/JUnit reports and incomplete attachment. Dependency installation and th
 React lockfile preparation use the registry. The actual consumer installation then
 uses `--offline --frozen-lockfile` in a separate empty directory; browser tests need
 only the local fixture server.
-On the tagged checkout this builds `artifacts/keytrail-0.1.0-beta.2.tgz`.
+On the tagged checkout this builds `artifacts/keytrail-0.1.0.tgz`.
 For the exact published tarball and consumer results, use the
-[beta release assets](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0-beta.2).
+[release assets](https://github.com/PerchAnton/keytrail/releases/tag/v0.1.0).
 
 ## Try the React portal
 
-The [React example](https://github.com/PerchAnton/keytrail/tree/v0.1.0-beta.2/examples/react-portal) uses the same dialog contract in
+The [React example](https://github.com/PerchAnton/keytrail/tree/v0.1.0/examples/react-portal) uses the same dialog contract in
 StrictMode, with the dialog mounted outside the app root. Compare correct behavior,
 wrong initial focus and lost return focus, then inspect the first mismatch:
 
@@ -91,7 +92,7 @@ wrong initial focus and lost return focus, then inspect the first mismatch:
 pnpm exec playwright show-report artifacts/consumers/react-portal/reports/teaching/html
 ```
 
-See [reading reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/reports.md) for the deliberately failing process and its
+See [reading reports](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/reports.md) for the deliberately failing process and its
 `not_run` observations. React remains an example dependency, not a library dependency.
 
 ## Write a contract
@@ -117,7 +118,7 @@ test('profile dialog', async ({ page }, testInfo) => {
 
 Use one journey per test, allow time for setup and reporting (the example uses 45 s),
 and let `JourneyAssertionError` fail application tests. Do not catch and ignore it.
-The [standalone example](https://github.com/PerchAnton/keytrail/tree/v0.1.0-beta.2/examples/vanilla) provides the actual HTML and configuration;
+The [standalone example](https://github.com/PerchAnton/keytrail/tree/v0.1.0/examples/vanilla) provides the actual HTML and configuration;
 `/profile` above is an application route, not a service supplied by this package.
 
 ## Test a tab list
@@ -128,8 +129,8 @@ checks that focus moves while selection stays unchanged until Enter or Space.
 It records actual sampling intervals; a gap over 100 ms blocks the check with
 `OBSERVATION_GAP` instead of claiming a pass.
 
-See the [Tabs API and flow diagram](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/tabs.md) and the
-[runnable manual-tabs example](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/examples/vanilla/tabs.journey.spec.ts).
+See the [Tabs API and flow diagram](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/tabs.md) and the
+[runnable manual-tabs example](https://github.com/PerchAnton/keytrail/blob/v0.1.0/examples/vanilla/tabs.journey.spec.ts).
 
 ## Test form error recovery
 
@@ -144,8 +145,8 @@ Invalid submit → messages + IDREF → focus → optional summary links
                                          → keyboard correction → errors cleared
 ```
 
-See the [Form errors API and flow diagram](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/form-errors.md) and the
-[working/broken email example](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/examples/vanilla/form-errors.journey.spec.ts).
+See the [Form errors API and flow diagram](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/form-errors.md) and the
+[working/broken email example](https://github.com/PerchAnton/keytrail/blob/v0.1.0/examples/vanilla/form-errors.journey.spec.ts).
 
 ## Require complete results in CI
 
@@ -158,7 +159,7 @@ projects: [{ name: 'journey', testMatch: '**/*.journey.spec.ts' }],
 
 Skipped tests, missing or incomplete reports, and failed attempts that later pass on
 retry fail the guard. A successful test without a successful journey is insufficient.
-See [setup, diagnostics, boundaries and the flow diagram](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/docs/ci-guard.md).
+See [setup, diagnostics, boundaries and the flow diagram](https://github.com/PerchAnton/keytrail/blob/v0.1.0/docs/ci-guard.md).
 
 ## What the result means
 
@@ -172,7 +173,7 @@ See [setup, diagnostics, boundaries and the flow diagram](https://github.com/Per
 `journey-result.json` is attached to Playwright's report. Every planned observation
 remains in the result. A failure takes precedence over blocking; `coverage.complete`
 still remains false if any checks are blocked or not run. Counts refer to individual
-observations, not broad accessibility rules. [JSON schema](https://github.com/PerchAnton/keytrail/blob/v0.1.0-beta.2/schema/journey-result.v1.json).
+observations, not broad accessibility rules. [JSON schema](https://github.com/PerchAnton/keytrail/blob/v0.1.0/schema/journey-result.v1.json).
 
 ## When to use it
 

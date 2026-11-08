@@ -2,12 +2,13 @@
 
 ## Non-prerelease 0.1.0
 
-The current candidate is tracked in [PR #23](https://github.com/PerchAnton/keytrail/pull/23).
+[PR #23](https://github.com/PerchAnton/keytrail/pull/23) is merged. The exact qualified
+archive is published on GitHub and npm under `latest`; `beta` remains 0.1.0-beta.2.
+[Registry and clean-consumer verification](evidence/npm-0.1.0.json) is complete.
 The stable policy retains ten complete final rounds, a separate four-worker
-comparison, zero retries/skips and the 100 ms observation limit. This candidate
-has new version/verification inputs and must have its own evidence; historical
-beta.2 records below do not certify it. Use `check-release-readiness.mjs` and the
-exact `check-package.mjs --release` consumer gate after recording the new results.
+comparison, zero retries/skips and the 100 ms observation limit. The new inputs
+completed their own qualification; historical beta.2 records below do not certify
+0.1.0. Source hashes, benchmark, guard and the release archive gate passed.
 
 Publish a normal GitHub release only after qualification. npm publication is a
 separate step: preserve the exact archive

@@ -2,11 +2,14 @@
 
 ## 0.1.0
 
-- First non-prerelease candidate, with 0.1.x compatibility and support policy.
+- First non-prerelease, with 0.1.x compatibility and support policy.
+- Publish the qualified archive to npm under `latest` on 2026-11-08; preserve `beta`.
+  Exact registry bytes, integrity and both clean consumers are verified in the
+  [npm receipt](docs/evidence/npm-0.1.0.json).
 - Accept stable versions in final verification without reducing ten rounds,
   four-worker comparison, zero retries or the 100 ms observation bound.
 - Preserve runtime behavior, result schema 1 and ruleset 0.4.0 from beta.2.
-  Package-version metadata changes; publication requires fresh candidate evidence.
+  Package-version metadata changes; fresh candidate evidence and release checks passed.
 
 ## 0.1.0-beta.2
 

@@ -1,0 +1,82 @@
+{
+  "published_at": "2026-11-08T07:09:04.798Z",
+  "sha256": "49eb5efacb84ac4c41560164a081e9f9368d93a24e171eecc03765cf5f72491c",
+  "integrity": "sha512-H/DvvmgU1sHQ6ch4qW7irpf13bXxMpg4tr3lOgrHW3qr0iA1bAoiryJqUA2qrnBRfxizwxfzCxzLJ2wqjBdofA==",
+  "bytes": 537884,
+  "identical_to_github_release": true,
+  "tags_before": {
+    "latest": "0.1.0-beta.1",
+    "beta": "0.1.0-beta.2"
+  },
+  "tags_after": {
+    "latest": "0.1.0",
+    "beta": "0.1.0-beta.2"
+  },
+  "package": "keytrail",
+  "version": "0.1.0",
+  "checked_at": "2026-11-08T07:11:51.147431+00:00",
+  "registry": "https://registry.npmjs.org",
+  "tarball": "https://registry.npmjs.org/keytrail/-/keytrail-0.1.0.tgz",
+  "tag": "v0.1.0",
+  "source_commit": "a086847033903b294411bb106e0c4313e443e9b5",
+  "merge_commit": "6e2816f595e77099db95f84d1562c236826b2cc2",
+  "source_tree": "7e6785050b7ca1302b8796c2d8ca16cb5d2074f4",
+  "merge_tree_identical": true,
+  "tag_ci": {
+    "passed": 4,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/42410079828"
+  },
+  "merge_ci": {
+    "passed": 4,
+    "url": "https://github.com/PerchAnton/keytrail/actions/runs/42411538377"
+  },
+  "final_qualification": {
+    "source": "85cee8c7cc2180e90ac553cfcfc839d049c56601",
+    "sequential_rounds": 10,
+    "sequential_tests": 1800,
+    "four_worker_tests": 180,
+    "raw_reports_revalidated": 11,
+    "unique_journey_ids": 1771,
+    "retries": 0,
+    "skips": 0,
+    "observation_gap_limit_ms": 100,
+    "max_passing_observation_gap_ms": 51.60000000009313,
+    "benchmark_checks": 108,
+    "guard_controls": 52,
+    "evidence_source_hashes": "PASS",
+    "scope": "Raw reports revalidated with the repository schema/signature validator; no new final series and no independent audit claim."
+  },
+  "consumers": {
+    "version": "0.1.0",
+    "checked_at": "2026-11-08T07:09:58.734Z",
+    "node": "v24.22.1",
+    "platform": "darwin",
+    "arch": "arm64",
+    "playwright": "1.64.1",
+    "registry": "https://registry.npmjs.org",
+    "registry_install": true,
+    "package_source": "Installed npm registry version in both consumers; no local dist",
+    "checks": {
+      "esm": true,
+      "cjs": true,
+      "types_esm": true,
+      "types_cjs": true,
+      "vanilla_browser": 6,
+      "vanilla_guard": 3,
+      "react_types": true,
+      "react_browser": 3,
+      "react_guard": 1,
+      "negative_exit": 1,
+      "negative_diagnosis": "D03 FOCUS_MISMATCH",
+      "negative_attachment": true,
+      "html": true,
+      "junit": true
+    },
+    "retries": 0,
+    "archive_rebuilt": false
+  },
+  "published": true,
+  "archive_rebuilt": false,
+  "original_release_assets_unchanged": true,
+  "downstream_dependencies_changed": false
+}
