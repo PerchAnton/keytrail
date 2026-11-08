@@ -126,7 +126,7 @@
       "fixture": "forms report type semantics when character keydown is prevented",
       "file": "form-errors.spec.ts",
       "outcome": "failed",
-      "inputMode": null,
+      "inputMode": "type",
       "actions": [
         "press",
         "press",
@@ -171,7 +171,7 @@
       "fixture": "forms report insertText semantics when character keydown is prevented",
       "file": "form-errors.spec.ts",
       "outcome": "passed",
-      "inputMode": null,
+      "inputMode": "insertText",
       "actions": [
         "press",
         "press",
@@ -196,7 +196,7 @@
       "fixture": "forms type printable characters with keyboard events and keep values private",
       "file": "form-errors.spec.ts",
       "outcome": "passed",
-      "inputMode": null,
+      "inputMode": "type",
       "actions": [
         "press",
         "press",
@@ -244,7 +244,7 @@
       "fixture": "forms stop typing after focus moves during a character event",
       "file": "form-errors.spec.ts",
       "outcome": "failed",
-      "inputMode": null,
+      "inputMode": "type",
       "actions": [
         "press",
         "press",
