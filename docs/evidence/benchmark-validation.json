@@ -1,30 +1,30 @@
 {
-  "checkedAt": "2026-11-04T23:18:34.630Z",
+  "checkedAt": "2026-11-08T09:08:09.321Z",
   "status": "passed",
-  "sourceCommit": "fd8f58adfb7c39144d5fc91de3cc7b56c41d4087",
-  "sourceTree": "e1635c7f9860b0bcd5c8eef6161142a8119117df",
-  "scope": "Independent recomputation of the full benchmark only. Final reliability is checked in its own series.",
+  "sourceCommit": "d43e2359eeb3174b6b62f2af9fe15a95e1ac14a9",
+  "sourceTree": "bdb19868e6e5e7b6b5ba280326595ec49fd8100b",
+  "scope": "Independent recomputation of all 108 benchmark checks and all measured pairs. Ten-round reliability acceptance is a separate check.",
   "tests": 108,
   "warmupsPerArm": 5,
   "pairsPerWorkload": 30,
   "retries": 0,
-  "reportSha256": "4900b10f256c91238c1674577ebf9b1de4b421061002e09c77896b2d1ac79c5a",
+  "reportSha256": "637e46bfb16588df40f1eed3de13af9549da7620d2b7fa278cc8de5771f30561",
   "sourceHashes": {
     "benchmarks/manifests/dialog.json": "f82e636c87291fde4a4f45a42c0b717e68be28e8123e091702d746906eb59436",
     "benchmarks/manifests/formErrors.json": "71c4810c36c04b09e2d86f3c72a28d743157594d010e63dc27a9db9e3aa25354",
     "benchmarks/manifests/tabs.json": "bdac6daffce4ccbf1c030f0f1d1af959dda72dfe7acfb34bd89876ca2ea7b240",
-    "benchmarks/native-reference.ts": "d5619ca14626a3c052b9679ffc5de81be57b1d25c1c266aa3f6c537a4f17a2dc",
+    "benchmarks/native-reference.ts": "6c1f16c92ca96c594167d6d5a071a1230bbf3efe1fe02d554345c5a63b2c91d5",
     "benchmarks/performance.spec.ts": "f9a373f65b358daf16c4165a21ae2c15d3bbd2c823fd3102220c05fb639b2f68",
     "benchmarks/playwright.config.ts": "d0b33dcbf7f603dbaa0848c433929cdc59123cbbb17fcde1adbdd4d24f0532f7",
     "benchmarks/reporter.mjs": "d4584a0c9426eebb9d911e8f06ab6cd113a57065e17880b2255c060b404d9b2a",
-    "package.json": "2e2b8f41afbab8bc968807836f118fb053907d33bd14753dc6b96857b1097cf9",
+    "package.json": "9432de0bfe7bdd134aaed45d1b5b9f9258482c721748b9ef0a2e5e3da9a4b63b",
     "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
     "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
     "scripts/verify-reliability.mjs": "aa9eb724680e2d8310cc60a2a5af04e2cd49dce783e890d2f952d5da81f05ef1",
-    "src/browser/driver.ts": "edc87ddf15a427195a8273e65ccd216add885f91523aad0ac1cf5dac94ac86b6",
-    "src/browser/observation-store.ts": "af90ff30efddc1853c3f61258acc2ce58532c8524fe0723ba391472221522f43",
+    "src/browser/driver.ts": "9af13783f0214765fd70ac22974fa355b8a5e7767dfa90dac4b73ed94e7e4bb1",
+    "src/browser/observation-store.ts": "981cc0072a14d9fe396df7292b7295d6cc8648a9b50b2940e3148594e1a62787",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
@@ -42,7 +42,8 @@
     "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
     "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
     "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
-    "src/version.ts": "eacd7b7414b19f63a81cf19dcdaa0f60a5006069028d0bbd004fd727462f7d51",
+    "src/version.ts": "aeec7b146aaf35ff4ee9f2e6770b394d47b02cb7cbf456cdba64f7428fae5e82",
+    "tests/compatibility/consumer.ts": "2a877d3c11415a713a7d6f06a034a699f4200570e1653db47c4d32d143fa0cbb",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
@@ -52,22 +53,22 @@
     "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
     "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
     "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
-    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/dialog.spec.ts": "5ccedafc2e25ee3d2587826c5106cf2f9c83e74b437ff38d7df1b306cd458094",
     "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
-    "tests/integration/observations.spec.ts": "3c1da9634cc221759b247b8cdd52662b4838d1f982a710d4188d145309f12dc1",
+    "tests/integration/observations.spec.ts": "3c5d585dada2bd7ef46970357d2b73f8b1fb89cebe432cb3b2a665beb6337ba6",
     "tests/integration/tabs.spec.ts": "e7ef141fddb0cd5109ca5060ee854ceb7568d8a472d5cc678a407d5485c0bc7d",
     "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
     "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
     "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
     "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
     "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
-    "tests/unit/reliability.test.mjs": "d5a8e5f1efb9fa14b1041a32aaf2da9ce5e3264fd4681398e758a001f8bc2426",
+    "tests/unit/reliability.test.mjs": "eac1e120da6121123485cfe7eafb40037eefebbbdab00a593f816074d1a11327",
     "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
     "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
-    "tests/unit/verification-modes.test.mjs": "2f3423a30f998d0ea65c7fca229296944c0f61952f0316c2a2f62fccbfdc8c97",
+    "tests/unit/verification-modes.test.mjs": "3c22f98cf9596ea3654d325652d07e0b2f68de0bffa9a4475b13da1b8f837adb",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
-    "verification/modes.mjs": "848d9299c07aefd96a71c7deea61258a01737591d32f23f06b5065d4b0b2dc46",
-    "verification/signatures.mjs": "2702214e19b118817d96e3d6b6a28dce58540b64ae5db739ea806bd69b2a9816"
+    "verification/modes.mjs": "922d3ac3076b1b2a470d2a2990a432a78eec5a850702176ec759998626d6a995",
+    "verification/signatures.mjs": "d59cb0fc1bb0bf5a2bf38e913b796cb2dbcbd487f92d6bd33948accaa0e5fe09"
   },
   "environment": {
     "node": "v24.22.1",
@@ -84,52 +85,52 @@
     "dialog": {
       "summary": {
         "keytrail": {
-          "medianMs": 131.1140839999989,
-          "p95Ms": 139.7640420000007
+          "medianMs": 86.86289549999947,
+          "p95Ms": 96.25408299999981
         },
         "native": {
-          "medianMs": 143.41906299999982,
-          "p95Ms": 158.71716699999888
+          "medianMs": 84.56218799999897,
+          "p95Ms": 93.11908299999959
         },
-        "pairedMedianOverheadPercent": -8.549037559038696,
-        "ratioOfMediansOverheadPercent": -8.579737409106436,
+        "pairedMedianOverheadPercent": 2.3906566170312615,
+        "ratioOfMediansOverheadPercent": 2.7207284418900413,
         "targetMet": true
       },
-      "measuredAt": "2026-11-04T23:10:06.945Z",
+      "measuredAt": "2026-11-08T08:42:00.304Z",
       "negativeControl": "D03.initial"
     },
     "tabs": {
       "summary": {
         "keytrail": {
-          "medianMs": 1565.5227085000006,
-          "p95Ms": 1614.128749999989
+          "medianMs": 1526.3455209999993,
+          "p95Ms": 1579.5887499999953
         },
         "native": {
-          "medianMs": 1664.7761460000038,
-          "p95Ms": 1691.252625000001
+          "medianMs": 1445.6989585000047,
+          "p95Ms": 1508.4569579999988
         },
-        "pairedMedianOverheadPercent": -5.549285801461262,
-        "ratioOfMediansOverheadPercent": -5.961968985348676,
+        "pairedMedianOverheadPercent": 5.668900815578059,
+        "ratioOfMediansOverheadPercent": 5.578378681525087,
         "targetMet": true
       },
-      "measuredAt": "2026-11-04T23:10:06.945Z",
+      "measuredAt": "2026-11-08T08:42:00.305Z",
       "negativeControl": "T05.forward.001.unchanged"
     },
     "formErrors": {
       "summary": {
         "keytrail": {
-          "medianMs": 126.97374950000085,
-          "p95Ms": 133.79129100000137
+          "medianMs": 74.89889600000606,
+          "p95Ms": 108.08008400001563
         },
         "native": {
-          "medianMs": 142.65106299999752,
-          "p95Ms": 153.49124999999185
+          "medianMs": 73.59322899999825,
+          "p95Ms": 97.55899999997928
         },
-        "pairedMedianOverheadPercent": -10.817506848610325,
-        "ratioOfMediansOverheadPercent": -10.989973134653008,
+        "pairedMedianOverheadPercent": 0.7062103385482632,
+        "ratioOfMediansOverheadPercent": 1.7741672946676168,
         "targetMet": true
       },
-      "measuredAt": "2026-11-04T23:10:06.945Z",
+      "measuredAt": "2026-11-08T08:42:00.305Z",
       "negativeControl": "F04.focus"
     }
   },

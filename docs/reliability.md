@@ -1,7 +1,13 @@
 # Full-suite repeatability protocol
 
-**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
-The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+**1.0.0 source qualification complete; registry publication pending.** [Release checklist](releases/1.0.0.md).
+Source `d43e235` passed **10 × 188 = 1,880** sequential checks and **188** matching
+four-worker checks, with zero retries/skips and the unchanged **100 ms** bound.
+All eleven raw reports were independently validated: **1,771 unique journey IDs**,
+maximum passing observation gap **47.7 ms**.
+[Raw-report hashes and validation](evidence/reliability-validation-d43e235.json).
+Historical 0.1.0/alpha/beta results below retain their original identities.
+
 
 **0.1.0 qualification.** Frozen source `85cee8c` completed 10 × 180 sequential
 executions and 180 matching four-worker checks, with zero retries/skips and

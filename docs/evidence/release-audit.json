@@ -1,11 +1,11 @@
 {
-  "version": "0.1.0-alpha.6",
+  "version": "1.0.0",
   "rulesetVersion": "0.4.0",
-  "scope": "Ten focused regression cases extracted from the final successful 163-test four-worker comparison after 100 complete local rounds; failed and blocked journey outcomes are intentional fixture expectations.",
-  "sourceCommit": "d03fda1305c27201c952d4fc054c147d40a2f391",
-  "recordedAt": "2026-10-30T05:02:58.085Z",
-  "seriesIdentity": "191d2d89449e23a319e221949729f6d069d4c57acbb6a432056867bc159b0fed",
-  "rawReportSha256": "d34f40ddbcbc857e6c89aff8e1ad0055892701215d8e42ffad02c836bb06bcb5",
+  "scope": "Ten focused regressions from the successful current final-series four-worker report. Intentional negative journeys retain failed/blocked outcomes.",
+  "sourceCommit": "d43e2359eeb3174b6b62f2af9fe15a95e1ac14a9",
+  "recordedAt": "2026-11-08T09:08:09.403Z",
+  "seriesIdentity": "ae79097563621d39eaa9b251b1c71946cdb53d3fa43f7ef6e1b992e64ed5082e",
+  "rawReportSha256": "1ce8137d97ea19fd4f46c67880e93b9d79d04b43aaead94657c9ba12e345cb24",
   "environment": {
     "node": "24.22.1",
     "platform": "darwin",
@@ -18,21 +18,22 @@
   },
   "workers": 4,
   "sourceHashes": {
-    "package.json": "f621dc5a5a045b7adc78248e5c008f7ee404556d47eb194b78d2fe5fcce1c86a",
-    "playwright.config.ts": "ec6658fc3dde1c08e91ad05156d36402d961f8f97131f21bb2e935c8f1e45e8a",
+    "package.json": "9432de0bfe7bdd134aaed45d1b5b9f9258482c721748b9ef0a2e5e3da9a4b63b",
+    "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
-    "scripts/build.mjs": "2f61bcc6ed997dd8160609d0339a01602b68a05a2317630d85d96c2a6edf5add",
-    "scripts/verify-reliability.mjs": "65be5e0a9fbea099924f95e02b8b6fc19df28b4fc9ae0c7c3ce185857eecd27e",
-    "src/browser/driver.ts": "2a3f6e7cd5142b57dc219010ce5321acdad49a19eed20715c8f4d4aef458983d",
+    "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
+    "scripts/verify-reliability.mjs": "aa9eb724680e2d8310cc60a2a5af04e2cd49dce783e890d2f952d5da81f05ef1",
+    "src/browser/driver.ts": "9af13783f0214765fd70ac22974fa355b8a5e7767dfa90dac4b73ed94e7e4bb1",
+    "src/browser/observation-store.ts": "981cc0072a14d9fe396df7292b7295d6cc8648a9b50b2940e3148594e1a62787",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
-    "src/contracts/common.ts": "ae1f3a6f77d35bd6673e0921f5fd3cf1180bbe084f026fc810a5e04b281b8434",
+    "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
     "src/contracts/form-errors.ts": "44cc1838967ecf319e55c7e6aff5211a0742ff2075e42058df741ca628c64d9b",
     "src/contracts/tabs.ts": "73d387a8040df26e07d7f1f9138e18bb522578b5806b1a4cdf818d3b43ac11e9",
     "src/contracts/types.ts": "78cef4b95bed88ac622170a8a8e92b43f8ecaf5ea91571384d602f126c060432",
     "src/engine/form-errors-plan.ts": "c094e2acf0e5665b4b3400d8fb980ed8dbbb46ef4839692810caeddc6219c44a",
-    "src/engine/observation-window.ts": "15d27d2d3f1b3912aa3b372758e441078af018435d13c358c34084281726c927",
+    "src/engine/observation-window.ts": "5f165904842f33e170f6f8f38fd53789c3124b39a1149335430e1ecbd1bd46b9",
     "src/engine/plan.ts": "cab99a7e19fea3fb1f5b80ba2136ae24bf867ba2920162e4d439ff7ec85b8f53",
     "src/engine/tabs-plan.ts": "1add41b1bc5500a28fd65d196e84ac58ae60b898db47825db0990226e44e5f34",
     "src/index.ts": "db30784e5f37a98070cd0c5b7ba1f172274031a253abfc850a11874de7029a4d",
@@ -41,8 +42,9 @@
     "src/reporting/validate.ts": "70e38e30858af50c29b785619c9f42ea6515251ddc9c4fe8d30f3134417e2dc6",
     "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
     "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
-    "src/scenarios/tabs.ts": "a5d62e94cf8281b0dfe8b4061a962faa55245a58a0242265f3ab17fb377f8194",
-    "src/version.ts": "1d8ad83fca6e82ceb3adfddd60d35f681a650646b7e5af0428e94267d819b894",
+    "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
+    "src/version.ts": "aeec7b146aaf35ff4ee9f2e6770b394d47b02cb7cbf456cdba64f7428fae5e82",
+    "tests/compatibility/consumer.ts": "2a877d3c11415a713a7d6f06a034a699f4200570e1653db47c4d32d143fa0cbb",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
@@ -51,19 +53,23 @@
     "tests/guard/playwright.config.mjs": "fc9771a33ee076bf3e0c1096a83bf1ccf2ed02730ade36705041704e27e92427",
     "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
     "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
-    "tests/integration/canary.spec.ts": "281f69a4ae8e65bbc0fbb7c2db9b72437cec84f48fffc5785007b3942bedb32e",
-    "tests/integration/dialog.spec.ts": "28a7fd3d86d3712f978861bf270835ecc6d15be199272501584832e9d9c3854c",
+    "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
+    "tests/integration/dialog.spec.ts": "5ccedafc2e25ee3d2587826c5106cf2f9c83e74b437ff38d7df1b306cd458094",
     "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
-    "tests/integration/observations.spec.ts": "d71859a9b0a20c0cc4a04107b0032a771143be641e79164e9af88a1216018a06",
-    "tests/integration/tabs.spec.ts": "69871a06c0a7fcccf107ea5f294c39470fbbed3821d52de1dc438cbad3d075c3",
-    "tests/unit/contracts.test.mjs": "1ce78e70acbce14e55c712c33e38a0fb26781e463dc2d655abf9d49e655233b9",
-    "tests/unit/form-errors.test.mjs": "e382c4ff52bffbaea6485570d8147644e3bbff9786d53c5fc839f0e443700237",
-    "tests/unit/observation-window.test.mjs": "9e5e85b6140a756d63bcb609be7d74b496d692237c94d22b6d22c209b738af4a",
-    "tests/unit/reliability.test.mjs": "a7a097f5388dbabdd08f98264bdf0926bfe6b51cad8d4934675771cd9fb9aac8",
+    "tests/integration/observations.spec.ts": "3c5d585dada2bd7ef46970357d2b73f8b1fb89cebe432cb3b2a665beb6337ba6",
+    "tests/integration/tabs.spec.ts": "e7ef141fddb0cd5109ca5060ee854ceb7568d8a472d5cc678a407d5485c0bc7d",
+    "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
+    "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
+    "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
+    "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
+    "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
+    "tests/unit/reliability.test.mjs": "eac1e120da6121123485cfe7eafb40037eefebbbdab00a593f816074d1a11327",
     "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
-    "tests/unit/tabs.test.mjs": "aa92068e71ed0884b4567a5408a43a4c574b3c27ca8b96615049df4f1163eddb",
+    "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
+    "tests/unit/verification-modes.test.mjs": "3c22f98cf9596ea3654d325652d07e0b2f68de0bffa9a4475b13da1b8f837adb",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
-    "verification/signatures.mjs": "aea81b63495cb2bef620b590b923b21fe345639a4dcc186a6d77146704ad3970"
+    "verification/modes.mjs": "922d3ac3076b1b2a470d2a2990a432a78eec5a850702176ec759998626d6a995",
+    "verification/signatures.mjs": "d59cb0fc1bb0bf5a2bf38e913b796cb2dbcbd487f92d6bd33948accaa0e5fe09"
   },
   "cases": [
     {
@@ -71,8 +77,8 @@
       "file": "dialog.spec.ts",
       "outcome": "failed",
       "inputMode": null,
-      "actions": 0,
-      "activationKeys": 0,
+      "actions": [],
+      "activationKeys": [],
       "typedCharacters": 0,
       "firstMismatch": {
         "checkId": "D01.entry",
@@ -96,8 +102,8 @@
       "file": "dialog.spec.ts",
       "outcome": "failed",
       "inputMode": null,
-      "actions": 0,
-      "activationKeys": 0,
+      "actions": [],
+      "activationKeys": [],
       "typedCharacters": 0,
       "firstMismatch": {
         "checkId": "D01.entry",
@@ -120,9 +126,28 @@
       "fixture": "forms report type semantics when character keydown is prevented",
       "file": "form-errors.spec.ts",
       "outcome": "failed",
-      "inputMode": "type",
-      "actions": 16,
-      "activationKeys": 1,
+      "inputMode": null,
+      "actions": [
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "activationKeys": [
+        "Enter"
+      ],
       "typedCharacters": 10,
       "firstMismatch": {
         "checkId": "F06.field.001.value",
@@ -146,9 +171,23 @@
       "fixture": "forms report insertText semantics when character keydown is prevented",
       "file": "form-errors.spec.ts",
       "outcome": "passed",
-      "inputMode": "insertText",
-      "actions": 11,
-      "activationKeys": 1,
+      "inputMode": null,
+      "actions": [
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "insertText",
+        "press",
+        "press",
+        "insertText",
+        "press"
+      ],
+      "activationKeys": [
+        "Enter"
+      ],
       "typedCharacters": 0,
       "firstMismatch": null,
       "windows": []
@@ -157,9 +196,46 @@
       "fixture": "forms type printable characters with keyboard events and keep values private",
       "file": "form-errors.spec.ts",
       "outcome": "passed",
-      "inputMode": "type",
-      "actions": 34,
-      "activationKeys": 1,
+      "inputMode": null,
+      "actions": [
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "press",
+        "press",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "type",
+        "press"
+      ],
+      "activationKeys": [
+        "Enter"
+      ],
       "typedCharacters": 25,
       "firstMismatch": null,
       "windows": []
@@ -168,9 +244,19 @@
       "fixture": "forms stop typing after focus moves during a character event",
       "file": "form-errors.spec.ts",
       "outcome": "failed",
-      "inputMode": "type",
-      "actions": 7,
-      "activationKeys": 1,
+      "inputMode": null,
+      "actions": [
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "type"
+      ],
+      "activationKeys": [
+        "Enter"
+      ],
       "typedCharacters": 1,
       "firstMismatch": {
         "checkId": "F06.field.001.value",
@@ -194,8 +280,8 @@
       "file": "form-errors.spec.ts",
       "outcome": "blocked",
       "inputMode": null,
-      "actions": 0,
-      "activationKeys": 0,
+      "actions": [],
+      "activationKeys": [],
       "typedCharacters": 0,
       "firstMismatch": {
         "checkId": "E_CONFIG",
@@ -214,8 +300,11 @@
       "file": "tabs.spec.ts",
       "outcome": "blocked",
       "inputMode": null,
-      "actions": 2,
-      "activationKeys": 0,
+      "actions": [
+        "press",
+        "press"
+      ],
+      "activationKeys": [],
       "typedCharacters": 0,
       "firstMismatch": {
         "checkId": "T05.forward.001.unchanged",
@@ -236,23 +325,43 @@
           "selectedCount": 1,
           "visibleCount": 1,
           "roving": true,
-          "observationWindowMs": 189.29999999701977,
+          "observationWindowMs": 155.60000002384186,
           "observationCount": 2,
           "observationIntervalsMs": [
-            189.29999999701977
+            155.60000002384186
           ],
-          "maxObservationGapMs": 189.29999999701977
+          "maxObservationGapMs": 155.60000002384186
         }
       },
-      "windows": []
+      "windows": [
+        {
+          "checkId": "T05.forward.001.unchanged",
+          "status": "blocked",
+          "messageCode": "OBSERVATION_GAP",
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 155.60000002384186,
+          "observationCount": 2,
+          "observationIntervalsMs": [
+            155.60000002384186
+          ],
+          "maxObservationGapMs": 155.60000002384186
+        }
+      ]
     },
     {
       "fixture": "manual tabs block a browser observation gap after evaluation",
       "file": "tabs.spec.ts",
       "outcome": "blocked",
       "inputMode": null,
-      "actions": 2,
-      "activationKeys": 0,
+      "actions": [
+        "press",
+        "press"
+      ],
+      "activationKeys": [],
       "typedCharacters": 0,
       "firstMismatch": {
         "checkId": "T05.forward.001.unchanged",
@@ -273,127 +382,278 @@
           "selectedCount": 1,
           "visibleCount": 1,
           "roving": true,
-          "observationWindowMs": 184.3999999910593,
+          "observationWindowMs": 155.60000002384186,
           "observationCount": 2,
           "observationIntervalsMs": [
-            184.3999999910593
+            155.60000002384186
           ],
-          "maxObservationGapMs": 184.3999999910593
+          "maxObservationGapMs": 155.60000002384186
         }
       },
-      "windows": []
+      "windows": [
+        {
+          "checkId": "T05.forward.001.unchanged",
+          "status": "blocked",
+          "messageCode": "OBSERVATION_GAP",
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 155.60000002384186,
+          "observationCount": 2,
+          "observationIntervalsMs": [
+            155.60000002384186
+          ],
+          "maxObservationGapMs": 155.60000002384186
+        }
+      ]
     },
     {
       "fixture": "manual tabs record initial and final observations even for a short window",
       "file": "tabs.spec.ts",
       "outcome": "passed",
       "inputMode": null,
-      "actions": 14,
-      "activationKeys": 6,
+      "actions": [
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press",
+        "press"
+      ],
+      "activationKeys": [
+        "Enter",
+        "Enter",
+        "Enter",
+        "Enter",
+        "Enter",
+        "Enter"
+      ],
       "typedCharacters": 0,
       "firstMismatch": null,
       "windows": [
         {
           "checkId": "T05.forward.001.unchanged",
-          "observed": {
-            "focus": "tab-2",
-            "selected": "tab-1",
-            "selectedCount": 1,
-            "visibleCount": 1,
-            "roving": true,
-            "observationWindowMs": 64,
-            "observationCount": 3,
-            "observationIntervalsMs": [
-              35.5,
-              28.5
-            ],
-            "maxObservationGapMs": 35.5
-          }
+          "status": "pass",
+          "messageCode": "OK",
+          "focus": "tab-2",
+          "selected": "tab-1",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 50.69999998807907,
+          "observationCount": 25,
+          "observationIntervalsMs": [
+            3.300000011920929,
+            1.899999976158142,
+            2,
+            1.9000000357627869,
+            2.099999964237213,
+            2.100000023841858,
+            1.800000011920929,
+            1.899999976158142,
+            1.699999988079071,
+            1.9000000357627869,
+            1.899999976158142,
+            2.5,
+            2,
+            2,
+            1.9000000357627869,
+            2.199999988079071,
+            2.5,
+            2.099999964237213,
+            1.800000011920929,
+            1.9000000357627869,
+            1.699999988079071,
+            1.899999976158142,
+            3.100000023841858,
+            2.599999964237213
+          ],
+          "maxObservationGapMs": 3.300000011920929
         },
         {
           "checkId": "T05.forward.002.unchanged",
-          "observed": {
-            "focus": "tab-0",
-            "selected": "tab-2",
-            "selectedCount": 1,
-            "visibleCount": 1,
-            "roving": true,
-            "observationWindowMs": 67.1000000089407,
-            "observationCount": 3,
-            "observationIntervalsMs": [
-              36.79999999701977,
-              30.30000001192093
-            ],
-            "maxObservationGapMs": 36.79999999701977
-          }
+          "status": "pass",
+          "messageCode": "OK",
+          "focus": "tab-0",
+          "selected": "tab-2",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 50,
+          "observationCount": 26,
+          "observationIntervalsMs": [
+            2.800000011920929,
+            3.099999964237213,
+            2.200000047683716,
+            1.7999999523162842,
+            1.9000000357627869,
+            1.899999976158142,
+            1.800000011920929,
+            1.600000023841858,
+            1.899999976158142,
+            1.899999976158142,
+            1.800000011920929,
+            1.699999988079071,
+            2,
+            2.200000047683716,
+            2.299999952316284,
+            1.7000000476837158,
+            1.7999999523162842,
+            2.100000023841858,
+            2.100000023841858,
+            1.899999976158142,
+            1.899999976158142,
+            2,
+            1.7000000476837158,
+            2.099999964237213,
+            1.800000011920929
+          ],
+          "maxObservationGapMs": 3.099999964237213
         },
         {
           "checkId": "T05.forward.003.unchanged",
-          "observed": {
-            "focus": "tab-1",
-            "selected": "tab-0",
-            "selectedCount": 1,
-            "visibleCount": 1,
-            "roving": true,
-            "observationWindowMs": 67.5,
-            "observationCount": 3,
-            "observationIntervalsMs": [
-              40.5,
-              27
-            ],
-            "maxObservationGapMs": 40.5
-          }
+          "status": "pass",
+          "messageCode": "OK",
+          "focus": "tab-1",
+          "selected": "tab-0",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 50.39999997615814,
+          "observationCount": 20,
+          "observationIntervalsMs": [
+            2.699999988079071,
+            2.699999988079071,
+            2.399999976158142,
+            2.700000047683716,
+            2.599999964237213,
+            2.199999988079071,
+            2.100000023841858,
+            3.199999988079071,
+            3.600000023841858,
+            3,
+            4.800000011920929,
+            2.599999964237213,
+            2.199999988079071,
+            2.200000047683716,
+            2,
+            1.899999976158142,
+            2.5,
+            2.5,
+            2.5
+          ],
+          "maxObservationGapMs": 4.800000011920929
         },
         {
           "checkId": "T05.backward.001.unchanged",
-          "observed": {
-            "focus": "tab-0",
-            "selected": "tab-1",
-            "selectedCount": 1,
-            "visibleCount": 1,
-            "roving": true,
-            "observationWindowMs": 64.29999999701977,
-            "observationCount": 3,
-            "observationIntervalsMs": [
-              36.599999994039536,
-              27.700000002980232
-            ],
-            "maxObservationGapMs": 36.599999994039536
-          }
+          "status": "pass",
+          "messageCode": "OK",
+          "focus": "tab-0",
+          "selected": "tab-1",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 50.30000001192093,
+          "observationCount": 21,
+          "observationIntervalsMs": [
+            2.5,
+            2.300000011920929,
+            2,
+            2.599999964237213,
+            3.300000011920929,
+            2.800000011920929,
+            2.800000011920929,
+            2.5,
+            2.099999964237213,
+            2.800000011920929,
+            2.100000023841858,
+            1.899999976158142,
+            2.100000023841858,
+            2,
+            2,
+            2.099999964237213,
+            3.100000023841858,
+            4.199999988079071,
+            2.800000011920929,
+            2.300000011920929
+          ],
+          "maxObservationGapMs": 4.199999988079071
         },
         {
           "checkId": "T05.backward.002.unchanged",
-          "observed": {
-            "focus": "tab-2",
-            "selected": "tab-0",
-            "selectedCount": 1,
-            "visibleCount": 1,
-            "roving": true,
-            "observationWindowMs": 65.5,
-            "observationCount": 3,
-            "observationIntervalsMs": [
-              37.19999998807907,
-              28.30000001192093
-            ],
-            "maxObservationGapMs": 37.19999998807907
-          }
+          "status": "pass",
+          "messageCode": "OK",
+          "focus": "tab-2",
+          "selected": "tab-0",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 50.59999996423721,
+          "observationCount": 23,
+          "observationIntervalsMs": [
+            2.099999964237213,
+            1.9000000357627869,
+            2,
+            2.199999988079071,
+            2.399999976158142,
+            2.100000023841858,
+            2.599999964237213,
+            1.9000000357627869,
+            2,
+            2.199999988079071,
+            1.899999976158142,
+            2,
+            1.800000011920929,
+            1.9000000357627869,
+            2.5,
+            4.399999976158142,
+            3.100000023841858,
+            2.299999952316284,
+            2.100000023841858,
+            2.899999976158142,
+            2.300000011920929,
+            2
+          ],
+          "maxObservationGapMs": 4.399999976158142
         },
         {
           "checkId": "T05.backward.003.unchanged",
-          "observed": {
-            "focus": "tab-1",
-            "selected": "tab-2",
-            "selectedCount": 1,
-            "visibleCount": 1,
-            "roving": true,
-            "observationWindowMs": 64.20000000298023,
-            "observationCount": 3,
-            "observationIntervalsMs": [
-              36,
-              28.200000002980232
-            ],
-            "maxObservationGapMs": 36
-          }
+          "status": "pass",
+          "messageCode": "OK",
+          "focus": "tab-1",
+          "selected": "tab-2",
+          "selectedCount": 1,
+          "visibleCount": 1,
+          "roving": true,
+          "observationWindowMs": 52.69999998807907,
+          "observationCount": 15,
+          "observationIntervalsMs": [
+            4.600000023841858,
+            3.5,
+            3.800000011920929,
+            4.199999988079071,
+            3.800000011920929,
+            3.5,
+            4.299999952316284,
+            3.600000023841858,
+            4.100000023841858,
+            4.099999964237213,
+            3,
+            3.300000011920929,
+            3.5,
+            3.399999976158142
+          ],
+          "maxObservationGapMs": 4.600000023841858
         }
       ]
     }

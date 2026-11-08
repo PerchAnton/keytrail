@@ -1,27 +1,27 @@
 {
   "package": "keytrail",
-  "version": "0.1.0",
-  "startedAt": "2026-11-07T19:42:32.910Z",
-  "identity": "1a42b55f244820c4ed909720acf6f19c657691a266b4770e24e41c698fb41148",
+  "version": "1.0.0",
+  "startedAt": "2026-11-08T08:42:01.106Z",
+  "identity": "ae79097563621d39eaa9b251b1c71946cdb53d3fa43f7ef6e1b992e64ed5082e",
   "environment": {
     "node": "24.22.1",
     "platform": "darwin",
     "release": "27.2.0",
     "arch": "arm64",
-    "cpu": "Apple M4",
+    "cpu": "Apple M3",
     "logicalCpus": 8,
     "playwright": "1.64.1",
     "chromium": "156.0.8078.4"
   },
   "sourceHashes": {
-    "package.json": "b29ae7ffecfe80a49890b4a54a378dfa68484fb24c71fed24a498c01ccb425c1",
+    "package.json": "9432de0bfe7bdd134aaed45d1b5b9f9258482c721748b9ef0a2e5e3da9a4b63b",
     "playwright.config.ts": "b37dd21c3b202d61916f34d3391678470f85346e2ace5e825d8d116df1acd343",
     "pnpm-lock.yaml": "576e299340865b49bafd46859e458ab14a2937a6a5f07fe90b3057b8bf84f183",
     "schema/journey-result.v1.json": "4deafd92cdccf4e923da6c19f350f1e9b3641f86007863e2ebb680cea7c48ce6",
     "scripts/build.mjs": "de9d5b90f5f2439850417349259e843502d456fbb6c1b8ed5c341333067fe830",
     "scripts/verify-reliability.mjs": "aa9eb724680e2d8310cc60a2a5af04e2cd49dce783e890d2f952d5da81f05ef1",
-    "src/browser/driver.ts": "edc87ddf15a427195a8273e65ccd216add885f91523aad0ac1cf5dac94ac86b6",
-    "src/browser/observation-store.ts": "af90ff30efddc1853c3f61258acc2ce58532c8524fe0723ba391472221522f43",
+    "src/browser/driver.ts": "9af13783f0214765fd70ac22974fa355b8a5e7767dfa90dac4b73ed94e7e4bb1",
+    "src/browser/observation-store.ts": "981cc0072a14d9fe396df7292b7295d6cc8648a9b50b2940e3148594e1a62787",
     "src/ci-guard.ts": "7aa34fda24c8b77e6fbd87c7318db5ded891b7ec483588dd773ab64e6502c7cf",
     "src/contracts/common.ts": "cf4082518e4210aa054db7fb98cc7edef8dbb2fdb222c95ed8ff3811d7772890",
     "src/contracts/dialog.ts": "99384b67e23425a7a89f34518c710ca1903e3ce424d49a711ddb227f507cd210",
@@ -39,7 +39,8 @@
     "src/scenarios/dialog.ts": "ef7c163b05542c44b119639602d910e86b2581d9fd256ba8857c7f143b057b00",
     "src/scenarios/form-errors.ts": "78cb7de2c9130105b9259060a6ae8d57f9a3473dd9b8a90fff6fe7e5c9546c7b",
     "src/scenarios/tabs.ts": "b8bdedb38e3c0642da9ad242dca79c1bbd9458013cccda3fd9ec32904853fd76",
-    "src/version.ts": "adacec0bf403bcf0cecb839676536541ea024e0fb56d792358d977420a41bdd4",
+    "src/version.ts": "aeec7b146aaf35ff4ee9f2e6770b394d47b02cb7cbf456cdba64f7428fae5e82",
+    "tests/compatibility/consumer.ts": "2a877d3c11415a713a7d6f06a034a699f4200570e1653db47c4d32d143fa0cbb",
     "tests/fixtures/dialog.ts": "bff39b874a4041757b3a32116e2313cc4e18be43bad78ce82bd05c4d15835604",
     "tests/fixtures/form-errors.ts": "d91f33c21ff4e9d5bb6ad3b4e5d55ae7ee5e43ce4df30328778b9b22c18ac6ac",
     "tests/fixtures/tabs.ts": "13bc81a70dacc4828a9a1c881509bf52098691595be28b1dcb39e89a1eb0092c",
@@ -49,22 +50,22 @@
     "tests/guard/report.mjs": "d37e6c570e20f382cc08d97134acb71f33335b287c6d0b3e6fd80bb21e6483c3",
     "tests/guard/setup.spec.mjs": "5125ccc3199877c152e07729f2c70e260f395f9260f89761c81c5923e10ad0c5",
     "tests/integration/canary.spec.ts": "c0acd3e2c90c80486c68da70cafda5eaeff61ff2353603f84089d1859775226d",
-    "tests/integration/dialog.spec.ts": "01901b749874696f1b01066b27a770c10d04125baa5552521ab7800af889ee3b",
+    "tests/integration/dialog.spec.ts": "5ccedafc2e25ee3d2587826c5106cf2f9c83e74b437ff38d7df1b306cd458094",
     "tests/integration/form-errors.spec.ts": "1cd15ccb3415ab4b1b2ac74486397fc4b0d47cd130db536f8d6f9922ee7d5206",
-    "tests/integration/observations.spec.ts": "3c1da9634cc221759b247b8cdd52662b4838d1f982a710d4188d145309f12dc1",
+    "tests/integration/observations.spec.ts": "3c5d585dada2bd7ef46970357d2b73f8b1fb89cebe432cb3b2a665beb6337ba6",
     "tests/integration/tabs.spec.ts": "e7ef141fddb0cd5109ca5060ee854ceb7568d8a472d5cc678a407d5485c0bc7d",
     "tests/support/snapshot-timings.ts": "dcda508e2fe890037c773d8a630f8677be99e296671bd84846c3f0a2f0705053",
     "tests/unit/contracts.test.mjs": "0f64c49ba8567247ea63dedcd75d642a8dd37f62cd1ea17193bdbb3ec9dd5d12",
     "tests/unit/deadline.test.mjs": "dad56ec32093098d3a8a1a90a9ccce2abd120ced8fb9901c8733aa9d758fa3f9",
     "tests/unit/form-errors.test.mjs": "e2ff649e4650ebd1f2f7a0fc6b53d8802bf4e83c227a9143a6425854d74bc2bd",
     "tests/unit/observation-window.test.mjs": "2bc6d547e234f4cf545c30c2ea4fa0258c1a325606d35cb3430cc3180bf909ff",
-    "tests/unit/reliability.test.mjs": "d5a8e5f1efb9fa14b1041a32aaf2da9ce5e3264fd4681398e758a001f8bc2426",
+    "tests/unit/reliability.test.mjs": "eac1e120da6121123485cfe7eafb40037eefebbbdab00a593f816074d1a11327",
     "tests/unit/reporting.test.mjs": "df8032dc07392a5eb6b64551b56f7bd712342fbdf99c3d4a5683b1ac746fd40a",
     "tests/unit/tabs.test.mjs": "4c50cb57f642192d25a05aa314e0e789e589a4d3cfc5e747b7247c4745ef94b2",
     "tests/unit/verification-modes.test.mjs": "3c22f98cf9596ea3654d325652d07e0b2f68de0bffa9a4475b13da1b8f837adb",
     "verification/inputs.mjs": "078bc601ef51e9b01827b079355fa04cfc1388956cb596d22dae79c70d87b6e6",
     "verification/modes.mjs": "922d3ac3076b1b2a470d2a2990a432a78eec5a850702176ec759998626d6a995",
-    "verification/signatures.mjs": "2702214e19b118817d96e3d6b6a28dce58540b64ae5db739ea806bd69b2a9816"
+    "verification/signatures.mjs": "d59cb0fc1bb0bf5a2bf38e913b796cb2dbcbd487f92d6bd33948accaa0e5fe09"
   },
   "mode": "final",
   "smoke": false,
@@ -75,85 +76,85 @@
   "rounds": [
     {
       "round": 1,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 148965.104
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146464.06
     },
     {
       "round": 2,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 148648.448
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146379.35400000002
     },
     {
       "round": 3,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147950.78900000002
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146601.35
     },
     {
       "round": 4,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147795.142
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146239.386
     },
     {
       "round": 5,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 148442.15899999999
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 145913.2
     },
     {
       "round": 6,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147570.64
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146030.58800000002
     },
     {
       "round": 7,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147912.392
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146446.552
     },
     {
       "round": 8,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147549.041
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 147356.136
     },
     {
       "round": 9,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147083.76299999998
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146454.407
     },
     {
       "round": 10,
-      "tests": 180,
-      "passed": 180,
-      "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-      "durationMs": 147536.145
+      "tests": 188,
+      "passed": 188,
+      "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+      "durationMs": 146814.753
     }
   ],
-  "lastCompletedAt": "2026-11-07T20:07:15.124Z",
+  "lastCompletedAt": "2026-11-08T09:06:29.032Z",
   "parallel": {
     "workers": 4,
-    "passed": 180,
-    "signature": "c3fa7cc6c74eaab8bfe4736130f14311c719a16abf48e600bbb51c0e2d19561e",
-    "durationMs": 42798.595
+    "passed": 188,
+    "signature": "3cf382f77f950daf3533d7793e3bed02ab2897f68587cc175f79b6a9d05a3a7e",
+    "durationMs": 40977.435
   },
-  "finishedAt": "2026-11-07T20:07:58.191Z",
-  "caseCount": 180,
-  "totalSequentialExecutions": 1800,
+  "finishedAt": "2026-11-08T09:07:10.315Z",
+  "caseCount": 188,
+  "totalSequentialExecutions": 1880,
   "uniqueJourneyRunIds": 1771,
   "acceptance": true,
   "cases": [
@@ -161,6 +162,12 @@
       "id": "24da8f22d9759f0a728f-08dfc6dcb5ca90a0a0d4",
       "file": "observations.spec.ts",
       "title": "an early resolution error awaits slower sibling reads before clearing stored nodes",
+      "kind": "engine-observation"
+    },
+    {
+      "id": "24da8f22d9759f0a728f-0c69f9a692b30dc014fd",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads resolve the original locator after rebound",
       "kind": "engine-observation"
     },
     {
@@ -182,9 +189,33 @@
       "kind": "engine-observation"
     },
     {
+      "id": "24da8f22d9759f0a728f-4308df33a62e2a6c51f3",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads detect added-role without DOM mutations",
+      "kind": "engine-observation"
+    },
+    {
       "id": "24da8f22d9759f0a728f-47ec33b33f395b68ef0a",
       "file": "observations.spec.ts",
       "title": "grouped manual reads detect missing-role without DOM mutations",
+      "kind": "engine-observation"
+    },
+    {
+      "id": "24da8f22d9759f0a728f-495d23982d3a16b8b026",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads resolve the original locator after swapped-ids",
+      "kind": "engine-observation"
+    },
+    {
+      "id": "24da8f22d9759f0a728f-496714e37487c50d1fbf",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads resolve the original locator after extra-match",
+      "kind": "engine-observation"
+    },
+    {
+      "id": "24da8f22d9759f0a728f-53324f0dbd99385e1f20",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads detect missing-target without DOM mutations",
       "kind": "engine-observation"
     },
     {
@@ -248,9 +279,27 @@
       "kind": "engine-observation"
     },
     {
+      "id": "24da8f22d9759f0a728f-cb526d9d9d0417dce696",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads detect missing-role without DOM mutations",
+      "kind": "engine-observation"
+    },
+    {
+      "id": "24da8f22d9759f0a728f-cf39427e535fdc7d641b",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads resolve targets and roles in one fresh request",
+      "kind": "engine-observation"
+    },
+    {
       "id": "24da8f22d9759f0a728f-df0b8ea486a8a2708f31",
       "file": "observations.spec.ts",
       "title": "grouped manual reads resolve the original locator after swapped-ids",
+      "kind": "engine-observation"
+    },
+    {
+      "id": "24da8f22d9759f0a728f-dfd2b882927018e7c60a",
+      "file": "observations.spec.ts",
+      "title": "grouped complete reads reject mutations between resolution and the atomic callback",
       "kind": "engine-observation"
     },
     {

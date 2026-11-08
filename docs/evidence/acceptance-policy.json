@@ -3,7 +3,7 @@
   "decisionDate": "2026-11-08",
   "referenceTargetRounds": 10,
   "minimumCompletedRounds": 10,
-  "seriesIdentity": null,
-  "sourceCommit": null,
-  "reason": "Unqualified 1.0.0 candidate. Freeze inputs and obtain explicit approval for its own ten final rounds plus the separate four-worker comparison. Published 0.1.0 evidence remains unchanged on its tag."
+  "seriesIdentity": "ae79097563621d39eaa9b251b1c71946cdb53d3fa43f7ef6e1b992e64ed5082e",
+  "sourceCommit": "d43e2359eeb3174b6b62f2af9fe15a95e1ac14a9",
+  "reason": "Owner-authorized final acceptance: ten complete sequential rounds and the separate four-worker comparison, independently checked from all eleven raw reports; 100 ms and zero retries."
 }

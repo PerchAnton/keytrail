@@ -6,7 +6,7 @@
 - Preserve documented journey behavior, schema 1, ruleset 0.4.0 and the 100 ms observation bound.
 - Group complete live observations as well as manual-tab reads, retaining mutation and membership guards; add eight complete-read regressions.
 - Reduce independent native benchmark target-query and stack-formatting overhead.
-- Keep old qualification historical; final acceptance for this candidate is pending.
+- Pass ten fresh final rounds (1,880 checks), the separate 188-check four-worker comparison, 108 benchmark checks and 52 CI guard controls. Preserve old qualification as historical.
 
 ## 0.1.0
 

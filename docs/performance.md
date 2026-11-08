@@ -1,9 +1,34 @@
 # Equivalent-work benchmark
 
-**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
-The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+**1.0.0 source qualification complete; registry publication pending.** [Release checklist](releases/1.0.0.md).
+Source `d43e235` passed **10 × 188 = 1,880** sequential checks and **188** matching
+four-worker checks, with zero retries/skips and the unchanged **100 ms** bound.
+All eleven raw reports were independently validated: **1,771 unique journey IDs**,
+maximum passing observation gap **47.7 ms**.
+[Raw-report hashes and validation](evidence/reliability-validation-d43e235.json).
+Historical 0.1.0/alpha/beta results below retain their original identities.
 
-## 1.0.0 qualification in progress
+
+## 1.0.0 measurements on `d43e235`
+
+All **108 checks passed** on the recorded Apple M3/macOS ARM environment,
+with five warmups and thirty alternating measured pairs per workload. Both
+independently recomputed overhead calculations meet the unchanged 20% criterion.
+
+![KeyTrail 1.0.0 measured overhead](assets/performance.svg)
+
+| Workload | KeyTrail median (ms) | Native median (ms) | Median paired overhead | Ratio of medians |
+| --- | ---: | ---: | ---: | ---: |
+| Dialog | 86.9 | 84.6 | 2.4% | 2.7% |
+| Manual tabs | 1526.3 | 1445.7 | 5.7% | 5.6% |
+| Form errors (insertText) | 74.9 | 73.6 | 0.7% | 1.8% |
+
+[Independent pair-level validation](evidence/benchmark-validation-d43e235.json).
+These synthetic fixtures do not establish a general speed advantage, adoption,
+or future shared-runner latency. Both implementations changed since earlier
+measurements, so historical numbers are not a controlled speedup comparison.
+
+## Qualification investigation
 
 Three complete benchmark attempts on 8 November were rejected (105/108,
 106/108 and 106/108). Manual-tab observation gaps exceeded 100 ms. Failed
@@ -26,7 +51,7 @@ reads. No targets, states or successful timestamps are reused across readings.
 Eight binding/mutation regressions additionally cover complete reads. The strict
 report validator explicitly recognizes those cases and still rejects unknown
 ones. The API, defaults, deadlines and 100 ms bound are unchanged. Short pilot
-results are diagnostic only; a new full benchmark and final series are required.
+results are diagnostic only; the new full benchmark and final series are recorded above.
 Earlier reference timings are not a controlled before/after comparison.
 
 ## 0.1.0 measurements on `85cee8c`
@@ -51,7 +76,7 @@ or future shared-runner reliability. Earlier measurements below remain historica
 
 All 108 tests passed on the recorded Mac. Each workload contributed five warmups, thirty alternating measured pairs and one defect control. Both overhead calculations met the 20% criterion in each of the three synthetic Chromium fixtures.
 
-![Beta.2 paired timing results](assets/performance.svg)
+![Beta.2 paired timing results](history/performance-fd8f58a.svg)
 
 | Workload | KeyTrail median (ms) | Native median (ms) | Median paired overhead | Ratio of medians |
 | --- | ---: | ---: | ---: | ---: |

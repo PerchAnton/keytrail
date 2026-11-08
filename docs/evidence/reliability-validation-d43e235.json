@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-11-08T09:08:09.194Z",
+  "version": "1.0.0",
+  "sourceCommit": "d43e2359eeb3174b6b62f2af9fe15a95e1ac14a9",
+  "status": "passed",
+  "identity": "ae79097563621d39eaa9b251b1c71946cdb53d3fa43f7ef6e1b992e64ed5082e",
+  "fullRounds": 10,
+  "cases": 188,
+  "sequentialExecutions": 1880,
+  "parallelExecutions": 188,
+  "workerComparisons": [
+    4
+  ],
+  "uniqueJourneyRunIds": 1771,
+  "maxPassingObservationGapMs": 47.700000047683716,
+  "observationGapLimitMs": 100,
+  "retries": 0,
+  "rawReportSha256": {
+    "round-001.json": "4590027ba644a8e2448f96f2a02225e06adaa926572aca307316a9729090a728",
+    "round-002.json": "675499377ba0868f829d115e1b76fe76b592e5a0763333a97ac902092351d237",
+    "round-003.json": "2e53f47ed81cb5296ed1d0c93a5431f002182399b887091882b275e0eadf2ad5",
+    "round-004.json": "a3b3460192aa7c305c080e8c30b72f67aecd2d29f3edf19308e9635bbc57474c",
+    "round-005.json": "2a8ea42c60ad41b750c80c044e32201c62787b806c5a31590b2b4adbf4043d51",
+    "round-006.json": "88397f78854c409f9629bb52a433427c668fc21ea285339d0a4541c26023e773",
+    "round-007.json": "987ee1b1518b310131384cb418606ebd8d4bb33b5e44e56ba289595cd517771b",
+    "round-008.json": "e49372a3c5cc5326f878747cb7a68d35218f4b03b1840d21607128903c118a82",
+    "round-009.json": "bc79487cb38d33b0f84c177029dd8b9e7d62b3d9e83b383fd91559a164161029",
+    "round-010.json": "6bee98adf5ded86012411a01551f31de7f31d30787374f695b8080a8776b25be",
+    "workers4.json": "1ce8137d97ea19fd4f46c67880e93b9d79d04b43aaead94657c9ba12e345cb24"
+  },
+  "environment": {
+    "node": "24.22.1",
+    "platform": "darwin",
+    "release": "27.2.0",
+    "arch": "arm64",
+    "cpu": "Apple M3",
+    "logicalCpus": 8,
+    "playwright": "1.64.1",
+    "chromium": "156.0.8078.4"
+  }
+}
