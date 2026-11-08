@@ -1,5 +1,8 @@
 # KeyTrail
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](docs/releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
 **Check dialog, tabs and form-error keyboard journeys in your existing Playwright tests.** Declare the
 expected focus order; KeyTrail presses keys, checks the result and attaches a report
 showing the first mismatch and the observations that could not run.

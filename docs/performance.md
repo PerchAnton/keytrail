@@ -1,5 +1,8 @@
 # Equivalent-work benchmark
 
+**1.0.0 candidate: not published or finally qualified.** [Preparation checklist](releases/1.0.0.md).
+The 0.1.0 results below remain tied to their original version and source; they do not certify 1.0.0.
+
 ## 0.1.0 measurements on `85cee8c`
 
 All 108 checks passed on Apple M4/macOS ARM, Node 24.22.1 and Chromium 156.0.8078.4.
