@@ -36,7 +36,7 @@ checks are marked `not_run`. Try one dialog in your app and ask a teammate to
 locate the mismatch from the report. Keep the native Playwright test alongside
 it to see which makes the failure easier to diagnose.
 
-[Additional consumer contracts](examples/consumer-contracts/README.md) exercise
+[Additional consumer contracts](https://github.com/PerchAnton/keytrail/tree/8b6c476/examples/consumer-contracts) exercise
 Swagger UI and Vue/Reka alongside native tests, and explore a dialog/toast
 composition. They show both successful checks and current API boundaries;
 the layer experiment is separate from the supported v1 report schema.
