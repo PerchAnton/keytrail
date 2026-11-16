@@ -93,3 +93,30 @@ of reaching its expected failure. The threshold stayed at 100 ms. This
 experiment is therefore not qualified for concurrent execution; keep the
 one-worker command and retain blocked results. These are consumer-example
 checks, not a new SDK release or final reliability qualification.
+
+## Dialog consumers and explicit compatibility limits
+
+Three additional consumers use Zag Dialog 1.48.0, React Aria Components 1.22.1,
+and React Bootstrap 2.10.10. Run `npm test -- dialog-consumers.spec.mjs` in this
+directory after building. URLs are `?example=dialog-zag`, `dialog-aria`, and
+`dialog-bootstrap`.
+
+| Consumer | Native keyboard check | Current KeyTrail contract |
+| --- | --- | --- |
+| Zag | Input receives focus; Escape returns to trigger | Passes; an incorrect return target fails D07 |
+| React Aria | Input receives focus; Escape returns to trigger | Fails D02 `MODAL_MISMATCH`; its modal representation does not satisfy the current strict same-element modal assertion |
+| React Bootstrap | Input receives focus; Escape returns to trigger | Fails D04 forward step 2: the declared immediate input/Close wrap reaches the body instead |
+
+The tests require those two specific failed journey results. A passing test of a
+known incompatibility is **not** a passing KeyTrail journey or proof of an
+upstream accessibility defect. The native check alone is also not an accessibility
+audit. No ARIA attribute, focus trap or library code was changed to make a result
+pass. React Bootstrap is shown without Bootstrap CSS; this is a focus behavior
+fixture, not a visual styling example.
+
+The initial three local rounds retained 15 passing test executions and 12 failing
+expectations because the first fixture assumed all three contracts would pass.
+One subsequent round checked the corrected assertions: seven tests passed,
+including the two explicitly failed journey results. That is four bounded
+consumer rounds, not a final reliability series. Core observation limits remain
+100 ms, with retries disabled.
