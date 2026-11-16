@@ -36,6 +36,11 @@ checks are marked `not_run`. Try one dialog in your app and ask a teammate to
 locate the mismatch from the report. Keep the native Playwright test alongside
 it to see which makes the failure easier to diagnose.
 
+[Additional consumer contracts](examples/consumer-contracts/README.md) exercise
+Swagger UI and Vue/Reka alongside native tests, and explore a dialog/toast
+composition. They show both successful checks and current API boundaries;
+the layer experiment is separate from the supported v1 report schema.
+
 [npm availability](https://www.npmjs.com/package/keytrail/v/1.0.0) ·
 [Release archives and checksums](https://github.com/PerchAnton/keytrail/releases/tag/v1.0.0) ·
 [Validation of all eleven reports](docs/evidence/reliability-validation-d43e235.json).

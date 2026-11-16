@@ -1,0 +1,8 @@
+import { mountSwagger } from './swagger.mjs';
+import { mountReka } from './reka.mjs';
+import { mountLayers } from './layers.jsx';
+import './style.css';
+const query = new URLSearchParams(location.search);
+if (query.get('example') === 'reka') mountReka({ returnElsewhere: query.get('return') === 'other', nativeReturn: query.get('return') === 'native' });
+else if (query.get('example') === 'layers') mountLayers({ brokenEscape: query.get('defect') === 'escape', expire: query.get('expire') === '1' });
+else mountSwagger({ corrected: ['corrected', 'semantics'].includes(query.get('mode')), trapFocus: query.get('mode') !== 'semantics' });
