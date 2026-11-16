@@ -5,6 +5,7 @@ adaptations and experiments, not upstream fixes or claims of adoption.
 
 | Consumer | What the example checks | Boundary |
 | --- | --- | --- |
+| Cypress React Tabs 1.3.1 / Vue Tabs 1.2.4 | Missing `activeId` skips all tabs; an explicit initial value enables entry and an arrow cycle | Host-owned mounted panels and IDREFs; native regression first, no upstream patch |
 | Swagger UI 5.35.0 | Authorization dialog: naming, focus loop, Escape and return focus | Unmodified UI fails the dialog-role contract; a semantic-only adaptation still lets focus escape |
 | Swagger UI 5.35.0 | Request-body tabs: arrows, Home/End and Tab exit | Native checks pass after an application adaptation; inactive panels are unmounted, so the current KeyTrail tabs API reports `STRUCTURE_MISMATCH` |
 | Vue 3.5.45 / Reka UI 2.11.0 | Shortcut opening and an explicit return-focus policy | Ctrl/Meta+K uses native Playwright checks; the KeyTrail v1 dialog API supports Enter/Space opening only |
@@ -32,6 +33,23 @@ fixture starts a loopback server automatically. JSON and HTML reports live in
 `?example=swagger`, `?example=reka`, or `?example=layers`.
 
 ## What the extra contract buys
+
+[Cypress #781](https://github.com/cypress-io/cypress-design/issues/781) has a
+six-test [React/Vue reproduction](cypress-tabs.spec.mjs). Both installed packages
+give all three tabs `tabindex=-1` when `activeId` is omitted. A native Tab test
+reaches the button after the tab list. Passing `activeId="one"` is a consumer
+workaround: the native arrow test and the same KeyTrail contract pass for both
+renderers. The fixture supplies mounted panels and IDREFs because the tab-bar
+packages do not own application panel content. It disables optional Home/End
+checks, which these packages do not implement.
+
+Use `?example=cypress-react` or `?example=cypress-vue`, then add `&mode=corrected`
+to compare. `npm test -- cypress-tabs.spec.mjs` runs the six checks. For an
+already installed browser set `KEYTRAIL_TEST_CHROME` to its executable path.
+The native assertions are sufficient for fixing the narrow upstream bug. The
+additional contract is useful when a consumer wants the same panel, focus and
+selection evidence across React and Vue; it does not justify requiring KeyTrail
+inside the design system.
 
 Native tests are included as a baseline and may be sufficient for a small flow.
 The dialog contract additionally produces named checks and actual focus evidence
