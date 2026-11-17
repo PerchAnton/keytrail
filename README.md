@@ -36,6 +36,11 @@ checks are marked `not_run`. Try one dialog in your app and ask a teammate to
 locate the mismatch from the report. Keep the native Playwright test alongside
 it to see which makes the failure easier to diagnose.
 
+[Additional consumer contracts](https://github.com/PerchAnton/keytrail/tree/8b6c476/examples/consumer-contracts) exercise
+Swagger UI and Vue/Reka alongside native tests, and explore a dialog/toast
+composition. They show both successful checks and current API boundaries;
+the layer experiment is separate from the supported v1 report schema.
+
 [npm availability](https://www.npmjs.com/package/keytrail/v/1.0.0) ·
 [Release archives and checksums](https://github.com/PerchAnton/keytrail/releases/tag/v1.0.0) ·
 [Validation of all eleven reports](docs/evidence/reliability-validation-d43e235.json).
@@ -61,6 +66,8 @@ D07 FOCUS_MISMATCH expected=open-profile observed=body
 
 The corrected component passes the same contract. The runnable example includes both
 versions; its intentionally broken fixture is our teaching example, not an upstream bug.
+
+[Dialog consumers and compatibility results](examples/dialog-recipes/README.md) compare nine published UI libraries with a native Playwright baseline and explicit KeyTrail contracts. Failed compatibility journeys remain failed in the attached reports.
 
 ## Try the packaged example
 

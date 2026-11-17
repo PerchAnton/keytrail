@@ -1,0 +1,12 @@
+import { mountDialogConsumer } from './dialog-consumers.jsx';
+import { mountSwagger } from './swagger.mjs';
+import { mountReka } from './reka.mjs';
+import { mountLayers } from './layers.jsx';
+import './style.css';
+import { mountCypressTabs } from './cypress-tabs.jsx';
+const query = new URLSearchParams(location.search);
+if (query.get('example')?.startsWith('dialog-')) mountDialogConsumer(query.get('example').slice(7));
+else if (query.get('example')?.startsWith('cypress-')) mountCypressTabs({ framework: query.get('example').slice(8), corrected: query.get('mode') === 'corrected' });
+else if (query.get('example') === 'reka') mountReka({ returnElsewhere: query.get('return') === 'other', nativeReturn: query.get('return') === 'native' });
+else if (query.get('example') === 'layers') mountLayers({ brokenEscape: query.get('defect') === 'escape', expire: query.get('expire') === '1' });
+else mountSwagger({ corrected: ['corrected', 'semantics'].includes(query.get('mode')), trapFocus: query.get('mode') !== 'semantics' });
