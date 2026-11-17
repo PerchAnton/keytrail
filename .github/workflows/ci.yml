@@ -39,11 +39,23 @@ jobs:
         working-directory: examples/consumer-contracts
       - run: npm test -- --workers=1 --retries=0
         working-directory: examples/consumer-contracts
+      - run: npm ci --ignore-scripts
+        working-directory: examples/dialog-recipes
+      - run: npm run build
+        working-directory: examples/dialog-recipes
+      - run: npm test -- --workers=1 --retries=0
+        working-directory: examples/dialog-recipes
+        env:
+          KEYTRAIL_RECIPE_PREVIEW: '1'
+      - run: node verify-report.mjs artifacts/results.json
+        working-directory: examples/dialog-recipes
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: consumer-examples
-          path: examples/consumer-contracts/artifacts/
+          path: |
+            examples/consumer-contracts/artifacts/
+            examples/dialog-recipes/artifacts/
           if-no-files-found: error
   linux:
     if: github.event_name != 'workflow_dispatch' || inputs.arm-allocation == 'all'

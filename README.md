@@ -67,6 +67,8 @@ D07 FOCUS_MISMATCH expected=open-profile observed=body
 The corrected component passes the same contract. The runnable example includes both
 versions; its intentionally broken fixture is our teaching example, not an upstream bug.
 
+[Dialog consumers and compatibility results](examples/dialog-recipes/README.md) compare nine published UI libraries with a native Playwright baseline and explicit KeyTrail contracts. Failed compatibility journeys remain failed in the attached reports.
+
 ## Try the packaged example
 
 Node.js 24 and pnpm 11.25.0 are used for development. The tested Playwright peer version
